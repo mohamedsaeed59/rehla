@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  text-transform: capitalize;
+}
+
+body {
+  @apply relative overflow-x-clip;
+}
+
+.nav-link {
+  @apply text-lg text-center font-normal text-[#7D7D7D] duration-300 p-1;
+}
+.nav-link.active {
+  color: #1e1e1e;
+  font-weight: bold;
+  padding: 8px;
+  border-bottom: 2px solid #1e1e1e;
+  box-shadow: "0px 1px 8px 0px #00000029";
+  border-radius: 24px;
+  -webkit-border-radius: 24px;
+  -moz-border-radius: 24px;
+  -ms-border-radius: 24px;
+  -o-border-radius: 24px;
+}
+
+.active-btn.active {
+  background-color: #f3c800;
+  border: 1px solid #1e1e1e;
+  position: relative;
+}
+
+.active-btn.active::before {
+  content: "\2713";
+  color: white;
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 20px;
+  height: 20px;
+  background-color: black;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.swiper-pagination-bullet {
+  @apply w-3 h-3 border !important;
+  /* box-shadow: 12px 12px 12px rgba(0, 0, 0, 0.1) inset, -10px -10px 10px white inset; */
+}
+
+.swiper-pagination-bullet.swiper-pagination-bullet-active {
+  @apply bg-mainBlack !important;
+}
