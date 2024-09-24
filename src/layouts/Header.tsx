@@ -9,6 +9,8 @@ import MobileMenu from "../Components/Header/MobileMenu";
 import menu from "../assets/HAmburger-menu.webp";
 import Notification from "../Components/Header/Notification";
 
+import { AnimatePresence } from "framer-motion";
+
 function Header() {
   const [isOpen, setOpen] = useState<boolean>(false);
   const [openNotification, setOpenNotification] = useState<boolean>(false);
@@ -80,10 +82,12 @@ function Header() {
                     className="w-4 lg:w-8"
                   />
                 </button>
-                {openNotification && (
-                  // bg-black/65 z-20 absolute top-0 left-0 w-full h-full
+                <AnimatePresence>
+                  {openNotification && (
+                    // bg-black/65 z-20 absolute top-0 left-0 w-full h-full
                     <Notification />
-                )}
+                  )}
+                </AnimatePresence>
               </div>
             </div>
             <button
