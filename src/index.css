@@ -15,7 +15,7 @@ body {
 }
 
 .nav-link {
-  @apply text-lg text-center font-normal text-[#7D7D7D] duration-300 p-1;
+  @apply text-sm xl:text-lg text-center font-normal text-[#7D7D7D] duration-300 p-1;
 }
 .nav-link.active {
   color: #1e1e1e;
@@ -63,4 +63,16 @@ body {
 
 .swiper-pagination-bullet.swiper-pagination-bullet-active {
   @apply bg-mainBlack !important;
+}
+
+
+.x::before{
+  content: "";
+  border-width: 10px;
+  border-style: solid;
+  border-color: transparent transparent #f6f6f6 transparent;
+  position: absolute;
+  right: 5px;
+  top: -20px;
+  /* font-family: "font/family/Roboto"; */
 }

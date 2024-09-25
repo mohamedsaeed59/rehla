@@ -9,9 +9,12 @@ const Notification = () => {
       <motion.div
         initial={{ y: "-100vh" }}
         animate={{ y: 0 }}
-        exit={{ y: "-100vh" }} // الأنميشن عند الإغلاق
+        exit={{ y: "-100vh" }} 
         className="absolute top-8 md:top-12 z-20 rtl:left-[-25px] ltr:right-[-25px] rounded-md bg-white border duration-300"
       >
+        <div>
+                          
+        </div>
         <div className="w-[300px] md:w-[500px] h-[500px]">
           <div className="flex flex-col justify-center items-center w-full h-full">
             <img src={loading} alt="loading" className="w-[200px] h-[200px]" />

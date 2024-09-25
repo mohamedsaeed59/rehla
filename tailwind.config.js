@@ -15,7 +15,7 @@ export default {
     screens: {
       sm: "640px",
       md: "768px",
-      lg: "1024px",
+      lg : "1024px",
       xl: "1280px",
     },
     extend: {
@@ -26,8 +26,12 @@ export default {
         borderColor: "#CACACA",
         textPlaceholder: "#B0B0B0",
         mainBlack: "#1E1E1E",
+        black50:"#E6E6E6",
         primary: "#62ADCF",
         ryBackground: "#F7F7F7",
+        ry3Text:"#7D7D7D",
+        ry4Text:"#B0B0B0",
+        red:"#FF3B30"
       },
       boxShadow: {
         shadow: "0px 1px 8px 0px #00000029",

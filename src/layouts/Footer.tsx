@@ -3,7 +3,7 @@ import { memo } from "react"
 
 function Footer() {
   return (
-    <div>
+    <div className="container">
       Footer
     </div>
   )
