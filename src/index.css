@@ -66,6 +66,11 @@ body {
 }
 
 
+
+.swiper-button-disabled {
+  border: 2px solid red;
+}
+
 .x::before{
   content: "";
   border-width: 10px;
