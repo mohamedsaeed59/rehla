@@ -7,11 +7,16 @@ import BannerSliderAuth from "./BannerSliderAuth";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 
-const SliderAuth = () => {
+type Props = {
+  heightScreen: string;
+  heightBottom:number
+};
+
+const SliderAuth = ({ heightScreen , heightBottom }: Props) => {
   const data = [
     {
       id: 1,
-      SrcImage: image1 ,
+      SrcImage: image1,
       title: "Best CHALETS in Iraq",
       dis: "Come and book your favorite",
     },
@@ -47,9 +52,15 @@ const SliderAuth = () => {
         }}
         modules={[Autoplay, Pagination]}
       >
-        {data.map((item , index) => (
+        {data.map((item, index) => (
           <SwiperSlide key={index}>
-            <BannerSliderAuth image={item.SrcImage} title={item.title} des={item.dis}/>
+            <BannerSliderAuth
+              image={item.SrcImage}
+              title={item.title}
+              des={item.dis}
+              heightScreen={heightScreen}
+              heightBottom={heightBottom}
+            />
           </SwiperSlide>
         ))}
       </Swiper>

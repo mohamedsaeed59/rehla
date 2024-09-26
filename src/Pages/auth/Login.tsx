@@ -75,7 +75,7 @@ const Login = () => {
           </div>
         </div>
         <div className="order-1 md:order-2">
-          <SliderAuth />
+          <SliderAuth heightScreen={"screen"}  heightBottom={20} />
         </div>
       </div>
     </div>

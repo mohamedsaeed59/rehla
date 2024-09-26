@@ -13,7 +13,7 @@ const Register= () => {
     <div className="">
     <div className="grid grid-cols-1 md:grid-cols-2">
       <div className="order-2 md:order-1">
-        <div className="flex flex-col  w-full p-4 gap-8">
+        <div className="flex flex-col  w-full p-4 gap-3">
           <div>
             <div className="text-end w-full p-2">
               <button className="font-normal text-xl">Skip</button>
@@ -22,7 +22,7 @@ const Register= () => {
               <img
                 src={logo}
                 alt="logo"
-                className="w-[200px] h-[200px] object-cover"
+                className="w-[150px] h-[150px] object-cover"
               />
             </div>
             <div className="flex flex-col gap-3 w-full md:w-[80%] mx-auto">
@@ -97,7 +97,7 @@ const Register= () => {
         </div>
       </div>
       <div className="order-1 md:order-2">
-        <SliderAuth />
+        <SliderAuth heightScreen={"full"} heightBottom={10}/>
       </div>
     </div>
   </div>

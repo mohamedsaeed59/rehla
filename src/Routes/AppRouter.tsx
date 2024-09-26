@@ -8,6 +8,9 @@ import Profile from "../Pages/Profile";
 import Search from "../Pages/Search";
 import SavedChalets from "../Pages/SavedChalets";
 import Register from "../Pages/auth/Register";
+// import Otp from "../Pages/Otp";
+// import Location from "../Pages/Location";
+
 
 
 
