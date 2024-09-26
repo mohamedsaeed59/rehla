@@ -2,7 +2,7 @@ import { memo } from "react";
 
 const TermsConditions = () => {
   return (
-    <div className="fixed bottom-3 left-[10%] bg-body w-[80%] mx-auto z-50 rounded-lg border">
+    <div className="fixed bottom-3 left-[5%] lg:left-[10%] bg-body w-[90%] lg:w-[80%] mx-auto z-50 rounded-lg border">
       <div className="flex justify-between items-center p-4">
         <p className="text-sm font-normal">
           You agree to our{" "}

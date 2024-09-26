@@ -8,8 +8,10 @@ import Profile from "../Pages/Profile";
 import Search from "../Pages/Search";
 import SavedChalets from "../Pages/SavedChalets";
 import Register from "../Pages/auth/Register";
-// import Otp from "../Pages/Otp";
-// import Location from "../Pages/Location";
+import Login from "../Pages/auth/Login";
+import Otp from "../Pages/Otp";
+import Location from "../Pages/Location";
+
 
 
 
@@ -20,7 +22,10 @@ export default function AppRouter() {
           path: "/",
           element: <Layouts/>,
           children: [
-            { path: "/", element: <Home/> },
+            { path: "/", element: <Login/> },
+            { path: "/home", element: <Home/> },
+            { path: "/otp", element: <Otp/> },
+            { path: "/location", element: <Location/> },
             { path: "/bookings", element: <Bookings/> },
             { path: "/profile", element: <Profile/> },
             { path: "/search", element: <Search/> },

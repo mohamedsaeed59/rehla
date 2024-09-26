@@ -5,3 +5,8 @@ export type DataSlideAuth = {
   heightScreen: string;
   heightBottom:number
 };
+
+export type DataBreadCrumb= {
+  title: string;
+  subTitle: string;
+};

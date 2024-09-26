@@ -1,12 +1,13 @@
 import { memo } from "react";
 import SliderAuth from "../../Components/auth/SliderAuth";
 import logo from "../../assets/logolight.webp";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import faceBook from "../../assets/icons/facebook.svg"
 import google from "../../assets/icons/google.svg"
 import apple from "../../assets/icons/apple.svg"
 
 const Login = () => {
+  const navigate = useNavigate()
   return (
     <div className="">
       <div className="grid grid-cols-1 md:grid-cols-2">
@@ -39,6 +40,7 @@ const Login = () => {
                     />
                   </div>
                   <button
+                  onClick={()=> navigate("/otp")}
                     type="submit"
                     className="rounded-3xl p-2 focus:outline-none text-lg font-bold bg-mainBlack text-white"
                   >

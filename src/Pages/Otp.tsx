@@ -1,9 +1,10 @@
 import { memo } from "react";
 import otp from "../assets/icons/otp.svg";
 import error from "../assets/icons/erroricon.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Otp = () => {
+  const navigate = useNavigate()
   return (
     <div className="w-screen h-screen">
       <div className="p-6 md:p-12">
@@ -58,6 +59,7 @@ const Otp = () => {
             </div>
             <div className="w-full md:w-[290px]">
               <button
+               onClick={()=> navigate("/home")}
                 type="submit"
                 className="w-full rounded-3xl p-2 focus:outline-none text-lg font-bold bg-mainBlack text-white"
               >

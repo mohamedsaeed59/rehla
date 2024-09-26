@@ -1,15 +1,14 @@
 import { memo } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Scrollbar } from "swiper/modules";
-import Card from "../Global/Card";
-
+import CardTwo from "../Global/CardTwo";
 
 const CloseLocation = () => {
   return (
     <div className="container py-10">
-        <h3 className="text-mainBlack font-bold text-2xl">
-          Close to your location
-        </h3>
+      <h3 className="text-mainBlack font-bold text-2xl">
+        Close to your location
+      </h3>
       <div className="py-8">
         <Swiper
           slidesPerView={1}
@@ -26,16 +25,16 @@ const CloseLocation = () => {
           modules={[Scrollbar]}
         >
           <SwiperSlide>
-            <Card />
+            <CardTwo />
           </SwiperSlide>
           <SwiperSlide>
-            <Card />
+            <CardTwo />
           </SwiperSlide>
           <SwiperSlide>
-            <Card />
+            <CardTwo />
           </SwiperSlide>
           <SwiperSlide>
-            <Card />
+            <CardTwo />
           </SwiperSlide>
         </Swiper>
       </div>

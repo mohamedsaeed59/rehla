@@ -32,6 +32,7 @@ export default {
         ryBackground: "#F7F7F7",
         ry3Text:"#7D7D7D",
         ry4Text:"#B0B0B0",
+        ry5Text:"#4A4A4A",
         red:"#FF3B30",
         locationBg:"#5F6368",
       },

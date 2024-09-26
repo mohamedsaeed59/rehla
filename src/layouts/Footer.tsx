@@ -3,7 +3,7 @@ import { memo } from "react"
 
 function Footer() {
   return (
-    <div className="container">
+    <div className="container bg-ryBackground">
       Footer
     </div>
   )

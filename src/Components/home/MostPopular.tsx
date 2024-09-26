@@ -6,7 +6,7 @@ import right from "../../assets/icons/right-arrow.svg";
 
 const MostPopular = () => {
   return (
-    <div className="py-10 bg-[#f9f7f7]">
+    <div className="py-10 bg-ryBackground">
       <div className="container">
         <div className="flex justify-between items-center">
           <h3 className="text-mainBlack font-bold text-2xl text-center lg:text-start">

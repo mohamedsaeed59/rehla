@@ -1,6 +1,6 @@
 import { memo, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import logolight from "../assets/logolight.webp";
+import logolight from "../assets/logolight.jpg";
 import search from "../assets/search.svg";
 import avter from "../assets/avter.webp";
 import notification from "../assets/arcticons_notificationcron.svg";
@@ -24,19 +24,21 @@ function Header() {
   };
 
   return (
-    <header className="py-3">
+    <header className="py-0">
       <TopHeader />
       <div className="border-b"></div>
       <div className="container">
         <div className="flex items-center justify-between relative">
-          <Link to="/">
-            <img
-              src={logolight}
-              alt="logolight"
-              className="w-[125px] h-[125px] object-cover"
-            />
-          </Link>
-          <nav className="hidden lg:block p-2">
+          <div className="w-[110px] h-[110px] p-0">
+            <Link to="/">
+              <img
+                src={logolight}
+                alt="logolight"
+                className="w-full h-full object-contain"
+              />
+            </Link>
+          </div>
+          <nav className="hidden lg:block">
             <ul className="flex items-center gap-10">
               <li>
                 <NavLink className="nav-link" to={"/"}>
