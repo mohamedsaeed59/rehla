@@ -73,11 +73,17 @@ body {
 
 .x::before{
   content: "";
-  border-width: 10px;
+  border-width: 25px;
   border-style: solid;
   border-color: transparent transparent #f6f6f6 transparent;
   position: absolute;
-  right: 5px;
-  top: -20px;
-  /* font-family: "font/family/Roboto"; */
+  right: -24px;
+  top: -24px;
+  transform: rotate(90deg);
+  /*font-family: "font/family/Roboto";
+  */-webkit-transform: rotate();
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
 }

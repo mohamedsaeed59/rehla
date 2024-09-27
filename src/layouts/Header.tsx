@@ -4,16 +4,17 @@ import logolight from "../assets/logolight.jpg";
 import search from "../assets/search.svg";
 import avter from "../assets/avter.webp";
 import notification from "../assets/arcticons_notificationcron.svg";
-import TopHeader from "../Components/Header/TopHeader";
 import MobileMenu from "../Components/Header/MobileMenu";
 import menu from "../assets/HAmburger-menu.webp";
 import Notification from "../Components/Header/Notification";
 
 import { AnimatePresence } from "framer-motion";
+import SearchMenu from "../Components/Search/SearchMenu";
 
 function Header() {
   const [isOpen, setOpen] = useState<boolean>(false);
   const [openNotification, setOpenNotification] = useState<boolean>(false);
+  const [openSearchMenu, setOpenSearchMenu] = useState<boolean>(false);
 
   const handleOpen = () => {
     setOpen(true);
@@ -23,9 +24,12 @@ function Header() {
     setOpenNotification(!openNotification);
   };
 
+  const handleOpenSearchMenu = () => {
+    setOpenSearchMenu(!openSearchMenu);
+  };
+
   return (
     <header className="py-0">
-      <TopHeader />
       <div className="border-b"></div>
       <div className="container">
         <div className="flex items-center justify-between relative">
@@ -61,16 +65,27 @@ function Header() {
             <MobileMenu isOpen={isOpen} setOpen={setOpen} />
           </div>
           <div className="flex items-center gap-4 ">
-            {/* border-none lg:border */}
-            <div className="flex items-center gap-2 p-2 border duration-300 rounded-2xl text-base w-fit lg:w-[359px] ">
-              <Link to={"/search"}>
-                <img src={search} alt="search" className="cursor-pointer" />
-              </Link>
-              <input
-                type="search"
-                placeholder="Search Chalet name, location"
-                className="w-full focus:outline-none hidden lg:block"
-              />
+            <div className="relative">
+              <div
+                className="flex items-center gap-1 p-1 border duration-300
+             rounded-2xl text-base lg:w-[350px] "
+                onClick={handleOpenSearchMenu}
+              >
+                <Link to={"/search"}>
+                  <img
+                    src={search}
+                    alt="search"
+                    className="cursor-pointer p-1"
+                  />
+                </Link>
+                <input
+                  type="search"
+                  placeholder="Search Chalet name, location"
+                  className="w-full focus:outline-none focus:border-primary p-1 hidden lg:block"
+                />
+              </div>
+
+              {openSearchMenu && <SearchMenu />}
             </div>
             <div className="flex items-center gap-2">
               <Link to={"/profile"} className="hidden lg:block">

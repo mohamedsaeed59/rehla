@@ -1,7 +1,8 @@
 import { memo } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import location from "../../assets/location.webp";
 import drop_down from "../../assets/ic_baseline-arrow-drop-down.webp";
+import Language from "../Global/Language";
 
 function TopHeader() {
   return (
@@ -30,26 +31,7 @@ function TopHeader() {
             </div>
           </div>
           <div className="hidden md:block">
-            <div className="flex items-center h-full">
-              <div className="flex justify-end  gap-4 xl:justify-start text-mainBlack">
-                <div className="text-mainBlack">
-                  <NavLink
-                    to={"/home"}
-                    className="active-btn rounded-3xl border py-1 px-3 bg-ryBackground"
-                  >
-                    English
-                  </NavLink>
-                </div>
-                <div className="text-mainBlack">
-                  <NavLink
-                    to={"/dd"}
-                    className="active-btn rounded-3xl border py-1 px-3 bg-ryBackground"
-                  >
-                    العربية
-                  </NavLink>
-                </div>
-              </div>
-            </div>
+            <Language />
           </div>
         </div>
       </div>

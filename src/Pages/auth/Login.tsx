@@ -2,12 +2,10 @@ import { memo } from "react";
 import SliderAuth from "../../Components/auth/SliderAuth";
 import logo from "../../assets/logolight.webp";
 import { Link, useNavigate } from "react-router-dom";
-import faceBook from "../../assets/icons/facebook.svg"
-import google from "../../assets/icons/google.svg"
-import apple from "../../assets/icons/apple.svg"
+import SocialIcons from "../../Components/Global/SocialIcons";
 
 const Login = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <div className="">
       <div className="grid grid-cols-1 md:grid-cols-2">
@@ -40,7 +38,7 @@ const Login = () => {
                     />
                   </div>
                   <button
-                  onClick={()=> navigate("/otp")}
+                    onClick={() => navigate("/otp")}
                     type="submit"
                     className="rounded-3xl p-2 focus:outline-none text-lg font-bold bg-mainBlack text-white"
                   >
@@ -60,24 +58,12 @@ const Login = () => {
                 <p className="text-ry3Text font-normal">Or</p>
                 <p className="text-ry3Text font-normal">Login with</p>
               </div>
-              <div className="p-2 flex justify-center items-center">
-                <ul className="flex gap-1 items-center">
-                  <li className="border border-textPlaceholder bg-white rounded-lg p-1 w-[35px] h-[35px] flex justify-center items-center">
-                    <a href="#"><img className="object-contain" src={faceBook} alt="faceBook"/></a>
-                  </li>
-                  <li className="border border-textPlaceholder bg-white rounded-lg p-1 w-[35px] h-[35px] flex justify-center items-center">
-                    <a href="#"><img src={google} alt="google" className="object-contain"/></a>
-                  </li>
-                  <li className="border border-textPlaceholder bg-white rounded-lg p-1 w-[35px] h-[35px] flex justify-center items-center">
-                    <a href="#"><img src={apple} alt="apple" className="object-contain"/></a>
-                  </li>
-                </ul>
-              </div>
+              <SocialIcons />
             </div>
           </div>
         </div>
         <div className="order-1 md:order-2">
-          <SliderAuth heightScreen={"screen"}  heightBottom={20} />
+          <SliderAuth heightScreen={"screen"} heightBottom={20} />
         </div>
       </div>
     </div>
