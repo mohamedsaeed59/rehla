@@ -9,7 +9,7 @@ import g from "../../assets/icons/carbon_location.svg";
 const MainProfile = () => {
   // md:w-[40%]
   return (
-    <div className="border border-borderColor w-full rounded-2xl overflow-hidden md:w-[450px] mx-auto m-0">
+    <div className="border border-borderColor w-full rounded-2xl overflow-hidden md:w-[450px] mx-auto my-8">
       <div className="flex flex-col my-8 py-6">
         <div className="flex flex-col gap-3 justify-center items-center">
           <div className="flex flex-col justify-center items-center">

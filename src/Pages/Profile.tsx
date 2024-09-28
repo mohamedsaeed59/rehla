@@ -11,7 +11,7 @@ const Profile = () => {
       <div className="block lg:hidden">
         <BreadCrumb title={"My profile"} subTitle={"My profile"} />
       </div>
-      <div className="container">
+      <div className="container overflow-hidden">
         <MainProfile />
       </div>
       <Footer />

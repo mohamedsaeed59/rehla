@@ -1,10 +1,16 @@
-import { memo } from "react";
-import { Link } from "react-router-dom";
+import { memo, useState } from "react";
 import location from "../../assets/location.webp";
 import drop_down from "../../assets/ic_baseline-arrow-drop-down.webp";
 import Language from "../Global/Language";
+import Location from "../../Pages/Location";
 
 function TopHeader() {
+  const [openLocation, setOpenLocation] = useState<boolean>(false);
+
+  const handleOpenLocation = () => {
+    setOpenLocation(!openLocation);
+  };
+
   return (
     <div className="container">
       <div className="py-2">
@@ -22,18 +28,19 @@ function TopHeader() {
               />
             </div>
             <div className="pl-3 text-center sm:text-start">
-              <Link
-                to={"/location"}
+              <div
+                onClick={handleOpenLocation}
                 className="text-primary text-base font-normal leading-4 border-b border-b-primary"
               >
                 Change location
-              </Link>
+              </div>
             </div>
           </div>
           <div className="hidden md:block">
             <Language />
           </div>
         </div>
+        {openLocation && <Location />}
       </div>
     </div>
   );

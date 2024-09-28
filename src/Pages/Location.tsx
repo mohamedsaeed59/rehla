@@ -3,7 +3,7 @@ import location from "../assets/icons/Location2.svg";
 
 const Location = () => {
   return (
-    <div className="w-screen h-screen flex justify-center items-center bg-locationBg">
+    <div className="absolute top-0 left-0 w-screen h-screen flex justify-center items-center backdrop-blur-[8px] bg-black/50 z-50">
       <div className="w-full md:w-[500px] rounded-3xl bg-body border border-borderColor2 shadow-sm mx-5">
         <div className="flex flex-col justify-center text-mainBlack">
           <div className="flex flex-col items-center gap-4 py-12 px-6">

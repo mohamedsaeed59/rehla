@@ -10,12 +10,12 @@ import SavedChalets from "../Pages/SavedChalets";
 import Register from "../Pages/auth/Register";
 import Login from "../Pages/auth/Login";
 import Otp from "../Pages/Otp";
-import Location from "../Pages/Location";
 import TellUs from "../Components/auth/TellUs";
 import EditProfile from "../Components/Profile/EditProfile";
 import Chate from "../Components/Global/Chate";
 import PrivacyPolicy from "../Components/Profile/PrivacyPolicy";
 import ProfileTermsConditions from "../Components/Profile/ProfileTerms&Conditions";
+import BookingConfirmation from "../Components/Bookings/BookingConfirmation";
 
 
 
@@ -25,11 +25,10 @@ export default function AppRouter() {
           path: "/",
           element: <Layouts/>,
           children: [
-            { path: "/", element: <Login/> },
+            { path: "/", element: <BookingConfirmation/> },
             { path: "/home", element: <Home/> },
             { path: "/otp", element: <Otp/> },
             { path: "/tellUs", element: <TellUs/> },
-            { path: "/location", element: <Location/> },
             { path: "/bookings", element: <Bookings/> },
             { path: "/profile", element: <Profile/> },
             { path: "/search", element: <Search/> },
