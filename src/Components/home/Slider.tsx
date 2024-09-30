@@ -1,7 +1,7 @@
 import { memo } from "react";
 import slideHome1 from "../../assets/slideHome.png";
-import slideHome2 from "../../assets/slideAuth/3.jfif";
-import slideHome3 from "../../assets/slideAuth/4.jfif";
+import slideHome2 from "../../assets/2.png";
+import slideHome3 from "../../assets/3.png";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";

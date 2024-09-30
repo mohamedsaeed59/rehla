@@ -1,7 +1,7 @@
 import { memo, useState } from "react";
 
-import MenuCity from "./MenuCity";
 import DeleteAccount from "./DeleteAccount";
+import MenuCity from "../Global/MenuCity";
 
 const ProfileForm = () => {
   const [openMenuCity, setOpenMenuCity] = useState<boolean>(false);
@@ -67,7 +67,7 @@ const ProfileForm = () => {
           onClick={handleOpenMenuCity}
           className="rounded-lg p-2 focus:outline-none focus:border-primary border border-borderColor"
         />
-        {openMenuCity && <MenuCity />}
+        {openMenuCity && <MenuCity/>}
       </div>
 
       <div className="flex flex-col gap-1">
@@ -93,7 +93,7 @@ const ProfileForm = () => {
       >
         Delete Account
       </div>
-      {openDeleteAccount && <DeleteAccount />}
+      {openDeleteAccount && <DeleteAccount/>}
     </form>
   );
 };

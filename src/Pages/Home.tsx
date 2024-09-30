@@ -14,9 +14,9 @@ function Home() {
       <Header />
       <div className="relative">
         <Slider />
-        {/* <div className="hidden md:block">
+        <div className="hidden md:block">
         <TermsConditions/>
-        </div> */}
+        </div>
         {/* <Conditions/> */}
         <CloseLocation />
         <MostPopular />

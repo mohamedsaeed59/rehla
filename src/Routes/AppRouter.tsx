@@ -11,11 +11,12 @@ import Register from "../Pages/auth/Register";
 import Login from "../Pages/auth/Login";
 import Otp from "../Pages/Otp";
 import TellUs from "../Components/auth/TellUs";
+import TellUsNext from "../Components/auth/TellUsNext";
 import EditProfile from "../Components/Profile/EditProfile";
 import Chate from "../Components/Global/Chate";
 import PrivacyPolicy from "../Components/Profile/PrivacyPolicy";
 import ProfileTermsConditions from "../Components/Profile/ProfileTerms&Conditions";
-import BookingConfirmation from "../Components/Bookings/BookingConfirmation";
+
 
 
 
@@ -25,10 +26,11 @@ export default function AppRouter() {
           path: "/",
           element: <Layouts/>,
           children: [
-            { path: "/", element: <BookingConfirmation/> },
+            { path: "/", element: <Login/> },
             { path: "/home", element: <Home/> },
             { path: "/otp", element: <Otp/> },
             { path: "/tellUs", element: <TellUs/> },
+            { path: "/tell-us-next", element: <TellUsNext/> },
             { path: "/bookings", element: <Bookings/> },
             { path: "/profile", element: <Profile/> },
             { path: "/search", element: <Search/> },

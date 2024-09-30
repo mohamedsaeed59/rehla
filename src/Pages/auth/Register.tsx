@@ -4,7 +4,6 @@ import logo from "../../assets/logolight.webp";
 import { Link, useNavigate } from "react-router-dom";
 import SocialIcons from "../../Components/Global/SocialIcons";
 
-
 const Register = () => {
   const navigate = useNavigate();
   return (
@@ -14,7 +13,9 @@ const Register = () => {
           <div className="flex flex-col  w-full p-4 gap-3">
             <div>
               <div className="text-end w-full p-2">
-                <button className="font-normal text-xl">Skip</button>
+                <Link to={"/home"} className="font-normal text-xl">
+                  Skip
+                </Link>
               </div>
               <div className="flex justify-center items-center">
                 <img
@@ -68,7 +69,7 @@ const Register = () => {
                 </form>
                 <p className="text-center font-normal text-lg text-mainBlack">
                   Don’t have an Account?{" "}
-                  <Link to={"/register"} className="text-primary">
+                  <Link to={"/"} className="text-primary">
                     Create Account
                   </Link>
                 </p>
@@ -79,7 +80,7 @@ const Register = () => {
                 <p className="text-ry3Text font-normal">Or</p>
                 <p className="text-ry3Text font-normal">Sign up with</p>
               </div>
-             <SocialIcons/>
+              <SocialIcons />
             </div>
           </div>
         </div>

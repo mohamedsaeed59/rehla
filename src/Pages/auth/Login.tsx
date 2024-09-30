@@ -13,7 +13,7 @@ const Login = () => {
           <div className="flex flex-col  w-full p-4 gap-8">
             <div>
               <div className="text-end w-full p-2">
-                <button className="font-normal text-xl">Skip</button>
+                <Link to={"/home"} className="font-normal text-xl">Skip</Link>
               </div>
               <div className="flex justify-center items-center">
                 <img
