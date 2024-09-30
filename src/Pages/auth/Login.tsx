@@ -19,10 +19,10 @@ const Login = () => {
                 <img
                   src={logo}
                   alt="logo"
-                  className="w-[200px] h-[200px] object-cover"
+                  className="w-[190px] h-[190px] object-cover"
                 />
               </div>
-              <div className="flex flex-col gap-3 w-full md:w-[80%] mx-auto">
+              <div className="flex flex-col gap-2 w-full md:w-[80%] mx-auto">
                 <h3 className="font-bold text-xl text-mainBlack">
                   Welcome Back,
                 </h3>
@@ -40,12 +40,12 @@ const Login = () => {
                   <button
                     onClick={() => navigate("/otp")}
                     type="submit"
-                    className="rounded-3xl p-2 focus:outline-none text-lg font-bold bg-mainBlack text-white"
+                    className="rounded-3xl p-1 focus:outline-none text-lg font-bold bg-mainBlack text-white"
                   >
                     Login
                   </button>
                 </form>
-                <p className="text-center font-normal text-lg text-mainBlack">
+                <p className="text-center font-normal text-base text-mainBlack">
                   Don’t have an Account?{" "}
                   <Link to={"/register"} className="text-primary">
                     Create Account
@@ -63,7 +63,7 @@ const Login = () => {
           </div>
         </div>
         <div className="order-1 md:order-2">
-          <SliderAuth heightScreen={"screen"} heightBottom={20} />
+          <SliderAuth/>
         </div>
       </div>
     </div>

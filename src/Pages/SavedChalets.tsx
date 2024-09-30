@@ -11,7 +11,7 @@ const SavedChalets = () => {
     <>
      <Header/>
       <div className="container">
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-8 my-8">
           <div className="flex justify-between items-center">
             <h3 className="text-[18px] font-bold">
               15 <span className="text-ry3Text font-medium">Saved Chalet</span>

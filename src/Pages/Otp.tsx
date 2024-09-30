@@ -63,7 +63,7 @@ const Otp = () => {
             </div>
             <div className="w-full md:w-[290px]">
               <button
-                onClick={() => navigate("/home")}
+                onClick={() => navigate("/tellUs")}
                 type="submit"
                 className="w-full rounded-3xl p-2 focus:outline-none text-lg font-bold bg-mainBlack text-white"
               >

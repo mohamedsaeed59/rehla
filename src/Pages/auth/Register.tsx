@@ -67,7 +67,7 @@ const Register = () => {
                     Create Account
                   </button>
                 </form>
-                <p className="text-center font-normal text-lg text-mainBlack">
+                <p className="text-center font-normal text-base text-mainBlack">
                   Don’t have an Account?{" "}
                   <Link to={"/"} className="text-primary">
                     Create Account
@@ -85,7 +85,7 @@ const Register = () => {
           </div>
         </div>
         <div className="order-1 md:order-2">
-          <SliderAuth heightScreen={"full"} heightBottom={10} />
+          <SliderAuth/>
         </div>
       </div>
     </div>

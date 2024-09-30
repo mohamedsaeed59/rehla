@@ -7,12 +7,9 @@ import BannerSliderAuth from "./BannerSliderAuth";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 
-type Props = {
-  heightScreen: string;
-  heightBottom:number
-};
 
-const SliderAuth = ({ heightScreen , heightBottom }: Props) => {
+
+const SliderAuth = () => {
   const data = [
     {
       id: 1,
@@ -40,7 +37,7 @@ const SliderAuth = ({ heightScreen , heightBottom }: Props) => {
     },
   ];
   return (
-    <div className="w-full">
+    <div className="overflow-hidden">
       <Swiper
         loop={true}
         autoplay={{
@@ -58,8 +55,6 @@ const SliderAuth = ({ heightScreen , heightBottom }: Props) => {
               image={item.SrcImage}
               title={item.title}
               des={item.dis}
-              heightScreen={heightScreen}
-              heightBottom={heightBottom}
             />
           </SwiperSlide>
         ))}

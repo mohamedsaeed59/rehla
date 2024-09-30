@@ -16,16 +16,13 @@ const TellUs = () => {
               <ol className="flex w-full text-xs text-gray-900 font-medium sm:text-base">
                 <li className="flex w-full relative text-mainBlack  after:content-['']  after:w-full after:h-[1px]  after:bg-borderColor after:inline-block after:absolute after:top-[12px] after:left-[24px]">
                   <div className="block whitespace-nowrap z-10">
-                    <span className="w-6 h-6 border-2 border-mainBlack rounded-full flex justify-center items-center mx-auto mb-3 text-sm  bg-body">
-                      
-                    </span>{" "}
+                    <span className="w-6 h-6 border-2 border-mainBlack rounded-full flex justify-center items-center mx-auto mb-3 text-sm  bg-body"></span>{" "}
                     User data
                   </div>
                 </li>
                 <li className="flex text-gray-900">
                   <div className="block whitespace-nowrap z-10">
-                    <span className="w-6 h-6 bg-body border-2 border-borderColor rounded-full flex justify-center items-center mx-auto mb-3 text-sm text-indigo-600">
-                    </span>{" "}
+                    <span className="w-6 h-6 bg-body border-2 border-borderColor rounded-full flex justify-center items-center mx-auto mb-3 text-sm text-indigo-600"></span>{" "}
                     Location
                   </div>
                 </li>
@@ -70,7 +67,8 @@ const TellUs = () => {
                 {/* <p>Not valid at least 2  digits</p> */}
               </div>
               <div className="flex justify-end mt-4 py-2">
-                <Link to={"/tell-us-next"}
+                <Link
+                  to={"/tell-us-next"}
                   // type="submit"
                   className="w-[280px] rounded-3xl p-2 text-center focus:outline-none text-lg font-bold bg-mainBlack text-white"
                 >
