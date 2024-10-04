@@ -1,12 +1,18 @@
 import { memo } from "react";
 import avter from "../../assets/avter.webp";
 import { Link } from "react-router-dom";
+import { useAppSelector } from "../../app/hooks";
 
 const UpdateProfile = () => {
+  const {data} = useAppSelector(
+    (state) => state.auth
+  );
+  // console.log(data);
+  
   return (
     <div className="flex flex-col justify-center items-center">
       <img src={avter} alt="avter" className="w-14 object-cover rounded-full" />
-      <h2 className="font-medium text-xl text-mainBlack">Yomna Asharf</h2>
+      <h2 className="font-medium text-xl text-mainBlack">{data?.name}</h2>
       <Link
         to={"/editprofile"}
         className="text-primary flex items-center"

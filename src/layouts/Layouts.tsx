@@ -1,16 +1,37 @@
-
-import {memo } from "react";
-// import Header from "./Header";
-// import Footer from "./Footer";
+import { memo, useEffect } from "react";
+import Header from "./Header";
+import Footer from "./Footer";
 import { Outlet } from "react-router";
-
+import { useLocation, useNavigate } from "react-router-dom";
+import { useAppSelector } from "../app/hooks";
 
 const Layouts = () => {
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+  const { skip } = useAppSelector((state) => state.auth);
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem("access_token");
+
+    if (!accessToken && !skip) {
+      navigate("/login");
+    }
+  }, [navigate, skip]);
   return (
-    <> 
-      <Outlet/>
+    <>
+      {!pathname.includes("login") &&
+        !pathname.includes("register") &&
+        !pathname.includes("otp") && 
+        !pathname.includes("tellUs") && 
+        <Header />}
+      <Outlet />
+      {!pathname.includes("login") &&
+        !pathname.includes("register") &&
+        !pathname.includes("otp") && 
+        !pathname.includes("tellUs") && 
+        <Footer />}
     </>
   );
-}
+};
 
 export default memo(Layouts);

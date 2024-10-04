@@ -2,8 +2,6 @@ import { memo, useState } from "react";
 import Card from "../Components/Global/Card";
 import downDrop from "../assets/icons/arrow-down-drop.svg";
 import filter from "../assets/icons/filter.svg";
-import Footer from "../layouts/Footer";
-import Header from "../layouts/Header";
 import BreadCrumb from "../Components/Global/BreadCrumb";
 
 const Search = () => {
@@ -11,7 +9,7 @@ const Search = () => {
 
   return (
     <>
-     <Header/>
+
      <div className="block lg:hidden">
      <BreadCrumb title={"Search Results"} subTitle={"search results"}/>
      </div>
@@ -71,7 +69,6 @@ const Search = () => {
           <Card />
         </div>
       </div>
-      <Footer/>
     </>
   );
 };

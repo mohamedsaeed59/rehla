@@ -1,15 +1,13 @@
 import { memo, useState } from "react";
 import Card from "../Components/Global/Card";
 import downDrop from "../assets/icons/arrow-down-drop.svg";
-import Footer from "../layouts/Footer";
-import Header from "../layouts/Header";
+
 
 const SavedChalets = () => {
   const [downDropStore, setDownDropStore] = useState<boolean>(true);
 
   return (
     <>
-     <Header/>
       <div className="container">
         <div className="flex flex-col gap-8 my-8">
           <div className="flex justify-between items-center">
@@ -58,7 +56,6 @@ const SavedChalets = () => {
           <Card />
         </div>
       </div>
-    <Footer/>
     </>
   );
 };

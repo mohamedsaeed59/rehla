@@ -13,9 +13,7 @@ const Register = () => {
           <div className="flex flex-col  w-full p-4 gap-3">
             <div>
               <div className="text-end w-full p-2">
-                <Link to={"/home"} className="font-normal text-xl">
-                  Skip
-                </Link>
+              <Link to={"/"} className="font-normal text-lg">Skip</Link>
               </div>
               <div className="flex justify-center items-center">
                 <img
@@ -84,8 +82,8 @@ const Register = () => {
             </div>
           </div>
         </div>
-        <div className="order-1 md:order-2">
-          <SliderAuth/>
+        <div className="order-1 md:order-2 h-full overflow-hidden">
+          <SliderAuth heightScreen={"full"}/>
         </div>
       </div>
     </div>

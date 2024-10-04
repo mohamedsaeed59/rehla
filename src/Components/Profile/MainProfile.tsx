@@ -8,7 +8,7 @@ import lock2 from "../../assets/6438892.png";
 import UpdateProfile from "./UpdateProfile";
 
 const MainProfile = () => {
-  // md:w-[40%]
+
   return (
     <div className="border border-borderColor w-full rounded-2xl overflow-hidden md:w-[450px] mx-auto my-8">
       <div className="flex flex-col my-8 py-6">
