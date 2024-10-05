@@ -6,30 +6,31 @@ import { actAuthRegister } from "./act/ActAuthRegister";
 interface IAuthState {
   data: {
     access_token: string;
-    user: {
-      id: number;
-      email: string;
-      name: string;
-      phone: string;
-    } | null;
+    user: string;
+    id: number;
+    email: string;
+    phone: string;
   };
   loading: TLoading;
   error: string | null;
   skip: boolean;
   message: string;
-  statusData:number
+  statusData: number;
 }
 
 const initialState: IAuthState = {
   data: {
     access_token: localStorage.getItem("access_token") || "",
-    user: null,
+    user: "",
+    id: 0,
+    email: "",
+    phone: "",
   },
   loading: "idle",
   error: null,
   skip: false,
   message: "",
-  statusData:0
+  statusData: 0,
 };
 
 const authSlice = createSlice({
@@ -38,7 +39,7 @@ const authSlice = createSlice({
   reducers: {
     authLogout: (state) => {
       state.data.access_token = "";
-      state.data.user = null;
+      state.data.user = "";
       localStorage.removeItem("access_token");
     },
     handleSkip: (state) => {
@@ -54,8 +55,8 @@ const authSlice = createSlice({
     builder.addCase(actAuthRegister.fulfilled, (state, action) => {
       state.loading = "succeeded";
       // console.log(action.payload);
-      state.message = action.payload.message
-      state.statusData = action.payload.status
+      state.message = action.payload.message;
+      state.statusData = action.payload.status;
     });
     builder.addCase(actAuthRegister.rejected, (state) => {
       state.loading = "failed";
@@ -71,8 +72,8 @@ const authSlice = createSlice({
       state.loading = "succeeded";
       state.data.access_token = action.payload.data.access_token;
       localStorage.setItem("access_token", action.payload.data.access_token);
-      // console.log(action.payload.data);
-      state.data = action.payload.data;
+      // console.log(action.payload);
+      state.data.user = action.payload.data.name;
     });
     builder.addCase(actAuthLogin.rejected, (state) => {
       state.loading = "failed";

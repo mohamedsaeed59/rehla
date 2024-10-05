@@ -1,6 +1,5 @@
 import { memo, useState } from "react";
 import bookingConfirmation from "../../assets/BookingConfirmation.gif";
-import Header from "../../layouts/Header";
 import Rate from "./Rate";
 
 const BookingConfirmation = () => {
@@ -12,7 +11,6 @@ const BookingConfirmation = () => {
 
   return (
     <>
-      <Header />
       <div className="container">
         <div className="flex items-center flex-col justify-center gap-6">
           <img

@@ -1,9 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { PropsInputsLogin} from "../../../Types/app";
+import { PropsInputsLogin } from "../../../Types/app";
 const URL__API = import.meta.env.VITE_REACT_APP_API_KEY;
-
-
 
 type TResponse = {
   // user: {
@@ -14,12 +12,10 @@ type TResponse = {
   // };
   data: {
     access_token: string;
-    user: {
-      id: number;
-      email: string;
-      name: string;
-      phone: string;
-    } | null;
+    id: number;
+    email: string;
+    name: string;
+    phone: string;
   };
 };
 
@@ -47,5 +43,3 @@ export const actAuthLogin = createAsyncThunk(
     }
   }
 );
-
-

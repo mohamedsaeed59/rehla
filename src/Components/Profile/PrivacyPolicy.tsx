@@ -1,14 +1,13 @@
 import { memo } from "react";
-import Footer from "../../layouts/Footer";
 import BreadCrumb from "../Global/BreadCrumb";
 import lock from "../../assets/6438892.png";
 import loading from "../../assets/loading.gif";
-import Header from "../../layouts/Header";
+
 
 const PrivacyPolicy = () => {
   return (
     <>
-      <Header />
+
       <div className="block lg:hidden">
         <BreadCrumb title={"Privacy & Policy"} subTitle={"Privacy & Policy"} />
       </div>
@@ -57,7 +56,6 @@ const PrivacyPolicy = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

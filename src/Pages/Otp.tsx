@@ -172,7 +172,7 @@ type PropsInputsOtp = {
 };
 
 const Otp = () => {
-  const { handleSubmit, register, setValue } = useForm<PropsInputsOtp>();
+  const { handleSubmit, setValue } = useForm<PropsInputsOtp>();
 
   const { phoneOrEmail, Otp2 } = useAppSelector(
     (state) => state.userSliceToLogin
@@ -209,15 +209,28 @@ const Otp = () => {
     navigate("/");
   };
 
+  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+  //   const { value } = e.target;
+  //   if (/^\d$/.test(value)) {  
+  //     // setValue(`num${index + 1}`, value);  
+  //     setValue(`num${index + 1}` as keyof PropsInputsOtp, value);
+  //     if (index < inputRefs.length - 1 && inputRefs[index + 1].current) {
+  //       inputRefs[index + 1].current!.focus();  
+  //     }
+  //   }
+  // };
+
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const { value } = e.target;
     if (/^\d$/.test(value)) {  
-      setValue(`num${index + 1}`, value);  
+      setValue(`num${index + 1}` as keyof PropsInputsOtp, value);  
       if (index < inputRefs.length - 1 && inputRefs[index + 1].current) {
         inputRefs[index + 1].current!.focus();  
       }
     }
   };
+  
 
   return (
     <div className="overflow-hidden">

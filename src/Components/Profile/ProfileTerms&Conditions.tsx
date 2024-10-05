@@ -1,14 +1,13 @@
 import { memo } from "react";
-import Footer from "../../layouts/Footer";
 import BreadCrumb from "../Global/BreadCrumb";
 import lock from "../../assets/icons/lock.svg";
 import loading from "../../assets/loading.gif";
-import Header from "../../layouts/Header";
+
 
 const ProfileTermsConditions = () => {
   return (
     <>
-       <Header/>
+
       <div className="block lg:hidden">
         <BreadCrumb title={"Terms & Conditions"} subTitle={"Terms & Conditions"} />
       </div>
@@ -57,7 +56,6 @@ const ProfileTermsConditions = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

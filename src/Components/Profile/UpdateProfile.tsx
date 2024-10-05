@@ -7,12 +7,11 @@ const UpdateProfile = () => {
   const {data} = useAppSelector(
     (state) => state.auth
   );
-  // console.log(data);
   
   return (
     <div className="flex flex-col justify-center items-center">
       <img src={avter} alt="avter" className="w-14 object-cover rounded-full" />
-      <h2 className="font-medium text-xl text-mainBlack">{data?.name}</h2>
+      <h2 className="font-medium text-xl text-mainBlack">{data.user}</h2>
       <Link
         to={"/editprofile"}
         className="text-primary flex items-center"

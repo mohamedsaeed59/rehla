@@ -1,8 +1,6 @@
 import { memo, useRef } from "react";
 import MainProfile from "./MainProfile";
 import BreadCrumb from "../Global/BreadCrumb";
-import Header from "../../layouts/Header";
-import Footer from "../../layouts/Footer";
 import ProfileForm from "./ProfileForm";
 import { Link } from "react-router-dom";
 import rightArrow from "../../assets/icons/right-arrow.svg";
@@ -18,7 +16,7 @@ const EditProfile = () => {
   };
   return (
     <>
-      <Header />
+
       <div className="block lg:hidden">
         <BreadCrumb title={"Edit Profile"} subTitle={"Edit Profile"} />
       </div>
@@ -74,7 +72,6 @@ const EditProfile = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 };
