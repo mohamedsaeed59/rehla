@@ -11,6 +11,9 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
+
+import 'react-toastify/dist/ReactToastify.css';
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Provider store={store}>

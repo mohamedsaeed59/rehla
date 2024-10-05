@@ -23,12 +23,14 @@ const Layouts = () => {
         !pathname.includes("register") &&
         !pathname.includes("otp") && 
         !pathname.includes("tellUs") && 
+        !pathname.includes("tell-us-next") && 
         <Header />}
       <Outlet />
       {!pathname.includes("login") &&
         !pathname.includes("register") &&
         !pathname.includes("otp") && 
         !pathname.includes("tellUs") && 
+        !pathname.includes("tell-us-next") && 
         <Footer />}
     </>
   );

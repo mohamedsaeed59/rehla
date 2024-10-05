@@ -7,6 +7,7 @@ import SocialIcons from "../../Components/Global/SocialIcons";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useAppDispatch } from "../../app/hooks";
 import { setPhoneOrEmail } from "../../app/auth/userSlice";
+import { handleSkip } from "../../app/auth/authSlice";
 
 type PropsInputsLogin = {
   phoneOremail: string;
@@ -26,18 +27,16 @@ const Login = () => {
   const onSubmit: SubmitHandler<PropsInputsLogin> = (data) => {
     console.log(data.phoneOremail);
     dispatch(setPhoneOrEmail(data.phoneOremail));
-    navigate("/otp");
     reset();
+    navigate("/otp"); 
   };
 
-const accessToken = localStorage.getItem("access_token");
-console.log(!accessToken);
+  // const accessToken = localStorage.getItem("access_token");
 
 
-//   if(accessToken) {
-//     return <Navigate to="/login"/>
-// }
-
+  //   if(accessToken) {
+  //     return <Navigate to="/login"/>
+  // }
 
   return (
     <div className="">
@@ -46,9 +45,15 @@ console.log(!accessToken);
           <div className="flex flex-col  w-full p-4 gap-8">
             <div>
               <div className="text-end w-full p-2">
-                <Link to={"/"} className="font-normal text-lg">
+                <button
+                  onClick={() => {
+                    dispatch(handleSkip());
+                    navigate("/");
+                  }}
+                  className="font-normal text-lg"
+                >
                   Skip
-                </Link>
+                </button>
               </div>
               <div className="flex justify-center items-center">
                 <img

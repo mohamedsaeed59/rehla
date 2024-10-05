@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { TLoading } from "../../Types/app";
 import { actAuthLogin } from "./act/ActAuthLogin";
+import { actAuthRegister } from "./act/ActAuthRegister";
 
 interface IAuthState {
   data: {
@@ -15,6 +16,8 @@ interface IAuthState {
   loading: TLoading;
   error: string | null;
   skip: boolean;
+  message: string;
+  statusData:number
 }
 
 const initialState: IAuthState = {
@@ -25,6 +28,8 @@ const initialState: IAuthState = {
   loading: "idle",
   error: null,
   skip: false,
+  message: "",
+  statusData:0
 };
 
 const authSlice = createSlice({
@@ -41,6 +46,22 @@ const authSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    // Register
+    builder.addCase(actAuthRegister.pending, (state) => {
+      state.loading = "pending";
+      state.error = null;
+    });
+    builder.addCase(actAuthRegister.fulfilled, (state, action) => {
+      state.loading = "succeeded";
+      // console.log(action.payload);
+      state.message = action.payload.message
+      state.statusData = action.payload.status
+    });
+    builder.addCase(actAuthRegister.rejected, (state) => {
+      state.loading = "failed";
+      state.error = "Login failed";
+    });
+
     // login
     builder.addCase(actAuthLogin.pending, (state) => {
       state.loading = "pending";
@@ -48,12 +69,6 @@ const authSlice = createSlice({
     });
     builder.addCase(actAuthLogin.fulfilled, (state, action) => {
       state.loading = "succeeded";
-
-      //   state.data.access_token = action.payload.accessToken;
-      // //   console.log(action.payload.data.access_token);
-      //   localStorage.setItem("access_token", action.payload.data.access_token);
-      //   state.data.user = action.payload.data
-
       state.data.access_token = action.payload.data.access_token;
       localStorage.setItem("access_token", action.payload.data.access_token);
       // console.log(action.payload.data);
@@ -67,4 +82,4 @@ const authSlice = createSlice({
 });
 
 export default authSlice.reducer;
-export const { authLogout , handleSkip} = authSlice.actions;
+export const { authLogout, handleSkip } = authSlice.actions;

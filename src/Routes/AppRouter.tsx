@@ -1,9 +1,5 @@
-// import Contact from "../Pages/Contact/Contact";
 import Layouts from "../layouts/Layouts";
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "../Pages/Home";
 import Bookings from "../Pages/Bookings";
 import Profile from "../Pages/Profile";
@@ -18,10 +14,8 @@ import EditProfile from "../Components/Profile/EditProfile";
 import Chate from "../Components/Global/Chate";
 import PrivacyPolicy from "../Components/Profile/PrivacyPolicy";
 import ProfileTermsConditions from "../Components/Profile/ProfileTerms&Conditions";
-// import ProtectedRoute from "../utils/ProtectedRoute";
 
 export default function AppRouter() {
-
   const router = createBrowserRouter([
     {
       path: "/",
@@ -30,16 +24,15 @@ export default function AppRouter() {
         { path: "/", element: <Home /> },
         {
           path: "/login",
-          element: <Login />,
-        },
+          element: <Login />,},
         { path: "/otp", element: <Otp /> },
+        { path: "/register", element: <Register /> },
         { path: "/tellUs", element: <TellUs /> },
         { path: "/tell-us-next", element: <TellUsNext /> },
         { path: "/bookings", element: <Bookings /> },
         { path: "/profile", element: <Profile /> },
         { path: "/search", element: <Search /> },
         { path: "/savedchalets", element: <SavedChalets /> },
-        { path: "/register", element: <Register /> },
         { path: "/editprofile", element: <EditProfile /> },
         { path: "/chate", element: <Chate /> },
         { path: "/privacy-policy", element: <PrivacyPolicy /> },
