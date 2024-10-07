@@ -5,13 +5,19 @@ import image3 from "../../assets/rate/loved.svg";
 import image4 from "../../assets/rate/v.good.svg";
 import RateThanks from "./RateThanks";
 
-const Rate = () => {
+type Props = {
+  setOpenRate: (open: boolean) => void;
+};
+
+const Rate = ({ setOpenRate }: Props) => {
   const [openRateThanks, setOpenRateThanks] = useState<boolean>(false);
 
   const handleOpenRateThanks = () => {
     setOpenRateThanks(!openRateThanks);
   };
-
+  const handleCloseRateThanks = () => {
+    setOpenRate(false);
+  };
   return (
     <>
       <div className="w-screen h-screen fixed top-0 left-0 flex justify-center items-center backdrop-blur-[8px] bg-black/30">
@@ -27,7 +33,10 @@ const Rate = () => {
               <img src={image4} alt="logo" className="w-10 h-10" />
             </div>
             <div className="flex gap-4 justify-center items-center mb-6 mx-auto">
-              <button className="rounded-3xl text-ry3Text py-1 px-3">
+              <button
+                onClick={() => handleCloseRateThanks()}
+                className="rounded-3xl text-ry3Text py-1 px-3"
+              >
                 Cancel
               </button>
               <button

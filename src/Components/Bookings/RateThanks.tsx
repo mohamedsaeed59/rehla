@@ -1,6 +1,7 @@
 import { memo } from "react";
 import image from "../../assets/rate/Vector.svg";
 import close from "../../assets/rate/close.svg";
+import { Link } from "react-router-dom";
 
 const Rate = () => {
   return (
@@ -18,10 +19,13 @@ const Rate = () => {
               We will enhance the app to be better for you!
             </p>
             <div className="border rounded-3xl px-7 py-1">
-              <button className="rounded-3xl text-ry3Text py-1 px-3 flex justify-center items-center gap-1">
+              <Link
+                to={"/bookings"}
+                className="rounded-3xl text-ry3Text py-1 px-3 flex justify-center items-center gap-1"
+              >
                 <img src={close} alt="logo" className="w-4 h-4" />
                 Close
-              </button>
+              </Link>
             </div>
           </div>
         </div>

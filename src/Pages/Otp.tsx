@@ -25,7 +25,7 @@
 //   const dispatch = useAppDispatch();
 //   const navigate = useNavigate();
 //   let accessToken ;
-  
+
 //   useEffect(() => {
 //     accessToken = localStorage.getItem("access_token");
 //     if (Otp2) {
@@ -85,7 +85,7 @@
 //                 <input
 //                   type="text"
 //                   placeholder="."
-                  
+
 //                   {...register("num1", {
 //                     required: "number is required",
 //                   })}
@@ -152,10 +152,7 @@
 
 // export default memo(Otp);
 
-
-
-
-import { memo, useEffect, useRef } from "react"; 
+import { memo, useEffect, useRef } from "react";
 import otpImage from "../assets/icons/otp.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
@@ -180,20 +177,23 @@ const Otp = () => {
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  let accessToken ;
+  const accessToken = localStorage.getItem("access_token");
 
-  const inputRefs = [useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null)];
+  const inputRefs = [
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+  ];
 
   useEffect(() => {
-    accessToken = localStorage.getItem("access_token");
     if (Otp2) {
       sendUserDataToDatabase();
     }
-
     if (accessToken) {
       navigate("/");
     }
-  }, [Otp2, accessToken]);
+  }, [Otp2, accessToken, navigate]);
 
   const onSubmit: SubmitHandler<PropsInputsOtp> = (data) => {
     dispatch(setOtp(Object.values(data).join("")));
@@ -206,31 +206,30 @@ const Otp = () => {
       fcm_token: "123456",
     };
     dispatch(actAuthLogin(userData));
-    navigate("/");
   };
 
   // const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
   //   const { value } = e.target;
-  //   if (/^\d$/.test(value)) {  
-  //     // setValue(`num${index + 1}`, value);  
+  //   if (/^\d$/.test(value)) {
+  //     // setValue(`num${index + 1}`, value);
   //     setValue(`num${index + 1}` as keyof PropsInputsOtp, value);
   //     if (index < inputRefs.length - 1 && inputRefs[index + 1].current) {
-  //       inputRefs[index + 1].current!.focus();  
+  //       inputRefs[index + 1].current!.focus();
   //     }
   //   }
   // };
-
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
     const { value } = e.target;
-    if (/^\d$/.test(value)) {  
-      setValue(`num${index + 1}` as keyof PropsInputsOtp, value);  
+    if (/^\d$/.test(value)) {
+      setValue(`num${index + 1}` as keyof PropsInputsOtp, value);
       if (index < inputRefs.length - 1 && inputRefs[index + 1].current) {
-        inputRefs[index + 1].current!.focus();  
+        inputRefs[index + 1].current!.focus();
       }
     }
   };
-  
 
   return (
     <div className="overflow-hidden">
@@ -263,7 +262,10 @@ const Otp = () => {
           >
             <div className="flex justify-center gap-2 py-4">
               {[1, 2, 3, 4].map((_, index) => (
-                <div key={index} className="w-[50px] h-[50px] p-3 border border-borderColor rounded-[8px] flex justify-center items-center">
+                <div
+                  key={index}
+                  className="w-[50px] h-[50px] p-3 border border-borderColor rounded-[8px] flex justify-center items-center"
+                >
                   <input
                     type="text"
                     maxLength={1}
@@ -296,4 +298,3 @@ const Otp = () => {
 };
 
 export default memo(Otp);
-

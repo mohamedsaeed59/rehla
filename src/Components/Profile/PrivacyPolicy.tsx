@@ -3,11 +3,9 @@ import BreadCrumb from "../Global/BreadCrumb";
 import lock from "../../assets/6438892.png";
 import loading from "../../assets/loading.gif";
 
-
 const PrivacyPolicy = () => {
   return (
     <>
-
       <div className="block lg:hidden">
         <BreadCrumb title={"Privacy & Policy"} subTitle={"Privacy & Policy"} />
       </div>

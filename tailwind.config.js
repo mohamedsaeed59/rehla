@@ -35,6 +35,7 @@ export default {
         ry5Text:"#4A4A4A",
         red:"#FF3B30",
         locationBg:"#5F6368",
+        bgNew:"#DBDBDB",
       },
       boxShadow: {
         shadow: "0px 1px 8px 0px #00000029",

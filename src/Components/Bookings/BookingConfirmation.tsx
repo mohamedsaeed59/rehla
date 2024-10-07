@@ -11,7 +11,7 @@ const BookingConfirmation = () => {
 
   return (
     <>
-      <div className="container">
+      <div className="container py-9">
         <div className="flex items-center flex-col justify-center gap-6">
           <img
             src={bookingConfirmation}
@@ -28,12 +28,12 @@ const BookingConfirmation = () => {
           </div>
           <button
             onClick={() => handleOpenRate()}
-            className="text-[14px] w-full duration-500 border border-mainBlack hover:bg-mainBlack hover:text-white font-bold leading-[17px] rounded-3xl py-2"
+            className="text-[14px] w-full md:w-[90%] duration-500 border border-mainBlack hover:bg-mainBlack hover:text-white font-bold leading-[17px] rounded-3xl py-3"
           >
             Review Details
           </button>
         </div>
-        {openRate && <Rate />}
+        {openRate && <Rate setOpenRate={setOpenRate} />}
       </div>
     </>
   );

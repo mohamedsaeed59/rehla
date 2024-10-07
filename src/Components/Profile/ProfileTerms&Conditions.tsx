@@ -7,7 +7,6 @@ import loading from "../../assets/loading.gif";
 const ProfileTermsConditions = () => {
   return (
     <>
-
       <div className="block lg:hidden">
         <BreadCrumb title={"Terms & Conditions"} subTitle={"Terms & Conditions"} />
       </div>
