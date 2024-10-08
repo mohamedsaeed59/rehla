@@ -11,7 +11,6 @@ import date from "../../assets/date.png";
 import Calendar from "./Calendar";
 import NumberOfAdults from "./NumberOfAdults";
 import SliderChaletDetails from "./SliderChaletDetails";
-// import Model from "./Model";
 
 const ChaletDetails = () => {
   return (
@@ -280,7 +279,6 @@ const ChaletDetails = () => {
           </div>
         </div>
       </div>
-      {/* <Model/> */}
       <div className="py-9">
         <div className="flex flex-col gap-4">
           <div className="flex items-center gap-2">

@@ -3,12 +3,11 @@ import { memo } from "react";
 import Language from "../Global/Language";
 import { Link } from "react-router-dom";
 import lock from "../../assets/icons/lock.svg";
-import g from "../../assets/icons/carbon_location.svg";
-import lock2 from "../../assets/6438892.png";
+import chat from "../../assets/chat.png";
+// import lock2 from "../../assets/6438892.png";
 import UpdateProfile from "./UpdateProfile";
 
 const MainProfile = () => {
-
   return (
     <div className="border border-borderColor w-full rounded-2xl overflow-hidden md:w-[450px] mx-auto my-8">
       <div className="flex flex-col my-8 py-6">
@@ -17,10 +16,10 @@ const MainProfile = () => {
           <div className="flex flex-col items-center gap-4 mt-6 mb-3">
             <div className="flex justify-center items-center rounded-xl bg-ryBackground shadow-lg w-[170px] h-[100px] hover:bg-ry4Text duration-700">
               <Link
-                to={"/chate"}
+                to={"/chate-profile"}
                 className="flex justify-center items-center flex-col gap-1"
               >
-                <img src={g} alt="location" className="w-5 h-5" />
+                <img src={chat} alt="chat" className="w-5 h-5" />
                 <p className="font-medium text-mainBlack text-[16px]">
                   Chat Us
                 </p>
@@ -43,7 +42,20 @@ const MainProfile = () => {
                   to={"/privacy-policy"}
                   className="flex justify-center items-center flex-col gap-1"
                 >
-                  <img src={lock2} alt="lock" className="w-6 h-6" />
+                  {/* <img src={lock2} alt="lock" className="w-6 h-6" /> */}
+                  <svg
+                    width="14"
+                    height="19"
+                    viewBox="0 0 14 19"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M6.50098 13.5095H7.50098V7.85651H6.50098V13.5095ZM7.00098 6.27951C7.17598 6.27951 7.32197 6.22051 7.43997 6.10251C7.55697 5.98451 7.61597 5.83852 7.61597 5.66452C7.61597 5.49052 7.55696 5.34352 7.43896 5.22552C7.32096 5.10752 7.17498 5.04953 7.00098 5.04953C6.82698 5.05053 6.68097 5.10953 6.56297 5.22653C6.44497 5.34453 6.38597 5.49053 6.38597 5.66553C6.38597 5.84153 6.44497 5.98752 6.56297 6.10352C6.68097 6.22052 6.82698 6.27951 7.00098 6.27951ZM7.00098 18.2415C4.99198 17.6455 3.32297 16.4285 1.99397 14.5905C0.664973 12.7535 0.000976562 10.6835 0.000976562 8.37952V2.97153L7.00098 0.356506L14.001 2.97153V8.37952C14.001 10.6825 13.337 12.7525 12.008 14.5895C10.679 16.4275 9.00998 17.6435 7.00098 18.2415ZM7.00098 17.1805C8.73398 16.6305 10.168 15.5305 11.301 13.8805C12.434 12.2305 13.001 10.3975 13.001 8.38052V3.65451L7.00098 1.42453L1.00098 3.65451V8.37952C1.00098 10.3965 1.56797 12.2295 2.70097 13.8795C3.83397 15.5295 5.26798 16.6305 7.00098 17.1805Z"
+                      fill="#1E1E1E"
+                    />
+                  </svg>
+
                   <p className="font-medium text-mainBlack text-[16px]">
                     Privacy & Policy
                   </p>

@@ -1,11 +1,21 @@
 import close from "../../assets/icons/close.svg";
 import chaletDetails from "../../assets/chalet-details.jfif";
-export default function Model() {
+
+type Props = {
+  setOpenModel: (open: boolean) => void;
+};
+export default function Model({ setOpenModel }: Props) {
+  const handleCloseModel = () => {
+    setOpenModel(false);
+  };
   return (
     <div className="absolute top-0 left-0 w-screen h-screen backdrop-blur-[8px] bg-black/50 z-50 overflow-hidden">
       <div className="container py-6">
         <div className="flex justify-end">
-          <div className="w-fit bg-white rounded-full cursor-pointer">
+          <div
+            onClick={() => handleCloseModel()}
+            className="w-fit bg-white rounded-full cursor-pointer"
+          >
             <img src={close} alt="close" className="w-10 h-10" />
           </div>
         </div>
@@ -18,8 +28,10 @@ export default function Model() {
             />
 
             <div className="swiper-arrows">
-              <div className="left-arrow absolute p-3 transition-all duration-1000 cursor-pointer left-[-15px]
-               top-[50%] z-10 bg-white rounded-full">
+              <div
+                className="left-arrow absolute p-3 transition-all duration-1000 cursor-pointer left-[-15px]
+               top-[50%] z-10 bg-white rounded-full"
+              >
                 <svg
                   width="7"
                   height="12"

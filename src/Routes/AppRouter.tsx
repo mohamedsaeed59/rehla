@@ -18,6 +18,7 @@ import CheckOut from "../Pages/CheckOut";
 import ChaletDetails from "../Components/Chalet/ChaletDetails";
 import BookingConfirmation from "../Components/Bookings/BookingConfirmation";
 import ThanksRequesting from "../Components/Chalet/ThanksRequesting";
+import ChatProfile from "../Components/Profile/ChatProfile";
 
 export default function AppRouter() {
   const router = createBrowserRouter([
@@ -41,6 +42,7 @@ export default function AppRouter() {
         { path: "/check-out", element: <CheckOut/> },
         { path: "/editprofile", element: <EditProfile /> },
         { path: "/chate", element: <Chate /> },
+        { path: "/chate-profile", element: <ChatProfile/> },
         { path: "/chalet/:id", element: <ChaletDetails /> },
         { path: "/privacy-policy", element: <PrivacyPolicy /> },
         { path: "/terms-conditions", element: <ProfileTermsConditions /> },
