@@ -5,15 +5,16 @@ import favorite from "../../assets/icons/carbon_favorite.svg";
 import location from "../../assets/icons/carbon_location.svg";
 import Group from "../../assets/icons/Group.svg";
 import date from "../../assets/date.png";
+import DetailsCheckOut from "../Global/DetailsCheckOut";
 
 const CardCheckOut = () => {
   return (
     <div className="flex flex-col gap-4">
       {/* card */}
       <div className="flex flex-col gap-4">
-        <div className="flex flex-wrap md:flex-nowrap gap-2 cursor-pointer group">
+        <div className="flex gap-2 cursor-pointer group">
           <div className="relative">
-            <div className="w-full max-w-[270px] h-full  max-h-[250px]">
+            <div className="w-[170px] md:w-[270px] h-full max-h-[250px]">
               <img
                 src={card}
                 alt="card"
@@ -114,57 +115,14 @@ const CardCheckOut = () => {
         </div>
       </div>
       {/* card three */}
-      <div className="rounded-2xl bg-ryBackground p-5">
-        <div className="flex flex-col gap-4">
-          <div className="flex justify-between">
-            <div className="flex items-center justify-center gap-2">
-              <img src={Group} alt="Group" className="w-5 h-5" />
-              <span className="text-[16px] font-normal">Adults (4)</span>
-            </div>
-            <span className="text-base font-light text-mainBlack">-</span>
-          </div>
-          <div className="flex justify-between">
-            <div className="flex items-center justify-center gap-2">
-              <img src={Group} alt="Group" className="w-5 h-5" />
-              <span className="text-[16px] font-normal">Extra Adults (0)</span>
-            </div>
-            <span className="text-base font-light text-mainBlack">-</span>
-          </div>
-          <div className="flex justify-between">
-            <div className="flex items-center justify-center gap-2">
-              <img src={Group} alt="Group" className="w-5 h-5" />
-              <span className="text-[16px] font-normal">Children (2)</span>
-            </div>
-            <span className="text-[16px] font-normal">Children (2)</span>
-            <span className="text-base font-light text-mainBlack">-</span>
-          </div>
-          <div className="flex justify-between">
-            <div className="flex items-center justify-center gap-2">
-              <img src={Group} alt="Group" className="w-5 h-5" />
-              <span className="text-[16px] font-normal">Extra amenity</span>
-            </div>
-            <span className="text-[16px] font-normal">Extra amenity</span>
-            <span className="text-base font-light text-mainBlack">150 |QD</span>
-          </div>
-          <div className="flex flex-col gap-1 w-[90%] mx-auto">
-            <div className="flex justify-between">
-              <p className="text-[13px] font-light text-mainBlack">Grill</p>
-              <span className="text-sm font-light text-ry5Text">50 |QD</span>
-            </div>
-            <div className="flex justify-between">
-              <p className="text-[13px] font-light text-mainBlack">
-                Sweet machine
-              </p>
-              <span className="text-sm font-light text-ry5Text">50 |QD</span>
-            </div>
-          </div>
-        </div>
-      </div>
+   
+   <DetailsCheckOut/>
     </div>
   );
 };
 
 export default memo(CardCheckOut);
+
 
 /*
 

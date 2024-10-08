@@ -17,6 +17,7 @@ import ProfileTermsConditions from "../Components/Profile/ProfileTerms&Condition
 import CheckOut from "../Pages/CheckOut";
 import ChaletDetails from "../Components/Chalet/ChaletDetails";
 import BookingConfirmation from "../Components/Bookings/BookingConfirmation";
+import ThanksRequesting from "../Components/Chalet/ThanksRequesting";
 
 export default function AppRouter() {
   const router = createBrowserRouter([
@@ -44,6 +45,7 @@ export default function AppRouter() {
         { path: "/privacy-policy", element: <PrivacyPolicy /> },
         { path: "/terms-conditions", element: <ProfileTermsConditions /> },
         { path: "/booking-confirmation", element: <BookingConfirmation/> },
+        { path: "/thanks-requeste", element: <ThanksRequesting/> },
       ],
     },
   ]);

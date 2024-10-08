@@ -2,7 +2,7 @@ export default function NumberOfAdults() {
   return (
     <div className="flex flex-col gap-8 py-9">
       <div className="flex flex-col gap-1">
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center flex-wrap md:flex-nowrap">
           <div className="flex items-center gap-2">
             <svg
               width="23"
@@ -54,7 +54,7 @@ export default function NumberOfAdults() {
                 fill="black"
               />
             </svg>
-            <p className="text-2xl font-bold text-mainBlack">
+            <p className="text-xl md:text-2xl font-bold text-mainBlack">
               Number Of Adults <span className="text-red">*</span>
             </p>
           </div>
@@ -319,42 +319,60 @@ export default function NumberOfAdults() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 py-6">
           <div className="flex justify-between items-center w-[217px] text-mainBlack">
             <div className="flex items-center gap-2">
-              <input type="checkbox" className="w-[19px] h-[19px] cursor-pointer" />
+              <input
+                type="checkbox"
+                className="w-[19px] h-[19px] cursor-pointer"
+              />
               <p className="text-lg font-normal">Amenity name</p>
             </div>
             <p className="font-bold text-[15px]">15 |Qd</p>
           </div>
           <div className="flex justify-between items-center w-[217px] text-mainBlack">
             <div className="flex items-center gap-2">
-              <input type="checkbox" className="w-[19px] h-[19px] cursor-pointer" />
+              <input
+                type="checkbox"
+                className="w-[19px] h-[19px] cursor-pointer"
+              />
               <p className="text-lg font-normal">Amenity name</p>
             </div>
             <p className="font-bold text-[15px]">15 |Qd</p>
           </div>
           <div className="flex justify-between items-center w-[217px] text-mainBlack">
             <div className="flex items-center gap-2">
-              <input type="checkbox" className="w-[19px] h-[19px] cursor-pointer" />
+              <input
+                type="checkbox"
+                className="w-[19px] h-[19px] cursor-pointer"
+              />
               <p className="text-lg font-normal">Amenity name</p>
             </div>
             <p className="font-bold text-[15px]">15 |Qd</p>
           </div>
           <div className="flex justify-between items-center w-[217px] text-mainBlack">
             <div className="flex items-center gap-2">
-              <input type="checkbox" className="w-[19px] h-[19px] cursor-pointer" />
+              <input
+                type="checkbox"
+                className="w-[19px] h-[19px] cursor-pointer"
+              />
               <p className="text-lg font-normal">Amenity name</p>
             </div>
             <p className="font-bold text-[15px]">15 |Qd</p>
           </div>
           <div className="flex justify-between items-center w-[217px] text-mainBlack">
             <div className="flex items-center gap-2">
-              <input type="checkbox" className="w-[19px] h-[19px] cursor-pointer" />
+              <input
+                type="checkbox"
+                className="w-[19px] h-[19px] cursor-pointer"
+              />
               <p className="text-lg font-normal">Amenity name</p>
             </div>
             <p className="font-bold text-[15px]">15 |Qd</p>
           </div>
           <div className="flex justify-between items-center w-[217px] text-mainBlack">
             <div className="flex items-center gap-2">
-              <input type="checkbox" className="w-[19px] h-[19px] cursor-pointer" />
+              <input
+                type="checkbox"
+                className="w-[19px] h-[19px] cursor-pointer"
+              />
               <p className="text-lg font-normal">Amenity name</p>
             </div>
             <p className="font-bold text-[15px]">15 |Qd</p>

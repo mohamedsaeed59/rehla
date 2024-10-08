@@ -10,36 +10,34 @@ import location from "../../assets/icons/carbon_location.svg";
 import date from "../../assets/date.png";
 import Calendar from "./Calendar";
 import NumberOfAdults from "./NumberOfAdults";
+import SliderChaletDetails from "./SliderChaletDetails";
 // import Model from "./Model";
 
 const ChaletDetails = () => {
   return (
     <div className="container my-9">
-      <div className="flex items-center gap-3">
-        <div className="flex flex-col gap-3 items-center">
-          <img
-            src={chaletDetails}
-            alt="chaletDetails"
-            className="w-[56px] h-[56px] rounded-xl"
-          />
-          <img
-            src={chaletDetails}
-            alt="chaletDetails"
-            className="w-[56px] h-[56px] rounded-xl"
-          />
-          <img
-            src={chaletDetails}
-            alt="chaletDetails"
-            className="w-[56px] h-[56px] rounded-xl"
-          />
-        </div>
-        {/* slider */}
-        <div>
-          <img
-            src={chaletDetails}
-            alt="chaletDetails"
-            className="w-[675px] h-[550px] rounded-xl"
-          />
+      <div className="flex flex-wrap md:flex-nowrap gap-3">
+        <div className="flex items-center justify-center gap-3 flex-wrap-reverse md:flex-nowrap">
+          <div className="flex flex-row md:flex-col gap-3 items-center">
+            <img
+              src={chaletDetails}
+              alt="chaletDetails"
+              className="w-[56px] h-[56px] rounded-xl cursor-pointer"
+            />
+            <img
+              src={chaletDetails}
+              alt="chaletDetails"
+              className="w-[56px] h-[56px] rounded-xl cursor-pointer"
+            />
+            <img
+              src={chaletDetails}
+              alt="chaletDetails"
+              className="w-[56px] h-[56px] rounded-xl cursor-pointer"
+            />
+          </div>
+          {/* slider */}
+            <SliderChaletDetails />
+ 
         </div>
         <div className="flex flex-col gap-2 flex-1">
           <Link
@@ -413,8 +411,8 @@ const ChaletDetails = () => {
           </div>
         </div>
       </div>
-      <Calendar/>
-      <NumberOfAdults/>
+      <Calendar />
+      <NumberOfAdults />
       <div className="flex justify-center items-center">
         <Link
           to={"/check-out"}
