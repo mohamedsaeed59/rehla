@@ -19,6 +19,7 @@ function Slider() {
           clickable: true,
         }}
         modules={[Autoplay, Pagination]}
+        className="z-0"
       >
         <SwiperSlide className="mb-16">
           <div className="w-full h-[430px] md:h-[500px]">

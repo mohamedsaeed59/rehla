@@ -28,11 +28,10 @@ const Login = () => {
     console.log(data.phoneOremail);
     dispatch(setPhoneOrEmail(data.phoneOremail));
     reset();
-    navigate("/otp"); 
+    navigate("/otp");
   };
 
   // const accessToken = localStorage.getItem("access_token");
-
 
   //   if(accessToken) {
   //     return <Navigate to="/login"/>
@@ -76,12 +75,12 @@ const Login = () => {
                     </label>
                     <input
                       type="text"
-                      placeholder="you@gmail.com or 0123456789"
+                      placeholder="you@gmail.com or 0781234567"
                       className="rounded-lg p-2 focus:outline-none border border-borderColor"
                       {...register("phoneOremail", {
                         required: "Email or phone number is required",
                         pattern: {
-                          value: /^(\S+@\S+\.\S+|\d{10,15})$/,
+                          value: /^(\S+@\S+\.\S+|07[3-9]\d{7})$/,
                           message: "Invalid email or phone number format",
                         },
                       })}

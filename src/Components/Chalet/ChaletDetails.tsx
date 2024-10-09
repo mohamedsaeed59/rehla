@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useState } from "react";
 import chaletDetails from "../../assets/chalet-details.jfif";
 import { Link } from "react-router-dom";
 import rightArrow from "../../assets/icons/right-arrow.svg";
@@ -11,8 +11,15 @@ import date from "../../assets/date.png";
 import Calendar from "./Calendar";
 import NumberOfAdults from "./NumberOfAdults";
 import SliderChaletDetails from "./SliderChaletDetails";
+import Comments from "../Global/Comments";
 
 const ChaletDetails = () => {
+  const [showComments, setShowComments] = useState<boolean>(true);
+
+  const handelShowComments = () => {
+    setShowComments(!showComments);
+  };
+
   return (
     <div className="container my-9">
       <div className="flex flex-wrap md:flex-nowrap gap-3">
@@ -35,8 +42,7 @@ const ChaletDetails = () => {
             />
           </div>
           {/* slider */}
-            <SliderChaletDetails />
- 
+          <SliderChaletDetails />
         </div>
         <div className="flex flex-col gap-2 flex-1">
           <Link
@@ -250,31 +256,40 @@ const ChaletDetails = () => {
                 className="w-3 h-3 rotate-[90deg]"
               />
             </Link>
-            <div className="flex justify-between bg-white border rounded-md p-2 my-2">
-              <div className="flex items-center gap-2">
-                <svg
-                  width="21"
-                  height="19"
-                  viewBox="0 0 21 19"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M10.2394 14.6931C14.9765 14.6931 18.8358 11.7642 18.8358 8.16258C18.8358 4.56476 14.9765 1.63587 10.2394 1.63587C5.49718 1.63587 1.64173 4.56476 1.64173 8.16258C1.64173 10.562 3.37688 12.7631 6.17153 13.913C6.38779 14.0025 6.55797 14.1764 6.63475 14.4002C6.71281 14.6189 6.69234 14.8632 6.57461 15.0666C6.26879 15.6191 5.95272 16.1461 5.65969 16.618C6.50551 16.2522 7.54967 15.6869 8.67444 14.8185C8.83695 14.688 9.04425 14.6279 9.2477 14.6484C9.58424 14.6765 9.91822 14.6931 10.2394 14.6931ZM10.2394 0C15.8786 0 20.4737 3.66307 20.4737 8.16258C20.4737 12.6659 15.8786 16.329 10.2394 16.329C9.97068 16.329 9.70324 16.3213 9.42685 16.3008C6.40698 18.5544 3.93734 18.8588 3.8273 18.8716C3.79914 18.8754 3.76588 18.8793 3.73389 18.8793C3.44981 18.8793 3.18109 18.7258 3.03138 18.4777C2.86503 18.2014 2.88039 17.8522 3.06337 17.5875C3.07617 17.576 3.87209 16.4428 4.70511 15.0372C1.77993 13.5472 0 10.9764 0 8.16258C0 3.66307 4.59122 0 10.2394 0Z"
-                    fill="#7D7D7D"
-                  />
-                </svg>
+            <div className="flex flex-col gap-2 bg-white rounded-md my-2 p-3 duration-700">
+              <div className="flex justify-between p-2">
+                <div className="flex items-center gap-2">
+                  <svg
+                    width="21"
+                    height="19"
+                    viewBox="0 0 21 19"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M10.2394 14.6931C14.9765 14.6931 18.8358 11.7642 18.8358 8.16258C18.8358 4.56476 14.9765 1.63587 10.2394 1.63587C5.49718 1.63587 1.64173 4.56476 1.64173 8.16258C1.64173 10.562 3.37688 12.7631 6.17153 13.913C6.38779 14.0025 6.55797 14.1764 6.63475 14.4002C6.71281 14.6189 6.69234 14.8632 6.57461 15.0666C6.26879 15.6191 5.95272 16.1461 5.65969 16.618C6.50551 16.2522 7.54967 15.6869 8.67444 14.8185C8.83695 14.688 9.04425 14.6279 9.2477 14.6484C9.58424 14.6765 9.91822 14.6931 10.2394 14.6931ZM10.2394 0C15.8786 0 20.4737 3.66307 20.4737 8.16258C20.4737 12.6659 15.8786 16.329 10.2394 16.329C9.97068 16.329 9.70324 16.3213 9.42685 16.3008C6.40698 18.5544 3.93734 18.8588 3.8273 18.8716C3.79914 18.8754 3.76588 18.8793 3.73389 18.8793C3.44981 18.8793 3.18109 18.7258 3.03138 18.4777C2.86503 18.2014 2.88039 17.8522 3.06337 17.5875C3.07617 17.576 3.87209 16.4428 4.70511 15.0372C1.77993 13.5472 0 10.9764 0 8.16258C0 3.66307 4.59122 0 10.2394 0Z"
+                      fill="#7D7D7D"
+                    />
+                  </svg>
 
-                <span className="font-normal text-base text-ry5Text">
-                  20 Comment
-                </span>
+                  <span className="font-normal text-base text-ry5Text">
+                    20 Comment
+                  </span>
+                </div>
+                <p
+                  onClick={() => handelShowComments()}
+                  className="font-medium text-base border-b border-primary text-primary cursor-pointer"
+                >
+                  Show
+                </p>
               </div>
-              <Link
-                to={"/savedchalets"}
-                className="font-medium text-base border-b border-primary text-primary"
-              >
-                Show
-              </Link>
+              {!showComments && (
+                <div className="flex flex-col gap-1 border-t p-3">
+                  <Comments />
+                  <Comments />
+                  <Comments />
+                </div>
+              )}
             </div>
           </div>
         </div>

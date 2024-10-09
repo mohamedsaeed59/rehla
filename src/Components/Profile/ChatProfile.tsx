@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import MainProfile from "./MainProfile";
 import logolight from "../../assets/logolight.jpg";
+import ChatComponent from "../Global/ChatComponent";
 
 export default function ChatProfile() {
   return (
@@ -11,7 +12,7 @@ export default function ChatProfile() {
         </div>
         <div className="my-8">
           <div className="bg-[#999999] text-white rounded-tl-[30px] rounded-tr-[30px] p-7">
-            <div className="w-[310px] flex items-center justify-between">
+            <div className="w-full md:w-[70%] flex items-center justify-between">
               <Link
                 to={"/"}
                 className="font-medium text-sm flex gap-1 items-center "
@@ -43,18 +44,7 @@ export default function ChatProfile() {
               </div>
             </div>
           </div>
-          <div className="p-3">
-            <p className="text-center text-sm font-normal text-[#252525] ">
-              Rehla app ensures your rights when booking electronically, and the
-              booking amount is transferred through our app only after
-              check-out. Rehla is not responsible for any bookings made outside
-              the app
-            </p>
-            <div className="py-4">
-                <p className="text-[#B0B0B0] text-center">Yesterday at 04:15 Pm</p>
-            </div>
-            <p className="text-[#7D7D7D] text-sm font-normal text-center py-[3px]">you can send your problem to our chatbot and we will fix it soon</p>
-          </div>
+          <ChatComponent leftLine={"25%"} />
         </div>
       </div>
     </div>

@@ -11,7 +11,7 @@ import Otp from "../Pages/Otp";
 import TellUs from "../Components/auth/TellUs";
 import TellUsNext from "../Components/auth/TellUsNext";
 import EditProfile from "../Components/Profile/EditProfile";
-import Chate from "../Components/Global/Chate";
+import Chate from "../Components/Global/ChatComponent";
 import PrivacyPolicy from "../Components/Profile/PrivacyPolicy";
 import ProfileTermsConditions from "../Components/Profile/ProfileTerms&Conditions";
 import CheckOut from "../Pages/CheckOut";
@@ -39,15 +39,15 @@ export default function AppRouter() {
         { path: "/profile", element: <Profile /> },
         { path: "/search", element: <Search /> },
         { path: "/savedchalets", element: <SavedChalets /> },
-        { path: "/check-out", element: <CheckOut/> },
+        { path: "/check-out", element: <CheckOut /> },
         { path: "/editprofile", element: <EditProfile /> },
         { path: "/chate", element: <Chate /> },
-        { path: "/chate-profile", element: <ChatProfile/> },
+        { path: "/chate-profile", element: <ChatProfile /> },
         { path: "/chalet/:id", element: <ChaletDetails /> },
         { path: "/privacy-policy", element: <PrivacyPolicy /> },
         { path: "/terms-conditions", element: <ProfileTermsConditions /> },
-        { path: "/booking-confirmation", element: <BookingConfirmation/> },
-        { path: "/thanks-requeste", element: <ThanksRequesting/> },
+        { path: "/booking-confirmation", element: <BookingConfirmation /> },
+        { path: "/thanks-requeste", element: <ThanksRequesting /> },
       ],
     },
   ]);
