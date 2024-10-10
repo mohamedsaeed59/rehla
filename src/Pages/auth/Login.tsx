@@ -6,7 +6,7 @@ import SocialIcons from "../../Components/Global/SocialIcons";
 
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useAppDispatch } from "../../app/hooks";
-import { setPhoneOrEmail } from "../../app/auth/userSlice";
+// import { setPhoneOrEmail } from "../../app/auth/userSlice";
 import { handleSkip } from "../../app/auth/authSlice";
 
 type PropsInputsLogin = {
@@ -26,7 +26,7 @@ const Login = () => {
 
   const onSubmit: SubmitHandler<PropsInputsLogin> = (data) => {
     console.log(data.phoneOremail);
-    dispatch(setPhoneOrEmail(data.phoneOremail));
+    // dispatch(setPhoneOrEmail(data.phoneOremail));
     reset();
     navigate("/otp");
   };

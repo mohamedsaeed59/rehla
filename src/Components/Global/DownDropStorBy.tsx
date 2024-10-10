@@ -1,6 +1,7 @@
 export default function DownDropStorBy() {
+  // top-6
   return (
-    <div className="absolute top-6 w-[300px] rounded-[33px] z-20 rtl:left-0 ltr:right-0 bg-white shadow-lg p-3">
+    <div className="absolute top-1 w-[300px] rounded-[30px] z-20 rtl:left-0 ltr:right-0 bg-white shadow-lg p-2 md:p-3">
       <ul className="w-full flex flex-col gap-2 p-2">
         <li>
           <div className="flex items-center gap-1 cursor-pointer">
@@ -14,7 +15,7 @@ export default function DownDropStorBy() {
 
         <li>
           <div className="flex items-center gap-1 cursor-pointer">
-            <input type="radio" id="html" value="HTML" />
+            <input type="radio" id="html" value="HTML" checked/>
             <label className="text-base font-normal">
               Price ( high to Low )
             </label>

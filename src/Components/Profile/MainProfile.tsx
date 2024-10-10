@@ -10,7 +10,7 @@ import { UpdateProfile } from "./index";
 const MainProfile = () => {
   return (
     <div className="border border-borderColor w-full rounded-2xl overflow-hidden md:w-[450px] mx-auto my-8">
-      <div className="flex flex-col my-8 py-6">
+      <div className="flex flex-col my-4 py-2">
         <div className="flex flex-col gap-3 justify-center items-center">
           <UpdateProfile />
           <div className="flex flex-col items-center gap-4 mt-6 mb-3">
@@ -64,9 +64,26 @@ const MainProfile = () => {
             </div>
           </div>
           <div>
-            <h2 className="font-bold text-lg text-mainBlack text-center my-4">
-              Language
-            </h2>
+            <div className="flex justify-center items-center gap-1">
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 14 14"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6 13.2805L9.5 5.78052L13 13.2805M7 11.2805H12M1 3.02753C2.327 2.86353 3.663 2.78152 5 2.78052M5 2.78052C5.747 2.78052 6.488 2.80551 7.223 2.85651M5 2.78052V1.28052M7.223 2.85651C6.451 6.38551 4.127 9.33352 1 10.9485M7.223 2.85651C7.82 2.89751 8.412 2.95453 9 3.02753M5.941 8.69153C4.847 7.57953 3.98 6.26652 3.389 4.82352"
+                  stroke="#1E1E1E"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+
+              <h2 className="font-semibold text-sm text-mainBlack text-center my-4">
+                Language
+              </h2>
+            </div>
             <Language />
           </div>
           <div className="flex flex-col justify-center items-center my-4 cursor-pointer p-2 hover:bg-ry4Text duration-700 rounded-lg">

@@ -7,8 +7,8 @@ export default function PaymentMethod() {
       <h3 className="font-medium text-xl text-mainBlack">
         Select Payment Method
       </h3>
-      <div className="flex gap-4">
-        <div className="relative w-[216px] h-[133px] shadow-lg bg-white rounded-xl border border-mainBlack  activePayment">
+      <div className="flex flex-wrap md:flex-nowrap gap-4">
+        <div className="relative w-full md:w-[216px] h-[133px] shadow-lg bg-white rounded-xl border border-mainBlack  activePayment">
           <div className="flex flex-col justify-center items-center gap-2 h-full">
             <svg
               width="50"
@@ -357,7 +357,7 @@ export default function PaymentMethod() {
             </p>
           </div>
         </div>
-        <div className=" w-[216px] h-[133px] shadow-lg bg-white rounded-xl border">
+        <div className="w-full md:w-[216px] h-[133px] shadow-lg bg-white rounded-xl border">
           <div className="flex flex-col justify-center items-center h-full">
             <img src={payment} alt="payment" className="w-[55px]" />
             <p className="text-mainBlack text-base">Zain Cash</p>

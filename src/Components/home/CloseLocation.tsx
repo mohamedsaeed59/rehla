@@ -5,11 +5,11 @@ import CardTwo from "../Global/CardTwo";
 
 const CloseLocation = () => {
   return (
-    <div className="container py-10">
+    <div className="container py-8">
       <h3 className="text-mainBlack font-bold text-2xl">
         Close to your location
       </h3>
-      <div className="py-8">
+      <div className="py-6">
         <Swiper
           slidesPerView={1}
           spaceBetween={15}

@@ -15,19 +15,19 @@ const Location = () => {
           </div>
           <div className="flex flex-col gap-2 text-center">
             <div className="border-t border-borderColor py-1 cursor-pointer">
-              <Link to={"/"} className="font-normal text-base sm:text-xl">
+              <Link to={"/"} className="font-normal text-base sm:text-lg">
                 Allow Once
               </Link>
             </div>
             <Link
               to={"/"}
-              className="font-normal text-base sm:text-xl border-t border-borderColor py-1 cursor-pointer"
+              className="font-normal text-base sm:text-lg border-t border-borderColor py-1 cursor-pointer"
             >
               Allow only while using this app
             </Link>
             <Link
               to={"/"}
-              className="font-normal text-base sm:text-xl border-t border-borderColor text-ry4Text py-1 cursor-pointer"
+              className="font-normal text-base sm:text-lg border-t border-borderColor text-ry4Text py-1 cursor-pointer"
             >
               Don’t Allow
             </Link>

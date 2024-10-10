@@ -15,7 +15,7 @@ interface DaysGridProps {
 export default function DaysGrid({ calendarData, onDayClick }: DaysGridProps) {
   const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex justify-center flex-wrap gap-2">
       {calendarData.map((day, index) => (
         <DayCell
           key={index}

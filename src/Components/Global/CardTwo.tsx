@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 const CardTwo = () => {
   return (
     <div>
-      <div className="flex gap-2 cursor-pointer group">
+      <div className="grid grid-cols-2 gap-1 cursor-pointer group">
         <div className="relative">
           <div className="w-full max-w-[500px] h-full  max-h-[230px]">
             <img

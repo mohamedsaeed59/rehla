@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { PropsInputsRegister } from "../../../Types/app";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 
 const URL__API = import.meta.env.VITE_REACT_APP_API_KEY;
 
@@ -42,7 +42,7 @@ export const actAuthRegister = createAsyncThunk(
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        toast.error(error.response?.data?.message || error.message);
+        // toast.error(error.response?.data?.message || error.message);
         return rejectWithValue(error.response?.data);
       } else {
         console.log("Unexpected error:", error);

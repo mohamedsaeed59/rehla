@@ -3,7 +3,7 @@ import Card from "../Components/Global/Card";
 import downDrop from "../assets/icons/arrow-down-drop.svg";
 import BreadCrumb from "../Components/Global/BreadCrumb";
 import FillterSearch from "../Components/Search/FillterSearch";
-import DownDropStorBy from "../Components/Search/DownDropStorBy";
+import DownDropStorBy from "../Components/Global/DownDropStorBy";
 
 const Search = () => {
   const [downDropStore, setDownDropStore] = useState<boolean>(true);

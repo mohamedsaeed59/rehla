@@ -33,7 +33,7 @@ const BookingConfirmation = () => {
             Review Details
           </button>
         </div>
-        {openRate && <Rate setOpenRate={setOpenRate} />}
+        {openRate && <Rate setOpenRate={setOpenRate}/>}
       </div>
     </>
   );

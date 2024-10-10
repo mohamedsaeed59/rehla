@@ -158,7 +158,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { setOtp } from "../app/auth/userSlice";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { actAuthLogin } from "../app/auth/act/ActAuthLogin";
+// import { actAuthLogin } from "../app/auth/act/ActAuthLogin";
 import { handleSkip } from "../app/auth/authSlice";
 
 type PropsInputsOtp = {
@@ -177,7 +177,7 @@ const Otp = () => {
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const accessToken = localStorage.getItem("access_token");
+  // const accessToken = localStorage.getItem("access_token");
 
   const inputRefs = [
     useRef<HTMLInputElement>(null),
@@ -190,10 +190,10 @@ const Otp = () => {
     if (Otp2) {
       sendUserDataToDatabase();
     }
-    if (accessToken) {
-      navigate("/");
-    }
-  }, [Otp2, accessToken, navigate]);
+    // if (!accessToken) {
+    //   navigate("/");
+    // }
+  }, [Otp2]);
 
   const onSubmit: SubmitHandler<PropsInputsOtp> = (data) => {
     dispatch(setOtp(Object.values(data).join("")));
@@ -205,7 +205,9 @@ const Otp = () => {
       otp: Otp2,
       fcm_token: "123456",
     };
-    dispatch(actAuthLogin(userData));
+    console.log(userData);
+    navigate("/");
+    // dispatch(actAuthLogin(userData));
   };
 
   // const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {

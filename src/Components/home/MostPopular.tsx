@@ -6,9 +6,9 @@ import right from "../../assets/icons/right-arrow.svg";
 
 const MostPopular = () => {
   return (
-    <div className="py-10 bg-ryBackground">
+    <div className="py-8 bg-ryBackground">
       <div className="container">
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between">
           <h3 className="text-mainBlack font-bold text-2xl text-center lg:text-start">
             MostPopular
           </h3>
@@ -31,18 +31,18 @@ const MostPopular = () => {
             </div>
           </div>
         </div>
-        <div className="py-8">
+        <div className="py-4">
           <Swiper
-            slidesPerView={1}
+            slidesPerView={3}
             spaceBetween={15}
             navigation={{ nextEl: ".right-arrow", prevEl: ".left-arrow" }}
             loop={true}
             breakpoints={{
-              700: {
-                slidesPerView: 1.3,
+              600:{
+                slidesPerView: 1,
               },
-              900: {
-                slidesPerView: 3,
+              1100:{
+                slidesPerView: 2,
               },
             }}
             modules={[Navigation]}

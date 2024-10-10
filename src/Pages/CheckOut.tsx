@@ -10,7 +10,7 @@ const CheckOut = () => {
           Check-out
         </h2>
         <div className="container py-9">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
             <CardCheckOut />
             <div>
               <PaymentMethod />

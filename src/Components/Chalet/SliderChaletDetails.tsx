@@ -11,9 +11,8 @@ export default function SliderChaletDetails() {
   const handleOpenModel = () => {
     setOpenModel(!openModel);
   };
-
   return (
-    <div className="w-[675px] h-full  md:h-[550px]">
+    <>
       <div className="relative">
         <Swiper
           loop={true}
@@ -25,21 +24,22 @@ export default function SliderChaletDetails() {
           //   clickable: true,
           // }}
           modules={[Autoplay, Pagination]}
+          className="w-[300px] sm:w-[350px] h-[300px] md:w-[675px] md:h-[590px]"
         >
           <SwiperSlide>
             <div
               onClick={() => handleOpenModel()}
-              className="relative cursor-pointer"
+              className="relative cursor-pointer w-full h-full"
             >
               <img
                 src={chaletDetails}
                 alt="chaletDetails"
-                className="w-[675px] h-full  md:h-[550px] rounded-xl"
+                className="w-full h-full rounded-xl"
               />
-              <div className="absolute flex justify-center items-center top-6 left-6 bg-white rounded-full border border-mainBlack w-[30px] h-[30px] cursor-pointer">
+              <div className="w-[34px] h-[34px] absolute flex justify-center items-center top-6 left-6 bg-white rounded-full border border-mainBlack cursor-pointer">
                 <svg
-                  width="18"
-                  height="18"
+                  width="17"
+                  height="17"
                   viewBox="0 0 22 20"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -66,18 +66,18 @@ export default function SliderChaletDetails() {
           </SwiperSlide>
           <SwiperSlide>
             <div
-              className="relative cursor-pointer"
+              className="relative cursor-pointer w-full h-full"
               onClick={() => handleOpenModel()}
             >
               <img
                 src={chaletDetails}
                 alt="chaletDetails"
-                className="w-[675px] h-full  md:h-[550px] rounded-xl"
+                className="w-full h-full rounded-xl"
               />
-              <div className="absolute flex justify-center items-center top-6 left-6 bg-white rounded-full border border-mainBlack w-[30px] h-[30px] cursor-pointer">
+              <div className="w-[34px] h-[34px] absolute flex justify-center items-center top-6 left-6 bg-white rounded-full border border-mainBlack cursor-pointer">
                 <svg
-                  width="18"
-                  height="18"
+                  width="17"
+                  height="17"
                   viewBox="0 0 22 20"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -105,8 +105,8 @@ export default function SliderChaletDetails() {
         </Swiper>
         <div className="swiper-arrows">
           <div
-            className="left-arrow absolute p-3 transition-all duration-1000 cursor-pointer left-[44%]
-          bottom-4 z-10 bg-white rounded-full"
+            className="left-arrow absolute w-8 h-8 transition-all duration-1000 cursor-pointer left-[35%] sm:left-[40%] md:left-[44%]
+          bottom-4 z-10 bg-[#B9B9B999] rounded-full flex justify-center items-center"
           >
             <svg
               width="7"
@@ -124,7 +124,7 @@ export default function SliderChaletDetails() {
               />
             </svg>
           </div>
-          <div className="right-arrow p-3 transition-all duration-1000 cursor-pointer absolute bottom-4 right-[44%] z-10 bg-white rounded-full">
+          <div className="right-arrow  w-8 h-8 flex justify-center items-center transition-all duration-1000 cursor-pointer absolute bottom-4 right-[35%] sm:right-[40%] md:right-[44%] z-10 bg-white rounded-full">
             <svg
               width="7"
               height="12"
@@ -144,6 +144,6 @@ export default function SliderChaletDetails() {
         </div>
       </div>
       {openModel && <Model setOpenModel={setOpenModel} />}
-    </div>
+    </>
   );
 }

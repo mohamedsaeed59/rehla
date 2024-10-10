@@ -1,11 +1,11 @@
-import { memo, useEffect } from "react";
+import { memo} from "react";
 import SliderAuth from "../../Components/auth/SliderAuth";
 import logo from "../../assets/logolight.webp";
 import { Link, useNavigate } from "react-router-dom";
 import SocialIcons from "../../Components/Global/SocialIcons";
 import { handleSkip } from "../../app/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { actAuthRegister } from "../../app/auth/act/ActAuthRegister";
+// import { actAuthRegister } from "../../app/auth/act/ActAuthRegister";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 type PropsInputsRegister = {
@@ -30,15 +30,16 @@ const Register = () => {
     register,
   } = useForm<PropsInputsRegister>();
 
-  useEffect(() => {
-    if (statusData === 201) {
-      navigate("/tellUs");
-    }
-  }, [statusData, navigate]);
+  // useEffect(() => {
+  //   if (statusData === 201) {
+  //     navigate("/tellUs");
+  //   }
+  // }, [statusData, navigate]);
 
   const onSubmit: SubmitHandler<PropsInputsRegister> = (data) => {
     console.log(data);
-    dispatch(actAuthRegister({ ...data, registration_type: "email" }));
+    navigate("/tellUs");
+    // dispatch(actAuthRegister({ ...data, registration_type: "email" }));
   };
 
   return (

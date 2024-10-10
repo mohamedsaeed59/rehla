@@ -1,7 +1,7 @@
 import { memo, useState } from "react";
 import Card from "../Components/Global/Card";
 import downDrop from "../assets/icons/arrow-down-drop.svg";
-
+import DownDropStorBy from "../Components/Global/DownDropStorBy";
 
 const SavedChalets = () => {
   const [downDropStore, setDownDropStore] = useState<boolean>(true);
@@ -27,27 +27,7 @@ const SavedChalets = () => {
                     className="w-6 h-6 object-cover"
                   />
                 </div>
-                {!downDropStore && (
-                  <div className="absolute top-2 md:top-4 w-[300px] z-20 rtl:left-0 ltr:right-0 rounded-md bg-white shadow-lg p-3">
-                    <ul className="w-full">
-                      <li>
-                        <div className="flex items-center gap-1">
-                          <input type="radio" id="html" value="HTML" />
-                          {/* for */}
-                          <label>Come and book your favorite</label>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <input type="radio" id="html" value="HTML" />
-                          <label>Come and book your favorite</label>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <input type="radio" id="html" value="HTML" />
-                          <label>Come and book your favorite</label>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                )}
+                {!downDropStore && <DownDropStorBy />}
               </div>
             </div>
           </div>
@@ -61,3 +41,45 @@ const SavedChalets = () => {
 };
 
 export default memo(SavedChalets);
+
+/*
+   <ul className="w-full">
+                      <li>
+                        <div className="flex items-center gap-1">
+                          <input type="radio" id="html" value="HTML" />
+                           for 
+                          <label>Come and book your favorite</label>
+                        </div>
+                      </li>
+                      <li>
+                        <div className="flex items-center gap-1">
+                          <input type="radio" id="html" value="HTML" />
+                          <label>Come and book your favorite</label>
+                        </div>
+                      </li>
+                      <li>
+                        <div className="flex items-center gap-1">
+                          <input type="radio" id="html" value="HTML" />
+                          <label>Come and book your favorite</label>
+                        </div>
+                      </li>
+                      <li>
+                        <div className="flex items-center gap-1">
+                          <input type="radio" id="html" value="HTML" />
+                          <label>Come and book your favorite</label>
+                        </div>
+                      </li>
+                      <li>
+                        <div className="flex items-center gap-1">
+                          <input type="radio" id="html" value="HTML" />
+                          <label>Come and book your favorite</label>
+                        </div>
+                      </li>
+                      <li>
+                        <div className="flex items-center gap-1">
+                          <input type="radio" id="html" value="HTML" />
+                          <label>Come and book your favorite</label>
+                        </div>
+                      </li>
+                    </ul>
+*/

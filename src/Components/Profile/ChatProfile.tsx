@@ -6,13 +6,13 @@ import ChatComponent from "../Global/ChatComponent";
 export default function ChatProfile() {
   return (
     <div className="container">
-      <div className="grid grid-cols-1 md:grid-cols-2">
-        <div className="md:block hidden">
+      <div className="flex justify-center gap-5">
+        <div className="lg:block hidden">
           <MainProfile />
         </div>
         <div className="my-8">
-          <div className="bg-[#999999] text-white rounded-tl-[30px] rounded-tr-[30px] p-7">
-            <div className="w-full md:w-[70%] flex items-center justify-between">
+          <div className="bg-[#999999] text-white rounded-tl-[30px] rounded-tr-[30px] p-4 md:p-7">
+            <div className="w-full md:w-[55%] flex items-center justify-between">
               <Link
                 to={"/"}
                 className="font-medium text-sm flex gap-1 items-center "
@@ -37,14 +37,14 @@ export default function ChatProfile() {
                 <img
                   src={logolight}
                   alt="logolight"
-                  className="w-[32px] h-[32px] rounded-full"
+                  className="w-[32px] h-[32px] rounded-full border border-black"
                 />
 
                 <p className="text-lg font-medium">REHLA Chat</p>
               </div>
             </div>
           </div>
-          <ChatComponent leftLine={"25%"} />
+          <ChatComponent/>
         </div>
       </div>
     </div>

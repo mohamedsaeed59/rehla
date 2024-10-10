@@ -11,13 +11,14 @@ import { Link } from "react-router-dom";
 const Card = () => {
   return (
     <div>
-      <div className="flex flex-wrap md:flex-nowrap gap-2 cursor-pointer group">
-        <div className="relative">
+      {/* <div className="flex flex-wrap md:flex-nowrap gap-2 cursor-pointer group"> */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 cursor-pointer group">
+        <div className="relative w-full">
           <Link to={`/chalet/:7`} className="">
             <img
               src={card}
               alt="card"
-              className="w-[600px] h-full  max-h-[250px] object-cover group-hover:scale-[1.02] duration-300"
+              className="w-full h-full  max-h-[250px] object-cover group-hover:scale-[1.02] duration-300"
             />
             <div className="absolute top-2 left-1/2 w-[64px] h-[24px] rounded-xl transform -translate-x-[50%] mainBlack text-sm backdrop-blur-[16px] bg-white/70">
               <div className="flex items-center justify-center p-1 h-full">
@@ -33,8 +34,7 @@ const Card = () => {
             </div>
           </Link>
         </div>
-
-        <div className="flex justify-between w-full px-2">
+        <div className="flex justify-between w-full">
           <div className="flex flex-col gap-6">
             <h2 className="font-normal text-xl text-mainBlack">Chalet name</h2>
             <div className="flex items-center gap-1">

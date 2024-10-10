@@ -14,7 +14,7 @@ const CardCheckOut = () => {
       <div className="flex flex-col gap-4">
         <div className="flex gap-2 cursor-pointer group">
           <div className="relative">
-            <div className="w-[170px] md:w-[270px] h-full max-h-[250px]">
+            <div className="w-[170px] md:w-[270px] h-full max-h-[240px]">
               <img
                 src={card}
                 alt="card"
@@ -34,8 +34,10 @@ const CardCheckOut = () => {
               </div>
             </div>
           </div>
-          <div className="flex flex-col gap-6 px-2">
-            <h2 className="font-normal text-xl text-primary">Chalet name</h2>
+          <div className="flex flex-col gap-3 md:gap-6 px-0 md:px-2">
+            <h2 className="font-normal text-base md:text-xl text-primary">
+              Chalet name
+            </h2>
             <div className="flex items-center gap-1">
               <img src={favorite} alt="favorite" className="w-4 h-4" />
               <span className="text-[16px] text-ry4Text">17,200</span>
@@ -43,11 +45,13 @@ const CardCheckOut = () => {
             <div className="flex flex-col gap-1">
               <div className="flex items-center gap-1 text-ry3Text">
                 <img src={Group} alt="Group" className="w-4 h-4" />
-                <span className="text-[16px]">20 Adults </span>
+                <span className="text-[14px] md:text-[16px]">20 Adults </span>
               </div>
               <div className="flex items-center gap-1 text-mainBlack">
                 <img src={location} alt="location" className="w-4 h-4" />
-                <span className="text-[16px] font-medium">Bagdad, Iraq</span>
+                <span className="text-[14px] md:text-[16px] font-medium">
+                  Bagdad, Iraq
+                </span>
               </div>
             </div>
           </div>
@@ -115,14 +119,13 @@ const CardCheckOut = () => {
         </div>
       </div>
       {/* card three */}
-   
-   <DetailsCheckOut/>
+
+      <DetailsCheckOut />
     </div>
   );
 };
 
 export default memo(CardCheckOut);
-
 
 /*
 

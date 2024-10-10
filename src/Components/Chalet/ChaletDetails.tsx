@@ -1,5 +1,4 @@
 import { memo, useState } from "react";
-import chaletDetails from "../../assets/chalet-details.jfif";
 import { Link } from "react-router-dom";
 import rightArrow from "../../assets/icons/right-arrow.svg";
 import save from "../../assets/icons/save.svg";
@@ -12,6 +11,7 @@ import Calendar from "./Calendar";
 import NumberOfAdults from "./NumberOfAdults";
 import SliderChaletDetails from "./SliderChaletDetails";
 import Comments from "../Global/Comments";
+import Thumbnails from "./_components/Thumbnails";
 
 const ChaletDetails = () => {
   const [showComments, setShowComments] = useState<boolean>(true);
@@ -22,27 +22,10 @@ const ChaletDetails = () => {
 
   return (
     <div className="container my-9">
-      <div className="flex flex-wrap md:flex-nowrap gap-3">
-        <div className="flex items-center justify-center gap-3 flex-wrap-reverse md:flex-nowrap">
-          <div className="flex flex-row md:flex-col gap-3 items-center">
-            <img
-              src={chaletDetails}
-              alt="chaletDetails"
-              className="w-[56px] h-[56px] rounded-xl cursor-pointer"
-            />
-            <img
-              src={chaletDetails}
-              alt="chaletDetails"
-              className="w-[56px] h-[56px] rounded-xl cursor-pointer"
-            />
-            <img
-              src={chaletDetails}
-              alt="chaletDetails"
-              className="w-[56px] h-[56px] rounded-xl cursor-pointer"
-            />
-          </div>
-          {/* slider */}
-          <SliderChaletDetails />
+        <div className="flex flex-wrap lg:flex-nowrap gap-3">
+        <div className="flex items-center justify-center gap-3 flex-wrap-reverse lg:flex-nowrap">
+            <Thumbnails />
+            <SliderChaletDetails />
         </div>
         <div className="flex flex-col gap-2 flex-1">
           <Link
