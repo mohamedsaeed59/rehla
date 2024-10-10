@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import MainProfile from "./MainProfile";
+import {MainProfile} from "./index";
 import logolight from "../../assets/logolight.jpg";
 import ChatComponent from "../Global/ChatComponent";
 

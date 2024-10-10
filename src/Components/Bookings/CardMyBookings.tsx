@@ -5,7 +5,7 @@ import Star from "../../assets/icons/Star.svg";
 import favorite from "../../assets/icons/carbon_favorite.svg";
 import location from "../../assets/icons/carbon_location.svg";
 import Group from "../../assets/icons/Group.svg";
-import MoreDetails from "./MoreDetails";
+import MoreDetails from "./_components/MoreDetails";
 
 const CardMyBookings = () => {
   const [openMoreDetails, setOpenMoreDetails] = useState<boolean>(false);
@@ -13,10 +13,13 @@ const CardMyBookings = () => {
     setOpenMoreDetails(!openMoreDetails);
   };
   return (
-    <div className="rounded-[20px] bg-ryBackground p-3 md:p-5">
-      <div className="flex gap-4 flex-col">
+    <div
+      className="rounded-[20px] bg-ryBackground p-3 md:py-[27px] md:px-5 h-full"
+      data-accordion="default-accordion"
+    >
+      <div className="flex gap-4 flex-col transition duration-500">
         <div className="flex gap-2 flex-col">
-          <div className="flex justify-between w-full px-2">
+          <div className="flex justify-between w-full px-2 py-1">
             <h3 className="text-[18px] font-bold text-ry3Text">Today</h3>
             <button
               aria-expanded={openMoreDetails}
@@ -26,7 +29,7 @@ const CardMyBookings = () => {
               <img
                 src={dropDown}
                 alt="dropDown"
-                className={`w-6 h-6 cursor-pointer duration-700 ${
+                className={`w-6 h-6 cursor-pointer transition duration-500 ${
                   openMoreDetails ? "transform rotate-180" : ""
                 }`}
               />
@@ -34,7 +37,7 @@ const CardMyBookings = () => {
           </div>
           <div className="flex gap-2 cursor-pointer group">
             <div className="relative">
-              <div className="w-full max-w-[240px] h-full  max-h-[240px]">
+              <div className="w-full max-w-[240px] h-full">
                 <img
                   src={card}
                   alt="card"
@@ -76,7 +79,7 @@ const CardMyBookings = () => {
             </div>
           </div>
         </div>
-          {openMoreDetails && <MoreDetails />}
+        {openMoreDetails && <MoreDetails />}
       </div>
     </div>
   );

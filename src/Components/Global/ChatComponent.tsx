@@ -6,6 +6,8 @@ type Props = {
   leftLine: string;
 };
 const ChatComponent = ({ leftLine }: Props) => {
+  console.log(leftLine);
+  
   return (
     <div className="bg-white">
       <div className="p-3">
@@ -16,10 +18,10 @@ const ChatComponent = ({ leftLine }: Props) => {
         </p>
         <div className="py-4">
           <p
-            className={`text-sm text-center text-[#B0B0B0]  w-full relative 
+            className={`text-sm text-center text-[#B0B0B0] w-full relative 
           
-              after:content-[''] after:w-[50px] after:h-[2px] after:bg-[#DBDBDB] after:inline-block after:absolute after:top-1/2 after:left-[${leftLine}] 
-              before:content-[''] before:w-[50px] before:h-[2px] before:bg-[#DBDBDB] before:inline-block before:absolute before:top-1/2 before:right-[${leftLine}]
+              after:content-[''] after:w-[50px] after:h-[2px] after:bg-[#DBDBDB] after:inline-block after:absolute after:top-1/2 after:left-[18%] 
+              before:content-[''] before:w-[50px] before:h-[2px] before:bg-[#DBDBDB] before:inline-block before:absolute before:top-1/2 before:right-[18%]
              `}
           >
             Yesterday at 04:15 PM

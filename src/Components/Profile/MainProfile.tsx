@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import lock from "../../assets/icons/lock.svg";
 import chat from "../../assets/chat.png";
 // import lock2 from "../../assets/6438892.png";
-import UpdateProfile from "./UpdateProfile";
+import { UpdateProfile } from "./index";
 
 const MainProfile = () => {
   return (

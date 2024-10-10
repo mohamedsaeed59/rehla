@@ -3,7 +3,7 @@ import Star from "../../assets/icons/Star.svg";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import { useState } from "react";
-import Model from "./Model";
+import Model from "./_components/Model";
 
 export default function SliderChaletDetails() {
   const [openModel, setOpenModel] = useState<boolean>(false);

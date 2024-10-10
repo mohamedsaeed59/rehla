@@ -1,6 +1,6 @@
 import { memo } from "react";
 import BreadCrumb from "../Components/Global/BreadCrumb";
-import MainProfile from "../Components/Profile/MainProfile";
+import { MainProfile } from "../Components/Profile/index";
 
 const Profile = () => {
   return (

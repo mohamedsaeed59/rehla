@@ -114,7 +114,7 @@ export default function NumberOfAdults() {
         <p className="text-base font-normal text-ry3Text">
           (Max 10 adults = 1 Adult = 50$/shift)
         </p>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 cursor-pointer">
           <svg
             width="18"
             height="18"

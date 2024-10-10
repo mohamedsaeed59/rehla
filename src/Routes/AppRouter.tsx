@@ -17,7 +17,7 @@ import ProfileTermsConditions from "../Components/Profile/ProfileTerms&Condition
 import CheckOut from "../Pages/CheckOut";
 import ChaletDetails from "../Components/Chalet/ChaletDetails";
 import BookingConfirmation from "../Components/Bookings/BookingConfirmation";
-import ThanksRequesting from "../Components/Chalet/ThanksRequesting";
+import ThanksRequesting from "../Components/Chalet/_components/ThanksRequesting";
 import ChatProfile from "../Components/Profile/ChatProfile";
 
 export default function AppRouter() {

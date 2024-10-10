@@ -1,23 +1,23 @@
-import { memo, useEffect } from "react";
+import { memo} from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import { Outlet } from "react-router";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useAppSelector } from "../app/hooks";
+// import { useAppSelector } from "../app/hooks";
 import Chat from "../Pages/Chat";
 
 const Layouts = () => {
   const { pathname } = useLocation();
-  const navigate = useNavigate();
-  const { skip } = useAppSelector((state) => state.auth);
+  // const navigate = useNavigate();
+  // const { skip } = useAppSelector((state) => state.auth);
 
-  useEffect(() => {
-    const accessToken = localStorage.getItem("access_token");
+  // useEffect(() => {
+  //   const accessToken = localStorage.getItem("access_token");
 
-    if (!accessToken && !skip) {
-      navigate("/login");
-    }
-  }, [navigate, skip]);
+  //   if (!accessToken && !skip) {
+  //     navigate("/login");
+  //   }
+  // }, [navigate, skip]);
   return (
     <>
       {!pathname.includes("login") &&

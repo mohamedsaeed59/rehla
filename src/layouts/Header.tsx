@@ -67,15 +67,17 @@ function Header() {
           <div className="flex items-center gap-4 ">
             <div className="relative">
               <div
-                className="flex items-center gap-1 p-1 border duration-300
-             rounded-2xl text-base lg:w-[350px] "
+                //     className="flex items-center gap-1 p-1 border-none lg:border lg:border-gray-400 duration-300
+                //  rounded-2xl text-base lg:w-[350px]"
+        className="flex items-center gap-1 p-1 lg:p-2 border-0 lg:border duration-300
+             rounded-2xl text-base w-full lg:w-[350px]"
                 onClick={handleOpenSearchMenu}
               >
                 <Link to={"/search"}>
                   <img
                     src={search}
                     alt="search"
-                    className="cursor-pointer p-1"
+                    className="cursor-pointer p-1 w-7 h-7"
                   />
                 </Link>
                 <input

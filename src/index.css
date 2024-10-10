@@ -64,8 +64,8 @@ body {
   @apply bg-mainBlack !important;
 }
 
-.swiper-button-disabled {
-  border: 2px solid red;
+.addBorder{
+  border-top: 13px solid #F3C800;
 }
 
 .x::before {

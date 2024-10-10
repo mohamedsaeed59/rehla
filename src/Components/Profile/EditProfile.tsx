@@ -1,12 +1,12 @@
 import { memo, useRef } from "react";
-import MainProfile from "./MainProfile";
+import { MainProfile} from "./index";
 import BreadCrumb from "../Global/BreadCrumb";
 
-import ProfileForm from "./ProfileForm";
 import { Link } from "react-router-dom";
 import rightArrow from "../../assets/icons/right-arrow.svg";
 import avter from "../../assets/avter.webp";
 import camera from "../../assets/icons/camera.svg";
+import ProfileForm from "./_components/ProfileForm";
 
 const EditProfile = () => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -68,7 +68,7 @@ const EditProfile = () => {
                 </div>
               </div>
             </div>
-            <ProfileForm />
+            <ProfileForm/>
           </div>
         </div>
       </div>
