@@ -15,13 +15,13 @@ const Search = () => {
       </div>
       <div className="container">
         <div className="flex flex-col gap-8">
-          <div className="flex justify-between items-center flex-wrap gap-3">
+          <div className="flex justify-between items-center gap-3">
             <h3 className="text-[18px] font-bold">
               1,755 <span className="text-ry3Text font-medium">Results</span>
             </h3>
-            <div className="flex items-center justify-between md:justify-center gap-3 w-full md:w-fit">
+            <div className="w-fit flex items-center justify-between md:justify-center gap-3 md:w-fit">
               <FillterSearch />
-              <div className="relative rounded-[8px] border border-black50 cursor-pointer">
+              <div className="relative rounded-[8px] border border-black50 cursor-pointer hidden sm:block">
                 <div
                   className="flex gap-2 p-2"
                   onClick={() => setDownDropStore(!downDropStore)}

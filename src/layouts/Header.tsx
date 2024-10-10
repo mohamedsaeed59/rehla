@@ -17,7 +17,7 @@ function Header() {
   const [openSearchMenu, setOpenSearchMenu] = useState<boolean>(false);
 
   const handleOpen = () => {
-    setOpen(true);
+    setOpen(!isOpen);
   };
 
   const handleOpenNotification = () => {
@@ -61,15 +61,10 @@ function Header() {
               </li>
             </ul>
           </nav>
-          <div className="block lg:hidden">
-            <MobileMenu isOpen={isOpen} setOpen={setOpen} />
-          </div>
           <div className="flex items-center gap-4 ">
             <div className="relative">
               <div
-                //     className="flex items-center gap-1 p-1 border-none lg:border lg:border-gray-400 duration-300
-                //  rounded-2xl text-base lg:w-[350px]"
-        className="flex items-center gap-1 p-1 lg:p-2 border-0 lg:border duration-300
+                className="flex items-center gap-1 p-1 lg:p-2 border-0 lg:border duration-300
              rounded-2xl text-base w-full lg:w-[350px]"
                 onClick={handleOpenSearchMenu}
               >
@@ -117,6 +112,11 @@ function Header() {
             </button>
           </div>
         </div>
+        {!isOpen && (
+            <div className="block lg:hidden">
+              <MobileMenu setOpen={setOpen} />
+            </div>
+          )}
       </div>
     </header>
   );

@@ -14,14 +14,14 @@ export default function FillterSearch() {
     setOpenMenuCity(!openMenuCity);
   };
 
-  // flex-col md:flex-row
   return (
-    <div className="flex gap-2">
-      <div className="flex gap-2 p-2 rounded-[8px] border border-black50 cursor-pointer">
-        <p className="text-sm font-normal">Fillter</p>
-        <img src={filter} alt="downDrop" className="w-6 h-6 object-cover" />
+    <div className="flex items-center gap-2">
+      <div className="flex gap-2 p-2 rounded-[8px] border-0 sm:border border-black50 cursor-pointer">
+        <p className="text-sm font-normal hidden sm:block">Fillter</p>
+        <img src={filter} alt="downDrop" className="w-6 h-6 object-cover cursor-pointer" />
       </div>
-      <div className="flex gap-2">
+      <div className="hidden sm:block">
+      <div className="flex items-center gap-2">
         <div className="w-fit bg-ryBackground rounded-3xl flex justify-center items-center px-[10px] py-[6px] cursor-pointer">
           <p className="font-normal text-[13px] text-mainBlack">Map</p>
         </div>
@@ -49,6 +49,7 @@ export default function FillterSearch() {
           {!openFilterByRate && <FilterByRate />}
         </div>
       </div>
+    </div>
     </div>
   );
 }

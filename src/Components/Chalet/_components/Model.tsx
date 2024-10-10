@@ -27,7 +27,7 @@ export default function Model({ setOpenModel }: Props) {
               className="w-full h-full rounded-2xl my-4"
             />
 
-            <div className="swiper-arrows">
+            <div className="swiper-arrows hidden md:block">
               <div
                 className="left-arrow absolute p-3 transition-all duration-1000 cursor-pointer left-[-15px]
                top-[50%] z-10 bg-white rounded-full"
