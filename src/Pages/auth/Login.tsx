@@ -6,7 +6,7 @@ import SocialIcons from "../../Components/Global/SocialIcons";
 
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useAppDispatch } from "../../app/hooks";
-// import { setPhoneOrEmail } from "../../app/auth/userSlice";
+import { setPhoneOrEmail } from "../../app/auth/userSlice";
 import { handleSkip } from "../../app/auth/authSlice";
 
 type PropsInputsLogin = {
@@ -26,7 +26,7 @@ const Login = () => {
 
   const onSubmit: SubmitHandler<PropsInputsLogin> = (data) => {
     console.log(data.phoneOremail);
-    // dispatch(setPhoneOrEmail(data.phoneOremail));
+    dispatch(setPhoneOrEmail(data.phoneOremail));
     reset();
     navigate("/otp");
   };
@@ -80,7 +80,7 @@ const Login = () => {
                       {...register("phoneOremail", {
                         required: "Email or phone number is required",
                         pattern: {
-                          value: /^(\S+@\S+\.\S+|07[3-9]\d{7})$/,
+                          value: /^(\S+@\S+\.\S+|^[0-9]{10})$/,
                           message: "Invalid email or phone number format",
                         },
                       })}

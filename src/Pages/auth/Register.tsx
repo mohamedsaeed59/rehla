@@ -1,11 +1,11 @@
-import { memo} from "react";
+import { memo, useEffect } from "react";
 import SliderAuth from "../../Components/auth/SliderAuth";
 import logo from "../../assets/logolight.webp";
 import { Link, useNavigate } from "react-router-dom";
 import SocialIcons from "../../Components/Global/SocialIcons";
 import { handleSkip } from "../../app/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-// import { actAuthRegister } from "../../app/auth/act/ActAuthRegister";
+import { actAuthRegister } from "../../app/auth/act/ActAuthRegister";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 type PropsInputsRegister = {
@@ -19,9 +19,9 @@ const Register = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const { statusData } = useAppSelector((state) => state.auth);
-  console.log(statusData);
-  console.log(typeof statusData);
+  const { status } = useAppSelector((state) => state.auth);
+  console.log(status);
+  console.log(typeof status);
 
   const {
     handleSubmit,
@@ -30,16 +30,15 @@ const Register = () => {
     register,
   } = useForm<PropsInputsRegister>();
 
-  // useEffect(() => {
-  //   if (statusData === 201) {
-  //     navigate("/tellUs");
-  //   }
-  // }, [statusData, navigate]);
+  useEffect(() => {
+    if (status === 200) {
+      navigate("/tellUs");
+    }
+  }, [status, navigate]);
 
   const onSubmit: SubmitHandler<PropsInputsRegister> = (data) => {
     console.log(data);
-    navigate("/tellUs");
-    // dispatch(actAuthRegister({ ...data, registration_type: "email" }));
+    dispatch(actAuthRegister({ ...data, registration_type: "email" }));
   };
 
   return (
@@ -107,8 +106,9 @@ const Register = () => {
                       {...register("phone", {
                         required: "Phone number is required",
                         pattern: {
-                          value: /^[0-9]{11}$/,
-                          message: "Invalid phone number format (number must be 11 numbers)",
+                          value: /^[0-9]{10}$/,
+                          message:
+                            "Invalid phone number format (number must be 10 digits)",
                         },
                       })}
                     />

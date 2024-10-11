@@ -11,11 +11,12 @@ interface IAuthState {
     email: string;
     phone: string;
   };
+  status: number;
   loading: TLoading;
   error: string | null;
   skip: boolean;
   message: string;
-  statusData: number;
+  // statusData: number;
 }
 
 const initialState: IAuthState = {
@@ -26,11 +27,12 @@ const initialState: IAuthState = {
     email: "",
     phone: "",
   },
+  status: 0,
   loading: "idle",
   error: null,
   skip: false,
   message: "",
-  statusData: 0,
+  // statusData: 0,
 };
 
 const authSlice = createSlice({
@@ -54,9 +56,9 @@ const authSlice = createSlice({
     });
     builder.addCase(actAuthRegister.fulfilled, (state, action) => {
       state.loading = "succeeded";
-      // console.log(action.payload);
+      console.log(action.payload);
       state.message = action.payload.message;
-      state.statusData = action.payload.status;
+      state.status = action.payload.status;
     });
     builder.addCase(actAuthRegister.rejected, (state) => {
       state.loading = "failed";
@@ -72,8 +74,9 @@ const authSlice = createSlice({
       state.loading = "succeeded";
       state.data.access_token = action.payload.data.access_token;
       localStorage.setItem("access_token", action.payload.data.access_token);
-      // console.log(action.payload);
+      console.log(action.payload);
       state.data.user = action.payload.data.name;
+      state.status = action.payload.status;
     });
     builder.addCase(actAuthLogin.rejected, (state) => {
       state.loading = "failed";

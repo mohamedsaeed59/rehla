@@ -21,6 +21,7 @@ export type PropsInputsRegister = {
   email: string;
   phone: string;
   registration_type: string;
+
 };
 
 export type TLoading = "idle" | "pending" | "succeeded" | "failed";

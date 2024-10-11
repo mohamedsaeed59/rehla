@@ -158,7 +158,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { setOtp } from "../app/auth/userSlice";
 import { useForm, SubmitHandler } from "react-hook-form";
-// import { actAuthLogin } from "../app/auth/act/ActAuthLogin";
+import { actAuthLogin } from "../app/auth/act/ActAuthLogin";
 import { handleSkip } from "../app/auth/authSlice";
 
 type PropsInputsOtp = {
@@ -175,9 +175,11 @@ const Otp = () => {
     (state) => state.userSliceToLogin
   );
 
+  const { status } = useAppSelector((state) => state.auth);
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  // const accessToken = localStorage.getItem("access_token");
+  const accessToken = localStorage.getItem("access_token");
 
   const inputRefs = [
     useRef<HTMLInputElement>(null),
@@ -190,10 +192,13 @@ const Otp = () => {
     if (Otp2) {
       sendUserDataToDatabase();
     }
-    // if (!accessToken) {
-    //   navigate("/");
-    // }
-  }, [Otp2]);
+  }, [Otp2, accessToken]);
+
+  useEffect(() => {
+    if (status === 200) {
+      navigate("/");
+    }
+  }, [status, navigate]);
 
   const onSubmit: SubmitHandler<PropsInputsOtp> = (data) => {
     dispatch(setOtp(Object.values(data).join("")));
@@ -206,8 +211,7 @@ const Otp = () => {
       fcm_token: "123456",
     };
     console.log(userData);
-    navigate("/");
-    // dispatch(actAuthLogin(userData));
+    dispatch(actAuthLogin(userData));
   };
 
   // const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
@@ -248,54 +252,54 @@ const Otp = () => {
           </button>
         </div>
         <div className="flex flex-col justify-center items-start md:items-center">
-          <div className="flex justify-center items-center w-full"> 
+          <div className="flex justify-center items-center w-full">
             <img src={otpImage} alt="otp" className="w-[200px] h-[200px]" />
           </div>
- 
-            <div className="flex flex-col gap-1">
-              <h3 className="font-bold text-lg text-start text-mainBlack">
-                OTP Verification
-              </h3>
-              <p className="font-normal text-[0.9rem] text-start text-ry3Text">
-                Enter your OTP that was sent to{" "}
-                <span className="text-mainBlack">‎+964-11-4884697 </span>
-              </p>
-            </div>
-            <form
-              onSubmit={handleSubmit(onSubmit)}
-              className="flex flex-col gap-3"
-            >
-              <div className="flex justify-center gap-2 py-4">
-                {[1, 2, 3, 4].map((_, index) => (
-                  <div
-                    key={index}
-                    className="w-[50px] h-[50px] p-3 border border-borderColor rounded-[8px] flex justify-center items-center"
-                  >
-                    <input
-                      type="text"
-                      maxLength={1}
-                      ref={inputRefs[index]}
-                      onChange={(e) => handleChange(e, index)}
-                      className="placeholder-textPlaceholder w-full h-full text-center focus:outline-none"
-                    />
-                  </div>
-                ))}
-              </div>
-              <div className="w-full md:w-[290px]">
-                <button
-                  type="submit"
-                  className="w-full rounded-3xl p-2 focus:outline-none text-lg font-bold bg-mainBlack text-white"
+
+          <div className="flex flex-col gap-1">
+            <h3 className="font-bold text-lg text-start text-mainBlack">
+              OTP Verification
+            </h3>
+            <p className="font-normal text-[0.9rem] text-start text-ry3Text">
+              Enter your OTP that was sent to{" "}
+              <span className="text-mainBlack">‎+964-11-4884697 </span>
+            </p>
+          </div>
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="flex flex-col gap-3"
+          >
+            <div className="flex justify-center gap-2 py-4">
+              {[1, 2, 3, 4].map((_, index) => (
+                <div
+                  key={index}
+                  className="w-[50px] h-[50px] p-3 border border-borderColor rounded-[8px] flex justify-center items-center"
                 >
-                  Verify
-                </button>
-              </div>
-              <p className="text-center font-normal text-[14px] text-mainBlack">
-                Not received a message?{" "}
-                <Link to={"/register"} className="text-primary">
-                  Send again
-                </Link>
-              </p>
-            </form>
+                  <input
+                    type="text"
+                    maxLength={1}
+                    ref={inputRefs[index]}
+                    onChange={(e) => handleChange(e, index)}
+                    className="placeholder-textPlaceholder w-full h-full text-center focus:outline-none"
+                  />
+                </div>
+              ))}
+            </div>
+            <div className="w-full md:w-[290px]">
+              <button
+                type="submit"
+                className="w-full rounded-3xl p-2 focus:outline-none text-lg font-bold bg-mainBlack text-white"
+              >
+                Verify
+              </button>
+            </div>
+            <p className="text-center font-normal text-[14px] text-mainBlack">
+              Not received a message?{" "}
+              <Link to={"/register"} className="text-primary">
+                Send again
+              </Link>
+            </p>
+          </form>
         </div>
       </div>
     </div>
