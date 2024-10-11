@@ -22,10 +22,10 @@ const ChaletDetails = () => {
 
   return (
     <div className="container my-9">
-        <div className="flex flex-wrap lg:flex-nowrap gap-3">
+      <div className="flex flex-wrap lg:flex-nowrap gap-3">
         <div className="flex items-center justify-center gap-3 flex-wrap-reverse lg:flex-nowrap">
-            <Thumbnails />
-            <SliderChaletDetails />
+          <Thumbnails />
+          <SliderChaletDetails />
         </div>
         <div className="flex flex-col gap-2 flex-1">
           <Link
