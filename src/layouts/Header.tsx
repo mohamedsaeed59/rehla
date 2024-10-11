@@ -112,7 +112,7 @@ function Header() {
             </button>
           </div>
         </div>
-        {!isOpen && (
+        {isOpen && (
             <div className="block lg:hidden">
               <MobileMenu setOpen={setOpen} />
             </div>

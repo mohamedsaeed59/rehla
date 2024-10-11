@@ -31,6 +31,10 @@ export default function Calendar() {
   const [showMonth, setShowMonth] = useState<boolean>(true);
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
 
+
+  console.log(selectedDate);
+  console.log(setSelectedMonth);
+  
   useEffect(() => {
     // Update the calendar data based on the selected month
     const monthData = data.months.find(

@@ -33,16 +33,16 @@ const MostPopular = () => {
         </div>
         <div className="py-4">
           <Swiper
-            slidesPerView={3}
+            slidesPerView={1}
             spaceBetween={15}
             navigation={{ nextEl: ".right-arrow", prevEl: ".left-arrow" }}
             loop={true}
             breakpoints={{
-              600:{
-                slidesPerView: 1,
+              700: {
+                slidesPerView: 1.3,
               },
-              1100:{
-                slidesPerView: 2,
+              900: {
+                slidesPerView: 3,
               },
             }}
             modules={[Navigation]}

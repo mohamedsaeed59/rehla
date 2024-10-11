@@ -184,8 +184,7 @@ type mobileMenu = {
 
 function MobileMenu({ setOpen }: mobileMenu) {
   const handleClose = () => {
-    setOpen(true);
-    console.log("kiki");
+    setOpen(false);
   };
 
   return (
