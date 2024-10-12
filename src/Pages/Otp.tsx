@@ -154,7 +154,7 @@
 
 import { memo, useEffect, useRef } from "react";
 import otpImage from "../assets/icons/otp.svg";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { setOtp } from "../app/auth/userSlice";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -262,7 +262,8 @@ const Otp = () => {
             </h3>
             <p className="font-normal text-[0.9rem] text-start text-ry3Text">
               Enter your OTP that was sent to{" "}
-              <span className="text-mainBlack">‎+964-11-4884697 </span>
+              <span className="text-mainBlack">‎{phoneOrEmail}</span>
+              {/* <span className="text-mainBlack">‎+964-11-4884697 </span> */}
             </p>
           </div>
           <form
@@ -295,9 +296,9 @@ const Otp = () => {
             </div>
             <p className="text-center font-normal text-[14px] text-mainBlack">
               Not received a message?{" "}
-              <Link to={"/register"} className="text-primary">
+              <button className="text-primary">
                 Send again
-              </Link>
+              </button>
             </p>
           </form>
         </div>

@@ -15,6 +15,7 @@ function Header() {
   const [isOpen, setOpen] = useState<boolean>(false);
   const [openNotification, setOpenNotification] = useState<boolean>(false);
   const [openSearchMenu, setOpenSearchMenu] = useState<boolean>(false);
+  const accessToken = localStorage.getItem("access_token");
 
   const handleOpen = () => {
     setOpen(!isOpen);
@@ -85,9 +86,16 @@ function Header() {
               {openSearchMenu && <SearchMenu />}
             </div>
             <div className="flex items-center gap-2">
-              <Link to={"/profile"} className="hidden lg:block">
-                <img src={avter} alt="avter" className="w-10 rounded-full" />
-              </Link>
+              {accessToken ? (
+                <Link to={"/profile"} className="hidden lg:block">
+                  <img src={avter} alt="avter" className="w-10 rounded-full" />
+                </Link>
+              ) : (
+                <Link to={"/login"} className="hidden lg:block">
+                  <img src={avter} alt="avter" className="w-10 rounded-full" />
+                </Link>
+              )}
+
               <div className="relative">
                 <button onClick={handleOpenNotification}>
                   <img
@@ -113,10 +121,10 @@ function Header() {
           </div>
         </div>
         {isOpen && (
-            <div className="block lg:hidden">
-              <MobileMenu setOpen={setOpen} />
-            </div>
-          )}
+          <div className="block lg:hidden">
+            <MobileMenu setOpen={setOpen} />
+          </div>
+        )}
       </div>
     </header>
   );

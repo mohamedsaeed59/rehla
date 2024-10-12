@@ -4,18 +4,29 @@ import { Link } from "react-router-dom";
 import { useAppSelector } from "../../app/hooks";
 
 const UpdateProfile = () => {
-  const {data} = useAppSelector(
-    (state) => state.auth
-  );
-  
+  const accessToken = localStorage.getItem("access_token");
+  const { data } = useAppSelector((state) => state.auth);
   return (
     <div className="flex flex-col justify-center items-center">
-      <img src={avter} alt="avter" className="w-14 object-cover rounded-full" />
+      {accessToken ? (
+        <Link to={"/profile"}>
+          <img
+            src={avter}
+            alt="avter"
+            className="w-14 object-cover rounded-full"
+          />
+        </Link>
+      ) : (
+        <Link to={"/login"}>
+          <img
+            src={avter}
+            alt="avter"
+            className="w-14 object-cover rounded-full"
+          />
+        </Link>
+      )}
       <h2 className="font-medium text-xl text-mainBlack">{data.user}</h2>
-      <Link
-        to={"/editprofile"}
-        className="text-primary flex items-center"
-      >
+      <Link to={"/editprofile"} className="text-primary flex items-center">
         Update Profile
         <svg
           width="17"

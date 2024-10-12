@@ -1,8 +1,21 @@
 import { memo } from "react";
 import imageLogo from "../../assets/logolight.jpg";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 const TellUs = () => {
+  const [gender, setGender] = useState<string>("");
+  const [age, setAge] = useState<string>("");
+  const [isFormValid, setIsFormValid] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (gender && age >= "10") {
+      setIsFormValid(true);
+    } else {
+      setIsFormValid(false);
+    }
+  }, [gender, age]);
+
   return (
     <div className="container">
       <div className="grid grid-cols-1 md:grid-cols-2 h-screen">
@@ -40,10 +53,15 @@ const TellUs = () => {
                   <input
                     type="radio"
                     id="male"
+                    checked
                     name="fav_language"
                     value="male"
+                    className="w-[18px] h-[18px] cursor-pointer"
+                    onChange={(e) => setGender(e.target.value)}
                   />
-                  <label className="text-xl font-normal">Male</label>
+                  <label className="text-xl font-normal cursor-pointer" htmlFor="male">
+                    Male
+                  </label>
                 </div>
                 <div className="flex items-center gap-2">
                   <input
@@ -51,8 +69,12 @@ const TellUs = () => {
                     id="female"
                     name="fav_language"
                     value="female"
+                    className="w-[18px] h-[18px] cursor-pointer"
+                    onChange={(e) => setGender(e.target.value)}
                   />
-                  <label className="text-xl font-normal">Female</label>
+                  <label className="text-xl font-normal cursor-pointer" htmlFor="female">
+                    Female
+                  </label>
                 </div>
               </div>
               <div className="flex flex-col gap-3 w-full">
@@ -60,17 +82,24 @@ const TellUs = () => {
                   Age <span className="text-red">*</span>
                 </label>
                 <input
-                  type="number"
+                  type="text"
                   placeholder="Write only numbers"
                   className="rounded-lg p-2 focus:outline-none border border-borderColor"
+                  onChange={(e) => setAge(e.target.value)}
                 />
-                {/* <p>Not valid at least 2  digits</p> */}
+                {/* {age.length <= 2 && <p className="text-red text-sm">Not valid at least 2  digits</p>} */}
               </div>
               <div className="flex justify-end mt-4 py-2">
                 <Link
                   to={"/tell-us-next"}
-                  // type="submit"
-                  className="w-[280px] rounded-3xl p-2 text-center focus:outline-none text-lg font-bold bg-mainBlack text-white"
+                  className={`w-[280px] rounded-3xl p-2 duration-500 text-center focus:outline-none text-lg font-bold text-white ${
+                    isFormValid
+                      ? "bg-mainBlack"
+                      : "bg-gray-500 cursor-not-allowed"
+                  }`}
+                  onClick={(e) => {
+                    if (!isFormValid) e.preventDefault();
+                  }}
                 >
                   Next
                 </Link>

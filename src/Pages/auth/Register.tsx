@@ -105,11 +105,11 @@ const Register = () => {
                       className="rounded-lg p-2 focus:outline-none border border-borderColor"
                       {...register("phone", {
                         required: "Phone number is required",
-                        pattern: {
-                          value: /^[0-9]{10}$/,
-                          message:
-                            "Invalid phone number format (number must be 10 digits)",
-                        },
+                        // pattern: {
+                        //   value: /^[0-9]{10}$/,
+                        //   message:
+                        //     "Invalid phone number format (number must be 10 digits)",
+                        // },
                       })}
                     />
                     {errors.phone && (

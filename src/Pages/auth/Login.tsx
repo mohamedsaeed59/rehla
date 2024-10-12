@@ -79,10 +79,10 @@ const Login = () => {
                       className="rounded-lg p-2 focus:outline-none border border-borderColor"
                       {...register("phoneOremail", {
                         required: "Email or phone number is required",
-                        pattern: {
-                          value: /^(\S+@\S+\.\S+|^[0-9]{10})$/,
-                          message: "Invalid email or phone number format",
-                        },
+                        // pattern: {
+                        //   value: /^(\S+@\S+\.\S+|^[0-9]{10})$/,
+                        //   message: "Invalid email or phone number format",
+                        // },
                       })}
                     />
                     {errors.phoneOremail && (
