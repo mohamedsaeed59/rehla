@@ -27,7 +27,7 @@ export const actAuthLogin = createAsyncThunk(
         },
       };
       const response = await axios.post<TResponse>(
-        `${URL__API}/auth/login-phone`,
+        `${URL__API}/auth/login-phone?lang=en`,
         data,
         config
       );

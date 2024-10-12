@@ -1,17 +1,26 @@
 import { memo } from "react";
 import close from "../../assets/icons/close.svg";
 import UpdateProfile from "../Profile/UpdateProfile";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import save from "../../assets/icons/save.svg";
 import lock from "../../assets/icons/lock.svg";
 import Language from "../Global/Language";
 import { motion } from "framer-motion";
+import { useAppDispatch } from "../../app/hooks";
+import { authLogout } from "../../app/auth/authSlice";
 
 type mobileMenu = {
   setOpen: (open: boolean) => void;
 };
 
 function MobileMenu({ setOpen }: mobileMenu) {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const handleLogOut = () => {
+    dispatch(authLogout());
+    navigate("/");
+  };
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -134,7 +143,10 @@ function MobileMenu({ setOpen }: mobileMenu) {
             </div>
 
             <div className="flex items-center flex-col sm:flex-row justify-center sm:justify-between sm:w-[60%] py-3">
-              <div className="flex flex-col justify-center items-center my-4 cursor-pointer p-2 hover:bg-ry4Text duration-700 rounded-lg">
+              <div
+                className="flex flex-col justify-center items-center my-4 cursor-pointer p-2 hover:bg-ry4Text duration-700 rounded-lg"
+                onClick={handleLogOut}
+              >
                 <svg
                   width="25"
                   height="24"
@@ -152,9 +164,7 @@ function MobileMenu({ setOpen }: mobileMenu) {
                   />
                 </svg>
 
-                <Link to={"/"} className="text-red">
-                  Logout
-                </Link>
+                <p className="text-red">Logout</p>
               </div>
               <div className="flex flex-col items-center mb-3">
                 <div className="flex justify-center items-center gap-1">

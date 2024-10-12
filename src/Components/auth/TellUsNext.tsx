@@ -1,18 +1,28 @@
 import { memo, useState } from "react";
 import imageLogo from "../../assets/logolight.jpg";
 import MenuCity from "../Global/MenuCity";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 // import Location from "../../Pages/Location";
 
 const TellUsNext = () => {
   const [openMenuCity, setOpenMenuCity] = useState<boolean>(false);
   const [valCity, setValCity] = useState<string>("Masul");
 
+  const navigate = useNavigate();
+
   // const [openLocation, setOpenLocation] = useState<boolean>(false);
 
-  // const handleOpenLocation = () => {
-  //   setOpenLocation(!openLocation);
-  // };
+  const handleOpenLocation = (e: React.FormEvent) => {
+    e.preventDefault();
+    toast.success("Registration completed successfully");
+
+    const timeoutId = setTimeout(() => {
+      navigate("/");
+    }, 5000);
+
+    return () => clearTimeout(timeoutId);
+  };
 
   const handleOpenMenuCity = () => {
     setOpenMenuCity(!openMenuCity);
@@ -46,7 +56,7 @@ const TellUsNext = () => {
           </div>
 
           <div className="w-full mt-0 md:mt-20">
-            <form className="flex flex-col gap-3">
+            <form className="flex flex-col gap-3" onSubmit={handleOpenLocation}>
               <div className="flex flex-col gap-1">
                 <label className="text-lg font-normal">
                   City <span className="text-red">*</span>
@@ -54,11 +64,17 @@ const TellUsNext = () => {
                 <input
                   type="text"
                   value={valCity}
+                  required
                   placeholder="Select Your city"
                   onClick={handleOpenMenuCity}
                   className="rounded-lg p-2 focus:outline-none focus:border-primary border border-borderColor"
                 />
-                {openMenuCity && <MenuCity setOpenMenuCity={setOpenMenuCity} setValCity={setValCity}/>}
+                {openMenuCity && (
+                  <MenuCity
+                    setOpenMenuCity={setOpenMenuCity}
+                    setValCity={setValCity}
+                  />
+                )}
               </div>
 
               <div className="flex flex-col gap-1">
@@ -68,17 +84,18 @@ const TellUsNext = () => {
                 <input
                   type="text"
                   // value={"22str, Iraq"}
+                  required
                   placeholder={"22str, Iraq"}
                   className="rounded-lg p-2 focus:outline-none focus:border-primary border border-borderColor"
                 />
               </div>
               <div className="flex justify-end mt-4 py-2">
-                <Link to={"/"}
-                  // onClick={() => handleOpenLocation()}
+                <button
+                  type="submit"
                   className="w-[280px] rounded-3xl p-2 text-center focus:outline-none text-lg font-bold bg-mainBlack text-white"
                 >
                   Save
-                </Link>
+                </button>
               </div>
               {/* {openLocation && <Location />} */}
             </form>

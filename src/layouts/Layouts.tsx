@@ -1,4 +1,4 @@
-import { memo, useEffect} from "react";
+import { memo, useEffect } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import { Outlet } from "react-router";

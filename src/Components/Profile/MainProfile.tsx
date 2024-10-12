@@ -1,13 +1,21 @@
 import { memo } from "react";
 
 import Language from "../Global/Language";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import lock from "../../assets/icons/lock.svg";
 import chat from "../../assets/chat.png";
 // import lock2 from "../../assets/6438892.png";
 import { UpdateProfile } from "./index";
+import { useAppDispatch } from "../../app/hooks";
+import { authLogout } from "../../app/auth/authSlice";
 
 const MainProfile = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const handleLogOut = () => {
+    dispatch(authLogout());
+    navigate("/");
+  };
   return (
     <div className="border border-borderColor w-full rounded-2xl overflow-hidden md:w-[450px] mx-auto my-8">
       <div className="flex flex-col my-4 py-2">
@@ -86,7 +94,10 @@ const MainProfile = () => {
             </div>
             <Language />
           </div>
-          <div className="flex flex-col justify-center items-center my-4 cursor-pointer p-2 hover:bg-ry4Text duration-700 rounded-lg">
+          <div
+            className="flex flex-col justify-center items-center my-4 cursor-pointer p-2 hover:bg-ry4Text duration-700 rounded-lg"
+            onClick={handleLogOut}
+          >
             <svg
               width="25"
               height="24"
@@ -104,9 +115,7 @@ const MainProfile = () => {
               />
             </svg>
 
-            <Link to={"/"} className="text-red">
-              Logout
-            </Link>
+            <p className="text-red">Logout</p>
           </div>
         </div>
       </div>

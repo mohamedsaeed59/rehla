@@ -1,4 +1,6 @@
-import { memo } from "react";
+import { memo, useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { actSettings } from "../../app/SettingsSlice";
 
 type props = {
   setOpenMenuCity: (open: boolean) => void;
@@ -6,16 +8,54 @@ type props = {
 };
 
 const MenuCity = ({ setOpenMenuCity, setValCity }: props) => {
+  const { data, loading } = useAppSelector((state) => state.settings);
+
+  console.log(loading);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(actSettings());
+  }, [dispatch]);
+
   const handleOpenMenuCity = (data: string) => {
     setOpenMenuCity(false);
     setValCity(data);
   };
   return (
-    <div className="bg-body border border-t-0 rounded-md rounded-tl-none rounded-tr-none w-full shadow-sm mt-[-25px]">
+    <div className="bg-body border border-t-0 rounded-md rounded-tl-none rounded-tr-none w-full shadow-sm mt-[-35px]">
       <div className="p-2">
         <h3 className="font-medium text-lg text-mainBlack">Select Your city</h3>
+        {loading === "pending" && <p>loading</p>}
         <form className="flex flex-col gap-3 p-2">
-          <div
+          {data?.cities?.map((item) => (
+            <div
+              key={item.id}
+              className="flex items-center gap-1 w-fit"
+              onClick={() => handleOpenMenuCity(item.title)}
+            >
+              <input
+                type="radio"
+                id="Baghdad"
+                value=""
+                name="city"
+                className="w-4 h-4 cursor-pointer"
+              />
+              <label className="text-lg cursor-pointer" htmlFor="Baghdad">
+                {item.title}
+              </label>
+            </div>
+          ))}
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default memo(MenuCity);
+
+/*
+ <div
             className="flex items-center gap-1 w-fit"
             onClick={() => handleOpenMenuCity("Baghdad")}
           >
@@ -105,10 +145,4 @@ const MenuCity = ({ setOpenMenuCity, setValCity }: props) => {
               Masul
             </label>
           </div>
-        </form>
-      </div>
-    </div>
-  );
-};
-
-export default memo(MenuCity);
+*/

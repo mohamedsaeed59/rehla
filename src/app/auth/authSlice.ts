@@ -16,7 +16,6 @@ interface IAuthState {
   error: string | null;
   skip: boolean;
   message: string;
-  // statusData: number;
 }
 
 const initialState: IAuthState = {
@@ -32,7 +31,6 @@ const initialState: IAuthState = {
   error: null,
   skip: false,
   message: "",
-  // statusData: 0,
 };
 
 const authSlice = createSlice({

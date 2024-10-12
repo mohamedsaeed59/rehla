@@ -31,7 +31,7 @@ export const actAuthRegister = createAsyncThunk(
         },
       };
       const response = await axios.post<TResponse>(
-        `${URL__API}/auth/add-waiting-user`,
+        `${URL__API}/auth/add-waiting-user?lang=en`,
         data,
         config
       );
