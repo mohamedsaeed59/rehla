@@ -6,6 +6,7 @@ import DeleteAccount from "./DeleteAccount";
 const ProfileForm = () => {
   const [openMenuCity, setOpenMenuCity] = useState<boolean>(false);
   const [openDeleteAccount, setOpenDeleteAccount] = useState<boolean>(false);
+  const [valCity, setValCity] = useState<string>("Masul");
 
   const handleOpenMenuCity = () => {
     setOpenMenuCity(!openMenuCity);
@@ -13,6 +14,7 @@ const ProfileForm = () => {
   const handleOpenDeleteAccount = () => {
     setOpenDeleteAccount(!openDeleteAccount);
   };
+
   return (
     <form className="flex flex-col gap-5">
       <div className="flex flex-col gap-1">
@@ -63,11 +65,14 @@ const ProfileForm = () => {
         </label>
         <input
           type="text"
-          value={"Masul"}
+          value={valCity}
+          placeholder="Select Your city"
           onClick={handleOpenMenuCity}
           className="rounded-lg p-2 focus:outline-none focus:border-primary border border-borderColor"
         />
-        {openMenuCity && <MenuCity />}
+        {openMenuCity && (
+          <MenuCity setOpenMenuCity={setOpenMenuCity} setValCity={setValCity} />
+        )}
       </div>
 
       <div className="flex flex-col gap-1">
