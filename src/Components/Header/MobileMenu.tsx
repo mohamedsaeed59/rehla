@@ -18,7 +18,7 @@ function MobileMenu({ setOpen }: mobileMenu) {
   const navigate = useNavigate();
   const handleLogOut = () => {
     dispatch(authLogout());
-    navigate("/");
+    navigate("/login");
   };
 
   const handleClose = () => {

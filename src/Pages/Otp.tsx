@@ -189,16 +189,16 @@ const Otp = () => {
   ];
 
   useEffect(() => {
-    if (Otp2) {
+    if (status === 200 && Otp2) {
       sendUserDataToDatabase();
     }
-  }, [Otp2, accessToken]);
+  }, [Otp2, status]);
 
   useEffect(() => {
-    if (status === 200) {
+    if (accessToken) {
       navigate("/");
     }
-  }, [status, navigate]);
+  }, [accessToken, navigate]);
 
   const onSubmit: SubmitHandler<PropsInputsOtp> = (data) => {
     dispatch(setOtp(Object.values(data).join("")));
@@ -296,9 +296,7 @@ const Otp = () => {
             </div>
             <p className="text-center font-normal text-[14px] text-mainBlack">
               Not received a message?{" "}
-              <button className="text-primary">
-                Send again
-              </button>
+              <button className="text-primary">Send again</button>
             </p>
           </form>
         </div>

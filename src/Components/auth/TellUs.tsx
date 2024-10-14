@@ -4,9 +4,10 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 const TellUs = () => {
-  const [gender, setGender] = useState<string>("");
+  const [gender, setGender] = useState<string>("male");
   const [age, setAge] = useState<string>("");
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
+  
 
   useEffect(() => {
     if (gender && age >= "10") {
@@ -15,6 +16,9 @@ const TellUs = () => {
       setIsFormValid(false);
     }
   }, [gender, age]);
+
+
+
 
   return (
     <div className="container">
@@ -53,7 +57,7 @@ const TellUs = () => {
                   <input
                     type="radio"
                     id="male"
-                    checked
+                    checked={gender === "male"}
                     name="fav_language"
                     value="male"
                     className="w-[18px] h-[18px] cursor-pointer"
@@ -69,6 +73,7 @@ const TellUs = () => {
                     id="female"
                     name="fav_language"
                     value="female"
+                    checked={gender === "female"}
                     className="w-[18px] h-[18px] cursor-pointer"
                     onChange={(e) => setGender(e.target.value)}
                   />

@@ -1,12 +1,15 @@
-import { memo, useState } from "react";
+import { memo, useRef, useState } from "react";
 
 import MenuCity from "../../Global/MenuCity";
 import DeleteAccount from "./DeleteAccount";
+import useClickOutside from "../../../hooks/useClickOutside";
 
 const ProfileForm = () => {
   const [openMenuCity, setOpenMenuCity] = useState<boolean>(false);
   const [openDeleteAccount, setOpenDeleteAccount] = useState<boolean>(false);
-  const [valCity, setValCity] = useState<string>("Masul");
+  const [valCity, setValCity] = useState<string>("");
+
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const handleOpenMenuCity = () => {
     setOpenMenuCity(!openMenuCity);
@@ -14,6 +17,8 @@ const ProfileForm = () => {
   const handleOpenDeleteAccount = () => {
     setOpenDeleteAccount(!openDeleteAccount);
   };
+
+  useClickOutside(dropdownRef, () => setOpenMenuCity(false));
 
   return (
     <form className="flex flex-col gap-5">
@@ -24,7 +29,7 @@ const ProfileForm = () => {
         <input
           type="text"
           value={"Yomna Ashraf Ahmed"}
-          className="rounded-lg p-2 focus:outline-none focus:border-primary border border-borderColor"
+          className="rounded-lg p-2 focus:outline-none border border-borderColor"
         />
       </div>
       <div className="flex flex-col gap-1">
@@ -34,7 +39,7 @@ const ProfileForm = () => {
         <input
           type="phone"
           value={"123456789"}
-          className="rounded-lg p-2 focus:outline-none border focus:border-primary border-borderColor"
+          className="rounded-lg p-2 focus:outline-none border border-borderColor"
         />
       </div>
       <div className="flex flex-col gap-1">
@@ -44,7 +49,7 @@ const ProfileForm = () => {
         <input
           type="email"
           value={"yomna@gmail.com"}
-          className="rounded-lg p-2 focus:outline-none focus:border-primary border border-borderColor"
+          className="rounded-lg p-2 focus:outline-none border border-borderColor"
         />
       </div>
 
@@ -55,7 +60,7 @@ const ProfileForm = () => {
         <input
           type="number"
           value={"26"}
-          className="rounded-lg p-2 focus:outline-none focus:border-primary border border-borderColor"
+          className="rounded-lg p-2 focus:outline-none border border-borderColor"
         />
       </div>
 
@@ -63,16 +68,17 @@ const ProfileForm = () => {
         <label className="text-lg font-normal">
           City <span className="text-red">*</span>
         </label>
+        <div ref={dropdownRef} onClick={handleOpenMenuCity} className="relative">
         <input
           type="text"
           value={valCity}
           placeholder="Select Your city"
-          onClick={handleOpenMenuCity}
-          className="rounded-lg p-2 focus:outline-none focus:border-primary border border-borderColor"
+          className="rounded-lg p-2 w-full focus:outline-none border border-borderColor"
         />
         {openMenuCity && (
           <MenuCity setOpenMenuCity={setOpenMenuCity} setValCity={setValCity} />
         )}
+      </div>
       </div>
 
       <div className="flex flex-col gap-1">
@@ -82,7 +88,7 @@ const ProfileForm = () => {
         <input
           type="text"
           value={"22str, Iraq"}
-          className="rounded-lg p-2 focus:outline-none focus:border-primary border border-borderColor"
+          className="rounded-lg p-2 focus:outline-none border border-borderColor"
         />
       </div>
 

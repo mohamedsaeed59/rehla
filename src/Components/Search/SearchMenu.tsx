@@ -10,21 +10,21 @@ const SearchMenu = () => {
       <div className="w-[300px] md:w-[340px]">
         <div className="flex flex-col gap-2 p-2">
           <h4 className="font-normal text-lg sm:text-xl">Location</h4>
-          <div className="flex justify-between items-center p-1 my-1">
+          <div className="flex justify-between items-center p-1 my-1 cursor-pointer">
             <div className="flex items-center gap-1">
               <img src={location} alt="location" className="w-3 h-3" />
               <p className="font-normal text-sm">Baghdad, Iraq</p>
             </div>
             <img src={arrow} alt="arrow" className="w-3 h-3" />
           </div>
-          <div className="flex justify-between items-center p-1 my-1">
+          <div className="flex justify-between items-center p-1 my-1 cursor-pointer">
             <div className="flex items-center gap-1">
               <img src={location} alt="location" className="w-3 h-3" />
               <p className="font-normal text-sm">Baghdad, Iraq</p>
             </div>
             <img src={arrow} alt="arrow" className="w-3 h-3" />
           </div>
-          <div className="flex justify-between items-center p-1 my-1">
+          <div className="flex justify-between items-center p-1 my-1 cursor-pointer">
             <div className="flex items-center gap-1">
               <img src={location} alt="location" className="w-3 h-3" />
               <p className="font-normal text-sm">Baghdad, Iraq</p>

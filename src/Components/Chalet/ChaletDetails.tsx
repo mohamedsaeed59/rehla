@@ -1,4 +1,4 @@
-import { memo, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import rightArrow from "../../assets/icons/right-arrow.svg";
 import save from "../../assets/icons/save.svg";
@@ -19,6 +19,11 @@ const ChaletDetails = () => {
   const handelShowComments = () => {
     setShowComments(!showComments);
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
 
   return (
     <div className="container my-9">

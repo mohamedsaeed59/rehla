@@ -10,8 +10,6 @@ type props = {
 const MenuCity = ({ setOpenMenuCity, setValCity }: props) => {
   const { data, loading } = useAppSelector((state) => state.settings);
 
-  console.log(loading);
-
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -23,7 +21,7 @@ const MenuCity = ({ setOpenMenuCity, setValCity }: props) => {
     setValCity(data);
   };
   return (
-    <div className="bg-body border border-t-0 rounded-md rounded-tl-none rounded-tr-none w-full shadow-sm mt-[-35px]">
+    <div className="absolute left-0 bg-body border border-borderColor border-t-0 rounded-md rounded-tl-none rounded-tr-none w-full shadow-sm">
       <div className="p-2">
         <h3 className="font-medium text-lg text-mainBlack">Select Your city</h3>
         {loading === "pending" && <p>loading</p>}

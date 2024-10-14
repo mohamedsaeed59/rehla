@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Group from "../../assets/icons/Group.svg";
+import Group from "../../../assets/icons/Group.svg";
 import { Range, getTrackBackground } from "react-range";
 
 export default function FilterByCapacity() {

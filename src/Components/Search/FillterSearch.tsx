@@ -1,8 +1,8 @@
 import { useState } from "react";
 import filter from "../../assets/icons/filter.svg";
-import FilterByCity from "./FilterByCity";
-import FilterByRate from "./FilterByRate";
-import FilterByCapacity from "./FilterByCapacity";
+import FilterByCity from "./_components/FilterByCity";
+import FilterByRate from "./_components/FilterByRate";
+import FilterByCapacity from "./_components/FilterByCapacity";
 
 export default function FillterSearch() {
   const [openMenuCity, setOpenMenuCity] = useState<boolean>(false);

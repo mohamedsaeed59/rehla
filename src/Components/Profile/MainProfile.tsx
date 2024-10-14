@@ -14,7 +14,7 @@ const MainProfile = () => {
   const navigate = useNavigate();
   const handleLogOut = () => {
     dispatch(authLogout());
-    navigate("/");
+    navigate("/login");
   };
   return (
     <div className="border border-borderColor w-full rounded-2xl overflow-hidden md:w-[450px] mx-auto my-8">

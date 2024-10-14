@@ -1,24 +1,28 @@
-import { memo, useState } from "react";
+import { memo, useRef, useState } from "react";
 import imageLogo from "../../assets/logolight.jpg";
 import MenuCity from "../Global/MenuCity";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import useClickOutside from "../../hooks/useClickOutside";
 // import Location from "../../Pages/Location";
 
 const TellUsNext = () => {
+
+  // const [openLocation, setOpenLocation] = useState<boolean>(false);
   const [openMenuCity, setOpenMenuCity] = useState<boolean>(false);
-  const [valCity, setValCity] = useState<string>("Masul");
+  const [valCity, setValCity] = useState<string>("");
+
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const navigate = useNavigate();
 
-  // const [openLocation, setOpenLocation] = useState<boolean>(false);
 
   const handleOpenLocation = (e: React.FormEvent) => {
     e.preventDefault();
     toast.success("Registration completed successfully");
 
     const timeoutId = setTimeout(() => {
-      navigate("/");
+      navigate("/login");
     }, 5000);
 
     return () => clearTimeout(timeoutId);
@@ -27,6 +31,9 @@ const TellUsNext = () => {
   const handleOpenMenuCity = () => {
     setOpenMenuCity(!openMenuCity);
   };
+  
+  useClickOutside(dropdownRef, () => setOpenMenuCity(false));
+
   return (
     <div className="container">
       <div className="grid grid-cols-1 md:grid-cols-2 h-screen">
@@ -61,20 +68,21 @@ const TellUsNext = () => {
                 <label className="text-lg font-normal">
                   City <span className="text-red">*</span>
                 </label>
-                <input
-                  type="text"
-                  value={valCity}
-                  required
-                  placeholder="Select Your city"
-                  onClick={handleOpenMenuCity}
-                  className="rounded-lg p-2 focus:outline-none focus:border-primary border border-borderColor"
-                />
-                {openMenuCity && (
-                  <MenuCity
-                    setOpenMenuCity={setOpenMenuCity}
-                    setValCity={setValCity}
+                <div ref={dropdownRef} onClick={handleOpenMenuCity} className="relative">
+                  <input
+                    type="text"
+                    value={valCity}
+                    required
+                    placeholder="Select Your city"
+                    className="w-full rounded-lg p-2 focus:outline-none border border-borderColor"
                   />
-                )}
+                  {openMenuCity && (
+                    <MenuCity
+                      setOpenMenuCity={setOpenMenuCity}
+                      setValCity={setValCity}
+                    />
+                  )}
+                </div>
               </div>
 
               <div className="flex flex-col gap-1">
@@ -84,9 +92,8 @@ const TellUsNext = () => {
                 <input
                   type="text"
                   // value={"22str, Iraq"}
-                  required
                   placeholder={"22str, Iraq"}
-                  className="rounded-lg p-2 focus:outline-none focus:border-primary border border-borderColor"
+                  className="rounded-lg p-2 focus:outline-none border border-borderColor"
                 />
               </div>
               <div className="flex justify-end mt-4 py-2">

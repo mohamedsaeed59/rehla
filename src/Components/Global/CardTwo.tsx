@@ -11,9 +11,9 @@ import { Link } from "react-router-dom";
 const CardTwo = () => {
   return (
     <div>
-      <div className="grid grid-cols-2 gap-1 cursor-pointer group">
+      <div className="grid grid-cols-2 gap-2 cursor-pointer group">
         <div className="relative">
-          <div className="w-full max-w-[500px] h-full  max-h-[230px]">
+        <Link to={`/chalet/:7`} className="w-full max-w-[500px] h-full  max-h-[230px]">
             <img
               src={card}
               alt="card"
@@ -31,14 +31,16 @@ const CardTwo = () => {
                 <span className="text-[14px]">(4.5)</span>
               </div>
             </div>
-          </div>
+          </Link>
         </div>
 
         <div className="flex justify-between w-full px-0 sm:px-2">
           <div className="flex flex-col gap-2 sm:gap-6">
-            <h2 className="font-bold text-xs sm:text-xl text-mainBlack">
-              Chalet name
-            </h2>
+            <Link to={`/chalet/:7`} className="">
+              <h2 className="font-bold text-xs sm:text-xl text-mainBlack">
+                Chalet name
+              </h2>
+            </Link>
             <div className="flex items-center gap-1">
               <img src={favorite} alt="favorite"  className="w-3 sm:w-4 h-3 sm:h-4"/>
               <span className="text-xs sm:text-sm text-ry4Text">17,200</span>

@@ -12,7 +12,7 @@ const Card = () => {
   return (
     <div>
       {/* <div className="flex flex-wrap md:flex-nowrap gap-2 cursor-pointer group"> */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 cursor-pointer group">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-[14px] cursor-pointer group">
         <div className="relative w-full">
           <Link to={`/chalet/:7`} className="">
             <img
@@ -36,7 +36,11 @@ const Card = () => {
         </div>
         <div className="flex justify-between w-full">
           <div className="flex flex-col gap-6">
-            <h2 className="font-normal text-xl text-mainBlack">Chalet name</h2>
+            <Link to={`/chalet/:7`} className="">
+              <h2 className="font-normal text-xl text-mainBlack">
+                Chalet name
+              </h2>
+            </Link>
             <div className="flex items-center gap-1">
               <img src={favorite} alt="favorite" className="w-4 h-4" />
               <span className="text-sm text-ry4Text">17,200</span>

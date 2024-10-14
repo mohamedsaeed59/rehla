@@ -1,13 +1,10 @@
-import { memo, useState } from "react";
+import { memo } from "react";
 import Card from "../Components/Global/Card";
-import downDrop from "../assets/icons/arrow-down-drop.svg";
 import BreadCrumb from "../Components/Global/BreadCrumb";
 import FillterSearch from "../Components/Search/FillterSearch";
-import DownDropStorBy from "../Components/Global/DownDropStorBy";
+import StorBy from "../Components/Global/StorBy/StorBy";
 
 const Search = () => {
-  const [downDropStore, setDownDropStore] = useState<boolean>(true);
-
   return (
     <>
       <div className="block lg:hidden">
@@ -21,21 +18,8 @@ const Search = () => {
             </h3>
             <div className="w-fit flex items-center justify-between md:justify-center gap-3 md:w-fit">
               <FillterSearch />
-              <div className="relative rounded-[8px] border border-black50 cursor-pointer hidden sm:block">
-                <div
-                  className="flex gap-2 p-2"
-                  onClick={() => setDownDropStore(!downDropStore)}
-                >
-                  <p className="text-sm font-normal">Stor By</p>
-                  <img
-                    src={downDrop}
-                    alt="downDrop"
-                    className="w-6 h-6 object-cover"
-                  />
-                </div>
-                {!downDropStore && (
-                 <DownDropStorBy/>
-                )}
+              <div className="hidden sm:block">
+                <StorBy />
               </div>
             </div>
           </div>

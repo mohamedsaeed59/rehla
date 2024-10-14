@@ -6,6 +6,8 @@ import { actAuthRegister } from "./act/ActAuthRegister";
 interface IAuthState {
   data: {
     access_token: string;
+    // 
+// user_token: "9pnkhz9o49ygi" access_token
     user: string;
     id: number;
     email: string;
