@@ -11,13 +11,13 @@ const Layouts = () => {
   const navigate = useNavigate();
   const { skip } = useAppSelector((state) => state.auth);
 
-  // useEffect(() => {
-  //   const accessToken = localStorage.getItem("access_token");
+  useEffect(() => {
+    const accessToken = localStorage.getItem("access_token");
 
-  //   if (!accessToken && !skip) {
-  //     navigate("/login");
-  //   }
-  // }, [navigate, skip]);
+    if (!accessToken && !skip) {
+      navigate("/login");
+    }
+  }, [navigate, skip]);
   return (
     <>
       {!pathname.includes("login") &&
