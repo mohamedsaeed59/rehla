@@ -1,9 +1,9 @@
 import { memo } from "react";
-import { useTranslation } from "react-i18next";
+// import { useTranslation } from "react-i18next";
 import SocialIcons from "../Components/Global/SocialIcons";
 
 function Footer() {
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
   return (
     <div className="bg-ryBackground">
       <div className="container">
