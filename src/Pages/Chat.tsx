@@ -3,6 +3,7 @@ import chat from "../assets/chat.png";
 import ChatComponent from "../Components/Global/ChatComponent";
 import logolight from "../assets/logolight.jpg";
 import close from "../assets/icons/close.svg";
+import { useTranslation } from "react-i18next";
 
 const Chate = () => {
   const [openChat, setOpenChat] = useState<boolean>(true);
@@ -10,6 +11,8 @@ const Chate = () => {
   const handelOpenChat = () => {
     setOpenChat(!openChat);
   };
+
+  const { t } = useTranslation();
 
   return (
     <div className="flex justify-end">
@@ -43,7 +46,7 @@ const Chate = () => {
             {openChat && (
               <div className="flex items-start gap-1">
                 <div className="bg-mainBlack rounded-lg rounded-br-none text-white p-[2px] w-[80px]">
-                  <p className="text-center">Hi!</p>
+                  <p className="text-center">{t('hi')}</p>
                 </div>
                 <div className="border border-mainBlack rounded-full p-1">
                   <img

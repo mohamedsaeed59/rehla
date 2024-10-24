@@ -5,6 +5,7 @@ import { Outlet } from "react-router";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAppSelector } from "../app/hooks";
 import Chat from "../Pages/Chat";
+import TopHeader from "../Components/Header/TopHeader";
 
 const Layouts = () => {
   const { pathname } = useLocation();
@@ -24,7 +25,12 @@ const Layouts = () => {
         !pathname.includes("register") &&
         !pathname.includes("otp") &&
         !pathname.includes("tellUs") &&
-        !pathname.includes("tell-us-next") && <Header />}
+        !pathname.includes("tell-us-next") && (
+          <>
+            <TopHeader />
+            <Header />
+          </>
+        )}
       <Outlet />
       {!pathname.includes("login") &&
         !pathname.includes("register") &&

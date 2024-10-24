@@ -2,10 +2,12 @@ import { memo } from "react";
 import avter from "../../assets/avter.webp";
 import { Link } from "react-router-dom";
 import { useAppSelector } from "../../app/hooks";
+import { useTranslation } from "react-i18next";
 
 const UpdateProfile = () => {
   const accessToken = localStorage.getItem("access_token");
   const { data } = useAppSelector((state) => state.auth);
+  const { t } = useTranslation();
   return (
     <div className="flex flex-col justify-center items-center">
       {accessToken ? (
@@ -27,7 +29,7 @@ const UpdateProfile = () => {
       )}
       <h2 className="font-medium text-xl text-mainBlack">{data.user}</h2>
       <Link to={"/editprofile"} className="text-primary flex items-center">
-        Update Profile
+      {t("Update profile")}
         <svg
           width="17"
           height="16"

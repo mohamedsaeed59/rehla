@@ -3,14 +3,16 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import Card from "../Global/Card";
 import right from "../../assets/icons/right-arrow.svg";
+import { useTranslation } from "react-i18next";
 
 const MostPopular = () => {
+  const { t } = useTranslation();
   return (
     <div className="py-8 bg-ryBackground">
       <div className="container">
         <div className="flex justify-between">
           <h3 className="text-mainBlack font-bold text-2xl text-center lg:text-start">
-            MostPopular
+            {t("MostPopular")}
           </h3>
           <div className="hidden lg:block">
             <div className="flex gap-2">

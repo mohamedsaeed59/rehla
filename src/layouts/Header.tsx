@@ -6,10 +6,11 @@ import MobileMenu from "../Components/Header/MobileMenu";
 import menu from "../assets/HAmburger-menu.webp";
 import SearchInput from "../Components/Search/SearchInput";
 import NotificationMain from "../Components/Notification/NotificationMain";
+import { useTranslation } from "react-i18next";
 
 function Header() {
   const [isOpen, setOpen] = useState<boolean>(false);
-
+  const { t } = useTranslation();
 
   const accessToken = localStorage.getItem("access_token");
 
@@ -37,32 +38,33 @@ function Header() {
             <ul className="flex items-center gap-10">
               <li>
                 <NavLink className="nav-link" to={"/"}>
-                  Home
+                  
+                  {t("Home")}
                 </NavLink>
               </li>
               {accessToken ? (
                 <li>
                   <NavLink className="nav-link" to={"/savedchalets"}>
-                    Saved Chalets
+                    {t("SavedChalets")}
                   </NavLink>
                 </li>
               ) : (
                 <li>
                   <NavLink className="nav-link" to={"/login"}>
-                    Saved Chalets
+                    {t("SavedChalets")}
                   </NavLink>
                 </li>
               )}
               {accessToken ? (
                 <li>
                   <NavLink className="nav-link" to={"/bookings"}>
-                    My Bookings
+                    {t("MyBookings")}
                   </NavLink>
                 </li>
               ) : (
                 <li>
                   <NavLink className="nav-link" to={"/login"}>
-                    My Bookings
+                  {t("MyBookings")}
                   </NavLink>
                 </li>
               )}

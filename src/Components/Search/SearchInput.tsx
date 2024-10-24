@@ -3,8 +3,11 @@ import { Link } from "react-router-dom";
 import SearchMenu from "./SearchMenu";
 import { useRef, useState } from "react";
 import useClickOutside from "../../hooks/useClickOutside";
+import { useTranslation } from "react-i18next";
 
 export default function SearchInput() {
+  const { t } = useTranslation();
+  
     const [openSearchMenu, setOpenSearchMenu] = useState<boolean>(false); 
     const dropdownRef = useRef<HTMLDivElement>(null);
   
@@ -37,7 +40,7 @@ export default function SearchInput() {
         </Link>
         <input
           type="search"
-          placeholder="Search Chalet name, location"
+          placeholder={t("SearchChaletNameLocation")}
           className="w-full focus:outline-none focus:border-primary p-1 hidden lg:block"
         />
       </div>

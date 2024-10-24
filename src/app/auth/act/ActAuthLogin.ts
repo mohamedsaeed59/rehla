@@ -2,7 +2,10 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { PropsInputsLogin } from "../../../Types/app";
 import { toast } from "react-toastify";
+import Cookies from "js-cookie";
+
 const URL__API = import.meta.env.VITE_REACT_APP_API_KEY;
+
 
 type TResponse = {
   status: number;
@@ -14,6 +17,8 @@ type TResponse = {
     phone: string;
   };
 };
+
+const lng = Cookies.get("i18next") || "en";
 
 export const actAuthLogin = createAsyncThunk(
   "auth/actAuthLogin",
@@ -27,7 +32,7 @@ export const actAuthLogin = createAsyncThunk(
         },
       };
       const response = await axios.post<TResponse>(
-        `${URL__API}/auth/login-phone?lang=en`,
+        `${URL__API}/auth/login-phone?lang=${lng}`,
         data,
         config
       );

@@ -3,6 +3,7 @@ import { memo, useRef, useState } from "react";
 import MenuCity from "../../Global/MenuCity";
 import DeleteAccount from "./DeleteAccount";
 import useClickOutside from "../../../hooks/useClickOutside";
+import { useTranslation } from "react-i18next";
 
 const ProfileForm = () => {
   const [openMenuCity, setOpenMenuCity] = useState<boolean>(false);
@@ -19,6 +20,8 @@ const ProfileForm = () => {
   };
 
   useClickOutside(dropdownRef, () => setOpenMenuCity(false));
+
+  const { t } = useTranslation();
 
   return (
     <form className="flex flex-col gap-5">
@@ -44,7 +47,7 @@ const ProfileForm = () => {
       </div>
       <div className="flex flex-col gap-1">
         <label className="text-lg font-normal">
-          E-mail <span className="text-ry3Text">(Optional)</span>
+          E-mail <span className="text-ry3Text">({t("Optional")})</span>
         </label>
         <input
           type="email"
@@ -83,7 +86,7 @@ const ProfileForm = () => {
 
       <div className="flex flex-col gap-1">
         <label className="text-lg font-normal">
-          Address <span className="text-ry3Text">(Optional)</span>
+          Address <span className="text-ry3Text">({t("Optional")})</span>
         </label>
         <input
           type="text"

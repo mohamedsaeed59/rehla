@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import thanksRequeste from "../../../assets/thanks-requeste.gif";
+import { useTranslation } from "react-i18next";
 
 export default function ThanksRequesting() {
+  const { t } = useTranslation();
   return (
     <div className="container py-11">
       <div className="flex items-center flex-col justify-center gap-6">
@@ -22,7 +24,7 @@ export default function ThanksRequesting() {
           </p>
         </div>
         <Link to={"/"} className="text-[14px] w-full text-center md:w-[40%] duration-500 border border-mainBlack hover:bg-mainBlack hover:text-white font-bold leading-[17px] rounded-3xl py-3">
-        Back to home
+        {t("BackToHome")}
         </Link>
       </div>
     </div>

@@ -5,8 +5,10 @@ import slideHome3 from "../../assets/3.png";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
+import Cookies from "js-cookie";
 
 function Slider() {
+  const lng = Cookies.get("i18next") || "en";
   return (
     <div className="w-full">
       <Swiper
@@ -23,24 +25,31 @@ function Slider() {
       >
         <SwiperSlide className="mb-16">
           <div className="w-full h-[430px] md:h-[500px]">
-            <img src={slideHome1} alt="slide1" className="w-full h-full" />
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="w-full h-[430px] md:h-[500px]">
             <img
-              src={slideHome2}
-              className="w-full h-full"   alt="slide2"
-           
+              key={lng}
+              src={slideHome1}
+              alt="slide1"
+              className="w-full h-full"
             />
           </div>
         </SwiperSlide>
         <SwiperSlide>
           <div className="w-full h-[430px] md:h-[500px]">
             <img
+              key={lng}
+              src={slideHome2}
+              className="w-full h-full"
+              alt="slide2"
+            />
+          </div>
+        </SwiperSlide>
+        <SwiperSlide>
+          <div className="w-full h-[430px] md:h-[500px]">
+            <img
+              key={lng}
               src={slideHome3}
               alt="slide3"
-             className="w-full h-full"
+              className="w-full h-full"
             />
           </div>
         </SwiperSlide>

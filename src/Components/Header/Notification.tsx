@@ -11,7 +11,7 @@ const Notification = () => {
         initial={{ y: "-100vh" }}
         animate={{ y: 0 }}
         exit={{ y: "-100vh" }}
-        className="absolute top-12 z-20 rtl:left-[-25px] ltr:right-[-25px] rounded-3xl rounded-tr-none bg-white border border-borderColor2 duration-300"
+        className="absolute top-12 z-20 rtl:left-[-25px] ltr:right-[-25px] rounded-3xl ltr:rounded-tr-none rtl:rounded-tl-none bg-white border border-borderColor2 duration-300"
       >
         <div className="w-[300px] md:w-[410px]">
           {/* <NotificationsEmpty/> */}

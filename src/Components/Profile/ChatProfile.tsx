@@ -2,8 +2,10 @@ import { Link } from "react-router-dom";
 import {MainProfile} from "./index";
 import logolight from "../../assets/logolight.jpg";
 import ChatComponent from "../Global/ChatComponent";
+import { useTranslation } from "react-i18next";
 
 export default function ChatProfile() {
+  const { t } = useTranslation();
   return (
     <div className="container">
       <div className="flex justify-center gap-5">
@@ -31,7 +33,7 @@ export default function ChatProfile() {
                     stroke-linejoin="round"
                   />
                 </svg>
-                Back
+                {t("BackToHome")}
               </Link>
               <div className="flex items-center gap-2">
                 <img

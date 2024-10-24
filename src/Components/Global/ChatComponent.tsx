@@ -1,19 +1,17 @@
 import { memo } from "react";
 import avter from "../../assets/avter.webp";
 import logolight from "../../assets/logolight.jpg";
-
+import { useTranslation } from "react-i18next";
 
 const ChatComponent = () => {
+  const { t } = useTranslation();
 
   return (
-    
     <div className="bg-white">
       <div className="py-3">
         <div className="overflow-y-scroll h-[400px] md:h-[420px]">
           <p className="text-center text-xs font-normal text-[#252525] w-[95%] mx-auto">
-            Rehla app ensures your rights when booking electronically, and the
-            booking amount is transferred through our app only after check-out.
-            Rehla is not responsible for any bookings made outside the app
+            {t("ChatMessageHint")}
           </p>
           <div className="flex justify-center items-center gap-2 py-4">
             <span className="w-[50px] h-[2px] inline-block bg-[#DBDBDB]"></span>
@@ -21,7 +19,9 @@ const ChatComponent = () => {
             <span className="w-[50px] h-[2px] inline-block bg-[#DBDBDB]"></span>
           </div>
           <p className="text-[#7D7D7D] text-xs font-normal text-center p-1">
-            you can send your problem to our chatbot and we will fix it soon
+            {t(
+              "you can send your problem to our chatbot and we will fix it soon"
+            )}
           </p>
           <div className="flex flex-col gap-3 py-5 h-[250px] px-[10px]">
             <div className="flex items-center justify-end gap-2">
@@ -230,13 +230,24 @@ const ChatComponent = () => {
             </div>
           </div>
         </div>
+
         <div className="my-6 flex px-3">
           <input
+            className="border border-borderColor rtl:border-l-0 ltr:border-r-0 
+
+           rtl:rounded-br-3xl  rtl:rounded-tr-3xl 
+           ltr:rounded-bl-3xl  ltr:rounded-tl-3xl 
+
+           focus:outline-none py-3 px-2 flex-1"
             type="text"
-            placeholder="Write Your Comment"
-            className="w-full border border-[#CACACA] rounded-tl-3xl rounded-bl-3xl focus:outline-none py-1 px-5 border-r-0"
+            placeholder={t("WriteYourComment")}
           />
-          <div className="bg-[#D9D9D9] rounded-tr-3xl rounded-br-3xl py-3 px-4 cursor-pointer">
+          <button
+            className="cursor-pointer bg-[#D9D9D9]
+        rtl:rounded-bl-3xl  rtl:rounded-tl-3xl 
+        ltr:rounded-br-3xl  ltr:rounded-tr-3xl 
+         py-2 px-4 m-0"
+          >
             <svg
               width="20"
               height="20"
@@ -251,7 +262,7 @@ const ChatComponent = () => {
                 />
               </g>
             </svg>
-          </div>
+          </button>
         </div>
       </div>
     </div>

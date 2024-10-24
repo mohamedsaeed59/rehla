@@ -7,6 +7,7 @@ import rightArrow from "../../assets/icons/right-arrow.svg";
 import avter from "../../assets/avter.webp";
 import camera from "../../assets/icons/camera.svg";
 import ProfileForm from "./_components/ProfileForm";
+import { useTranslation } from "react-i18next";
 
 const EditProfile = () => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -15,6 +16,7 @@ const EditProfile = () => {
       inputRef.current.click();
     }
   };
+  const { t } = useTranslation();
   return (
     <>
       <div className="block lg:hidden">
@@ -38,7 +40,7 @@ const EditProfile = () => {
                     className="w-3 h-3 rotate-180"
                   />
                 </div>
-                Back
+                {t("BackToHome")}
               </Link>
             </div>
             <div className="flex justify-center items-center pb-4 overflow-hidden">

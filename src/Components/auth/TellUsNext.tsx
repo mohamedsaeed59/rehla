@@ -4,10 +4,11 @@ import MenuCity from "../Global/MenuCity";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import useClickOutside from "../../hooks/useClickOutside";
+import { useTranslation } from "react-i18next";
 // import Location from "../../Pages/Location";
 
 const TellUsNext = () => {
-
+  const { t } = useTranslation();
   // const [openLocation, setOpenLocation] = useState<boolean>(false);
   const [openMenuCity, setOpenMenuCity] = useState<boolean>(false);
   const [valCity, setValCity] = useState<string>("");
@@ -40,7 +41,7 @@ const TellUsNext = () => {
         <div className="flex flex-col gap-4 order-2 md:order-1">
           <div className="flex flex-col items-center transform md:translate-x-1/2">
             <h2 className="font-bold text-lg sm:text-2xl text-mainBlack py-4">
-              Tell Us more about you
+            {t("Tell us more about you")}
             </h2>
 
             <div className="w-[280px] md:w-[300px] mx-auto my-3 flex justify-between items-center">
@@ -55,7 +56,7 @@ const TellUsNext = () => {
                 <li className="flex text-gray-900">
                   <div className="block whitespace-nowrap z-10">
                     <span className="w-6 h-6 bg-body border-2 border-borderColor rounded-full flex justify-center items-center mx-auto mb-3 text-sm text-indigo-600"></span>{" "}
-                    Location
+                    {t('Location')}
                   </div>
                 </li>
               </ol>
@@ -66,7 +67,7 @@ const TellUsNext = () => {
             <form className="flex flex-col gap-3" onSubmit={handleOpenLocation}>
               <div className="flex flex-col gap-1">
                 <label className="text-lg font-normal">
-                  City <span className="text-red">*</span>
+                  {t('City')}<span className="text-red">*</span>
                 </label>
                 <div ref={dropdownRef} onClick={handleOpenMenuCity} className="relative">
                   <input
@@ -87,7 +88,7 @@ const TellUsNext = () => {
 
               <div className="flex flex-col gap-1">
                 <label className="text-lg font-normal">
-                  Address <span className="text-ry3Text">(Optional)</span>
+                  {t('Address')} <span className="text-ry3Text">({t("Optional")})</span>
                 </label>
                 <input
                   type="text"
@@ -101,7 +102,7 @@ const TellUsNext = () => {
                   type="submit"
                   className="w-[280px] rounded-3xl p-2 text-center focus:outline-none text-lg font-bold bg-mainBlack text-white"
                 >
-                  Save
+                  {t('Save')}
                 </button>
               </div>
               {/* {openLocation && <Location />} */}

@@ -1,11 +1,13 @@
+import { useTranslation } from "react-i18next";
 import payment from "../../assets/PaymentMethod.png";
 import FormCheckOut from "./FormCheckOut";
 
 export default function PaymentMethod() {
+  const { t } = useTranslation();
   return (
     <div className="flex flex-col gap-6">
       <h3 className="font-medium text-xl text-mainBlack">
-        Select Payment Method
+      {t("Select Payment Method")}
       </h3>
       <div className="flex flex-wrap md:flex-nowrap gap-4">
         <div className="relative w-full md:w-[216px] h-[133px] shadow-lg bg-white rounded-xl border border-mainBlack  activePayment">

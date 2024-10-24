@@ -11,7 +11,8 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-import 'i18next'
+
+import './i18n';
 
 import 'react-toastify/dist/ReactToastify.css';
 

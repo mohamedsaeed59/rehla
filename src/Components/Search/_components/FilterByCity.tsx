@@ -1,18 +1,20 @@
 import { memo } from "react";
 import close from "../../../assets/icons/close.svg";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   setOpenMenuCity: (open: boolean) => void;
 };
 
 const FilterByCity = ({ setOpenMenuCity }: Props) => {
+  const { t } = useTranslation();
   return (
     <div className="absolute top-0 left-0 w-screen h-screen flex justify-center items-center backdrop-blur-[8px] bg-black/50 z-50">
       <div className="rounded-3xl bg-body border w-full md:w-[600px] border-borderColor2 shadow-sm mx-8">
         <div className="flex flex-col justify-center text-mainBlack p-4">
           <div className="flex justify-between items-center p-2">
             <h3 className="text-lg font-bold text-mainBlack">
-              Select your city
+            {t("Select your city")}
             </h3>
             <div
               onClick={() => setOpenMenuCity(false)}

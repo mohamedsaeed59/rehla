@@ -160,6 +160,7 @@ import { setOtp } from "../app/auth/userSlice";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { actAuthLogin } from "../app/auth/act/ActAuthLogin";
 import { handleSkip } from "../app/auth/authSlice";
+import { useTranslation } from "react-i18next";
 
 type PropsInputsOtp = {
   num1: string;
@@ -241,7 +242,7 @@ const Otp = () => {
       }
     }
   };
-
+  const { t } = useTranslation();
   return (
     <div className="overflow-hidden">
       <div className="p-6 md:p-12">
@@ -253,7 +254,7 @@ const Otp = () => {
             }}
             className="font-normal text-base sm:text-xl"
           >
-            Skip
+            {t("Skip")}
           </button>
         </div>
         <div className="flex flex-col justify-center items-start md:items-center">
@@ -263,10 +264,10 @@ const Otp = () => {
 
           <div className="flex flex-col gap-1">
             <h3 className="font-bold text-lg text-start text-mainBlack">
-              OTP Verification
+             {t("OTPVerification")}
             </h3>
             <p className="font-normal text-[0.9rem] text-start text-ry3Text">
-              Enter your OTP that was sent to{" "}
+            {t("OTPVerificationMessage")}{" "}
               <span className="text-mainBlack">‎{phoneOrEmail}</span>
               {/* <span className="text-mainBlack">‎+964-11-4884697 </span> */}
             </p>
@@ -296,12 +297,12 @@ const Otp = () => {
                 type="submit"
                 className="w-full rounded-3xl p-2 focus:outline-none text-lg font-bold bg-mainBlack text-white"
               >
-                Verify
+               {t("Verify")}
               </button>
             </div>
             <p className="text-center font-normal text-[14px] text-mainBlack">
-              Not received a message?{" "}
-              <button className="text-primary">Send again</button>
+            {t("NotReceivedMessage")}
+              <button className="text-primary">{t("SendAgain")}</button>
             </p>
           </form>
         </div>

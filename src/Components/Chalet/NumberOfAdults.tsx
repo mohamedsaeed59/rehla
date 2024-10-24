@@ -1,4 +1,7 @@
+import { useTranslation } from "react-i18next";
+
 export default function NumberOfAdults() {
+  const { t } = useTranslation();
   return (
     <div className="flex flex-col gap-8 py-9">
       <div className="flex flex-col gap-1">
@@ -55,7 +58,7 @@ export default function NumberOfAdults() {
               />
             </svg>
             <p className="text-xl md:text-2xl font-bold text-mainBlack">
-              Number Of Adults <span className="text-red">*</span>
+              {t("NumberOfAdults")} <span className="text-red">*</span>
             </p>
           </div>
           <div>
@@ -130,7 +133,7 @@ export default function NumberOfAdults() {
           </svg>
 
           <p className="text-base font-normal text-mainBlack">
-            Have Children <span className="text-ry3Text">(&lt;5years)</span>
+            {t("HaveChildren")}<span className="text-ry3Text">(&lt;5years)</span>
           </p>
         </div>
       </div>
@@ -310,11 +313,11 @@ export default function NumberOfAdults() {
           </svg>
 
           <p className="text-xl font-bold text-mainBlack">
-            Add Extra Amenities <span className="text-ry3Text">(Optional)</span>
+            {t("AddExtraAmenities")} <span className="text-ry3Text">({t("Optional")})</span>
           </p>
         </div>
         <p className="text-base font-normal text-ry3Text">
-          (each one will cost extra fees)
+          ({t("eachOneWillCostExtraFees")})
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 py-6">
           <div className="flex justify-between items-center w-[217px] text-mainBlack">

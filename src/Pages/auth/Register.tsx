@@ -7,6 +7,7 @@ import { handleSkip } from "../../app/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { actAuthRegister } from "../../app/auth/act/ActAuthRegister";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 type PropsInputsRegister = {
   name: string;
@@ -18,10 +19,9 @@ type PropsInputsRegister = {
 const Register = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
 
   const { status } = useAppSelector((state) => state.auth);
-  console.log(status);
-  console.log(typeof status);
 
   const {
     handleSubmit,
@@ -55,7 +55,7 @@ const Register = () => {
                   }}
                   className="font-normal text-lg"
                 >
-                  Skip
+                 {t("Skip")}
                 </button>
               </div>
               <div className="flex justify-center items-center">
@@ -67,7 +67,7 @@ const Register = () => {
               </div>
               <div className="flex flex-col gap-3 w-full md:w-[80%] mx-auto">
                 <h3 className="font-bold text-xl text-mainBlack">
-                  Create Account
+                  {t("CreateAccount")}
                 </h3>
                 <form
                   onSubmit={handleSubmit(onSubmit)}
@@ -75,7 +75,7 @@ const Register = () => {
                 >
                   <div className="flex flex-col gap-1">
                     <label className="text-lg font-normal">
-                      Full Name <span className="text-red">*</span>
+                      {t("FullName")}<span className="text-red">*</span>
                     </label>
                     <input
                       type="text"
@@ -97,7 +97,7 @@ const Register = () => {
                   </div>
                   <div className="flex flex-col gap-1">
                     <label className="text-lg font-normal">
-                      Phone number <span className="text-red">*</span>
+                      {t("PhoneNumber")}<span className="text-red">*</span>
                     </label>
                     <input
                       type="phone"
@@ -120,7 +120,7 @@ const Register = () => {
                   </div>
                   <div className="flex flex-col gap-1">
                     <label className="text-lg font-normal">
-                      E-mail (Optional)
+                      {t("Email")} ({t("Optional")})
                     </label>
                     <input
                       type="email"
@@ -143,21 +143,21 @@ const Register = () => {
                     type="submit"
                     className="rounded-3xl p-2 focus:outline-none text-lg font-bold bg-mainBlack text-white"
                   >
-                    Create Account
+                      {t("CreateAccount")}
                   </button>
                 </form>
                 <p className="text-center font-normal text-base text-mainBlack">
-                  Already have an Account?{" "}
+                 {t("AlreadyHaveAnAccount")}
                   <Link to={"/login"} className="text-primary">
-                    Log in
+                    {t("Login")}
                   </Link>
                 </p>
               </div>
             </div>
             <div className="flex justify-center flex-col items-center gap-2">
               <div className="text-center">
-                <p className="text-ry3Text font-normal">Or</p>
-                <p className="text-ry3Text font-normal">Sign up with</p>
+                <p className="text-ry3Text font-normal">{t("Or")}</p>
+                <p className="text-ry3Text font-normal">{t("SignUpWith")}</p>
               </div>
               <SocialIcons />
             </div>

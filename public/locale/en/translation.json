@@ -103,12 +103,18 @@
  "experienceMessage2": "We will enhance the app to be better for you!",
  "Thank you": "Thank you",
 "Check out": "Check out",
-"Discount or voucher code": "Discount or voucher",
+"Select Payment Method":"Select Payment Method",
+"Discount or voucher code": "Discount or voucher code",
  "Confirm Payment": "Confirm Payment",
  "Enter discount or voucher code": "Enter discount or voucher code",
 "Taxes": "Taxes",
 "ChatMessageHint": "Rehla app ensures your rights when booking electronivally, and the booking amount is transferred through our app only after check-out. Rehla is not responsible for any bookings made outside the app",
-
+"you can send your problem to our chatbot and we will fix it soon":"you can send your problem to our chatbot and we will fix it soon",
+"Name in card":"Name in card",
+"card Number":"card Number",
+"Date on card":"Date on card",
+"CVC":"CVC",
+"We are fully compliant with the payment card industry":"We are fully compliant with the payment card industry data security stansards",
 
 
  "signIn": "Sign in",
@@ -227,6 +233,7 @@
  "SelectLocation": "Select location",
  "AllCategories": "All Categories",
  "resultsForCatNearYou": "num results for cat near you",
+ "No internet connection":"No internet connection",
 
  "Share": "Share",
  "Direction": "Direction",
@@ -705,6 +712,11 @@
  "YourPercentage": "Please enter your percentage",
  "AdvisorPercentage": "Advisor percentage",
  "YourPercentage1": "Your percentage",
+ " Open device’s location?":" Open device’s location?",
+ "Allow Once":"Allow Once",
+ "Allow only while using this app":"Allow only while using this app",
+"Don’t Allow":"Don’t Allow",
+
 
  "PleaseEnterAdvisorPercentageNote": "Note: The advisor’s percentage will be deducted from your percentage",
  "agreement": "agreement",

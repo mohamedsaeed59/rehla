@@ -30,13 +30,13 @@ body {
   -o-border-radius: 24px;
 }
 
-.active-btn.active {
+.active-btn{
   background-color: #f3c800;
   border: 1px solid #1e1e1e;
   position: relative;
 }
 .activePayment::before,
-.active-btn.active::before {
+.active-btn::before {
   content: "\2713";
   color: white;
   position: absolute;

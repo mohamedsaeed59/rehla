@@ -8,6 +8,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { useAppDispatch } from "../../app/hooks";
 import { setPhoneOrEmail } from "../../app/auth/userSlice";
 import { handleSkip } from "../../app/auth/authSlice";
+import { useTranslation } from "react-i18next";
 
 type PropsInputsLogin = {
   phoneOremail: string;
@@ -21,6 +22,7 @@ const Login = () => {
     register,
   } = useForm<PropsInputsLogin>();
 
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -51,7 +53,7 @@ const Login = () => {
                   }}
                   className="font-normal text-lg"
                 >
-                  Skip
+                  {t("Skip")}
                 </button>
               </div>
               <div className="flex justify-center items-center">
@@ -63,7 +65,7 @@ const Login = () => {
               </div>
               <div className="flex flex-col gap-2 w-full md:w-[80%] mx-auto">
                 <h3 className="font-bold text-xl text-mainBlack">
-                  Welcome Back,
+                 {t("WelcomeBack")}
                 </h3>
                 <form
                   onSubmit={handleSubmit(onSubmit)}
@@ -71,7 +73,7 @@ const Login = () => {
                 >
                   <div className="flex flex-col gap-1">
                     <label className="text-lg font-normal">
-                      Phone number / E-mail *
+                     {t("PhoneNumberEmail")}*
                     </label>
                     <input
                       type="text"
@@ -95,21 +97,21 @@ const Login = () => {
                     type="submit"
                     className="rounded-3xl p-1 focus:outline-none text-lg font-bold bg-mainBlack text-white"
                   >
-                    Login
+                    {t("Login")}
                   </button>
                 </form>
                 <p className="text-center font-normal text-base text-mainBlack">
-                  Don’t have an Account?{" "}
+                {t("DontHaveAccount")}{" "}
                   <Link to={"/register"} className="text-primary">
-                    Create Account
+                  {t("CreateAccount")}
                   </Link>
                 </p>
               </div>
             </div>
             <div className="flex justify-center flex-col items-center gap-2">
               <div className="text-center">
-                <p className="text-ry3Text font-normal">Or</p>
-                <p className="text-ry3Text font-normal">Login with</p>
+                <p className="text-ry3Text font-normal"> {t("Or")}</p>
+                <p className="text-ry3Text font-normal">{t("LoginWith")}</p>
               </div>
               <SocialIcons />
             </div>

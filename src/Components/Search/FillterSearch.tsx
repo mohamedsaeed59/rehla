@@ -3,6 +3,7 @@ import filter from "../../assets/icons/filter.svg";
 import FilterByCity from "./_components/FilterByCity";
 import FilterByRate from "./_components/FilterByRate";
 import FilterByCapacity from "./_components/FilterByCapacity";
+import { useTranslation } from "react-i18next";
 
 export default function FillterSearch() {
   const [openMenuCity, setOpenMenuCity] = useState<boolean>(false);
@@ -14,6 +15,7 @@ export default function FillterSearch() {
     setOpenMenuCity(!openMenuCity);
   };
 
+  const { t } = useTranslation();
   return (
     <div className="flex items-center gap-2">
       <div className="flex gap-2 p-2 rounded-[8px] border-0 sm:border border-black50 cursor-pointer">
@@ -29,7 +31,7 @@ export default function FillterSearch() {
           onClick={() => setOpenFilterByCapacity(!openFilterByCapacity)}
           className="relative w-fit bg-ryBackground rounded-3xl flex justify-center items-center px-[10px] py-[6px] cursor-pointer"
         >
-          <p className="font-normal text-[13px] text-mainBlack">Capacity</p>
+          <p className="font-normal text-[13px] text-mainBlack">{t("Capacity")}</p>
           {!openFilterByCapacity && <FilterByCapacity />}
         </div>
         <div className=" w-fit bg-ryBackground rounded-3xl flex justify-center items-center px-[10px] py-[6px] cursor-pointer">
@@ -37,7 +39,7 @@ export default function FillterSearch() {
             onClick={handleOpenMenuCity}
             className="font-normal text-[13px] text-mainBlack"
           >
-            City
+            {t("City")}
           </p>
           {openMenuCity && <FilterByCity setOpenMenuCity={setOpenMenuCity} />}
         </div>

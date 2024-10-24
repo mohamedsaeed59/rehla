@@ -1,12 +1,14 @@
 import { memo } from "react";
 import BreadCrumb from "../Global/BreadCrumb";
 import loading from "../../assets/loading.gif";
+import { useTranslation } from "react-i18next";
 
 const PrivacyPolicy = () => {
+  const { t } = useTranslation();
   return (
     <>
       <div className="block lg:hidden">
-        <BreadCrumb title={"Privacy & Policy"} subTitle={"Privacy & Policy"} />
+        <BreadCrumb title={t("Privacy Policy")} subTitle={t("Privacy Policy")} />
       </div>
       <div className="container my-16">
         <div className="flex flex-col items-center gap-4">
@@ -25,7 +27,7 @@ const PrivacyPolicy = () => {
           </svg>
           </div>
           <h3 className="font-bold text-lg sm:text-2xl hidden lg:block">
-            Privacy & Policy
+            {t("Privacy Policy")}
           </h3>
           <img
             src={loading}

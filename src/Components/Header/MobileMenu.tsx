@@ -8,6 +8,7 @@ import Language from "../Global/Language";
 import { motion } from "framer-motion";
 import { useAppDispatch } from "../../app/hooks";
 import { authLogout } from "../../app/auth/authSlice";
+import { useTranslation } from "react-i18next";
 
 type mobileMenu = {
   setOpen: (open: boolean) => void;
@@ -15,6 +16,8 @@ type mobileMenu = {
 
 function MobileMenu({ setOpen }: mobileMenu) {
   const dispatch = useAppDispatch();
+
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const handleLogOut = () => {
     dispatch(authLogout());
@@ -87,7 +90,7 @@ function MobileMenu({ setOpen }: mobileMenu) {
                   </svg>
 
                   <p className="font-medium text-mainBlack text-[18px]">
-                    My Bookings
+                    {t("MyBookings")}
                   </p>
                 </Link>
               </div>
@@ -101,7 +104,7 @@ function MobileMenu({ setOpen }: mobileMenu) {
                   <img src={save} alt="save" className="w-5 h-5 object-cover" />
 
                   <p className="font-medium text-mainBlack text-[18px]">
-                    Saved Chalets
+                    {t("SavedChalets")}
                   </p>
                 </Link>
               </div>
@@ -115,7 +118,7 @@ function MobileMenu({ setOpen }: mobileMenu) {
                   <img src={lock} alt="lock" className="w-5 h-5 object-cover" />
 
                   <p className="font-medium text-mainBlack text-[18px]">
-                    Terms & Conditions
+                    {t("TermsConditions")}
                   </p>
                 </Link>
               </div>
@@ -140,7 +143,7 @@ function MobileMenu({ setOpen }: mobileMenu) {
                   </svg>
 
                   <p className="font-medium text-mainBlack text-[18px]">
-                    Privacy & Policy
+                    {t("Privacy Policy")}
                   </p>
                 </Link>
               </div>
@@ -168,7 +171,7 @@ function MobileMenu({ setOpen }: mobileMenu) {
                   />
                 </svg>
 
-                <p className="text-red">Logout</p>
+                <p className="text-red">{t("LogOut")}</p>
               </div>
               <div className="flex flex-col items-center mb-3">
                 <div className="flex justify-center items-center gap-1">
@@ -188,7 +191,7 @@ function MobileMenu({ setOpen }: mobileMenu) {
                   </svg>
 
                   <h2 className="font-semibold text-sm text-mainBlack text-center my-4">
-                    Language
+                    {t("Language")}
                   </h2>
                 </div>
                 <Language />

@@ -1,4 +1,7 @@
+import { useTranslation } from "react-i18next";
+
 export default function DownDropStorBy() {
+  const { t } = useTranslation();
 
   return (
     <div className="absolute top-10 w-[290px] md:w-[300px] rounded-[30px] z-20 rtl:left-0 ltr:right-0 bg-white shadow-lg p-2 md:p-3">
@@ -7,7 +10,7 @@ export default function DownDropStorBy() {
           <div className="flex items-center gap-1 cursor-pointer">
             <input type="radio" id="low" value="" name="result" className="cursor-pointer"/>
             <label className="text-base font-normal cursor-pointer" htmlFor="low">
-              Price ( Low to high)
+            {t("PriceLowToHigh")}
             </label>
           </div>
         </li>
@@ -16,7 +19,7 @@ export default function DownDropStorBy() {
           <div className="flex items-center gap-1">
             <input type="radio" id="high" value="" name="result" className="cursor-pointer"/>
             <label className="text-base font-normal cursor-pointer" htmlFor="high">
-              Price ( high to Low )
+              {t("PriceHighToLow")}
             </label>
           </div>
         </li>
@@ -24,27 +27,31 @@ export default function DownDropStorBy() {
         <li>
           <div className="flex items-center gap-1 cursor-pointer">
             <input type="radio" id="alphabet" value="" className="cursor-pointer" name="result" />
-            <label className="text-base font-normal cursor-pointer" htmlFor="alphabet">Alphabet (A-Z)</label>
+            <label className="text-base font-normal cursor-pointer" htmlFor="alphabet">{t("AlphabetAZ")}</label>
           </div>
         </li>
 
         <li>
           <div className="flex items-center gap-1 cursor-pointer">
             <input type="radio" id="alphabet2" value="" className="cursor-pointer" name="result" />
-            <label className="text-base font-normal cursor-pointer" htmlFor="alphabet2">Alphabet (Z-A)</label>
+            <label className="text-base font-normal cursor-pointer" htmlFor="alphabet2">{t("AlphabetZA")}</label>
           </div>
         </li>
 
         <li>
           <div className="flex items-center gap-1 cursor-pointer">
             <input type="radio" id="rate" value="" className="cursor-pointer" name="result"/>
-            <label className="text-base font-normal cursor-pointer" htmlFor="rate">Rate (high to low)</label>
+            <label className="text-base font-normal cursor-pointer" htmlFor="rate">
+            {t("RateHighToLow")}
+            </label>
           </div>
         </li>
         <li>
           <div className="flex items-center gap-1 cursor-pointer">
             <input type="radio" id="rate2" value="" className="cursor-pointer" name="result"/>
-            <label className="text-base font-normal cursor-pointer" htmlFor="rate2">Rate (low to high)</label>
+            <label className="text-base font-normal cursor-pointer" htmlFor="rate2">
+            {t("RateLowToHigh")}
+              </label>
           </div>
         </li>
       </ul>

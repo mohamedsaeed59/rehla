@@ -3,6 +3,8 @@ import location from "../../assets/location.webp";
 import drop_down from "../../assets/ic_baseline-arrow-drop-down.webp";
 import Language from "../Global/Language";
 import Location from "../../Pages/Location";
+import { useTranslation } from "react-i18next";
+
 
 function TopHeader() {
   const [openLocation, setOpenLocation] = useState<boolean>(false);
@@ -10,6 +12,9 @@ function TopHeader() {
   const handleOpenLocation = () => {
     setOpenLocation(!openLocation);
   };
+
+  const { t } = useTranslation();
+
 
   return (
     <div className="container">
@@ -30,9 +35,9 @@ function TopHeader() {
             <div className="pl-3 text-center sm:text-start">
               <div
                 onClick={handleOpenLocation}
-                className="text-primary text-base font-normal leading-4 border-b border-b-primary"
+                className="text-primary text-base font-normal leading-4 border-b border-b-primary cursor-pointer"
               >
-                Change location
+                 {t('Change location')}
               </div>
             </div>
           </div>
@@ -40,7 +45,7 @@ function TopHeader() {
             <Language />
           </div>
         </div>
-        {openLocation && <Location />}
+        {openLocation && <Location setOpenLocation={setOpenLocation}/>}
       </div>
     </div>
   );

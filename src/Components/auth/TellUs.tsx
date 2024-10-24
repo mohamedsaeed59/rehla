@@ -2,6 +2,7 @@ import { memo } from "react";
 import imageLogo from "../../assets/logolight.jpg";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 const TellUs = () => {
   const [gender, setGender] = useState<string>("male");
@@ -17,7 +18,7 @@ const TellUs = () => {
     }
   }, [gender, age]);
 
-
+  const { t } = useTranslation();
 
 
   return (
@@ -26,7 +27,7 @@ const TellUs = () => {
         <div className="flex flex-col gap-4 order-2 md:order-1">
           <div className="flex flex-col items-center transform md:translate-x-1/2">
             <h2 className="font-bold text-lg sm:text-2xl text-mainBlack py-4">
-              Tell Us more about you
+            {t("Tell us more about you")}
             </h2>
 
             <div className="w-[280px] md:w-[300px] mx-auto my-3 flex justify-between items-center">
@@ -34,13 +35,14 @@ const TellUs = () => {
                 <li className="flex w-full relative text-mainBlack  after:content-['']  after:w-full after:h-[1px]  after:bg-borderColor after:inline-block after:absolute after:top-[12px] after:left-[24px]">
                   <div className="block whitespace-nowrap z-10">
                     <span className="w-6 h-6 border-2 border-mainBlack rounded-full flex justify-center items-center mx-auto mb-3 text-sm  bg-body"></span>{" "}
-                    User data
+                    {t('User data')}
                   </div>
                 </li>
                 <li className="flex text-gray-900">
                   <div className="block whitespace-nowrap z-10">
                     <span className="w-6 h-6 bg-body border-2 border-borderColor rounded-full flex justify-center items-center mx-auto mb-3 text-sm text-indigo-600"></span>{" "}
-                    Location
+                    
+                    {t('Location')}
                   </div>
                 </li>
               </ol>
@@ -50,7 +52,7 @@ const TellUs = () => {
           <div className="w-full mt-0 md:mt-20">
             <form className="flex flex-col gap-3">
               <label className="text-lg font-bold">
-                Gender <span className="text-red">*</span>
+              {t('Gender')}<span className="text-red">*</span>
               </label>
               <div className="flex items-center gap-8 w-full md:w-1/2">
                 <div className="flex items-center gap-2">
@@ -64,7 +66,8 @@ const TellUs = () => {
                     onChange={(e) => setGender(e.target.value)}
                   />
                   <label className="text-xl font-normal cursor-pointer" htmlFor="male">
-                    Male
+                    
+                    {t('Male')}
                   </label>
                 </div>
                 <div className="flex items-center gap-2">
@@ -78,13 +81,13 @@ const TellUs = () => {
                     onChange={(e) => setGender(e.target.value)}
                   />
                   <label className="text-xl font-normal cursor-pointer" htmlFor="female">
-                    Female
+                    {t('Female')}
                   </label>
                 </div>
               </div>
               <div className="flex flex-col gap-3 w-full">
                 <label className="text-lg font-bold">
-                  Age <span className="text-red">*</span>
+                   {t('Age')} <span className="text-red">*</span>
                 </label>
                 <input
                   type="text"
@@ -106,7 +109,7 @@ const TellUs = () => {
                     if (!isFormValid) e.preventDefault();
                   }}
                 >
-                  Next
+                  {t('Next')}
                 </Link>
               </div>
             </form>

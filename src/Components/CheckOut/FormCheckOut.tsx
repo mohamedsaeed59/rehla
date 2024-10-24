@@ -1,12 +1,14 @@
 import { memo } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 const FormCheckOut = () => {
+  const { t } = useTranslation();
   return (
     <form className="flex flex-col gap-4">
       <div className="flex flex-col gap-1">
         <label className="text-xs font-normal">
-          Name on card <span className="text-red"> * </span>
+          {t("Name in card")} <span className="text-red"> * </span>
         </label>
         <input
           type="text"
@@ -16,7 +18,8 @@ const FormCheckOut = () => {
       </div>
       <div className="flex flex-col gap-1">
         <label className="text-xs font-normal">
-          card Number<span className="text-red"> *</span>
+          {t("card Number")}
+          <span className="text-red"> *</span>
         </label>
         <input
           type="number"
@@ -26,7 +29,8 @@ const FormCheckOut = () => {
       </div>
       <div className="flex flex-col gap-1">
         <label className="text-xs font-normal">
-          Date on card<span className="text-red"> *</span>
+          {t("Date on card")}
+          <span className="text-red"> *</span>
         </label>
         <input
           type="date"
@@ -35,7 +39,8 @@ const FormCheckOut = () => {
       </div>
       <div className="flex flex-col gap-1">
         <label className="text-xs font-normal">
-          CVC<span className="text-red"> * </span>
+          {t("CVC")}
+          <span className="text-red"> * </span>
         </label>
         <input
           type="password"
@@ -58,20 +63,30 @@ const FormCheckOut = () => {
         </svg>
 
         <p className="text-center w-[90%] md:w-[70%]">
-          We are fully compliant with the payment card industry data security
-          stansards
+          {t("We are fully compliant with the payment card industry")}
         </p>
       </div>
 
-        <div className="flex">
-          <input
-            className="border border-borderColor border-r-0 rounded-bl-lg rounded-tl-lg focus:outline-none py-2 px-2 flex-1"
-            placeholder="Discount or voucher code"
-          />
-          <button className="bg-mainBlack text-white rounded-br-lg rounded-tr-lg py-2 px-4 m-0">
-            Apply
-          </button>
-        </div>
+      <div className="flex">
+        <input
+          className="border border-borderColor rtl:border-l-0 ltr:border-r-0 
+
+
+           rtl:rounded-br-lg rtl:rounded-tr-lg
+           ltr:rounded-bl-lg ltr:rounded-tl-lg
+
+           focus:outline-none py-2 px-2 flex-1"
+          placeholder={t("Discount or voucher code")}
+        />
+        <button
+          className="bg-mainBlack text-white 
+        rtl:rounded-bl-lg rtl:rounded-tl-lg
+        ltr:rounded-br-lg ltr:rounded-tr-lg
+         py-2 px-4 m-0"
+        >
+          {t("Apply")}
+        </button>
+      </div>
       <div className="flex flex-col">
         <div className="flex flex-col gap-4">
           <div className="flex justify-between">

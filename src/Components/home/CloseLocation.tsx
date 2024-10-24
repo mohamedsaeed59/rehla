@@ -2,12 +2,14 @@ import { memo } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Scrollbar } from "swiper/modules";
 import CardTwo from "../Global/CardTwo";
+import { useTranslation } from "react-i18next";
 
 const CloseLocation = () => {
+  const { t } = useTranslation();
   return (
     <div className="container py-8">
       <h3 className="text-mainBlack font-bold text-2xl">
-        Close to your location
+        {t("Close to your location")}
       </h3>
       <div className="py-6">
         <Swiper

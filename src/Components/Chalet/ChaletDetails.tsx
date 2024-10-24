@@ -12,10 +12,14 @@ import NumberOfAdults from "./NumberOfAdults";
 import SliderChaletDetails from "./SliderChaletDetails";
 import Comments from "../Global/Comments";
 import Thumbnails from "./_components/Thumbnails";
+import { useTranslation } from "react-i18next";
+
 
 const ChaletDetails = () => {
   const [showComments, setShowComments] = useState<boolean>(true);
   const [save, setSave] = useState<boolean>(true);
+
+  const { t } = useTranslation();
 
   const handelShowComments = () => {
     setShowComments(!showComments);
@@ -48,7 +52,7 @@ const ChaletDetails = () => {
                 className="w-3 h-3 rotate-180"
               />
             </div>
-            Back
+            {t("BackToHome")}
           </Link>
           <div className="flex flex-col gap-2 bg-ryBackground rounded-md py-6 px-3">
             <div className="">
@@ -257,7 +261,7 @@ const ChaletDetails = () => {
               to={"/"}
               className="font-medium text-lg text-primary flex gap-1 items-center "
             >
-              Show more
+              {t("Show more")}
               <img
                 src={rightArrow}
                 alt="rightArrow"
@@ -307,7 +311,7 @@ const ChaletDetails = () => {
           <div className="flex items-center gap-2">
             <img src={date} alt="date" className="w-[22px] h-[22px]" />
             <p className="text-2xl font-bold text-mainBlack">
-              Select your stay Date <span className="text-red">*</span>
+              {t("SelectYourStayDate")} <span className="text-red">*</span>
             </p>
           </div>
           <div className="flex flex-col gap-[6px]">
@@ -339,7 +343,7 @@ const ChaletDetails = () => {
                   />
                 </g>
               </svg>
-              <p className="text-lg font-normal text-mainBlack">Available</p>
+              <p className="text-lg font-normal text-mainBlack">{t("Available")}</p>
             </div>
             <div className="flex items-center gap-2">
               <svg
@@ -393,7 +397,7 @@ const ChaletDetails = () => {
                 </g>
               </svg>
 
-              <p className="text-lg font-normal text-mainBlack">Not Filled</p>
+              <p className="text-lg font-normal text-mainBlack">{t("NotFilled")}</p>
             </div>
 
             <div className="flex items-center gap-2">
@@ -426,7 +430,7 @@ const ChaletDetails = () => {
               </svg>
 
               <p className="text-lg font-normal text-mainBlack">
-                Not Available
+               {t("NotAvailable")}
               </p>
             </div>
           </div>
@@ -439,7 +443,7 @@ const ChaletDetails = () => {
           to={"/check-out"}
           className="rounded-[33px] text-center w-full md:w-[500px] py-4  text-2xl font-bold bg-mainBlack text-white"
         >
-          CHECK OUT
+          {t("Check out")}
         </Link>
       </div>
     </div>

@@ -8,10 +8,15 @@ import chat from "../../assets/chat.png";
 import { UpdateProfile } from "./index";
 import { useAppDispatch } from "../../app/hooks";
 import { authLogout } from "../../app/auth/authSlice";
+import { useTranslation } from "react-i18next";
 
 const MainProfile = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  const { t } = useTranslation();
+
+
   const handleLogOut = () => {
     dispatch(authLogout());
     navigate("/login");
@@ -29,7 +34,7 @@ const MainProfile = () => {
               >
                 <img src={chat} alt="chat" className="w-5 h-5" />
                 <p className="font-medium text-mainBlack text-[16px]">
-                  Chat Us
+                  {t("Chat us")}
                 </p>
               </Link>
             </div>
@@ -41,7 +46,7 @@ const MainProfile = () => {
                 >
                   <img src={lock} alt="lock" className="w-5 h-5" />
                   <p className="font-medium text-mainBlack text-[16px]">
-                    Terms & Conditions
+                    {t("TermsConditions")}
                   </p>
                 </Link>
               </div>
@@ -65,7 +70,7 @@ const MainProfile = () => {
                   </svg>
 
                   <p className="font-medium text-mainBlack text-[16px]">
-                    Privacy & Policy
+                    {t("Privacy Policy")}
                   </p>
                 </Link>
               </div>
@@ -89,7 +94,7 @@ const MainProfile = () => {
               </svg>
 
               <h2 className="font-semibold text-sm text-mainBlack text-center my-4">
-                Language
+                {t("Language")}
               </h2>
             </div>
             <Language />
@@ -115,7 +120,7 @@ const MainProfile = () => {
               />
             </svg>
 
-            <p className="text-red">Logout</p>
+            <p className="text-red"> {t('LogOut')}</p>
           </div>
         </div>
       </div>
