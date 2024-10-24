@@ -54,6 +54,7 @@ function MobileMenu({ setOpen }: mobileMenu) {
               <div className="flex justify-center items-center cursor-pointer rounded-xl bg-ryBackground shadow-lg py-2 hover:bg-ry4Text duration-700">
                 <Link
                   to={"/bookings"}
+                  onClick={()=>setOpen(false)}
                   className="flex justify-center items-center flex-col gap-1"
                 >
                   <svg
@@ -94,6 +95,7 @@ function MobileMenu({ setOpen }: mobileMenu) {
               <div className="flex justify-center items-center cursor-pointer rounded-xl bg-ryBackground shadow-lg py-2 hover:bg-ry4Text duration-700">
                 <Link
                   to={"/savedchalets"}
+                  onClick={()=>setOpen(false)}
                   className="flex justify-center items-center flex-col gap-1"
                 >
                   <img src={save} alt="save" className="w-5 h-5 object-cover" />
@@ -107,6 +109,7 @@ function MobileMenu({ setOpen }: mobileMenu) {
               <div className="flex justify-center items-center cursor-pointer rounded-xl bg-ryBackground shadow-lg py-2 hover:bg-ry4Text duration-700">
                 <Link
                   to={"/terms-conditions"}
+                  onClick={()=>setOpen(false)}
                   className="flex justify-center items-center flex-col gap-1"
                 >
                   <img src={lock} alt="lock" className="w-5 h-5 object-cover" />
@@ -120,6 +123,7 @@ function MobileMenu({ setOpen }: mobileMenu) {
               <div className="flex justify-center items-center cursor-pointer rounded-xl bg-ryBackground shadow-lg py-2 hover:bg-ry4Text duration-700">
                 <Link
                   to={"/privacy-policy"}
+                  onClick={()=>setOpen(false)}
                   className="flex justify-center items-center flex-col gap-1"
                 >
                   <svg

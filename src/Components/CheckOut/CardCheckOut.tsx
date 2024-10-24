@@ -6,6 +6,7 @@ import location from "../../assets/icons/carbon_location.svg";
 import Group from "../../assets/icons/Group.svg";
 import date from "../../assets/date.png";
 import DetailsCheckOut from "../Global/DetailsCheckOut";
+import { Link } from "react-router-dom";
 
 const CardCheckOut = () => {
   return (
@@ -15,11 +16,13 @@ const CardCheckOut = () => {
         <div className="flex gap-2 cursor-pointer group">
           <div className="relative">
             <div className="w-[170px] md:w-[270px] h-full max-h-[240px]">
+            <Link to={`/chalet/:7`} className="">
               <img
                 src={card}
                 alt="card"
                 className="w-full h-full object-cover group-hover:scale-[1.02] duration-300"
               />
+              </Link>
               <div className="absolute top-2 left-1/2 w-[64px] h-[24px] rounded-xl transform -translate-x-[50%] mainBlack text-sm backdrop-blur-[16px] bg-white/70">
                 <div className="flex items-center justify-center p-1 h-full">
                   <span>
@@ -35,9 +38,11 @@ const CardCheckOut = () => {
             </div>
           </div>
           <div className="flex flex-col gap-3 md:gap-6 px-0 md:px-2">
+          <Link to={`/chalet/:7`} className="">
             <h2 className="font-normal text-base md:text-xl text-primary">
               Chalet name
             </h2>
+            </Link>
             <div className="flex items-center gap-1">
               <img src={favorite} alt="favorite" className="w-4 h-4" />
               <span className="text-[16px] text-ry4Text">17,200</span>

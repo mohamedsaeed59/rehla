@@ -175,7 +175,7 @@ const Otp = () => {
     (state) => state.userSliceToLogin
   );
 
-  const { status } = useAppSelector((state) => state.auth);
+  // const { status } = useAppSelector((state) => state.auth);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -188,11 +188,16 @@ const Otp = () => {
     useRef<HTMLInputElement>(null),
   ];
 
+  // useEffect(() => {
+  //   if (status === 200 && Otp2) {
+  //     sendUserDataToDatabase();
+  //   }
+  // }, [Otp2, status]);
   useEffect(() => {
-    if (status === 200 && Otp2) {
+    if (Otp2) {
       sendUserDataToDatabase();
     }
-  }, [Otp2, status]);
+  }, [Otp2]);
 
   useEffect(() => {
     if (accessToken) {

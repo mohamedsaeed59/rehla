@@ -1,6 +1,6 @@
-import { memo } from "react";
+import { memo, useState } from "react";
 import card from "../../assets/card.jfif";
-import save from "../../assets/icons/save.svg";
+// import saveImage from "../../assets/icons/save.svg";
 import Star from "../../assets/icons/Star.svg";
 import favorite from "../../assets/icons/carbon_favorite.svg";
 import location from "../../assets/icons/carbon_location.svg";
@@ -9,6 +9,12 @@ import Group from "../../assets/icons/Group.svg";
 import { Link } from "react-router-dom";
 
 const Card = () => {
+  const [save, setSave] = useState<boolean>(true);
+
+  const handleSave = () => {
+    setSave(!save);
+  };
+
   return (
     <div>
       {/* <div className="flex flex-wrap md:flex-nowrap gap-2 cursor-pointer group"> */}
@@ -57,7 +63,21 @@ const Card = () => {
             </div>
           </div>
           <Link to={""}>
-            <img src={save} alt="save" className="object-cover" />
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 33"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              onClick={handleSave}
+            >
+              <path
+                d="M12.6078 25.9215L12 25.5829L11.3922 25.9215L1 31.701V3.96647C1 3.16117 1.31451 2.40017 1.85555 1.84801C2.39658 1.29743 3.11526 1 3.85185 1H20.1481C20.8847 1 21.6034 1.29743 22.1445 1.84801C22.6855 2.40017 23 3.16117 23 3.96647V31.701L12.6078 25.9215Z"
+                fill={`${!save ? "#F3C800" : "#00000"}`}
+                stroke="#1E1E1E"
+                stroke-width="1.5"
+              />
+            </svg>
           </Link>
         </div>
       </div>

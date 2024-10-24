@@ -21,13 +21,13 @@ function Footer() {
               <div className="flex justify-center flex-wrap items-center gap-2 md:gap-5">
                 <p>Address : <span className="text-ry3Text">Iraq</span></p>
                 <p className="text-ry3Text">‎+964-11-4884697</p>
-                <p>Rahla@gmail.com</p>
+                <p>INFO@REHLA-1Q.COM</p>
               </div>
             </div>
             <SocialIcons/>
           </div>
         </div>
-        <p className="text-ry3Text text-center p-2 font-medium">All rights are reserved by@Rahla</p>
+        <p className="text-ry3Text text-center p-2 font-medium">All right reserved by@Rehla</p>
       </div>
     </div>
   );

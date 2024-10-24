@@ -1,7 +1,7 @@
 import { memo, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import rightArrow from "../../assets/icons/right-arrow.svg";
-import save from "../../assets/icons/save.svg";
+// import save from "../../assets/icons/save.svg";
 import favorite from "../../assets/icons/carbon_favorite.svg";
 // import favorite from "../../assets/heart.png";
 import Group from "../../assets/icons/Group.svg";
@@ -15,6 +15,7 @@ import Thumbnails from "./_components/Thumbnails";
 
 const ChaletDetails = () => {
   const [showComments, setShowComments] = useState<boolean>(true);
+  const [save, setSave] = useState<boolean>(true);
 
   const handelShowComments = () => {
     setShowComments(!showComments);
@@ -24,6 +25,9 @@ const ChaletDetails = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  const handleSave = () => {
+    setSave(!save);
+  };
 
   return (
     <div className="container my-9">
@@ -50,8 +54,24 @@ const ChaletDetails = () => {
             <div className="">
               <div className="flex items-center justify-between">
                 <h2 className="font-bold text-2xl text-primary">Chalet name</h2>
-                <div className="bg-white rounded-full p-2">
-                  <img src={save} alt="save" className="object-cover" />
+                <div className="bg-white rounded-full p-2 cursor-pointer">
+                  {/* <img src={save} alt="save" className="object-cover" /> */}
+
+                  <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 33"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              onClick={handleSave}
+            >
+              <path
+                d="M12.6078 25.9215L12 25.5829L11.3922 25.9215L1 31.701V3.96647C1 3.16117 1.31451 2.40017 1.85555 1.84801C2.39658 1.29743 3.11526 1 3.85185 1H20.1481C20.8847 1 21.6034 1.29743 22.1445 1.84801C22.6855 2.40017 23 3.16117 23 3.96647V31.701L12.6078 25.9215Z"
+                fill={`${!save ? "#F3C800" : "#00000"}`}
+                stroke="#1E1E1E"
+                stroke-width="1.5"
+              />
+            </svg>
                 </div>
               </div>
               <div className="flex flex-col gap-2">
@@ -234,7 +254,7 @@ const ChaletDetails = () => {
               High-quality materials were used in the renovation,{" "}
             </p>
             <Link
-              to={"/savedchalets"}
+              to={"/"}
               className="font-medium text-lg text-primary flex gap-1 items-center "
             >
               Show more

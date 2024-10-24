@@ -2,16 +2,14 @@ import { memo, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import logolight from "../assets/logolight.jpg";
 import avter from "../assets/avter.webp";
-import notification from "../assets/arcticons_notificationcron.svg";
 import MobileMenu from "../Components/Header/MobileMenu";
 import menu from "../assets/HAmburger-menu.webp";
-import Notification from "../Components/Header/Notification";
-import { AnimatePresence } from "framer-motion";
 import SearchInput from "../Components/Search/SearchInput";
+import NotificationMain from "../Components/Notification/NotificationMain";
 
 function Header() {
   const [isOpen, setOpen] = useState<boolean>(false);
-  const [openNotification, setOpenNotification] = useState<boolean>(false);
+
 
   const accessToken = localStorage.getItem("access_token");
 
@@ -19,9 +17,7 @@ function Header() {
     setOpen(!isOpen);
   };
 
-  const handleOpenNotification = () => {
-    setOpenNotification(!openNotification);
-  };
+
 
   return (
     <header className="py-0">
@@ -85,21 +81,7 @@ function Header() {
                 </Link>
               )}
 
-              <div className="relative">
-                <button onClick={handleOpenNotification}>
-                  <img
-                    src={notification}
-                    alt="notification"
-                    className="w-4 lg:w-8"
-                  />
-                </button>
-                <AnimatePresence>
-                  {openNotification && (
-                    // bg-black/65 z-20 absolute top-0 left-0 w-full h-full
-                    <Notification />
-                  )}
-                </AnimatePresence>
-              </div>
+             <NotificationMain/>
             </div>
             <button
               onClick={handleOpen}

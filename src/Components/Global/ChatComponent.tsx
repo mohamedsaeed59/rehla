@@ -6,6 +6,7 @@ import logolight from "../../assets/logolight.jpg";
 const ChatComponent = () => {
 
   return (
+    
     <div className="bg-white">
       <div className="py-3">
         <div className="overflow-y-scroll h-[400px] md:h-[420px]">
