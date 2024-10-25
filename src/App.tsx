@@ -1,33 +1,30 @@
-import { memo, useEffect, useState } from "react";
+import { memo, useEffect } from "react";
 import AppRouter from "./Routes/AppRouter";
 import { ToastContainer } from "react-toastify";
 import i18next from "i18next";
-import Cookies from "js-cookie";
+
 
 function App() {
+ 
+  const localLang = localStorage.getItem("i18nextLng") || "en";
 
-  const [lng, setLng] = useState(Cookies.get("i18next") || "en");
-
+  console.log(localLang);
 
   useEffect(() => {
     const handleLanguageChange = (newLang: string) => {
-      setLng(newLang);
-      window.document.dir = i18next.dir(newLang); 
+      window.document.dir = i18next.dir(newLang);
     };
 
-    i18next.on('languageChanged', handleLanguageChange);
+    i18next.on("languageChanged", handleLanguageChange);
 
     return () => {
-      i18next.off('languageChanged', handleLanguageChange);
+      i18next.off("languageChanged", handleLanguageChange);
     };
   }, []);
 
-
-
-
   useEffect(() => {
-    window.document.dir = i18next.dir(lng); 
-  }, [lng]);
+    window.document.dir = i18next.dir(localLang);
+  }, [localLang]);
 
   return (
     <>

@@ -1,15 +1,15 @@
 import { memo, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import Cookies from "js-cookie";
 
 const Language = () => {
   const { i18n } = useTranslation();
-
-  const [lng, setLng] = useState(Cookies.get("i18next") || "en");
+  const [localLang, setLocalLang] = useState(
+    localStorage.getItem("i18nextLng") || "en"
+  );
 
   useEffect(() => {
     const handleLanguageChange = (newLang: string) => {
-      setLng(newLang);
+      setLocalLang(newLang);
     };
 
     i18n.on("languageChanged", handleLanguageChange);
@@ -21,7 +21,7 @@ const Language = () => {
 
   const changeLanguage = (newLng: string) => {
     i18n.changeLanguage(newLng);
-    Cookies.set("i18next", newLng);
+    localStorage.setItem("i18nextLng", newLng);
   };
 
   return (
@@ -31,7 +31,7 @@ const Language = () => {
           <div
             onClick={() => changeLanguage("en")}
             className={`${
-              lng === "en" ? "active-btn" : ""
+              localLang === "en" ? "active-btn" : ""
             } rounded-3xl border py-1 px-3 bg-ryBackground hover:bg-slate-200 cursor-pointer`}
           >
             English
@@ -41,7 +41,7 @@ const Language = () => {
           <div
             onClick={() => changeLanguage("ar")}
             className={`${
-              lng === "ar" ? "active-btn" : ""
+              localLang === "ar" ? "active-btn" : ""
             } rounded-3xl border py-1 px-3 bg-ryBackground hover:bg-slate-200 cursor-pointer`}
           >
             العربية

@@ -13,8 +13,8 @@ i18n
     // lng: lang === "en" ? lang : "en",
     detection: {
       order: [
-        "cookie",
         "localStorage",
+        "cookie",
         "htmlTag",
         "querystring",
         "sessionStorage",
@@ -22,7 +22,7 @@ i18n
         "path",
         "subdomain",
       ],
-      caches: ["cookie"],
+      caches: ["localStorage"],
     },
     backend: {
       loadPath: "/locale/{{lng}}/translation.json",

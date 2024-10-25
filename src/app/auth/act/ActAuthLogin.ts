@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { PropsInputsLogin } from "../../../Types/app";
 import { toast } from "react-toastify";
-import Cookies from "js-cookie";
+
 
 const URL__API = import.meta.env.VITE_REACT_APP_API_KEY;
 
@@ -18,7 +18,7 @@ type TResponse = {
   };
 };
 
-const lng = Cookies.get("i18next") || "en";
+const lng = localStorage.getItem("i18nextLng") || "en";
 
 export const actAuthLogin = createAsyncThunk(
   "auth/actAuthLogin",
