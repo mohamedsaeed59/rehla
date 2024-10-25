@@ -10,7 +10,7 @@ import { Autoplay, Pagination } from "swiper/modules";
 function Slider() {
 
   return (
-    <div className="w-full">
+    <div className="w-full" dir="ltr">
       <Swiper
         loop={true}
         autoplay={{
