@@ -5,8 +5,9 @@ import Card from "../Global/Card";
 import right from "../../assets/icons/right-arrow.svg";
 import { useTranslation } from "react-i18next";
 
-const MostPopular = () => {
+const MostPopular = ({ popular_ads }: any) => {
   const { t } = useTranslation();
+
   return (
     <div className="py-8 bg-ryBackground">
       <div className="container">
@@ -19,16 +20,12 @@ const MostPopular = () => {
               <div className="left-arrow cursor-pointer border border-black rounded-full p-3">
                 <img
                   src={right}
-                  alt="right"
+                  alt="left arrow"
                   className="w-[14px] object-cover transform rotate-180"
                 />
               </div>
               <div className="right-arrow cursor-pointer border rounded-full p-3">
-                <img
-                  src={right}
-                  alt="right"
-                  className="w-[14px] object-cover"
-                />
+                <img src={right} alt="right arrow" className="w-[14px] object-cover" />
               </div>
             </div>
           </div>
@@ -49,18 +46,19 @@ const MostPopular = () => {
             }}
             modules={[Navigation]}
           >
-            <SwiperSlide>
-              <Card />
-            </SwiperSlide>
-            <SwiperSlide>
-              <Card />
-            </SwiperSlide>
-            <SwiperSlide>
-              <Card />
-            </SwiperSlide>
-            <SwiperSlide>
-              <Card />
-            </SwiperSlide>
+            {popular_ads?.map((ad: any, index: number) => (
+              <SwiperSlide key={index}>
+                <Card
+                  id={ad.id}
+                  name={ad.name}
+                  image={ad.image}
+                  rate={ad.rate}
+                  favorites={ad.no_favorites}
+                  city={ad.city}
+                  adults={ad.no_adults}
+              />
+              </SwiperSlide>
+            ))}
           </Swiper>
         </div>
       </div>

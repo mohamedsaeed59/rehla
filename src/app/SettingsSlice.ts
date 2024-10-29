@@ -7,6 +7,10 @@ const URL__API = import.meta.env.VITE_REACT_APP_API_KEY;
 const initialState = {
   data: {
     cities: null as TCity[] | null,
+    terms_title: "",
+    terms_body: "",
+    policy_title: "",
+    policy_body: "",
   },
   status: 0,
   message: "",
@@ -16,11 +20,11 @@ const initialState = {
 
 export const actSettings = createAsyncThunk(
   "setting/actSettings",
-  async (_, thunkAPI) => {
+  async (lang, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
     try {
       const response = await axios.get<TResponse>(
-        `${URL__API}/settings?lang=en`
+        `${URL__API}/settings?lang=${lang}`
       );
       return response.data;
     } catch (error) {
@@ -41,6 +45,10 @@ const settingsSlice = createSlice({
     builder.addCase(actSettings.fulfilled, (state, action) => {
       state.loading = "succeeded";
       state.data.cities = action.payload.data.cities || [];
+      state.data.terms_title = action.payload.data.terms_title;
+      state.data.terms_body = action.payload.data.terms_body;
+      state.data.policy_title = action.payload.data.policy_title;
+      state.data.policy_body = action.payload.data.policy_body;
     });
     builder.addCase(actSettings.rejected, (state, action) => {
       state.loading = "failed";

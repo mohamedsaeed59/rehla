@@ -8,7 +8,17 @@ import Group from "../../assets/icons/Group.svg";
 
 import { Link } from "react-router-dom";
 
-const Card = () => {
+interface CardProps {
+  id: number;
+  name: string;
+  image: string;
+  rate: number;
+  favorites: number;
+  city: string;
+  adults: string;
+}
+
+const Card = ({id, name, image, rate, favorites, city, adults}: CardProps) => {
   const [save, setSave] = useState<boolean>(true);
 
   const handleSave = () => {
@@ -20,9 +30,9 @@ const Card = () => {
       {/* <div className="flex flex-wrap md:flex-nowrap gap-2 cursor-pointer group"> */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-[14px] cursor-pointer group">
         <div className="relative w-full">
-          <Link to={`/chalet/:7`} className="">
+          <Link to={`/chalet/${id}`} className="">
             <img
-              src={card}
+              src={image}
               alt="card"
               className="w-full h-full  max-h-[250px] object-cover group-hover:scale-[1.02] duration-300"
             />
@@ -35,30 +45,30 @@ const Card = () => {
                     className="w-[14px] object-cover"
                   />
                 </span>
-                <span className="text-[14px]">(4.5)</span>
+                <span className="text-[14px]">({rate})</span>
               </div>
             </div>
           </Link>
         </div>
         <div className="flex justify-between w-full">
           <div className="flex flex-col gap-6">
-            <Link to={`/chalet/:7`} className="">
+            <Link to={`/chalet/${id}`} className="">
               <h2 className="font-normal text-xl text-mainBlack">
-                Chalet name
+                {name}
               </h2>
             </Link>
             <div className="flex items-center gap-1">
               <img src={favorite} alt="favorite" className="w-4 h-4" />
-              <span className="text-sm text-ry4Text">17,200</span>
+              <span className="text-sm text-ry4Text">{favorites}</span>
             </div>
             <div className="flex flex-col gap-1">
               <div className="flex items-center gap-1 text-ry3Text">
                 <img src={location} alt="location" className="w-4 h-4" />
-                <span className="text-[16px]">Bagdad, Iraq</span>
+                <span className="text-[16px]">{city}</span>
               </div>
               <div className="flex items-center gap-1 text-ry3Text">
                 <img src={Group} alt="Group" className="w-4 h-4" />
-                <span className="text-[16px]">20 Adults </span>
+                <span className="text-[16px]">{adults} Adults </span>
               </div>
             </div>
           </div>
