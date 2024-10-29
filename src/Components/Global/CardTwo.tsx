@@ -3,12 +3,22 @@ import card from "../../assets/card.jfif";
 // import save from "../../assets/icons/save.svg";
 import Star from "../../assets/icons/Star.svg";
 import favorite from "../../assets/icons/carbon_favorite.svg";
-import location from "../../assets/icons/carbon_location.svg";
+import locationIcon from "../../assets/icons/carbon_location.svg";
 import Group from "../../assets/icons/Group.svg";
 
 import { Link } from "react-router-dom";
 
-const CardTwo = () => {
+interface CardTwoProps {
+  id: number;
+  name: string;
+  image: string;
+  rate: number;
+  favorites: number;
+  city: string;
+  adults: string;
+}
+
+const CardTwo = ({id, name, image, rate, favorites, city, adults}: CardTwoProps) => {
   const [save, setSave] = useState<boolean>(true);
 
   const handleSave = () => {
@@ -18,9 +28,9 @@ const CardTwo = () => {
     <div>
       <div className="grid grid-cols-2 gap-2 cursor-pointer group">
         <div className="relative">
-        <Link to={`/chalet/:7`} className="w-full max-w-[500px] h-full  max-h-[230px]">
+        <Link to={`/chalet/${id}`} className="w-full max-w-[500px] h-full  max-h-[230px]">
             <img
-              src={card}
+              src={image}
               alt="card"
               className="w-full h-full object-cover group-hover:scale-[1.02] duration-300"
             />
@@ -33,7 +43,7 @@ const CardTwo = () => {
                     className="w-[14px] object-cover"
                   />
                 </span>
-                <span className="text-[14px]">(4.5)</span>
+                <span className="text-[14px]">({rate})</span>
               </div>
             </div>
           </Link>
@@ -41,19 +51,19 @@ const CardTwo = () => {
 
         <div className="flex justify-between w-full px-0 sm:px-2">
           <div className="flex flex-col gap-2 sm:gap-6">
-            <Link to={`/chalet/:7`} className="">
+            <Link to={`/chalet/${id}`} className="">
               <h2 className="font-bold text-xs sm:text-xl text-mainBlack">
-                Chalet name
+                {name}
               </h2>
             </Link>
             <div className="flex items-center gap-1">
               <img src={favorite} alt="favorite"  className="w-3 sm:w-4 h-3 sm:h-4"/>
-              <span className="text-xs sm:text-sm text-ry4Text">17,200</span>
+              <span className="text-xs sm:text-sm text-ry4Text">{favorites}</span>
             </div>
             <div className="flex flex-col gap-1">
               <div className="flex items-center gap-1 text-ry3Text">
-                <img src={location} alt="location"  className="w-3 sm:w-4 h-3 sm:h-4"/>
-                <span className="text-sm sm:text-[16px]">Bagdad, Iraq</span>
+                <img src={locationIcon} alt="location"  className="w-3 sm:w-4 h-3 sm:h-4"/>
+                <span className="text-sm sm:text-[16px]">{city}</span>
               </div>
               <div className="flex items-center gap-1 text-ry3Text">
                 <img
@@ -61,7 +71,7 @@ const CardTwo = () => {
                   alt="Group"
                   className="w-3 sm:w-4 h-3 sm:h-4"
                 />
-                <span className="text-sm sm:text-[16px]">20 Adults </span>
+                <span className="text-sm sm:text-[16px]">{adults} Adults </span>
               </div>
             </div>
           </div>

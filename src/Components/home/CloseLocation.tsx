@@ -4,8 +4,9 @@ import { Scrollbar } from "swiper/modules";
 import CardTwo from "../Global/CardTwo";
 import { useTranslation } from "react-i18next";
 
-const CloseLocation = () => {
-  const { t } = useTranslation();
+const CloseLocation = ({ close_ads }: any) => {
+  const { t } = useTranslation();  
+  
   return (
     <div className="container py-8">
       <h3 className="text-mainBlack font-bold text-2xl">
@@ -26,18 +27,19 @@ const CloseLocation = () => {
           }}
           modules={[Scrollbar]}
         >
-          <SwiperSlide>
-            <CardTwo />
-          </SwiperSlide>
-          <SwiperSlide>
-            <CardTwo />
-          </SwiperSlide>
-          <SwiperSlide>
-            <CardTwo />
-          </SwiperSlide>
-          <SwiperSlide>
-            <CardTwo />
-          </SwiperSlide>
+          {close_ads?.map((ad: any) => (
+            <SwiperSlide key={ad.id}>
+              <CardTwo
+                id={ad.id}
+                name={ad.name}
+                image={ad.image}
+                rate={ad.rate}
+                favorites={ad.no_favorites}
+                city={ad.city}
+                adults={ad.no_adults}
+              />
+            </SwiperSlide>
+          ))}
         </Swiper>
       </div>
     </div>

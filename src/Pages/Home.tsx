@@ -4,9 +4,13 @@ import TermsConditions from "../Components/home/Terms&Conditions";
 import CloseLocation from "../Components/home/CloseLocation";
 import MostPopular from "../Components/home/MostPopular";
 import RecentlyAdd from "../Components/home/RecentlyAdd";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { actFetchHomeScreen } from "../app/home/homeSlice";
 
 function Home() {
   const [showTermsConditions, setShowTermsConditions] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
+  const { data } = useAppSelector((state) => state.home);  
 
   useEffect(() => {
     const cookies = document.cookie.split("; ").find((row) => row.startsWith("termsAccepted="));
@@ -23,10 +27,28 @@ function Home() {
     setShowTermsConditions(false); 
   };
 
+  useEffect(() => {
+    const lang = localStorage.getItem("i18nextLng") || "en";
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          dispatch(actFetchHomeScreen({ lat: latitude, lon: longitude, lang: lang }));
+        },
+        (error) => {
+          console.error("Error getting location:", error);
+        }
+      );
+    } else {
+      console.error("Geolocation is not supported by this browser.");
+    }
+  }, [dispatch]);
+
   return (
     <>
       <div className="relative">
-        <Slider />
+        <Slider banners={data.banners} />
         {/* <div className="hidden md:block"> */}
           {showTermsConditions && (
             <TermsConditions
@@ -35,9 +57,9 @@ function Home() {
             />
           )}
         {/* </div> */}
-        <CloseLocation />
-        <MostPopular />
-        <RecentlyAdd />
+        <CloseLocation close_ads={data?.close_ads} />
+        <MostPopular popular_ads={data?.popular_ads} />
+        <RecentlyAdd recently_ads={data?.recently_ads} />
       </div>
     </>
   );
