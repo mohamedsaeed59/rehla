@@ -3,12 +3,17 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { actSettings } from "../../app/SettingsSlice";
 import { useTranslation } from "react-i18next";
 
-type props = {
-  setOpenMenuCity: (open: boolean) => void;
-  setValCity: (open: string) => void;
+type City = {
+  id: number;
+  title: string;
 };
 
-const MenuCity = ({ setOpenMenuCity, setValCity }: props) => {
+type Props = {
+  setOpenMenuCity: (open: boolean) => void;
+  setValCity: (city: City) => void;
+};
+
+const MenuCity = ({ setOpenMenuCity, setValCity }: Props) => {
   const { t } = useTranslation();
   const { data, loading } = useAppSelector((state) => state.settings);
 
@@ -20,7 +25,7 @@ const MenuCity = ({ setOpenMenuCity, setValCity }: props) => {
     dispatch(actSettings(lang));
   }, [dispatch]);
 
-  const handleOpenMenuCity = (data: any) => {
+  const handleOpenMenuCity = (data: City) => {
     setOpenMenuCity(false);
     setValCity(data);
   };
@@ -30,7 +35,7 @@ const MenuCity = ({ setOpenMenuCity, setValCity }: props) => {
         <h3 className="font-medium text-lg text-mainBlack"> {t("Select your city")}</h3>
         {loading === "pending" && <p>loading</p>}
         <form className="flex flex-col gap-3 p-2">
-          {data?.cities?.map((item) => (
+          {data?.cities?.map((item: City) => (
             <div
               key={item.id}
               className="flex items-center gap-1 w-fit"

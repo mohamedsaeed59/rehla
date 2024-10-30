@@ -7,6 +7,11 @@ import { useTranslation } from "react-i18next";
 import { useAppDispatch } from "../../../app/hooks";
 import { actUpdateProfile } from "../../../app/auth/authSlice";
 
+type City = {
+  id: number;
+  title: string;
+};
+
 const ProfileForm = () => {
   const [userProfile, setUserProfile] = useState({
     name: "",
@@ -20,7 +25,9 @@ const ProfileForm = () => {
 
   const [openMenuCity, setOpenMenuCity] = useState<boolean>(false);
   const [openDeleteAccount, setOpenDeleteAccount] = useState<boolean>(false);
-  const [valCity, setValCity] = useState(userProfile.city_id);
+  // const [valCity, setValCity] = useState(userProfile.city_id);
+  const [valCity, setValCity] = useState<City | undefined>(userProfile.city_id as City | undefined);
+  
   const dispatch = useAppDispatch();  
 
   const dropdownRef = useRef<HTMLDivElement>(null);
