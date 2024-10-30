@@ -1,5 +1,4 @@
 import { memo, useState } from "react";
-import card from "../../assets/card.jfif";
 // import saveImage from "../../assets/icons/save.svg";
 import Star from "../../assets/icons/Star.svg";
 import favorite from "../../assets/icons/carbon_favorite.svg";
