@@ -4,11 +4,24 @@ import MenuCity from "../../Global/MenuCity";
 import DeleteAccount from "./DeleteAccount";
 import useClickOutside from "../../../hooks/useClickOutside";
 import { useTranslation } from "react-i18next";
+import { useAppDispatch } from "../../../app/hooks";
+import { actUpdateProfile } from "../../../app/auth/authSlice";
 
 const ProfileForm = () => {
+  const [userProfile, setUserProfile] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    age: "",
+    city_id: undefined,
+    address: "",
+    gender: "",
+  });
+
   const [openMenuCity, setOpenMenuCity] = useState<boolean>(false);
   const [openDeleteAccount, setOpenDeleteAccount] = useState<boolean>(false);
-  const [valCity, setValCity] = useState<string>("");
+  const [valCity, setValCity] = useState(userProfile.city_id);
+  const dispatch = useAppDispatch();  
 
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -23,15 +36,44 @@ const ProfileForm = () => {
 
   const { t } = useTranslation();
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const updatedProfile = {
+      ...userProfile,
+      city_id: valCity?.id,
+      gender: "male",
+    };
+
+    try {
+      // Dispatch the action to update the profile
+      const action = await dispatch(actUpdateProfile(updatedProfile));
+
+      // Check for action result
+      if (actUpdateProfile.fulfilled.match(action)) {
+        // Update local state with the new profile data
+        setUserProfile(action.payload.data); // Assuming response structure matches
+        alert("Profile updated successfully.");
+      } else {
+        alert("Failed to update profile: " + action.error.message);
+      }
+    } catch (error) {
+      console.error("Failed to update profile:", error);
+      alert("An error occurred while updating the profile.");
+    }
+  };
+
   return (
-    <form className="flex flex-col gap-5">
+    <>
+    <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
       <div className="flex flex-col gap-1">
         <label className="text-lg font-normal">
           Full Name <span className="text-red">*</span>
         </label>
         <input
           type="text"
-          value={"Yomna Ashraf Ahmed"}
+          defaultValue={userProfile.name}
+          onChange={(e) => setUserProfile({ ...userProfile, name: e.target.value })}
           className="rounded-lg p-2 focus:outline-none border border-borderColor"
         />
       </div>
@@ -41,7 +83,8 @@ const ProfileForm = () => {
         </label>
         <input
           type="phone"
-          value={"123456789"}
+          defaultValue={userProfile.phone}
+          onChange={(e) => setUserProfile({ ...userProfile, phone: e.target.value })}
           className="rounded-lg p-2 focus:outline-none border border-borderColor"
         />
       </div>
@@ -51,7 +94,8 @@ const ProfileForm = () => {
         </label>
         <input
           type="email"
-          value={"yomna@gmail.com"}
+          defaultValue={userProfile.email}
+          onChange={(e) => setUserProfile({ ...userProfile, email: e.target.value })}
           className="rounded-lg p-2 focus:outline-none border border-borderColor"
         />
       </div>
@@ -62,7 +106,8 @@ const ProfileForm = () => {
         </label>
         <input
           type="number"
-          value={"26"}
+          defaultValue={userProfile.age}
+          onChange={(e) => setUserProfile({ ...userProfile, age: e.target.value })}
           className="rounded-lg p-2 focus:outline-none border border-borderColor"
         />
       </div>
@@ -74,7 +119,7 @@ const ProfileForm = () => {
         <div ref={dropdownRef} onClick={handleOpenMenuCity} className="relative">
         <input
           type="text"
-          value={valCity}
+          value={valCity?.title}
           placeholder="Select Your city"
           className="rounded-lg p-2 w-full focus:outline-none border border-borderColor"
         />
@@ -90,7 +135,8 @@ const ProfileForm = () => {
         </label>
         <input
           type="text"
-          value={"22str, Iraq"}
+          defaultValue={userProfile.address}
+          onChange={(e) => setUserProfile({ ...userProfile, address: e.target.value })}
           className="rounded-lg p-2 focus:outline-none border border-borderColor"
         />
       </div>
@@ -107,8 +153,9 @@ const ProfileForm = () => {
       >
         Delete Account
       </div>
-      {openDeleteAccount && <DeleteAccount />}
     </form>
+      {openDeleteAccount && <DeleteAccount setOpenDeleteAccount={setOpenDeleteAccount} />}
+    </>
   );
 };
 

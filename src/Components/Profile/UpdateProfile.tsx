@@ -7,13 +7,14 @@ import { useTranslation } from "react-i18next";
 const UpdateProfile = () => {
   const accessToken = localStorage.getItem("access_token");
   const { data } = useAppSelector((state) => state.auth);
-  const { t } = useTranslation();
+  const { t } = useTranslation();  
+  
   return (
     <div className="flex flex-col justify-center items-center">
       {accessToken ? (
         <Link to={"/profile"}>
           <img
-            src={avter}
+            src={data?.profileImage || avter}
             alt="avter"
             className="w-14 object-cover rounded-full"
           />
@@ -27,7 +28,7 @@ const UpdateProfile = () => {
           />
         </Link>
       )}
-      <h2 className="font-medium text-xl text-mainBlack">{data.user}</h2>
+      <h2 className="font-medium text-xl text-mainBlack">{data?.name}</h2>
       <Link to={"/editprofile"} className="text-primary flex items-center">
       {t("Update profile")}
         <svg

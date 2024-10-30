@@ -20,7 +20,7 @@ const MenuCity = ({ setOpenMenuCity, setValCity }: props) => {
     dispatch(actSettings(lang));
   }, [dispatch]);
 
-  const handleOpenMenuCity = (data: string) => {
+  const handleOpenMenuCity = (data: any) => {
     setOpenMenuCity(false);
     setValCity(data);
   };
@@ -34,7 +34,7 @@ const MenuCity = ({ setOpenMenuCity, setValCity }: props) => {
             <div
               key={item.id}
               className="flex items-center gap-1 w-fit"
-              onClick={() => handleOpenMenuCity(item.title)}
+              onClick={() => handleOpenMenuCity(item)}
             >
               <input
                 type="radio"

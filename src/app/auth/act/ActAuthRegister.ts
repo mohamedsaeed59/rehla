@@ -10,12 +10,16 @@ type TResponse = {
   status: number;
   data: {
     access_token: string;
-    user: {
-      id: number;
-      email: string;
-      name: string;
-      phone: string;
-    } | null;
+    id: number;
+    email: string;
+    name: string;
+    phone: string;
+    // user: {
+    //   id: number;
+    //   email: string;
+    //   name: string;
+    //   phone: string;
+    // } | null;
   };
 };
 

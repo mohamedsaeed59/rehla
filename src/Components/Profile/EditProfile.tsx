@@ -8,15 +8,28 @@ import avter from "../../assets/avter.webp";
 import camera from "../../assets/icons/camera.svg";
 import ProfileForm from "./_components/ProfileForm";
 import { useTranslation } from "react-i18next";
+import { actChangeProfileImage } from "../../app/auth/authSlice";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 
 const EditProfile = () => {
+  const { t } = useTranslation();
+  const dispatch = useAppDispatch();
   const inputRef = useRef<HTMLInputElement>(null);
+  const { data } = useAppSelector((state) => state.auth);
+
   const handleClick = () => {
     if (inputRef.current) {
       inputRef.current.click();
     }
   };
-  const { t } = useTranslation();
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      dispatch(actChangeProfileImage(file));
+    }
+  };
+
   return (
     <>
       <div className="block lg:hidden">
@@ -43,10 +56,11 @@ const EditProfile = () => {
                 {t("BackToHome")}
               </Link>
             </div>
+
             <div className="flex justify-center items-center pb-4 overflow-hidden">
               <div className="w-20 h-20 relative">
                 <img
-                  src={avter}
+                  src={data.profileImage || avter}
                   alt="avter"
                   className="w-20 h-20 object-cover rounded-full"
                 />
@@ -56,6 +70,7 @@ const EditProfile = () => {
                       type="file"
                       name="image"
                       ref={inputRef}
+                      onChange={handleFileChange}
                       className="opacity-0"
                     />
                     <div className="flex justify-center items-center backdrop-blur-[1px] bg-white/10 w-20 h-20 absolute top-0 left-0 rounded-full">
@@ -70,6 +85,7 @@ const EditProfile = () => {
                 </div>
               </div>
             </div>
+
             <ProfileForm/>
           </div>
         </div>

@@ -1,39 +1,105 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 import { TLoading } from "../../Types/app";
 import { actAuthLogin } from "./act/ActAuthLogin";
 import { actAuthRegister } from "./act/ActAuthRegister";
 
+const API_URL = import.meta.env.VITE_REACT_APP_API_KEY;
+
+// Initial state
 interface IAuthState {
   data: {
     access_token: string;
-    // 
-// user_token: "9pnkhz9o49ygi" access_token
-    user: string;
+    profileImage: string;
+    name: string;
     id: number;
     email: string;
     phone: string;
   };
   status: number;
+  message: string;
   loading: TLoading;
   error: string | null;
   skip: boolean;
-  message: string;
 }
 
 const initialState: IAuthState = {
   data: {
     access_token: localStorage.getItem("access_token") || "",
-    user: "",
+    profileImage: "",
+    name: "",
     id: 0,
     email: "",
     phone: "",
   },
   status: 0,
+  message: "",
   loading: "idle",
   error: null,
   skip: false,
-  message: "",
 };
+
+// Async thunk for updating profile
+export const actUpdateProfile = createAsyncThunk(
+  "auth/actUpdateProfile",
+  async (profileData: { name: string; email: string; phone: string; age: string; city_id: any; address: string; gender: string }, { rejectWithValue }) => {
+    try {
+      const accessToken = localStorage.getItem("access_token");
+
+      const response = await axios.post(`${API_URL}/update-profile`, profileData, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+// Async thunk for changing profile image
+export const actChangeProfileImage = createAsyncThunk(
+  "auth/actChangeProfileImage",
+  async (imageData: File, { rejectWithValue }) => {
+    const accessToken = localStorage.getItem("access_token");
+    const formData = new FormData();
+    formData.append("image", imageData);
+
+    try {
+      const response = await axios.post(`${API_URL}/change-image-profile`, formData, {
+        headers: {
+          "Authorization": `Bearer ${accessToken}`,
+          "Content-Type": "multipart/form-data"
+        }
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+
+// Async thunk for deleting account
+export const actDeleteAccount = createAsyncThunk(
+  "auth/actDeleteAccount",
+  async (_, { rejectWithValue }) => {
+    const accessToken = localStorage.getItem("access_token");
+    try {
+      const response = await axios.post(`${API_URL}/delete-account`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
 
 const authSlice = createSlice({
   name: "auth",
@@ -41,7 +107,7 @@ const authSlice = createSlice({
   reducers: {
     authLogout: (state) => {
       state.data.access_token = "";
-      state.data.user = "";
+      state.data.profileImage = "";
       localStorage.removeItem("access_token");
     },
     handleSkip: (state) => {
@@ -75,12 +141,62 @@ const authSlice = createSlice({
       state.data.access_token = action.payload.data.access_token;
       localStorage.setItem("access_token", action.payload.data.access_token);
       console.log(action.payload);
-      state.data.user = action.payload.data.name;
+      state.data.name = action.payload.data.name;
       state.status = action.payload.status;
     });
     builder.addCase(actAuthLogin.rejected, (state) => {
       state.loading = "failed";
       state.error = "Login failed";
+    });
+
+    // Update Profile
+    builder.addCase(actUpdateProfile.pending, (state) => {
+      state.loading = "pending";
+      state.error = null;
+    });
+    builder.addCase(actUpdateProfile.fulfilled, (state, action) => {
+      state.loading = "succeeded";
+      state.status = action.payload.status;
+      state.message = "Profile updated successfully.";
+      state.data = action.payload.data;
+    });
+    builder.addCase(actUpdateProfile.rejected, (state, action) => {
+      state.loading = "failed";
+      state.error = action.payload as string;
+    });
+
+    // Change Profile Image
+    builder.addCase(actChangeProfileImage.pending, (state) => {
+      state.loading = "pending";
+      state.error = null;
+    });
+    builder.addCase(actChangeProfileImage.fulfilled, (state, action) => {
+      state.loading = "succeeded";
+      state.status = action.payload.status;
+      state.message = "Profile image updated successfully.";
+      if (state.data) {
+        state.data.profileImage = action.payload.data.image;
+      }
+    });
+    builder.addCase(actChangeProfileImage.rejected, (state, action) => {
+      state.loading = "failed";
+      state.error = action.payload as string;
+    });
+
+    // Delete Account
+    builder.addCase(actDeleteAccount.pending, (state) => {
+      state.loading = "pending";
+      state.error = null;
+    });
+    builder.addCase(actDeleteAccount.fulfilled, (state, action) => {
+      state.loading = "succeeded";
+      state.status = action.payload.status;
+      state.message = "Account deleted successfully.";
+      state.data = initialState.data; // Reset user data on account deletion
+    });
+    builder.addCase(actDeleteAccount.rejected, (state, action) => {
+      state.loading = "failed";
+      state.error = action.payload as string;
     });
   },
 });
