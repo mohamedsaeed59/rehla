@@ -1,5 +1,5 @@
 import { memo } from "react";
-import Card from "../Components/Global/Card";
+// import Card from "../Components/Global/Card";
 import StorBy from "../Components/Global/StorBy/StorBy";
 import { useTranslation } from "react-i18next";
 
@@ -16,9 +16,9 @@ const SavedChalets = () => {
 
             <StorBy />
           </div>
-          <Card />
-          <Card />
-          <Card />
+          {/* <Card /> */}
+          {/* <Card /> */}
+          {/* <Card /> */}
         </div>
       </div>
     </>

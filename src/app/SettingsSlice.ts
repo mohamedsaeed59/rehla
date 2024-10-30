@@ -18,7 +18,11 @@ const initialState = {
   error: null as string | null,
 };
 
-export const actSettings = createAsyncThunk(
+export const actSettings = createAsyncThunk<
+    TResponse,
+    string,
+    { rejectValue: any }
+  >(
   "setting/actSettings",
   async (lang, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;

@@ -8,5 +8,9 @@ export type TResponse = {
   status: number;
   data: {
     cities: TCity[] | null;
+    terms_title: string,
+    terms_body: string,
+    policy_title: string,
+    policy_body: string,
   };
 };

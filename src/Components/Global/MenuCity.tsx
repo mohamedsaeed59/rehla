@@ -15,7 +15,9 @@ const MenuCity = ({ setOpenMenuCity, setValCity }: props) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(actSettings());
+    const lang = localStorage.getItem("i18nextLng") || "en";
+
+    dispatch(actSettings(lang));
   }, [dispatch]);
 
   const handleOpenMenuCity = (data: string) => {

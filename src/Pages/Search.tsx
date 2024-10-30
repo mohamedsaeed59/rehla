@@ -1,5 +1,5 @@
 import { memo } from "react";
-import Card from "../Components/Global/Card";
+// import Card from "../Components/Global/Card";
 import BreadCrumb from "../Components/Global/BreadCrumb";
 import FillterSearch from "../Components/Search/FillterSearch";
 import StorBy from "../Components/Global/StorBy/StorBy";
@@ -26,9 +26,9 @@ const Search = () => {
             </div>
           </div>
   
+          {/* <Card />
           <Card />
-          <Card />
-          <Card />
+          <Card /> */}
         </div>
       </div>
     </>
