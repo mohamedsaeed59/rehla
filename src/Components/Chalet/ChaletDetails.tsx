@@ -162,7 +162,7 @@ const ChaletDetails = () => {
                   </svg>
 
                   <span className="font-normal text-base text-ry5Text">
-                    {comment.length} Comment
+                    {comment?.length} Comment
                   </span>
                 </div>
                 <p
