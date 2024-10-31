@@ -6,9 +6,16 @@ const URL__API = import.meta.env.VITE_REACT_APP_API_KEY;
 // Async action to fetch chalet details
 export const fetchChaletDetails = createAsyncThunk(
   'chalet/fetchChaletDetails',
-  async (chaletId, { rejectWithValue }) => {
+  async (chaletParam: any, { rejectWithValue }) => {
+    const accessToken = localStorage.getItem("access_token");
     try {
-      const response = await axios.get(`${URL__API}/ad?id=${chaletId}&lang=en`);
+      const response = await axios.get(`${URL__API}/ad?id=${chaletParam.id}&lang=${chaletParam.lang}`,
+        {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+      );
       return response.data.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -16,25 +23,53 @@ export const fetchChaletDetails = createAsyncThunk(
   }
 );
 
+// Async action to fetch chalet details
+export const getComments = createAsyncThunk(
+    'chalet/getComments',
+    async (commentParam: any, { rejectWithValue }) => {
+      try {
+        const response = await axios.get(`${URL__API}/ad-comments?id=${commentParam.id}&lang=${commentParam.lang}`);
+        return response.data.data;
+      } catch (error) {
+        return rejectWithValue(error.response.data);
+      }
+    }
+  );
+
 const chaletSlice = createSlice({
   name: 'chalet',
   initialState: {
-    data: null,
+    chaletDetails: null,
+    comment: null,
     loading: false,
     error: null,
   },
   reducers: {},
   extraReducers: (builder) => {
-    builder
-      .addCase(fetchChaletDetails.pending, (state) => {
+    // fetchChaletDetails
+    builder.addCase(fetchChaletDetails.pending, (state) => {
         state.loading = true;
         state.error = null;
-      })
-      .addCase(fetchChaletDetails.fulfilled, (state, action) => {
+      });
+      builder.addCase(fetchChaletDetails.fulfilled, (state, action) => {
         state.loading = false;
-        state.data = action.payload;
-      })
-      .addCase(fetchChaletDetails.rejected, (state, action) => {
+        state.chaletDetails = action.payload;
+      });
+      builder.addCase(fetchChaletDetails.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
+
+      // Get comments
+      builder.addCase(getComments.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      });
+      builder.addCase(getComments.fulfilled, (state, action) => {
+        state.loading = false;
+        state.comment = action.payload;
+      });
+      builder.addCase(getComments.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });

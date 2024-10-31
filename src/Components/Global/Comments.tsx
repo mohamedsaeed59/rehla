@@ -1,16 +1,16 @@
 import avter from "../../assets/avter.webp";
 
-export default function Comments() {
+export default function Comments({com}: any) {
   return (
     <div className="flex flex-col gap-1">
       <div className="flex items-center gap-3">
         <img
-          src={avter}
+          src={com?.user_image}
           alt="avter"
           className="w-[24px] h-[24px] rounded-full"
         />
         <div className="flex flex-col gap-0">
-          <p className="text-sm font-medium">Tark Ahmed</p>
+          <p className="text-sm font-medium">{com?.user_name}</p>
           <div className="flex items-center gap-[2px]">
             <svg
               width="12"
@@ -24,11 +24,11 @@ export default function Comments() {
                 fill="#F3C800"
               />
             </svg>
-            <span className="text-mainBlack font-normal text-sm">(4.5)</span>
+            <span className="text-mainBlack font-normal text-sm">({com?.rate})</span>
           </div>
         </div>
       </div>
-      <p className="text-[#B0B0B0] w-[90%] mx-auto text-base px-2">Good chalet</p>
+      <p className="text-[#B0B0B0] w-[90%] mx-auto text-base px-2">{com?.comment}</p>
     </div>
   );
 }
