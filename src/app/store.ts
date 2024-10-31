@@ -3,6 +3,7 @@ import userSlice from "./auth/userSlice";
 import authSlice from "./auth/authSlice";
 import settingsSlice from "./SettingsSlice"
 import homeReducer from './home/homeSlice';
+import chaletReducer from './chalet/chaletSlice';
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     auth: authSlice,
     settings:settingsSlice,
     home: homeReducer,
+    chalet: chaletReducer,
   },
   devTools: true,
 });

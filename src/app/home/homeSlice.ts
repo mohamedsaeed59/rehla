@@ -23,7 +23,7 @@ export const actFetchHomeScreen = createAsyncThunk(
     const { rejectWithValue } = thunkAPI;
     try {
       const response = await axios.get<HomeTypes>(
-        `${URL__API}/home-screen?lang=${location.lang}&lat=${33.3303718457}&lon=${44.3855353472}`
+        `${URL__API}/home-screen?lang=${location.lang}&lat=${location.lat}&lon=${location.lon}`
       );
       return response.data;
     } catch (error) {
