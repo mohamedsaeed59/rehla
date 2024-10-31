@@ -4,6 +4,7 @@ import drop_down from "../../assets/ic_baseline-arrow-drop-down.webp";
 import Language from "../Global/Language";
 import Location from "../../Pages/Location";
 import { useTranslation } from "react-i18next";
+// @ts-ignore
 import Cookies from "js-cookie";
 import { useAppDispatch } from "../../app/hooks";
 import { actFetchHomeScreen } from "../../app/home/homeSlice";

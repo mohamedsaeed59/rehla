@@ -18,7 +18,7 @@ export const fetchChaletDetails = createAsyncThunk(
       );
       return response.data.data;
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      return rejectWithValue(error);
     }
   }
 );
@@ -31,8 +31,8 @@ export const getComments = createAsyncThunk(
         const response = await axios.get(`${URL__API}/ad-comments?id=${commentParam.id}&lang=${commentParam.lang}`);
         return response.data.data;
       } catch (error) {
-        return rejectWithValue(error.response.data);
-      }
+        return rejectWithValue(error);
+    }
     }
   );
 
@@ -57,7 +57,7 @@ const chaletSlice = createSlice({
       });
       builder.addCase(fetchChaletDetails.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload;
+        state.error = action.payload as any;
       });
 
       // Get comments
@@ -71,8 +71,8 @@ const chaletSlice = createSlice({
       });
       builder.addCase(getComments.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload;
-      });
+        state.error = action.payload as any;
+    });
   },
 });
 

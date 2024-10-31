@@ -11,7 +11,7 @@ const TellUsNext = () => {
   const { t } = useTranslation();
   // const [openLocation, setOpenLocation] = useState<boolean>(false);
   const [openMenuCity, setOpenMenuCity] = useState<boolean>(false);
-  const [valCity, setValCity] = useState<string>("");
+  const [valCity, setValCity] = useState<any>("");
 
   const dropdownRef = useRef<HTMLDivElement>(null);
 

@@ -1,4 +1,3 @@
-import avter from "../../assets/avter.webp";
 
 export default function Comments({com}: any) {
   return (
