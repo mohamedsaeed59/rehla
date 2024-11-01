@@ -74,7 +74,8 @@ const ProfileForm = () => {
         <input
           type="text"
           // placeholder={userProfile.name}
-          defaultValue={data?.name}
+          defaultValue={userProfile?.name}
+          placeholder={data?.name}
           onChange={(e) => setUserProfile({ ...userProfile, name: e.target.value })}
           className="rounded-lg p-2 focus:outline-none border border-borderColor"
         />
@@ -85,7 +86,8 @@ const ProfileForm = () => {
         </label>
         <input
           type="phone"
-          defaultValue={data?.phone}
+          defaultValue={userProfile?.phone}
+          placeholder={data?.phone}
           onChange={(e) => setUserProfile({ ...userProfile, phone: e.target.value })}
           className="rounded-lg p-2 focus:outline-none border border-borderColor"
         />
@@ -96,7 +98,8 @@ const ProfileForm = () => {
         </label>
         <input
           type="email"
-          defaultValue={data?.email}
+          defaultValue={userProfile?.email}
+          placeholder={data?.email}
           onChange={(e) => setUserProfile({ ...userProfile, email: e.target.value })}
           className="rounded-lg p-2 focus:outline-none border border-borderColor"
         />
@@ -108,7 +111,8 @@ const ProfileForm = () => {
         </label>
         <input
           type="number"
-          defaultValue={data?.age}
+          defaultValue={userProfile?.age}
+          placeholder={data?.age}
           onChange={(e) => setUserProfile({ ...userProfile, age: e.target.value })}
           className="rounded-lg p-2 focus:outline-none border border-borderColor"
         />
@@ -137,7 +141,8 @@ const ProfileForm = () => {
         </label>
         <input
           type="text"
-          defaultValue={data?.address}
+          defaultValue={userProfile?.address}
+          placeholder={data?.address}
           onChange={(e) => setUserProfile({ ...userProfile, address: e.target.value })}
           className="rounded-lg p-2 focus:outline-none border border-borderColor"
         />

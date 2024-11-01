@@ -11,6 +11,7 @@ const initialState = {
     terms_body: "",
     policy_title: "",
     policy_body: "",
+    onborad_pages: [],
   },
   status: 0,
   message: "",
@@ -53,6 +54,7 @@ const settingsSlice = createSlice({
       state.data.terms_body = action.payload.data.terms_body;
       state.data.policy_title = action.payload.data.policy_title;
       state.data.policy_body = action.payload.data.policy_body;
+      state.data.onborad_pages = action.payload.data.onborad_pages;
     });
     builder.addCase(actSettings.rejected, (state, action) => {
       state.loading = "failed";

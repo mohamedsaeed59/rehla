@@ -36,10 +36,30 @@ export const getComments = createAsyncThunk(
     }
   );
 
+// Async action to fetch Search Results
+  export const fetchSearchResults = createAsyncThunk(
+    'search/fetchSearchResults',
+    async ({ searchQuery, cityId, minAdults, maxAdults, popular, lastAdd }: any) => {
+      const response = await axios.get(`${URL__API}/ads`, {
+        params: {
+          page: 1,
+          serach: searchQuery,
+          city_id: cityId,
+          min_no_adults: minAdults,
+          max_no_adults: maxAdults,
+          popular,
+          last_add: lastAdd,
+        },
+      });
+      return response.data;
+    }
+  );
+
 const chaletSlice = createSlice({
   name: 'chalet',
   initialState: {
     chaletDetails: null,
+    searchResults: [],
     comment: null,
     loading: false,
     error: null,
@@ -73,6 +93,19 @@ const chaletSlice = createSlice({
         state.loading = false;
         state.error = action.payload as any;
     });
+
+    // search
+      builder.addCase(fetchSearchResults.pending, (state) => {
+        state.loading = true;
+      })
+      builder.addCase(fetchSearchResults.fulfilled, (state, action) => {
+        state.loading = false;
+        state.searchResults = action.payload.data;
+      })
+      builder.addCase(fetchSearchResults.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as any
+      });
   },
 });
 

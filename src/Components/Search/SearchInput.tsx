@@ -1,12 +1,16 @@
 import search from "../../assets/search.svg";
 import { Link } from "react-router-dom";
 import SearchMenu from "./SearchMenu";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useClickOutside from "../../hooks/useClickOutside";
 import { useTranslation } from "react-i18next";
+import { fetchSearchResults } from "../../app/chalet/chaletSlice";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 
 export default function SearchInput() {
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
+  const { searchResults } = useAppSelector((state: any) => state.chalet);  
   
     const [openSearchMenu, setOpenSearchMenu] = useState<boolean>(false); 
     const dropdownRef = useRef<HTMLDivElement>(null);
@@ -22,6 +26,11 @@ export default function SearchInput() {
       }
       setOpenSearchMenu(false);
     });
+
+    useEffect(() => {
+      dispatch(
+        fetchSearchResults({ searchQuery: 'ch', cityId: 2, minAdults: 1, maxAdults: 10, popular: 1, lastAdd: 1}))
+    },[])
 
   return (
     <div className="relative">
@@ -45,7 +54,7 @@ export default function SearchInput() {
         />
       </div>
 
-      {openSearchMenu && <SearchMenu />}
+      {openSearchMenu && <SearchMenu searchResults={searchResults} />}
     </div>
   );
 }
