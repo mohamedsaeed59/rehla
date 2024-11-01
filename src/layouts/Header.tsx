@@ -1,4 +1,4 @@
-import { memo, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import logolight from "../assets/logolight.jpg";
 import avter from "../assets/avter.webp";
@@ -7,10 +7,20 @@ import menu from "../assets/HAmburger-menu.webp";
 import SearchInput from "../Components/Search/SearchInput";
 import NotificationMain from "../Components/Notification/NotificationMain";
 import { useTranslation } from "react-i18next";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import Cookie from 'js-cookie';
+import { setUser } from "../app/auth/authSlice";
 
 function Header() {
   const [isOpen, setOpen] = useState<boolean>(false);
   const { t } = useTranslation();
+  const { data } = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
+  const user = Cookie.get('user') ? JSON.parse(Cookie.get('user')) : null;
+
+  useEffect(() => {
+    dispatch(setUser(user));
+  }, [])
 
   const accessToken = localStorage.getItem("access_token");
 
@@ -75,10 +85,10 @@ function Header() {
             <div className="flex items-center gap-2">
               {accessToken ? (
                 <Link to={"/profile"} className="hidden lg:block">
-                  <img src={avter} alt="avter" className="w-10 rounded-full" />
+                  <img src={data?.profileImage || avter} alt="avter" className="w-10 rounded-full" />
                 </Link>
               ) : (
-                <Link to={"/login"} className="hidden lg:block">
+                <Link to={"/login"} className="hidden lg:block">  
                   <img src={avter} alt="avter" className="w-10 rounded-full" />
                 </Link>
               )}

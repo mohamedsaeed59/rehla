@@ -4,7 +4,7 @@ import MenuCity from "../../Global/MenuCity";
 import DeleteAccount from "./DeleteAccount";
 import useClickOutside from "../../../hooks/useClickOutside";
 import { useTranslation } from "react-i18next";
-import { useAppDispatch } from "../../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { actUpdateProfile } from "../../../app/auth/authSlice";
 
 type City = {
@@ -27,6 +27,7 @@ const ProfileForm = () => {
   const [openDeleteAccount, setOpenDeleteAccount] = useState<boolean>(false);
   // const [valCity, setValCity] = useState(userProfile.city_id);
   const [valCity, setValCity] = useState<City | undefined>(userProfile.city_id as City | undefined);
+  const { data } = useAppSelector((state) => state.auth);  
   
   const dispatch = useAppDispatch();  
 
@@ -53,20 +54,13 @@ const ProfileForm = () => {
     };
 
     try {
-      // Dispatch the action to update the profile
       const action = await dispatch(actUpdateProfile(updatedProfile));
 
-      // Check for action result
       if (actUpdateProfile.fulfilled.match(action)) {
-        // Update local state with the new profile data
-        setUserProfile(action.payload.data); // Assuming response structure matches
-        alert("Profile updated successfully.");
-      } else {
-        alert("Failed to update profile: " + action.error.message);
+        setUserProfile(action.payload.data);
       }
     } catch (error) {
       console.error("Failed to update profile:", error);
-      alert("An error occurred while updating the profile.");
     }
   };
 
@@ -79,7 +73,8 @@ const ProfileForm = () => {
         </label>
         <input
           type="text"
-          defaultValue={userProfile.name}
+          // placeholder={userProfile.name}
+          defaultValue={data?.name}
           onChange={(e) => setUserProfile({ ...userProfile, name: e.target.value })}
           className="rounded-lg p-2 focus:outline-none border border-borderColor"
         />
@@ -90,7 +85,7 @@ const ProfileForm = () => {
         </label>
         <input
           type="phone"
-          defaultValue={userProfile.phone}
+          defaultValue={data?.phone}
           onChange={(e) => setUserProfile({ ...userProfile, phone: e.target.value })}
           className="rounded-lg p-2 focus:outline-none border border-borderColor"
         />
@@ -101,7 +96,7 @@ const ProfileForm = () => {
         </label>
         <input
           type="email"
-          defaultValue={userProfile.email}
+          defaultValue={data?.email}
           onChange={(e) => setUserProfile({ ...userProfile, email: e.target.value })}
           className="rounded-lg p-2 focus:outline-none border border-borderColor"
         />
@@ -113,7 +108,7 @@ const ProfileForm = () => {
         </label>
         <input
           type="number"
-          defaultValue={userProfile.age}
+          defaultValue={data?.age}
           onChange={(e) => setUserProfile({ ...userProfile, age: e.target.value })}
           className="rounded-lg p-2 focus:outline-none border border-borderColor"
         />
@@ -127,7 +122,7 @@ const ProfileForm = () => {
         <input
           type="text"
           value={valCity?.title}
-          placeholder="Select Your city"
+          placeholder={data?.city}
           className="rounded-lg p-2 w-full focus:outline-none border border-borderColor"
         />
         {openMenuCity && (
@@ -142,7 +137,7 @@ const ProfileForm = () => {
         </label>
         <input
           type="text"
-          defaultValue={userProfile.address}
+          defaultValue={data?.address}
           onChange={(e) => setUserProfile({ ...userProfile, address: e.target.value })}
           className="rounded-lg p-2 focus:outline-none border border-borderColor"
         />

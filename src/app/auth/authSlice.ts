@@ -3,6 +3,7 @@ import axios from "axios";
 import { TLoading } from "../../Types/app";
 import { actAuthLogin } from "./act/ActAuthLogin";
 import { actAuthRegister } from "./act/ActAuthRegister";
+import Cookie from 'js-cookie'
 
 const API_URL = import.meta.env.VITE_REACT_APP_API_KEY;
 
@@ -10,7 +11,7 @@ const API_URL = import.meta.env.VITE_REACT_APP_API_KEY;
 interface IAuthState {
   data: {
     access_token: string;
-    profileImage: string;
+    profileImage: any;
     name: string;
     id: number;
     email: string;
@@ -26,7 +27,7 @@ interface IAuthState {
 const initialState: IAuthState = {
   data: {
     access_token: localStorage.getItem("access_token") || "",
-    profileImage: "",
+    profileImage: localStorage.getItem("profileImage"),
     name: "",
     id: 0,
     email: "",
@@ -107,8 +108,14 @@ const authSlice = createSlice({
   reducers: {
     authLogout: (state) => {
       state.data.access_token = "";
-      state.data.profileImage = "";
+      // state.data.profileImage = "";
       localStorage.removeItem("access_token");
+    },
+    setUser: (state, action: any) => {
+      state.data = action.payload;
+    },
+    setUserImage: (state, action: any) => {
+      state.data.profileImage = action.payload
     },
     handleSkip: (state) => {
       state.skip = true;
@@ -140,7 +147,8 @@ const authSlice = createSlice({
       state.loading = "succeeded";
       state.data.access_token = action.payload.data.access_token;
       localStorage.setItem("access_token", action.payload.data.access_token);
-      console.log(action.payload);
+      Cookie.set("user", JSON.stringify(action.payload.data))
+      console.log('action.payload', action.payload);
       state.data.name = action.payload.data.name;
       state.status = action.payload.status;
     });
@@ -158,7 +166,7 @@ const authSlice = createSlice({
       state.loading = "succeeded";
       state.status = action.payload.status;
       state.message = "Profile updated successfully.";
-      state.data = action.payload.data;
+      state.data.name = action.payload.data.data.name;
     });
     builder.addCase(actUpdateProfile.rejected, (state, action) => {
       state.loading = "failed";
@@ -174,9 +182,10 @@ const authSlice = createSlice({
       state.loading = "succeeded";
       state.status = action.payload.status;
       state.message = "Profile image updated successfully.";
-      if (state.data) {
-        state.data.profileImage = action.payload.data.image;
-      }
+      state.data.profileImage = action.payload.data.image;
+      localStorage.setItem("profileImage", action.payload.data.image);
+      // state.data.profileImage = action.payload.data.image;
+      // Cookie.set("user", JSON.stringify(action.payload.data))
     });
     builder.addCase(actChangeProfileImage.rejected, (state, action) => {
       state.loading = "failed";
@@ -202,4 +211,4 @@ const authSlice = createSlice({
 });
 
 export default authSlice.reducer;
-export const { authLogout, handleSkip } = authSlice.actions;
+export const { authLogout, setUser, setUserImage, handleSkip } = authSlice.actions;

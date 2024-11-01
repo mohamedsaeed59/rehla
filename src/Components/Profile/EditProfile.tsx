@@ -60,7 +60,7 @@ const EditProfile = () => {
             <div className="flex justify-center items-center pb-4 overflow-hidden">
               <div className="w-20 h-20 relative">
                 <img
-                  src={data.profileImage || avter}
+                  src={data?.profileImage || avter}
                   alt="avter"
                   className="w-20 h-20 object-cover rounded-full"
                 />
