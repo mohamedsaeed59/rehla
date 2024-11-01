@@ -19,7 +19,7 @@ const Search = () => {
         <div className="flex flex-col gap-8 py-8">
           <div className="flex justify-between items-center gap-3">
             <h3 className="text-[18px] font-bold">
-              {searchResults?.length} <span className="text-ry3Text font-medium">{t("Results")}</span>
+              {searchResults?.length ?? 0} <span className="text-ry3Text font-medium">{t("Results")}</span>
             </h3>
             <div className="w-fit flex items-center justify-between md:justify-center gap-3 md:w-fit">
               <FillterSearch />
