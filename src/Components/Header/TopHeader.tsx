@@ -12,7 +12,7 @@ import { actFetchHomeScreen } from "../../app/home/homeSlice";
 function TopHeader() {
   const { t, i18n } = useTranslation();
   const dispatch = useAppDispatch();
-  const [openLocation, setOpenLocation] = useState(true);
+  const [openLocation, setOpenLocation] = useState(false);
   const [address, setAddress] = useState("");
   const [lang, setLang] = useState(localStorage.getItem("i18nextLng") || "en");
 
@@ -48,6 +48,8 @@ function TopHeader() {
     const savedAddress = Cookies.get("user_location");
     if (savedAddress) {
       setAddress(savedAddress);
+    }else {
+      setOpenLocation(true);
     }
     
     const handleLanguageChange = async (newLang: string) => {

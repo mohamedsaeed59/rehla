@@ -9,6 +9,9 @@ import { useAppDispatch } from "../../app/hooks";
 import { setPhoneOrEmail } from "../../app/auth/userSlice";
 import { handleSkip } from "../../app/auth/authSlice";
 import { useTranslation } from "react-i18next";
+import { actFetchHomeScreen } from "../../app/home/homeSlice";
+// @ts-ignore
+import Cookies from "js-cookie";
 
 type PropsInputsLogin = {
   phoneOremail: string;
@@ -25,6 +28,8 @@ const Login = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const lang = localStorage.getItem("i18nextLng") || "en";
+  const user_location = Cookies.get("user_location");
 
   const onSubmit: SubmitHandler<PropsInputsLogin> = (data) => {
     console.log(data.phoneOremail);
@@ -38,6 +43,22 @@ const Login = () => {
   //   if(accessToken) {
   //     return <Navigate to="/login"/>
   // }
+  
+  const fetchHomeScreen = async () => {
+    const response = await fetch(`https://ipapi.co/json/`);
+    const data = await response.json();
+    dispatch(
+      actFetchHomeScreen({
+        lat: data.latitude,
+        lon: data.longitude,
+        lang: lang,
+      })
+    );
+    return {
+      address: `${data.city}, ${data.region}, ${data.country_name}`,
+      coordinates: { lat: data.latitude, lon: data.longitude },
+    };
+  };
 
   return (
     <div className="">
@@ -50,6 +71,9 @@ const Login = () => {
                   onClick={() => {
                     dispatch(handleSkip());
                     navigate("/");
+                    if(user_location){
+                      fetchHomeScreen();
+                    }
                   }}
                   className="font-normal text-lg"
                 >
