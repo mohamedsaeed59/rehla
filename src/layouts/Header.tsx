@@ -8,6 +8,7 @@ import SearchInput from "../Components/Search/SearchInput";
 import NotificationMain from "../Components/Notification/NotificationMain";
 import { useTranslation } from "react-i18next";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
+// @ts-ignore
 import Cookie from 'js-cookie';
 import { setUser } from "../app/auth/authSlice";
 

@@ -11,7 +11,7 @@ const initialState = {
     terms_body: "",
     policy_title: "",
     policy_body: "",
-    onborad_pages: [],
+    onborad_pages: null,
   },
   status: 0,
   message: "",

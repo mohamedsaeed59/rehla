@@ -12,5 +12,6 @@ export type TResponse = {
     terms_body: string,
     policy_title: string,
     policy_body: string,
+    onborad_pages: null,
   };
 };

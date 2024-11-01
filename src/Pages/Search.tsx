@@ -28,7 +28,7 @@ const Search = () => {
               </div>
             </div>
           </div>
-          {searchResults?.map((ad: any, index: number) => (
+          {searchResults?.map((ad: any) => (
                 <Card
                   id={ad.id}
                   name={ad.name}

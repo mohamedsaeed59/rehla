@@ -62,7 +62,7 @@ const SliderAuth = ({ heightScreen }: Props) => {
         }}
         modules={[Autoplay, Pagination]}
       >
-        {data?.onborad_pages?.map((item: any, index: number) => (
+        {(data?.onborad_pages || []).map((item: any, index: number) => (
           <SwiperSlide key={index}>
             <BannerSliderAuth
               image={item.image}

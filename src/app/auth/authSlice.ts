@@ -3,6 +3,7 @@ import axios from "axios";
 import { TLoading } from "../../Types/app";
 import { actAuthLogin } from "./act/ActAuthLogin";
 import { actAuthRegister } from "./act/ActAuthRegister";
+// @ts-ignore
 import Cookie from 'js-cookie'
 
 const API_URL = import.meta.env.VITE_REACT_APP_API_KEY;
@@ -16,6 +17,9 @@ interface IAuthState {
     id: number;
     email: string;
     phone: string;
+    address: any;
+    city: any;
+    age: any;
   };
   status: number;
   message: string;
@@ -32,6 +36,9 @@ const initialState: IAuthState = {
     id: 0,
     email: "",
     phone: "",
+    address: "",
+    city: "",
+    age: "",
   },
   status: 0,
   message: "",
