@@ -55,11 +55,25 @@ export const getComments = createAsyncThunk(
     }
   );
 
+  // Async action to fetch shifts
+  export const addShifts = createAsyncThunk(
+    'chalet/addShifts',
+    async (shiftParam: any, { rejectWithValue }) => {
+      try {
+        const response = await axios.get(`${URL__API}/ad-shifts?id=${shiftParam.id}&date=${shiftParam.formattedDate}`);
+        return response.data.data;
+      } catch (error) {
+        return rejectWithValue(error);
+    }
+    }
+  );
+
 const chaletSlice = createSlice({
   name: 'chalet',
   initialState: {
     chaletDetails: null,
     searchResults: [],
+    shifts: [],
     comment: null,
     loading: false,
     error: null,
@@ -103,6 +117,19 @@ const chaletSlice = createSlice({
         state.searchResults = action.payload.data;
       })
       builder.addCase(fetchSearchResults.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as any
+      });
+
+      // shifts
+      builder.addCase(addShifts.pending, (state) => {
+        state.loading = true;
+      })
+      builder.addCase(addShifts.fulfilled, (state, action) => {
+        state.loading = false;
+        state.shifts = action.payload;
+      })
+      builder.addCase(addShifts.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as any
       });

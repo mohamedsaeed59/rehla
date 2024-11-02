@@ -4,6 +4,7 @@ import authSlice from "./auth/authSlice";
 import settingsSlice from "./SettingsSlice"
 import homeReducer from './home/homeSlice';
 import chaletReducer from './chalet/chaletSlice';
+import orderReducer from './order/orderSlice';
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     settings:settingsSlice,
     home: homeReducer,
     chalet: chaletReducer,
+    order: orderReducer,
   },
   devTools: true,
 });

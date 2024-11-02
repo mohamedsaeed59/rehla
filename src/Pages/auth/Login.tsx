@@ -54,10 +54,6 @@ const Login = () => {
         lang: lang,
       })
     );
-    return {
-      address: `${data.city}, ${data.region}, ${data.country_name}`,
-      coordinates: { lat: data.latitude, lon: data.longitude },
-    };
   };
 
   return (

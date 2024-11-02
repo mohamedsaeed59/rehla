@@ -315,7 +315,7 @@ const ChaletDetails = () => {
           </div>
         </div>
       </div>
-      <Calendar />
+      <Calendar chaletDetails={chaletDetails} calendar={chaletDetails?.calendar} />
       <NumberOfAdults />
       <div className="flex justify-center items-center">
         <Link
