@@ -16,19 +16,32 @@ import { useTranslation } from "react-i18next";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { fetchChaletDetails, getComments } from "../../app/chalet/chaletSlice";
 import { useParams } from 'react-router-dom';
+import { addOrder } from "../../app/order/orderSlice";
+import { actSettings } from "../../app/SettingsSlice";
+import { useNavigate } from "react-router-dom";
 
 const ChaletDetails = () => {
   const [showComments, setShowComments] = useState<boolean>(true);
   const [save, setSave] = useState<boolean>(true);
   const dispatch = useAppDispatch();
   const { chaletDetails, comment } = useAppSelector((state: any) => state.chalet);
+  const { data } = useAppSelector((state: any) => state.settings);
   const { id } = useParams();
   const lang = localStorage.getItem("i18nextLng") || "en";
+  const [isSelectedDate, setIsSelectedDate] = useState<string | null>(null); 
+  const [selectedDaysWithoutShifts, setSelectedDaysWithoutShifts] = useState<any[]>([]);
+  const [selectedShifts, setSelectedShifts] = useState<any[]>([]);
+  const [selectedIds, setSelectedIds] = useState<number[]>([]);
+  const [totalPrice, setTotalPrice] = useState<number>(0);
 
   useEffect(() => {
     dispatch(fetchChaletDetails({id, lang}));
     dispatch(getComments({id, lang}));
 }, [dispatch, id])
+
+useEffect(() => {
+  dispatch(actSettings(lang));
+}, [])
 
   const { t } = useTranslation();
 
@@ -43,6 +56,36 @@ const ChaletDetails = () => {
   const handleSave = () => {
     setSave(!save);
   };
+
+  // Tax
+  const Tax = Number(data?.tax);
+
+  // subtotal price
+  const subTotal = chaletDetails?.price + totalPrice;
+
+  // subtotal price
+  const total = subTotal + Tax;
+
+  const handleCheckOut = () => {
+    if(chaletDetails.rent_type == "direct"){
+
+    }else{
+      dispatch(addOrder({ 
+        ad_id : Number(id),
+        subtotal: subTotal, 
+        total: total, 
+        tax: Tax, 
+        booking_type: chaletDetails.have_shifts ? "shift" : "day", 
+        coupon_id: null, 
+        extra_no_adults: 2, 
+        no_adults: 4, 
+        no_children: 5, 
+        days: isSelectedDate || selectedDaysWithoutShifts, 
+        services: selectedIds, 
+        ...(chaletDetails.have_shifts && { shifts: selectedShifts }),
+      }));
+    }
+  }
 
   return (
     <div className="container my-9">
@@ -315,11 +358,18 @@ const ChaletDetails = () => {
           </div>
         </div>
       </div>
-      <Calendar chaletDetails={chaletDetails} calendar={chaletDetails?.calendar} />
-      <NumberOfAdults />
+      <Calendar
+          chaletDetails={chaletDetails} 
+          calendar={chaletDetails?.calendar} 
+          setIsSelectedDate={setIsSelectedDate} 
+          setSelectedDaysWithoutShifts={setSelectedDaysWithoutShifts}
+          setSelectedShifts={setSelectedShifts}
+      />
+      <NumberOfAdults services={chaletDetails?.services} selectedIds={selectedIds} setSelectedIds={setSelectedIds} setTotalPrice={setTotalPrice} totalPrice={totalPrice} />
       <div className="flex justify-center items-center">
         <Link
-          to={"/check-out"}
+          to={""}
+          onClick={handleCheckOut}
           className="rounded-[33px] text-center w-full md:w-[500px] py-4  text-2xl font-bold bg-mainBlack text-white"
         >
           {t("Check out")}

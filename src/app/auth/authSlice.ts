@@ -152,10 +152,13 @@ const authSlice = createSlice({
     });
     builder.addCase(actAuthLogin.fulfilled, (state, action) => {
       state.loading = "succeeded";
-      state.data.access_token = action.payload.data.access_token;
-      localStorage.setItem("access_token", action.payload.data.access_token);
-      Cookie.set("user", JSON.stringify(action.payload.data))
-      console.log('action.payload', action.payload);
+      if (action.payload.data && action.payload.data.access_token) {
+        state.data.access_token = action.payload.data.access_token;
+        localStorage.setItem("access_token", action.payload.data.access_token);
+        Cookie.set("user", JSON.stringify(action.payload.data));
+        console.log('action.payload.data.access_token', action.payload.data.access_token);
+        
+      }
       state.data.name = action.payload.data.name;
       state.status = action.payload.status;
     });

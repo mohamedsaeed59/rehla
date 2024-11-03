@@ -1,20 +1,26 @@
-import { memo } from "react";
-
+import { memo, useEffect } from "react";
 import CardMyBookings from "../Components/Bookings/CardMyBookings";
-// import DetailsCheckOut from "../Components/Global/DetailsCheckOut";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { fetchOrders } from "../app/order/orderSlice";
 
 const Bookings = () => {
+  const dispatch = useAppDispatch();
+  const { orders } = useAppSelector((state: any) => state.order);
+console.log(orders);
+
+  useEffect(() => {
+    dispatch(fetchOrders());
+}, [dispatch])
+
   return (
     <>
       <div className="container">
-        {/* <div className="grid grid-cols-1 md:grid-cols-2  gap-4 py-6"> */}
         <div className="grid grid-cols-1 gap-4 py-6">
           <div className="flex flex-col gap-7">
-          <CardMyBookings />
-          <CardMyBookings />
-          <CardMyBookings />
+          {orders?.map((booking: any) => (
+            <CardMyBookings key={booking.order_id} booking={booking} />
+          ))}
           </div>
-          {/* <DetailsCheckOut/> */}
         </div>
       </div>
     </>

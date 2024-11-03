@@ -1,6 +1,22 @@
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-export default function NumberOfAdults() {
+export default function NumberOfAdults({services, selectedIds, setSelectedIds, setTotalPrice, totalPrice}: any) {
+
+  const handleCheckboxChange = (id: number, price: number) => {
+    setSelectedIds((prevSelectedIds) =>
+      prevSelectedIds.includes(id)
+        ? prevSelectedIds.filter((selectedId) => selectedId !== id) // Uncheck
+        : [...prevSelectedIds, id] // Check
+    );
+
+    setTotalPrice((prevTotal) =>
+      selectedIds.includes(id)
+        ? prevTotal - price // Subtract price if unchecked
+        : prevTotal + price // Add price if checked
+    );
+  };
+
   const { t } = useTranslation();
   return (
     <div className="flex flex-col gap-8 py-9">
@@ -319,68 +335,22 @@ export default function NumberOfAdults() {
         <p className="text-base font-normal text-ry3Text">
           ({t("eachOneWillCostExtraFees")})
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 py-6">
-          <div className="flex justify-between items-center w-[217px] text-mainBlack">
-            <div className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                className="w-[19px] h-[19px] cursor-pointer"
-              />
-              <p className="text-lg font-normal">Amenity name</p>
+        {services?.map((service: any) => (
+          <div key={service.id} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 py-6">
+              <div className="flex justify-between items-center w-[217px] text-mainBlack">
+              <div className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  className="w-[19px] h-[19px] cursor-pointer"
+                  onChange={() => handleCheckboxChange(Number(service.id), Number(service.price))}
+                checked={selectedIds.includes(Number(service.id))}
+                />
+                <p className="text-lg font-normal">{service.name}</p>
+              </div>
+              <p className="font-bold text-[15px]">{service.price} |Qd</p>
             </div>
-            <p className="font-bold text-[15px]">15 |Qd</p>
           </div>
-          <div className="flex justify-between items-center w-[217px] text-mainBlack">
-            <div className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                className="w-[19px] h-[19px] cursor-pointer"
-              />
-              <p className="text-lg font-normal">Amenity name</p>
-            </div>
-            <p className="font-bold text-[15px]">15 |Qd</p>
-          </div>
-          <div className="flex justify-between items-center w-[217px] text-mainBlack">
-            <div className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                className="w-[19px] h-[19px] cursor-pointer"
-              />
-              <p className="text-lg font-normal">Amenity name</p>
-            </div>
-            <p className="font-bold text-[15px]">15 |Qd</p>
-          </div>
-          <div className="flex justify-between items-center w-[217px] text-mainBlack">
-            <div className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                className="w-[19px] h-[19px] cursor-pointer"
-              />
-              <p className="text-lg font-normal">Amenity name</p>
-            </div>
-            <p className="font-bold text-[15px]">15 |Qd</p>
-          </div>
-          <div className="flex justify-between items-center w-[217px] text-mainBlack">
-            <div className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                className="w-[19px] h-[19px] cursor-pointer"
-              />
-              <p className="text-lg font-normal">Amenity name</p>
-            </div>
-            <p className="font-bold text-[15px]">15 |Qd</p>
-          </div>
-          <div className="flex justify-between items-center w-[217px] text-mainBlack">
-            <div className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                className="w-[19px] h-[19px] cursor-pointer"
-              />
-              <p className="text-lg font-normal">Amenity name</p>
-            </div>
-            <p className="font-bold text-[15px]">15 |Qd</p>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );

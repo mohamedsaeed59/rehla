@@ -14,16 +14,14 @@ interface DayData {
   isSelected: boolean;
 }
 
-export default function Calendar({ calendar = [] }: any) {  
+export default function Calendar({ calendar = [], setIsSelectedDate, setSelectedDaysWithoutShifts, setSelectedShifts }: any) {  
   const dispatch = useAppDispatch();
   const [calendarData, setCalendarData] = useState<DayData[]>([]);
   const [monthNames, setMonthNames] = useState<any[]>([]);
   const [selectedMonthIndex, setSelectedMonthIndex] = useState<number>(0);
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
-  const [selectedDaysWithoutShifts, setSelectedDaysWithoutShifts] = useState<DayData[]>([]);
   const { shifts, chaletDetails } = useAppSelector((state: any) => state.chalet);
   const { id } = useParams();
-console.log('selectedDaysWithoutShifts', selectedDaysWithoutShifts);
 
   useEffect(() => {
     if (chaletDetails?.have_shifts) {
@@ -74,18 +72,23 @@ console.log('selectedDaysWithoutShifts', selectedDaysWithoutShifts);
   };
 
   const handleDayClick = (index: number) => {
+    // Get the year and month based on the current selected month
+    const [monthName, year] = monthNames[selectedMonthIndex].split(" ");
+    const monthNumber = new Date(`${monthName} 1, ${year}`).getMonth() + 1; // Months are 0-based, add 1 for 1-based format
+    const day = calendarData[index].date.toString().padStart(2, '0'); // Ensure day is two digits
+    const formattedDate = `${year}-${monthNumber.toString().padStart(2, '0')}-${day}`;
+
     setCalendarData((prevData) => {
         const clickedDay = prevData[index];
         const isAlreadySelected = clickedDay.isSelected;
 
         if (!chaletDetails?.have_shifts) {
             if (isAlreadySelected) {
-                // Deselect the clicked day
+                // Deselect the clicked day and remove from selectedDaysWithoutShifts
                 const updatedDays = prevData.map((day, i) => {
                     if (i === index) {
-                        // Remove from selected days
                         setSelectedDaysWithoutShifts((prev) =>
-                            prev.filter((selectedDay) => selectedDay.date !== day.date)
+                            prev.filter((date) => date !== formattedDate)
                         );
                         return { ...day, isSelected: false };
                     }
@@ -93,11 +96,15 @@ console.log('selectedDaysWithoutShifts', selectedDaysWithoutShifts);
                 });
                 return updatedDays;
             } else {
-                // Select the clicked day
+                // Select the clicked day only if it’s not already in selectedDaysWithoutShifts
                 const updatedDays = prevData.map((day, i) => {
                     if (i === index) {
-                        // Add to selected days
-                        setSelectedDaysWithoutShifts((prev) => [...prev, day]);
+                        setSelectedDaysWithoutShifts((prev) => {
+                            if (!prev.includes(formattedDate)) {
+                                return [...prev, formattedDate];
+                            }
+                            return prev;
+                        });
                         return { ...day, isSelected: true };
                     }
                     return day;
@@ -105,7 +112,7 @@ console.log('selectedDaysWithoutShifts', selectedDaysWithoutShifts);
                 return updatedDays;
             }
         } else {
-            // If have_shifts is true, allow single selection
+            // Single selection if have_shifts is true
             return prevData.map((day, i) => {
                 if (i === index) {
                     return { ...day, isSelected: !day?.isSelected };
@@ -117,20 +124,11 @@ console.log('selectedDaysWithoutShifts', selectedDaysWithoutShifts);
 
     // Update selected date only if have_shifts is true
     if (chaletDetails?.have_shifts) {
-        const clickedDay = calendarData[index + 1]?.date || null;
-        if (clickedDay) {
-            const [monthName, year] = monthNames[selectedMonthIndex].split(" ");
-            const monthNumber = new Date(`${monthName} 1, ${year}`).getMonth();
-            const selectedFullDate = new Date(Number(year), monthNumber, clickedDay);
-            const formattedDate = selectedFullDate.toISOString().split("T")[0];
-            setSelectedDate(formattedDate);
-        } else {
-            setSelectedDate(null);
-        }
+        setSelectedDate(formattedDate);
+        setIsSelectedDate([formattedDate])
     }
 };
 
-  
   
   const handleMonthChange = (direction: "next" | "prev") => {
     const newIndex = direction === "next" ? selectedMonthIndex + 1 : selectedMonthIndex - 1;
@@ -169,7 +167,7 @@ console.log('selectedDaysWithoutShifts', selectedDaysWithoutShifts);
           <DaysGrid calendarData={calendarData} onDayClick={handleDayClick} have_shifts={chaletDetails?.have_shifts} />
         </div>
         <div className="w-80">
-          <ShiftsSidePanel shifts={shifts} have_shifts={chaletDetails?.have_shifts} selectedDate={selectedDate} />
+          <ShiftsSidePanel shifts={shifts} have_shifts={chaletDetails?.have_shifts} selectedDate={selectedDate} setSelectedShifts={setSelectedShifts} />
         </div>
       </div>
     </div>
