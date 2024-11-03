@@ -18,7 +18,6 @@ import { fetchChaletDetails, getComments } from "../../app/chalet/chaletSlice";
 import { useParams } from 'react-router-dom';
 import { addOrder } from "../../app/order/orderSlice";
 import { actSettings } from "../../app/SettingsSlice";
-import { useNavigate } from "react-router-dom";
 
 const ChaletDetails = () => {
   const [showComments, setShowComments] = useState<boolean>(true);

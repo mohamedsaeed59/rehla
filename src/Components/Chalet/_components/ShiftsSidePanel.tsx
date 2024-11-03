@@ -23,7 +23,7 @@ export default function ShiftsSidePanel({
   const [selectedShiftIds, setSelectedShiftIds] = useState<number[]>([]);
   const [errShiftMessage, setErrShiftMessage] = useState<boolean>(false);
 
-  const handleShiftClick = (id: number, index: number) => {
+  const handleShiftClick = (id: number) => {
     const newSelectedShiftIds = selectedShiftIds.includes(id)
       ? selectedShiftIds.filter((shiftId) => shiftId !== id)
       : [...selectedShiftIds, id];
@@ -65,10 +65,10 @@ export default function ShiftsSidePanel({
           </p>
 
           <div className="grid grid-cols-3 gap-4">
-            {shifts?.map((shift, index) => (
+            {shifts?.map((shift) => (
               <div key={shift.id} className="relative">
                 <div
-                  onClick={() => handleShiftClick(shift.id, index)}
+                  onClick={() => handleShiftClick(shift.id)}
                   className={`p-2 border border-mainBlack rounded-xl ${
                     selectedShiftIds.includes(shift.id) ? "activePayment" : ""
                   }`}

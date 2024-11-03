@@ -87,8 +87,8 @@ export default function Calendar({ calendar = [], setIsSelectedDate, setSelected
                 // Deselect the clicked day and remove from selectedDaysWithoutShifts
                 const updatedDays = prevData.map((day, i) => {
                     if (i === index) {
-                        setSelectedDaysWithoutShifts((prev) =>
-                            prev.filter((date) => date !== formattedDate)
+                        setSelectedDaysWithoutShifts((prev: any) =>
+                            prev.filter((date: any) => date !== formattedDate)
                         );
                         return { ...day, isSelected: false };
                     }
@@ -99,7 +99,7 @@ export default function Calendar({ calendar = [], setIsSelectedDate, setSelected
                 // Select the clicked day only if it’s not already in selectedDaysWithoutShifts
                 const updatedDays = prevData.map((day, i) => {
                     if (i === index) {
-                        setSelectedDaysWithoutShifts((prev) => {
+                        setSelectedDaysWithoutShifts((prev: any) => {
                             if (!prev.includes(formattedDate)) {
                                 return [...prev, formattedDate];
                             }

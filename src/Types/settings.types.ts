@@ -13,5 +13,6 @@ export type TResponse = {
     policy_title: string,
     policy_body: string,
     onborad_pages: null,
+    tax: any,
   };
 };

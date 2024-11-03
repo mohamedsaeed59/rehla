@@ -1,16 +1,15 @@
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-export default function NumberOfAdults({services, selectedIds, setSelectedIds, setTotalPrice, totalPrice}: any) {
+export default function NumberOfAdults({services, selectedIds, setSelectedIds, setTotalPrice}: any) {
 
   const handleCheckboxChange = (id: number, price: number) => {
-    setSelectedIds((prevSelectedIds) =>
+    setSelectedIds((prevSelectedIds: any) =>
       prevSelectedIds.includes(id)
-        ? prevSelectedIds.filter((selectedId) => selectedId !== id) // Uncheck
+        ? prevSelectedIds.filter((selectedId: any) => selectedId !== id) // Uncheck
         : [...prevSelectedIds, id] // Check
     );
 
-    setTotalPrice((prevTotal) =>
+    setTotalPrice((prevTotal: any) =>
       selectedIds.includes(id)
         ? prevTotal - price // Subtract price if unchecked
         : prevTotal + price // Add price if checked
