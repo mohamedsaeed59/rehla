@@ -1,5 +1,4 @@
-import { memo } from "react";
-import card from "../../assets/card.jfif";
+import { memo, useEffect } from "react";
 import Star from "../../assets/icons/Star.svg";
 import favorite from "../../assets/icons/carbon_favorite.svg";
 import location from "../../assets/icons/carbon_location.svg";
@@ -7,8 +6,27 @@ import Group from "../../assets/icons/Group.svg";
 import date from "../../assets/date.png";
 import DetailsCheckOut from "../Global/DetailsCheckOut";
 import { Link } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { addShifts, fetchChaletDetails } from "../../app/chalet/chaletSlice";
 
-const CardCheckOut = () => {
+const CardCheckOut = ({directOrders}: any) => {
+  const dispatch = useAppDispatch();
+  const lang = localStorage.getItem("i18nextLng") || "en";
+  const { chaletDetails, shifts } = useAppSelector((state: any) => state.chalet);
+
+  const selectedShiftIds = directOrders.shifts;
+  const filteredShifts = shifts.filter((shift: any) => selectedShiftIds.includes(shift.id));
+
+  useEffect(() => {
+    dispatch(fetchChaletDetails({id: directOrders?.ad_id, lang}));
+}, [dispatch, directOrders?.ad_id])
+
+useEffect(() => {
+  if (chaletDetails?.have_shifts) {
+    dispatch(addShifts({ id: directOrders?.ad_id, selectedDate: directOrders.days}));
+  }
+}, []);
+
   return (
     <div className="flex flex-col gap-4">
       {/* card */}
@@ -16,9 +34,9 @@ const CardCheckOut = () => {
         <div className="flex gap-2 cursor-pointer group">
           <div className="relative">
             <div className="w-[170px] md:w-[270px] h-full max-h-[240px]">
-            <Link to={`/chalet/:7`} className="">
+            <Link to={""} className="">
               <img
-                src={card}
+                src={chaletDetails?.image}
                 alt="card"
                 className="w-full h-full object-cover group-hover:scale-[1.02] duration-300"
               />
@@ -32,30 +50,30 @@ const CardCheckOut = () => {
                       className="w-[14px] object-cover"
                     />
                   </span>
-                  <span className="text-[14px]">(4.5)</span>
+                  <span className="text-[14px]">({chaletDetails?.rate})</span>
                 </div>
               </div>
             </div>
           </div>
           <div className="flex flex-col gap-3 md:gap-6 px-0 md:px-2">
-          <Link to={`/chalet/:7`} className="">
+          <Link to={``} className="">
             <h2 className="font-normal text-base md:text-xl text-primary">
-              Chalet name
+              {chaletDetails?.name}
             </h2>
             </Link>
             <div className="flex items-center gap-1">
               <img src={favorite} alt="favorite" className="w-4 h-4" />
-              <span className="text-[16px] text-ry4Text">17,200</span>
+              <span className="text-[16px] text-ry4Text">{chaletDetails?.no_favorites}</span>
             </div>
             <div className="flex flex-col gap-1">
               <div className="flex items-center gap-1 text-ry3Text">
                 <img src={Group} alt="Group" className="w-4 h-4" />
-                <span className="text-[14px] md:text-[16px]">20 Adults </span>
+                <span className="text-[14px] md:text-[16px]">{chaletDetails?.no_adults} Adults </span>
               </div>
               <div className="flex items-center gap-1 text-mainBlack">
                 <img src={location} alt="location" className="w-4 h-4" />
                 <span className="text-[14px] md:text-[16px] font-medium">
-                  Bagdad, Iraq
+                {chaletDetails?.city}
                 </span>
               </div>
             </div>
@@ -63,69 +81,35 @@ const CardCheckOut = () => {
         </div>
       </div>
       {/* card two */}
+      {directOrders.booking_type == "shift" &&
       <div className="rounded-2xl bg-ryBackground p-5">
         <h3 className="font-normal text-xl text-mainBlack py-4">
           Resisted Shifts
         </h3>
-        <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-2">
             <div className="flex gap-2">
               <img src={date} alt="date" className="w-5 h-5" />
-              <span className="text-base font-normal">15/09/2024</span>
+              <span className="text-base font-normal">{directOrders?.days[0]}</span>
             </div>
-            <div className="fex flex-col gap-1 w-[90%] mx-auto">
+            {filteredShifts.map((filterShift: any) => (
+            <div key={filterShift?.id} className="fex flex-col gap-1 w-[90%] mx-auto">
               <div className="flex justify-between">
                 <p className="text-primary text-[15px] font-normal">
-                  Shift 1{" "}
-                  <span className="text-ry3Text">(08:00am - 03:00pm)</span>
+                  {filterShift?.name}
+                  <span className="text-ry3Text">({filterShift?.time_from} - {filterShift?.time_from})</span>
                 </p>
                 <p className="text-mainBlack text-[18px] font-normal">
-                  350 |QD
-                </p>
-              </div>
-              <div className="flex justify-between">
-                <p className="text-primary text-[15px] font-normal">
-                  Shift 2{" "}
-                  <span className="text-ry3Text">(08:00am - 03:00pm)</span>
-                </p>
-                <p className="text-mainBlack text-[18px] font-normal">
-                  200 |QD
+                {filterShift?.price} |QD
                 </p>
               </div>
             </div>
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <div className="flex gap-2">
-              <img src={date} alt="date" className="w-5 h-5" />
-              <span className="text-base font-normal">15/09/2024</span>
-            </div>
-            <div className="fex flex-col gap-1 w-[90%] mx-auto">
-              <div className="flex justify-between">
-                <p className="text-primary text-[15px] font-normal">
-                  Shift 1{" "}
-                  <span className="text-ry3Text">(08:00am - 03:00pm)</span>
-                </p>
-                <p className="text-mainBlack text-[18px] font-normal">
-                  350 |QD
-                </p>
-              </div>
-              <div className="flex justify-between">
-                <p className="text-primary text-[15px] font-normal">
-                  Shift 2{" "}
-                  <span className="text-ry3Text">(08:00am - 03:00pm)</span>
-                </p>
-                <p className="text-mainBlack text-[18px] font-normal">
-                  200 |QD
-                </p>
-              </div>
-            </div>
+           ))}
           </div>
         </div>
-      </div>
+      </div>}
       {/* card three */}
-
-      <DetailsCheckOut />
+      <DetailsCheckOut directOrders={directOrders} />
     </div>
   );
 };

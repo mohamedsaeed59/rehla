@@ -5,6 +5,7 @@ import settingsSlice from "./SettingsSlice"
 import homeReducer from './home/homeSlice';
 import chaletReducer from './chalet/chaletSlice';
 import orderReducer from './order/orderSlice';
+import archiveReducer from './archive/archiveSlice';
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     home: homeReducer,
     chalet: chaletReducer,
     order: orderReducer,
+    archive: archiveReducer,
   },
   devTools: true,
 });

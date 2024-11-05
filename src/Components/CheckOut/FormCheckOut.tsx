@@ -1,9 +1,66 @@
-import { memo } from "react";
+import { memo, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { addOrder, useCoupon } from "../../app/order/orderSlice";
+import { actSettings } from "../../app/SettingsSlice";
 
-const FormCheckOut = () => {
+const FormCheckOut = ({directOrders} : any) => {
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const { coupon_code, percentage } = useAppSelector((state: any) => state.order);  
+  const { chaletDetails } = useAppSelector((state: any) => state.chalet);  
+  const { data } = useAppSelector((state: any) => state.settings);
+  const [coupon, setCoupon] = useState("");
+  const [errorMessage, setErrorMessage] = useState<any>("");
+  const lang = localStorage.getItem("i18nextLng") || "en";
+
+  useEffect(() => {
+    dispatch(actSettings(lang));
+  }, [])
+
+  const handleCoupon = (e: any) => {
+    e.preventDefault();
+    dispatch(useCoupon({ coupon_code: coupon }));
+  }
+  // Calculate the Invoice
+  const SubTotal = directOrders?.subtotal;
+  const Tax = directOrders?.tax;
+  const Total = directOrders?.total - Number(percentage);  
+
+  const handleCreateOrder = async (e: any) => {
+    e.preventDefault();
+    if(chaletDetails.rent_type == "direct"){
+      try {
+        const resultAction = await dispatch(addOrder({
+          ad_id: directOrders?.ad_id,
+          subtotal: SubTotal,
+          total: Total + Tax,
+          tax: Tax,
+          booking_type: directOrders?.booking_type,
+          coupon_id: coupon_code || null,
+          extra_no_adults: directOrders.extra_no_adults,
+          no_adults: directOrders.no_adults,
+          no_children: directOrders.no_children,
+          days: directOrders?.days,
+          services: directOrders?.services,
+          ...(chaletDetails.have_shifts && { shifts: directOrders?.shifts }),
+        })).unwrap();
+    
+        if (resultAction.status === 200) {
+          navigate('/booking-confirmation');
+          localStorage.removeItem('directOrders');
+        }
+      } catch (error: any) {
+        setErrorMessage(error.response.data.message)
+      }
+    }else{
+
+    }
+  };
+  
+
   return (
     <form className="flex flex-col gap-4">
       <div className="flex flex-col gap-1">
@@ -69,6 +126,7 @@ const FormCheckOut = () => {
 
       <div className="flex">
         <input
+          onChange={(e: any) => setCoupon(e.target.value)}
           className="border border-borderColor rtl:border-l-0 ltr:border-r-0 
 
 
@@ -79,6 +137,7 @@ const FormCheckOut = () => {
           placeholder={t("Discount or voucher code")}
         />
         <button
+          onClick={handleCoupon}
           className="bg-mainBlack text-white 
         rtl:rounded-bl-lg rtl:rounded-tl-lg
         ltr:rounded-br-lg ltr:rounded-tr-lg
@@ -92,26 +151,28 @@ const FormCheckOut = () => {
           <div className="flex justify-between">
             <p className="text-base font-normal text-mainBlack">Subtotal</p>
             <span className="text-base font-light text-mainBlack">
-              1,100 |QD
+              {SubTotal} |QD
             </span>
           </div>
           <div className="flex justify-between pb-2">
-            <p className="text-base font-normal text-mainBlack">Taxes (0%) </p>
-            <span className="text-base font-light text-mainBlack">-</span>
+            <p className="text-base font-normal text-mainBlack">Taxes ({data?.tax}%) </p>
+            <span className="text-base font-light text-mainBlack">{Tax} |QD</span>
           </div>
         </div>
         <div className="flex justify-between border-t pt-2">
           <p>Total</p>
-          <span className="text-primary font-bold">1,100 |QD</span>
+          <span className="text-primary font-bold">{Total + Tax} |QD</span>
         </div>
       </div>
-      <Link
-        to={"/booking-confirmation"}
+      <button
+        // to={"/booking-confirmation"}
         // type="submit"
+        onClick={handleCreateOrder}
         className="rounded-3xl text-center py-4 text-sm font-bold bg-mainBlack text-white"
       >
-        CONFIRM PAYMENT ...1,030 IQD
-      </Link>
+        CONFIRM PAYMENT ...{Total + Tax} IQD
+      </button>
+      <span className="text-red">{errorMessage}</span>
     </form>
   );
 };

@@ -1,13 +1,42 @@
 import { memo } from "react";
 import date from "../../../assets/date.png";
+import { useAppDispatch } from "../../../app/hooks";
+import { setDirectOrder } from "../../../app/order/orderSlice";
+import { useNavigate } from "react-router-dom";
 
-const MoreDetails = ({ shifts, orderDate }: any) => {
+const MoreDetails = ({ shifts, orderDate, booking }: any) => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const handleCheckout = (e: any) => {
+    e.preventDefault(); 
+    dispatch(
+      setDirectOrder({
+        ad_id: Number(booking?.ad_id),
+        order_id: booking?.order_id,
+        subtotal: Number(booking?.subtotal),
+        total: Number(booking?.total),
+        tax: Number(booking?.tax),
+        booking_type: booking?.shifts?.length > 0 ? 'shift' : 'day',
+        coupon_id: null,
+        extra_no_adults: booking?.extra_no_adults,
+        no_adults: booking?.no_adults,
+        no_children: booking?.no_children,
+        days: booking?.day,
+        services: booking.services.map((service: any) => service.id),
+        ...(booking?.shifts?.length > 0 && { shifts: booking.shifts.map((shift: any) => shift.id)}),
+      })
+    )
+    navigate('/check-out');
+  }
+
   return (
     <div className="transition duration-700 p-1">
       <div className="flex flex-col gap-6">
         <h3 className="text-[19px] font-normal text-mainBlack">
           Register Shifts
         </h3>
+        {booking.status == "requested" && <button onClick={handleCheckout}>Check Out</button>}
         <div className="flex flex-col gap-4">
         <div className="flex gap-2 py-2">
            <img src={date} alt="date" className="w-5 h-5" />

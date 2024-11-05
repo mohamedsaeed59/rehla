@@ -1,5 +1,5 @@
 import { memo, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import rightArrow from "../../assets/icons/right-arrow.svg";
 // import save from "../../assets/icons/save.svg";
 import favorite from "../../assets/icons/carbon_favorite.svg";
@@ -16,8 +16,9 @@ import { useTranslation } from "react-i18next";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { fetchChaletDetails, getComments } from "../../app/chalet/chaletSlice";
 import { useParams } from 'react-router-dom';
-import { addOrder } from "../../app/order/orderSlice";
+import { addOrder, setDirectOrder } from "../../app/order/orderSlice";
 import { actSettings } from "../../app/SettingsSlice";
+import { archiveAd, unarchiveAd } from "../../app/archive/archiveSlice";
 
 const ChaletDetails = () => {
   const [showComments, setShowComments] = useState<boolean>(true);
@@ -27,11 +28,16 @@ const ChaletDetails = () => {
   const { data } = useAppSelector((state: any) => state.settings);
   const { id } = useParams();
   const lang = localStorage.getItem("i18nextLng") || "en";
+  const navigate = useNavigate();
   const [isSelectedDate, setIsSelectedDate] = useState<string | null>(null); 
   const [selectedDaysWithoutShifts, setSelectedDaysWithoutShifts] = useState<any[]>([]);
   const [selectedShifts, setSelectedShifts] = useState<any[]>([]);
+  const [totalShiftPrice, setTotalShiftPrice] = useState<number>(0);
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
-  const [totalPrice, setTotalPrice] = useState<number>(0);
+  const [totalPriceOfServices, setTotalPriceOfServices] = useState<number>(0);
+  const [errorMessage, setErrorMessage] = useState<any>("");
+  const [countAdults, setCountAdults] = useState(0);
+  const [countChildren, setCountChildren] = useState(0);
 
   useEffect(() => {
     dispatch(fetchChaletDetails({id, lang}));
@@ -53,36 +59,84 @@ useEffect(() => {
   }, []);
 
   const handleSave = () => {
-    setSave(!save);
+    setSave((prevSave) => !prevSave);
+    if (save) {
+      dispatch(archiveAd({ ad_id: id }));
+    } else {
+      dispatch(unarchiveAd({ ad_id: id }));
+    }
   };
 
+  // Check if the number of adults exceeds the limit
+  const calc = countAdults > chaletDetails?.no_adults;
+
+  // Calculate additional charges if `calc` is true
+  const extraAdults = calc ? (countAdults - chaletDetails?.no_adults) : 0;
+  const extraCost = extraAdults * chaletDetails?.price_extra_adults;
+
   // Tax
-  const Tax = Number(data?.tax);
+  // const Tax = Number(data?.tax);
+
+  // base price with or without shift
+  const bsaePrice = chaletDetails?.have_shifts ? totalShiftPrice : chaletDetails?.price;
 
   // subtotal price
-  const subTotal = chaletDetails?.price + totalPrice;
+  const subTotal = bsaePrice + totalPriceOfServices + extraCost;
 
-  // subtotal price
-  const total = subTotal + Tax;
-
-  const handleCheckOut = () => {
-    if(chaletDetails.rent_type == "direct"){
-
-    }else{
-      dispatch(addOrder({ 
-        ad_id : Number(id),
-        subtotal: subTotal, 
-        total: total, 
-        tax: Tax, 
-        booking_type: chaletDetails.have_shifts ? "shift" : "day", 
-        coupon_id: null, 
-        extra_no_adults: 2, 
-        no_adults: 4, 
-        no_children: 5, 
-        days: isSelectedDate || selectedDaysWithoutShifts, 
-        services: selectedIds, 
+  const Tax = calculateTotalPrice(subTotal, Number(data?.tax));  
+  
+  function calculateTotalPrice(price: any, taxRate: any) {
+    const totalPrice = price * (taxRate / 100);
+    return totalPrice;
+  }
+  
+  const handleCheckOut = async () => {
+    dispatch(
+      setDirectOrder({
+        ad_id: Number(id),
+        subtotal: subTotal,
+        total: subTotal,
+        tax: Tax,
+        booking_type: chaletDetails.have_shifts ? 'shift' : 'day',
+        coupon_id: null,
+        extra_no_adults: extraAdults,
+        no_adults: countAdults,
+        no_children: countChildren,
+        days: isSelectedDate || selectedDaysWithoutShifts,
+        services: selectedIds,
         ...(chaletDetails.have_shifts && { shifts: selectedShifts }),
-      }));
+      })
+    )
+    if(chaletDetails.rent_type == "direct"){
+      const days = isSelectedDate || selectedDaysWithoutShifts;
+      if(days && days.length > 0 && selectedShifts && selectedShifts.length > 0){
+       navigate('/check-out');
+      }
+    }else{
+      try {
+        const resultAction = await dispatch(addOrder({ 
+          ad_id : Number(id),
+          subtotal: subTotal, 
+          total: subTotal + Tax, 
+          tax: Tax, 
+          booking_type: chaletDetails.have_shifts ? "shift" : "day", 
+          coupon_id: null, 
+          extra_no_adults: extraAdults,
+          no_adults: countAdults, 
+          no_children: countChildren, 
+          days: isSelectedDate || selectedDaysWithoutShifts, 
+          services: selectedIds, 
+          ...(chaletDetails.have_shifts && { shifts: selectedShifts }),
+        })).unwrap();
+        if (resultAction.status === 200) {
+          navigate('/thanks-requeste');
+        }
+      } catch (error: any) {
+        setErrorMessage(error.response.data.message);
+        setTimeout(() => {
+          setErrorMessage(null);
+        }, 6000);
+      }
     }
   }
 
@@ -90,7 +144,7 @@ useEffect(() => {
     <div className="container my-9">
       <div className="flex flex-wrap lg:flex-nowrap gap-3">
         <div className="flex items-center justify-center gap-3 flex-wrap-reverse lg:flex-nowrap">
-          <Thumbnails  gallery={chaletDetails?.gallery} />
+          <Thumbnails gallery={chaletDetails?.gallery} />
           <SliderChaletDetails gallery={chaletDetails?.gallery} rate={chaletDetails?.rate} />
         </div>
         <div className="flex flex-col gap-2 flex-1">
@@ -363,8 +417,20 @@ useEffect(() => {
           setIsSelectedDate={setIsSelectedDate} 
           setSelectedDaysWithoutShifts={setSelectedDaysWithoutShifts}
           setSelectedShifts={setSelectedShifts}
+          totalShiftPrice={totalShiftPrice}
+          setTotalShiftPrice={setTotalShiftPrice}
       />
-      <NumberOfAdults services={chaletDetails?.services} selectedIds={selectedIds} setSelectedIds={setSelectedIds} setTotalPrice={setTotalPrice} totalPrice={totalPrice} />
+      <NumberOfAdults
+          services={chaletDetails?.services} 
+          selectedIds={selectedIds} 
+          setSelectedIds={setSelectedIds} 
+          setTotalPriceOfServices={setTotalPriceOfServices} 
+          totalPriceOfServices={totalPriceOfServices} 
+          countAdults={countAdults}
+          setCountAdults={setCountAdults}
+          countChildren={countChildren}
+          setCountChildren={setCountChildren}
+       />
       <div className="flex justify-center items-center">
         <Link
           to={""}
@@ -373,6 +439,7 @@ useEffect(() => {
         >
           {t("Check out")}
         </Link>
+      <span className="text-red">{errorMessage}</span>
       </div>
     </div>
   );

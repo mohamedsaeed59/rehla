@@ -14,7 +14,7 @@ interface DayData {
   isSelected: boolean;
 }
 
-export default function Calendar({ calendar = [], setIsSelectedDate, setSelectedDaysWithoutShifts, setSelectedShifts }: any) {  
+export default function Calendar({ calendar = [], setIsSelectedDate, setSelectedDaysWithoutShifts, setSelectedShifts, totalShiftPrice, setTotalShiftPrice }: any) {  
   const dispatch = useAppDispatch();
   const [calendarData, setCalendarData] = useState<DayData[]>([]);
   const [monthNames, setMonthNames] = useState<any[]>([]);
@@ -167,7 +167,7 @@ export default function Calendar({ calendar = [], setIsSelectedDate, setSelected
           <DaysGrid calendarData={calendarData} onDayClick={handleDayClick} have_shifts={chaletDetails?.have_shifts} />
         </div>
         <div className="w-80">
-          <ShiftsSidePanel shifts={shifts} have_shifts={chaletDetails?.have_shifts} selectedDate={selectedDate} setSelectedShifts={setSelectedShifts} />
+          <ShiftsSidePanel shifts={shifts} have_shifts={chaletDetails?.have_shifts} selectedDate={selectedDate} setSelectedShifts={setSelectedShifts} totalShiftPrice={totalShiftPrice} setTotalShiftPrice={setTotalShiftPrice} />
         </div>
       </div>
     </div>

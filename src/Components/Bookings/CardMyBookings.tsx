@@ -60,7 +60,7 @@ const CardMyBookings = ({ booking }: any) => {
             </div>
           </div>
         </div>
-        {openMoreDetails && <MoreDetails shifts={booking?.shifts} orderDate={booking?.order_date} />}
+        {openMoreDetails && <MoreDetails shifts={booking?.shifts} orderDate={booking?.order_date} booking={booking}  />}
       </div>
     </div>
   );

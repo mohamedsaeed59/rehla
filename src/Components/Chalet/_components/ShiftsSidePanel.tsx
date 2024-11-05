@@ -2,6 +2,7 @@ import { useState } from "react";
 
 interface Shift {
   id: number;
+  name: string;
   time_from: string;
   time_to: string;
   price: number;
@@ -12,28 +13,35 @@ interface ShiftsSidePanelProps {
   selectedDate: any;
   have_shifts: any;
   setSelectedShifts: React.Dispatch<React.SetStateAction<number[]>>;
+  totalShiftPrice: any;
+  setTotalShiftPrice: any
 }
 
 export default function ShiftsSidePanel({
   shifts,
   selectedDate,
   have_shifts,
+  setTotalShiftPrice,
   setSelectedShifts,
 }: ShiftsSidePanelProps) {
   const [selectedShiftIds, setSelectedShiftIds] = useState<number[]>([]);
   const [errShiftMessage, setErrShiftMessage] = useState<boolean>(false);
 
   const handleShiftClick = (id: number) => {
+    const shift = shifts.find((s) => s.id === id);
+    if (!shift) return;
+
+    // Update selected shift IDs
     const newSelectedShiftIds = selectedShiftIds.includes(id)
       ? selectedShiftIds.filter((shiftId) => shiftId !== id)
       : [...selectedShiftIds, id];
 
-    // Sort selected shift ids by index to check for valid patterns
+    // Sort selected shift IDs by index to check for valid patterns
     const sortedIndexes = newSelectedShiftIds
       .map((shiftId) => shifts.findIndex((shift) => shift.id === shiftId))
       .sort((a, b) => a - b);
 
-    // Only validate if there are two or more selected shifts
+    // Validation for shift selection pattern
     if (sortedIndexes.length > 1) {
       const isValidSelection =
         sortedIndexes.length === 3 || // All three shifts are selected
@@ -45,12 +53,23 @@ export default function ShiftsSidePanel({
         setSelectedShifts(newSelectedShiftIds); // Update selected shifts state with ids
       } else {
         setErrShiftMessage(true);
+        return;
       }
     } else {
-      // No validation needed for a single selected shift
       setSelectedShiftIds(newSelectedShiftIds);
       setSelectedShifts(newSelectedShiftIds); // Update selected shifts state with ids
     }
+
+    // Calculate total price of selected shifts
+    const calculatedTotalPrice = newSelectedShiftIds.reduce(
+      (total, shiftId) => {
+        const selectedShift = shifts.find((shift) => shift.id === shiftId);
+        return total + (Number(selectedShift?.price) || 0);
+      },
+      0
+    );
+
+    setTotalShiftPrice(calculatedTotalPrice); // Update total price state
   };
 
   return (
@@ -73,7 +92,7 @@ export default function ShiftsSidePanel({
                     selectedShiftIds.includes(shift.id) ? "activePayment" : ""
                   }`}
                 >
-                  <h4 className="font-medium mb-2">Shift {shift.id}</h4>
+                  <h4 className="font-medium mb-2">{shift?.name}</h4>
                   <p className="text-sm text-gray-600 mb-2">{shift?.time_from}</p>
                   <p className="text-sm text-gray-600 mb-2">{shift?.time_to}</p>
                   <p className="font-bold">{shift.price} IQD</p>

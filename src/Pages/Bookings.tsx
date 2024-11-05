@@ -6,7 +6,6 @@ import { fetchOrders } from "../app/order/orderSlice";
 const Bookings = () => {
   const dispatch = useAppDispatch();
   const { orders } = useAppSelector((state: any) => state.order);
-console.log(orders);
 
   useEffect(() => {
     dispatch(fetchOrders());

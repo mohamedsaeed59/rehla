@@ -1,13 +1,20 @@
+import { useAppSelector } from "../../app/hooks";
 import Group from "../../assets/icons/Group.svg";
 
-export default function DetailsCheckOut() {
+export default function DetailsCheckOut({directOrders}: any) {
+  const { chaletDetails } = useAppSelector((state: any) => state.chalet);
+
+  const selectedSercices = directOrders?.services;
+  const allSercices = chaletDetails?.services;
+  const filteredSercices = allSercices?.filter((service: any) => selectedSercices?.includes(Number(service.id)));
+  
   return (
     <div className="rounded-[20px] bg-ryBackground p-5 h-full max-h-[260px]">
       <div className="flex flex-col gap-4">
         <div className="flex justify-between">
           <div className="flex items-center justify-center gap-2">
             <img src={Group} alt="Group" className="w-5 h-5" />
-            <span className="text-[16px] font-normal">Adults (4)</span>
+            <span className="text-[16px] font-normal">Adults ({directOrders?.no_adults})</span>
           </div>
           <span className="text-base font-light text-mainBlack">-</span>
         </div>
@@ -26,7 +33,7 @@ export default function DetailsCheckOut() {
               />
             </svg>
 
-            <span className="text-[16px] font-normal">Extra Adults (0)</span>
+            <span className="text-[16px] font-normal">Extra Adults ({directOrders?.extra_no_adults})</span>
           </div>
           <span className="text-base font-light text-mainBlack">-</span>
         </div>
@@ -47,9 +54,9 @@ export default function DetailsCheckOut() {
               />
             </svg>
 
-            <span className="text-[16px] font-normal">Children (2)</span>
+            <span className="text-[16px] font-normal">Children ({directOrders?.no_children})</span>
           </div>
-          <span className="text-[16px] font-normal">Children (2)</span>
+          {/* <span className="text-[16px] font-normal">Children (2)</span> */}
           <span className="text-base font-light text-mainBlack">-</span>
         </div>
         <div className="flex justify-between">
@@ -236,20 +243,16 @@ export default function DetailsCheckOut() {
 
             <span className="text-[16px] font-normal">Extra amenity</span>
           </div>
-          <span className="text-[16px] font-normal">Extra amenity</span>
-          <span className="text-base font-light text-mainBlack">150 |QD</span>
+          {/* <span className="text-[16px] font-normal">Extra amenity</span>
+          <span className="text-base font-light text-mainBlack">150 |QD</span> */}
         </div>
         <div className="flex flex-col gap-[6px] w-[90%] mx-auto">
-          <div className="flex justify-between">
-            <p className="text-[14px] font-normal text-mainBlack">. Grill</p>
-            <span className="text-sm font-light text-ry5Text">50 |QD</span>
-          </div>
-          <div className="flex justify-between">
-            <p className="text-[14px] font-normal text-mainBlack">
-              . Sweet machine
-            </p>
-            <span className="text-sm font-light text-ry5Text">50 |QD</span>
-          </div>
+         {filteredSercices?.map((service: any) => (
+           <div key={service?.id} className="flex justify-between">
+            <p className="text-[14px] font-normal text-mainBlack">{service.name}</p>
+            <span className="text-sm font-light text-ry5Text">{service.price} |QD</span>
+           </div>
+         ))}
         </div>
       </div>
     </div>

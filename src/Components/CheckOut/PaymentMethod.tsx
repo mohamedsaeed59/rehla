@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import payment from "../../assets/PaymentMethod.png";
 import FormCheckOut from "./FormCheckOut";
 
-export default function PaymentMethod() {
+export default function PaymentMethod({directOrders}: any) {
   const { t } = useTranslation();
   return (
     <div className="flex flex-col gap-6">
@@ -366,7 +366,7 @@ export default function PaymentMethod() {
           </div>
         </div>
       </div>
-      <FormCheckOut />
+      <FormCheckOut directOrders={directOrders} />
     </div>
   );
 }

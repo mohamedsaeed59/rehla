@@ -4,11 +4,14 @@ import TermsConditions from "../Components/home/Terms&Conditions";
 import CloseLocation from "../Components/home/CloseLocation";
 import MostPopular from "../Components/home/MostPopular";
 import RecentlyAdd from "../Components/home/RecentlyAdd";
-import { useAppSelector } from "../app/hooks";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { actFetchHomeScreen } from "../app/home/homeSlice";
 
 function Home() {
   const [showTermsConditions, setShowTermsConditions] = useState<boolean>(false);
   const { data } = useAppSelector((state) => state.home);
+  const dispatch = useAppDispatch();
+  const lang = localStorage.getItem("i18nextLng") || "en";
 
   useEffect(() => {
     const cookies = document.cookie.split("; ").find((row) => row.startsWith("termsAccepted="));
@@ -23,6 +26,15 @@ function Home() {
     document.cookie = "termsAccepted=true; path=/; max-age=" + 60 * 60 * 24 * 365; 
     setShowTermsConditions(false); 
   };
+  useEffect(() => {
+    dispatch(
+      actFetchHomeScreen({
+        lat: '',
+        lon: '',
+        lang: lang,
+      })
+    );
+  },[])
 
   return (
     <>

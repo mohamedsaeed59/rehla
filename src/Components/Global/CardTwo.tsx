@@ -7,6 +7,9 @@ import locationIcon from "../../assets/icons/carbon_location.svg";
 import Group from "../../assets/icons/Group.svg";
 
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { archiveAd, unarchiveAd } from "../../app/archive/archiveSlice";
+import { AppDispatch } from "../../app/store";
 
 interface CardTwoProps {
   id: number;
@@ -20,10 +23,17 @@ interface CardTwoProps {
 
 const CardTwo = ({id, name, image, rate, favorites, city, adults}: CardTwoProps) => {
   const [save, setSave] = useState<boolean>(true);
+  const dispatch: AppDispatch = useDispatch();
 
   const handleSave = () => {
-    setSave(!save);
+    setSave((prevSave) => !prevSave);
+    if (save) {
+      dispatch(archiveAd({ ad_id: id }));
+    } else {
+      dispatch(unarchiveAd({ ad_id: id }));
+    }
   };
+  
   return (
     <div>
       <div className="grid grid-cols-2 gap-2 cursor-pointer group">

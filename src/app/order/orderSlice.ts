@@ -3,11 +3,16 @@ import axios from 'axios';
 
 const URL__API = import.meta.env.VITE_REACT_APP_API_KEY;
 
+const persistedOrders = localStorage.getItem('directOrders') ? JSON.parse(localStorage.getItem('directOrders')!) : [];
+
 interface OrderState {
     loading: boolean;
     error: string | null;
     success: boolean;
     orders: any;
+    directOrders: any;
+    coupon_code: any;
+    percentage: any;
 }
 
 const initialState: OrderState = {
@@ -15,6 +20,9 @@ const initialState: OrderState = {
     error: null,
     success: false,
     orders: [],
+    directOrders: persistedOrders,
+    coupon_code: "",
+    percentage: "",
 };
 
 // Create an async thunk for the API call
@@ -54,6 +62,24 @@ export const fetchOrders = createAsyncThunk(
     }
 );
 
+// Create an async thunk for coupon
+export const useCoupon = createAsyncThunk(
+    'order/useCoupon',
+    async (couponData: { coupon_code: string }, { rejectWithValue }) => {
+      const accessToken = localStorage.getItem("access_token");
+      try {
+        const response = await axios.post(`${URL__API}/use-coupon`, couponData, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+        return response.data;
+      } catch (error: any) {
+        return rejectWithValue(error);
+      }
+    }
+  );
+
 const orderSlice = createSlice({
     name: 'order',
     initialState,
@@ -62,6 +88,11 @@ const orderSlice = createSlice({
             state.loading = false;
             state.error = null;
             state.success = false;
+        },
+        setDirectOrder: (state, action) => {
+            state.directOrders = action.payload;
+            state.success = true;
+            localStorage.setItem('directOrders', JSON.stringify(state.directOrders));
         },
     },
     extraReducers: (builder) => {
@@ -92,9 +123,24 @@ const orderSlice = createSlice({
                 state.loading = false;
                 state.error = action.payload as string;
             });
+
+             // coupon
+             builder
+             .addCase(useCoupon.pending, (state) => {
+                 state.loading = true;
+             })
+             .addCase(useCoupon.fulfilled, (state, action) => {
+                 state.loading = false;
+                 state.coupon_code = action.payload.data.coupon_id;
+                 state.percentage = action.payload.data.percentage;
+             })
+             .addCase(useCoupon.rejected, (state, action) => {
+                 state.loading = false;
+                 state.error = action.payload as string;
+             });
     },
 });
 
-export const { resetOrderState } = orderSlice.actions;
+export const { resetOrderState, setDirectOrder } = orderSlice.actions;
 
 export default orderSlice.reducer;

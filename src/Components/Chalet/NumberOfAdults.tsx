@@ -1,6 +1,31 @@
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useAppSelector } from "../../app/hooks";
 
-export default function NumberOfAdults({services, selectedIds, setSelectedIds, setTotalPrice}: any) {
+export default function NumberOfAdults({services, selectedIds, setSelectedIds, setTotalPriceOfServices, countAdults, setCountAdults, countChildren, setCountChildren}: any) {
+  const [showCounterChildren, setShowCounterChildren] = useState(false);
+  const { chaletDetails } = useAppSelector((state: any) => state.chalet);
+
+  const handleCheckboxClick = () => {
+    setShowCounterChildren(prev => !prev); // Toggle counter visibility
+    if (!showCounterChildren) setCountChildren(0); // Reset count when showing counter
+  };
+
+  const handleIncreaseChildren = () => {
+    setCountChildren((prevCount: any) => prevCount + 1);
+  };
+
+  const handleDecreaseChildren = () => {
+    setCountChildren((prevCount: any) => (prevCount > 0 ? prevCount - 1 : 0));
+  };
+
+  const handleIncreaseAdults = () => {
+    setCountAdults((prevCount: any) => prevCount + 1);
+  };
+
+  const handleDecreaseAdults = () => {
+    setCountAdults((prevCount: any) => (prevCount > 0 ? prevCount - 1 : 0));
+  };
 
   const handleCheckboxChange = (id: number, price: number) => {
     setSelectedIds((prevSelectedIds: any) =>
@@ -9,7 +34,7 @@ export default function NumberOfAdults({services, selectedIds, setSelectedIds, s
         : [...prevSelectedIds, id] // Check
     );
 
-    setTotalPrice((prevTotal: any) =>
+    setTotalPriceOfServices((prevTotal: any) =>
       selectedIds.includes(id)
         ? prevTotal - price // Subtract price if unchecked
         : prevTotal + price // Add price if checked
@@ -88,6 +113,8 @@ export default function NumberOfAdults({services, selectedIds, setSelectedIds, s
                   //   tabindex="-1"
                   aria-label="Decrease"
                   data-hs-input-number-decrement=""
+                  onClick={handleDecreaseAdults}
+                  disabled={countAdults === 0}
                 >
                   <svg
                     width="19"
@@ -103,14 +130,16 @@ export default function NumberOfAdults({services, selectedIds, setSelectedIds, s
                   className="p-0 w-6 bg-transparent text-lg border-0 text-gray-800 text-center focus:ring-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
                   type="number"
                   aria-roledescription="Number field"
-                  value="0"
+                  value={countAdults}
                   data-hs-input-number-input=""
+                  readOnly
                 />
                 <button
                   type="button"
                   className="inline-flex justify-center p-2 items-center gap-x-2 font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
                   aria-label="Increase"
                   data-hs-input-number-increment=""
+                  onClick={handleIncreaseAdults}
                 >
                   <svg
                     width="19"
@@ -130,27 +159,63 @@ export default function NumberOfAdults({services, selectedIds, setSelectedIds, s
           </div>
         </div>
         <p className="text-base font-normal text-ry3Text">
-          (Max 10 adults = 1 Adult = 50$/shift)
+          (Max {chaletDetails?.no_adults} adults = 1 Adult = {chaletDetails?.price_extra_adults}$/shift)
         </p>
-        <div className="flex items-center gap-2 cursor-pointer">
+        <div className="flex justify-between items-center flex-wrap md:flex-nowrap">
+        <div className="flex items-center gap-2">
+        <div className="inline" onClick={handleCheckboxClick}><input type="checkbox" checked={showCounterChildren} readOnly /> </div>     
+        <p className="text-base font-normal text-mainBlack inline">
+          Have Children <span className="text-ry3Text">(&lt;5 years)</span>
+        </p>
+        </div>
+        {showCounterChildren && (
+        <div className="flex items-center gap-x-1.5 mt-2 mr-2">
+          <button
+            type="button"
+            className="inline-flex justify-center p-2 h-[37px] items-center gap-x-2 font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
+            aria-label="Decrease"
+            onClick={handleDecreaseChildren}
+            disabled={countChildren === 0}
+          >
+            <svg
+              width="19"
+              height="2"
+              viewBox="0 0 19 2"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              >
+              <path d="M19 2H0V0H19V2Z" fill="#1E1E1E" />
+            </svg>
+          </button>        
+          <input
+            className="p-0 w-6 bg-transparent text-lg border-0 text-gray-800 text-center focus:ring-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+            type="number"
+            aria-roledescription="Number field"
+            value={countChildren}
+            readOnly
+          />      
+          <button
+            type="button"
+            className="inline-flex justify-center p-2 items-center gap-x-2 font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
+            aria-label="Increase"
+            onClick={handleIncreaseChildren}
+          >
           <svg
-            width="18"
+            width="19"
             height="18"
-            viewBox="0 0 18 18"
+            viewBox="0 0 19 18"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              d="M15 1.34204H3C1.89543 1.34204 1 2.23537 1 3.34204V15.342C1 16.4487 1.89543 17.342 3 17.342H15C16.1045 17.342 17 16.4487 17 15.342V3.34204C17 2.23537 16.1045 1.34204 15 1.34204Z"
-              stroke="#1E1E1E"
-              stroke-linejoin="round"
+              d="M19 10.2857H10.8571V18H8.14286V10.2857H0V7.71429H8.14286V0H10.8571V7.71429H19V10.2857Z"
+              fill="#1E1E1E"
             />
-          </svg>
-
-          <p className="text-base font-normal text-mainBlack">
-            {t("HaveChildren")}<span className="text-ry3Text">(&lt;5years)</span>
-          </p>
+            </svg>
+          </button>
         </div>
+      )}
+      </div>     
       </div>
       <div>
         <div className="flex items-center gap-2">
