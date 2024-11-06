@@ -2,7 +2,7 @@ import { memo, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { addOrder, useCoupon } from "../../app/order/orderSlice";
+import { addOrder, updateOrder, useCoupon } from "../../app/order/orderSlice";
 import { actSettings } from "../../app/SettingsSlice";
 
 const FormCheckOut = ({directOrders} : any) => {
@@ -24,10 +24,17 @@ const FormCheckOut = ({directOrders} : any) => {
     e.preventDefault();
     dispatch(useCoupon({ coupon_code: coupon }));
   }
-  // Calculate the Invoice
-  const SubTotal = directOrders?.subtotal;
-  const Tax = directOrders?.tax;
-  const Total = directOrders?.total - Number(percentage);  
+
+  const SubTotal = directOrders?.subtotal - Number(percentage);
+
+  const Tax = calculateTotalPrice(SubTotal, Number(data?.tax));  
+  
+  function calculateTotalPrice(price: any, taxRate: any) {
+    const totalPrice = price * (taxRate / 100);
+    return totalPrice;
+  }
+
+  const Total = SubTotal + Tax;
 
   const handleCreateOrder = async (e: any) => {
     e.preventDefault();
@@ -36,7 +43,7 @@ const FormCheckOut = ({directOrders} : any) => {
         const resultAction = await dispatch(addOrder({
           ad_id: directOrders?.ad_id,
           subtotal: SubTotal,
-          total: Total + Tax,
+          total: Total,
           tax: Tax,
           booking_type: directOrders?.booking_type,
           coupon_id: coupon_code || null,
@@ -54,9 +61,28 @@ const FormCheckOut = ({directOrders} : any) => {
         }
       } catch (error: any) {
         setErrorMessage(error.response.data.message)
+        setTimeout(() => {
+          setErrorMessage(null);
+        }, 20000);
       }
     }else{
-
+      try {
+        const resultAction = await dispatch(updateOrder({
+          order_id: directOrders?.order_id,
+          total: Total,
+          coupon_id: coupon_code || null,
+        })).unwrap();
+    
+        if (resultAction.status === 200) {
+          navigate('/booking-confirmation');
+          localStorage.removeItem('directOrders');
+        }
+      } catch (error: any) {
+        setErrorMessage(error.response.data.message)
+        setTimeout(() => {
+          setErrorMessage(null);
+        }, 20000);
+      }
     }
   };
   
@@ -161,7 +187,7 @@ const FormCheckOut = ({directOrders} : any) => {
         </div>
         <div className="flex justify-between border-t pt-2">
           <p>Total</p>
-          <span className="text-primary font-bold">{Total + Tax} |QD</span>
+          <span className="text-primary font-bold">{Total} |QD</span>
         </div>
       </div>
       <button
@@ -170,9 +196,9 @@ const FormCheckOut = ({directOrders} : any) => {
         onClick={handleCreateOrder}
         className="rounded-3xl text-center py-4 text-sm font-bold bg-mainBlack text-white"
       >
-        CONFIRM PAYMENT ...{Total + Tax} IQD
+        CONFIRM PAYMENT ...{Total} IQD
       </button>
-      <span className="text-red">{errorMessage}</span>
+      <p className="w-[300px] py-3 font-bold text-red">{errorMessage}</p>
     </form>
   );
 };

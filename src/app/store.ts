@@ -6,6 +6,7 @@ import homeReducer from './home/homeSlice';
 import chaletReducer from './chalet/chaletSlice';
 import orderReducer from './order/orderSlice';
 import archiveReducer from './archive/archiveSlice';
+import appRateReducer from './rate/rateSlice';
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
     chalet: chaletReducer,
     order: orderReducer,
     archive: archiveReducer,
+    appRate: appRateReducer,
   },
   devTools: true,
 });

@@ -805,5 +805,8 @@
   "pledgeAlert": "برجاء تحديد التعهد",
   "searchSerialAndName": "البحث بالرقم التسلسلي او اسم المستشار",
   "Inside your city": "داخل مدينتك",
-  "There are no chalets booked yet": "لا توجد شاليهات محجوزه بعد"
+  "There are no chalets booked yet": "لا توجد شاليهات محجوزه بعد",
+
+  "Complete Your Order": "أكمل طلبك",
+  "Your order has been rejected": "طلبك تم رفضة"
 }

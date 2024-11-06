@@ -14,8 +14,8 @@ const CardCheckOut = ({directOrders}: any) => {
   const lang = localStorage.getItem("i18nextLng") || "en";
   const { chaletDetails, shifts } = useAppSelector((state: any) => state.chalet);
 
-  const selectedShiftIds = directOrders.shifts;
-  const filteredShifts = shifts.filter((shift: any) => selectedShiftIds.includes(shift.id));
+  const selectedShiftIds = directOrders?.shifts;
+  const filteredShifts = shifts?.filter((shift: any) => selectedShiftIds?.includes(shift?.id));
 
   useEffect(() => {
     dispatch(fetchChaletDetails({id: directOrders?.ad_id, lang}));
@@ -23,7 +23,7 @@ const CardCheckOut = ({directOrders}: any) => {
 
 useEffect(() => {
   if (chaletDetails?.have_shifts) {
-    dispatch(addShifts({ id: directOrders?.ad_id, selectedDate: directOrders.days}));
+    dispatch(addShifts({ id: directOrders?.ad_id, selectedDate: directOrders?.days}));
   }
 }, []);
 
@@ -81,7 +81,7 @@ useEffect(() => {
         </div>
       </div>
       {/* card two */}
-      {directOrders.booking_type == "shift" &&
+      {directOrders?.booking_type == "shift" &&
       <div className="rounded-2xl bg-ryBackground p-5">
         <h3 className="font-normal text-xl text-mainBlack py-4">
           Resisted Shifts
@@ -92,7 +92,7 @@ useEffect(() => {
               <img src={date} alt="date" className="w-5 h-5" />
               <span className="text-base font-normal">{directOrders?.days[0]}</span>
             </div>
-            {filteredShifts.map((filterShift: any) => (
+            {filteredShifts?.map((filterShift: any) => (
             <div key={filterShift?.id} className="fex flex-col gap-1 w-[90%] mx-auto">
               <div className="flex justify-between">
                 <p className="text-primary text-[15px] font-normal">

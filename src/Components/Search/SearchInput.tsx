@@ -29,7 +29,7 @@ export default function SearchInput() {
 
     useEffect(() => {
       dispatch(
-        fetchSearchResults({ searchQuery: 'ch', cityId: 2, minAdults: 1, maxAdults: 10, popular: 1, lastAdd: 1}))
+        fetchSearchResults({ searchQuery: '', cityId: 2, minAdults: 1, maxAdults: 10, popular: 1, lastAdd: 1}))
     },[])
 
   return (

@@ -43,6 +43,24 @@ export const addOrder = createAsyncThunk(
     }
 );
 
+// Create async thunk for updating the order
+export const updateOrder = createAsyncThunk(
+    'order/updateOrder',
+    async (updateOrderData: { order_id: number; total: number; coupon_id: number }, { rejectWithValue }) => {
+        const accessToken = localStorage.getItem("access_token");
+        try {
+            const response = await axios.post(`${URL__API}/update-order`, updateOrderData, {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                },
+            });
+            return response.data;
+        } catch (error: any) {
+            return rejectWithValue(error);
+        }
+    }
+);
+
 // Create an async thunk for fetching orders
 export const fetchOrders = createAsyncThunk(
     'order/fetchOrders',
@@ -106,6 +124,20 @@ const orderSlice = createSlice({
                 state.success = true;
             })
             .addCase(addOrder.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload as string;
+            });
+
+            // Update Order
+            builder
+            .addCase(updateOrder.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(updateOrder.fulfilled, (state) => {
+                state.loading = false;
+                state.success = true;
+            })
+            .addCase(updateOrder.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload as string;
             });

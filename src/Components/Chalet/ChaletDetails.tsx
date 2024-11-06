@@ -91,33 +91,38 @@ useEffect(() => {
   }
   
   const handleCheckOut = async () => {
-    dispatch(
-      setDirectOrder({
-        ad_id: Number(id),
-        subtotal: subTotal,
-        total: subTotal,
-        tax: Tax,
-        booking_type: chaletDetails.have_shifts ? 'shift' : 'day',
-        coupon_id: null,
-        extra_no_adults: extraAdults,
-        no_adults: countAdults,
-        no_children: countChildren,
-        days: isSelectedDate || selectedDaysWithoutShifts,
-        services: selectedIds,
-        ...(chaletDetails.have_shifts && { shifts: selectedShifts }),
-      })
-    )
     if(chaletDetails.rent_type == "direct"){
+      dispatch(
+        setDirectOrder({
+          ad_id: Number(id),
+          subtotal: subTotal,
+          total: subTotal,
+          tax: Tax,
+          booking_type: chaletDetails.have_shifts ? 'shift' : 'day',
+          coupon_id: null,
+          extra_no_adults: extraAdults,
+          no_adults: countAdults,
+          no_children: countChildren,
+          days: isSelectedDate || selectedDaysWithoutShifts,
+          services: selectedIds,
+          ...(chaletDetails.have_shifts && { shifts: selectedShifts }),
+        })
+      )
       const days = isSelectedDate || selectedDaysWithoutShifts;
-      if(days && days.length > 0 && selectedShifts && selectedShifts.length > 0){
+      if(days && days.length > 0 && selectedShifts && selectedShifts.length > 0 && countAdults > 0){
        navigate('/check-out');
+      }else{
+        setErrorMessage(t("PleaseEnterAllDataCorrectly"));
+        setTimeout(() => {
+          setErrorMessage(null);
+        }, 20000);
       }
     }else{
       try {
         const resultAction = await dispatch(addOrder({ 
           ad_id : Number(id),
           subtotal: subTotal, 
-          total: subTotal + Tax, 
+          total: subTotal + Tax,
           tax: Tax, 
           booking_type: chaletDetails.have_shifts ? "shift" : "day", 
           coupon_id: null, 
@@ -135,7 +140,7 @@ useEffect(() => {
         setErrorMessage(error.response.data.message);
         setTimeout(() => {
           setErrorMessage(null);
-        }, 6000);
+        }, 20000);
       }
     }
   }
@@ -431,7 +436,7 @@ useEffect(() => {
           countChildren={countChildren}
           setCountChildren={setCountChildren}
        />
-      <div className="flex justify-center items-center">
+      <div className="flex flex-col justify-center items-center">
         <Link
           to={""}
           onClick={handleCheckOut}
@@ -439,7 +444,7 @@ useEffect(() => {
         >
           {t("Check out")}
         </Link>
-      <span className="text-red">{errorMessage}</span>
+        <p className="w-[300px] py-3 font-bold text-red">{errorMessage}</p>
       </div>
     </div>
   );

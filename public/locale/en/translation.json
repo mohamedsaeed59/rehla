@@ -807,5 +807,8 @@
  "pledgeAlert": "Please select the pledge",
  "searchSerialAndName": "Search by serial number or advisor name",
  "Inside your city": "Inside your city",
- "There are no chalets booked yet": "There are no chalets booked yet"
+ "There are no chalets booked yet": "There are no chalets booked yet",
+
+ "Complete Your Order": "Complete Your Order",
+ "Your order has been rejected": "Your order has been rejected"
 }

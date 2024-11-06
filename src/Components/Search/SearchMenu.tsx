@@ -1,10 +1,9 @@
 import { memo } from "react";
 import location from "../../assets/icons/Location2.svg";
 import arrow from "../../assets/icons/right-arrow.svg";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const SearchMenu = ({searchResults}: any) => {
-  const navigate = useNavigate();
   return (
     <div className="absolute top-12 z-20 rtl:left-0 ltr:right-0 rounded-lg bg-white border border-borderColor2 duration-300">
       <div className="w-[300px] md:w-[340px]">
@@ -13,10 +12,10 @@ const SearchMenu = ({searchResults}: any) => {
           {searchResults.map((loc: any, index: number) => {
             return(
               <div key={index} className="flex justify-between items-center p-1 my-1 cursor-pointer">
-              <div className="flex items-center gap-1">
+              <Link to={"/search"} className="flex items-center gap-1">
                 <img src={location} alt="location" className="w-3 h-3" />
                 <p className="font-normal text-sm">{loc?.city}</p>
-              </div>
+              </Link>
               <img src={arrow} alt="arrow" className="w-3 h-3" />
             </div>
             )
@@ -25,7 +24,7 @@ const SearchMenu = ({searchResults}: any) => {
           {searchResults.map((chalet: any, index: number) => {
             return(
             <div key={index} className="flex justify-between items-center p-1 my-1">
-            <div>
+            <Link to={"/search"}>
               <div className="flex items-center gap-1 text-primary">
                 <svg
                   width="16"
@@ -62,7 +61,7 @@ const SearchMenu = ({searchResults}: any) => {
                 <img src={location} alt="location" className="w-3 h-3" />
                 <p className="text-ry3Text text-xs font-light">{chalet.city}</p>
               </div>
-            </div>
+            </Link>
             <img src={arrow} alt="arrow" className="w-3 h-3" />
           </div>
             )
@@ -70,11 +69,10 @@ const SearchMenu = ({searchResults}: any) => {
 
           <div className="m-1">
             <button
-              onClick={() => navigate("/search")}
               type="submit"
               className="w-full rounded-[35px] p-2 focus:outline-none text-lg font-bold hover:bg-mainBlack border border-mainBlack hover:text-white text-mainBlack duration-300"
             >
-              Show all search results
+            <Link to={"/search"}>Show all search results</Link>
             </button>
           </div>
         </div>

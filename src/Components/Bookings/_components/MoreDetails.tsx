@@ -3,10 +3,12 @@ import date from "../../../assets/date.png";
 import { useAppDispatch } from "../../../app/hooks";
 import { setDirectOrder } from "../../../app/order/orderSlice";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const MoreDetails = ({ shifts, orderDate, booking }: any) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleCheckout = (e: any) => {
     e.preventDefault(); 
@@ -36,7 +38,19 @@ const MoreDetails = ({ shifts, orderDate, booking }: any) => {
         <h3 className="text-[19px] font-normal text-mainBlack">
           Register Shifts
         </h3>
-        {booking.status == "requested" && <button onClick={handleCheckout}>Check Out</button>}
+        {booking.status == "approved" &&
+         <button
+            className="rounded-[33px] w-[200px] py-3 font-bold bg-mainBlack text-white" 
+            onClick={handleCheckout}
+          >
+            {t("Complete Your Order")}
+          </button>}
+
+          {booking.status == "rejected" &&
+         <p className="w-[250px] py-3 font-bold text-red">
+            {t("Your order has been rejected")}
+          </p>}
+
         <div className="flex flex-col gap-4">
         <div className="flex gap-2 py-2">
            <img src={date} alt="date" className="w-5 h-5" />

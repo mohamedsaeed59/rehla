@@ -5,6 +5,8 @@ import image3 from "../../assets/rate/loved.svg";
 import image4 from "../../assets/rate/v.good.svg";
 import RateThanks from "./RateThanks";
 import { useTranslation } from "react-i18next";
+import { useAppDispatch } from "../../app/hooks";
+import { appRate } from "../../app/rate/rateSlice";
 
 type Props = {
   setOpenRate: (open: boolean) => void;
@@ -12,6 +14,7 @@ type Props = {
 
 const Rate = ({ setOpenRate }: Props) => {
   const [openRateThanks, setOpenRateThanks] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
 
   const handleOpenRateThanks = () => {
     setOpenRateThanks(!openRateThanks);
@@ -30,10 +33,10 @@ const Rate = ({ setOpenRate }: Props) => {
                 {t("experienceMessage")}
               </h3>
               <div className="flex justify-center items-center gap-3 md:gap-5">
-                <img src={image1} alt="logo" className="w-10 h-10" />
-                <img src={image2} alt="logo" className="w-10 h-10" />
-                <img src={image3} alt="logo" className="w-10 h-10" />
-                <img src={image4} alt="logo" className="w-10 h-10" />
+                <img src={image1} alt="logo" className="w-10 h-10 cursor-pointer" onClick={() => dispatch(appRate({rate: 1}))} />
+                <img src={image3} alt="logo" className="w-10 h-10 cursor-pointer" onClick={() => dispatch(appRate({rate: 2}))} />
+                <img src={image2} alt="logo" className="w-10 h-10 cursor-pointer" onClick={() => dispatch(appRate({rate: 3}))} />
+                <img src={image4} alt="logo" className="w-10 h-10 cursor-pointer" onClick={() => dispatch(appRate({rate: 4}))} />
               </div>
               <div className="flex gap-4 justify-center items-center mb-6 mx-auto">
                 <button
