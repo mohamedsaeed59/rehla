@@ -14,7 +14,7 @@ const UpdateProfile = () => {
       {accessToken ? (
         <Link to={"/profile"}>
           <img
-            src={data?.profileImage || avter}
+            src={data?.image || avter}
             alt="avter"
             className="w-14 object-cover rounded-full"
           />

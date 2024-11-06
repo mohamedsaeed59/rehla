@@ -1,4 +1,4 @@
-import { memo, useRef } from "react";
+import { memo, useEffect, useRef } from "react";
 import { MainProfile} from "./index";
 import BreadCrumb from "../Global/BreadCrumb";
 
@@ -8,7 +8,7 @@ import avter from "../../assets/avter.webp";
 import camera from "../../assets/icons/camera.svg";
 import ProfileForm from "./_components/ProfileForm";
 import { useTranslation } from "react-i18next";
-import { actChangeProfileImage } from "../../app/auth/authSlice";
+import { actChangeProfileImage, setUserImage } from "../../app/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 
 const EditProfile = () => {
@@ -16,6 +16,12 @@ const EditProfile = () => {
   const dispatch = useAppDispatch();
   const inputRef = useRef<HTMLInputElement>(null);
   const { data } = useAppSelector((state) => state.auth);
+  // const user = Cookie.get('user') ? JSON.parse(Cookie.get('user')) : null;
+  const profileImg = localStorage.getItem('profileImage');
+
+  useEffect(() => {
+    dispatch(setUserImage(profileImg as any));
+  }, [])
 
   const handleClick = () => {
     if (inputRef.current) {
@@ -60,7 +66,7 @@ const EditProfile = () => {
             <div className="flex justify-center items-center pb-4 overflow-hidden">
               <div className="w-20 h-20 relative">
                 <img
-                  src={data?.profileImage || avter}
+                  src={data?.image || avter}
                   alt="avter"
                   className="w-20 h-20 object-cover rounded-full"
                 />

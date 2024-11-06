@@ -86,7 +86,7 @@ function Header() {
             <div className="flex items-center gap-2">
               {accessToken ? (
                 <Link to={"/profile"} className="hidden lg:block">
-                  <img src={data?.profileImage || avter} alt="avter" className="w-10 rounded-full" />
+                  <img src={data?.image || avter} alt="avter" className="w-10 rounded-full" />
                 </Link>
               ) : (
                 <Link to={"/login"} className="hidden lg:block">  

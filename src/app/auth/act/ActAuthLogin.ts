@@ -10,6 +10,7 @@ const URL__API = import.meta.env.VITE_REACT_APP_API_KEY;
 type TResponse = {
   status: number;
  data: {
+    image: any;
     access_token: string;
     id: number;
     email: string;

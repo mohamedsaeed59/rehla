@@ -16,7 +16,6 @@ const MainProfile = () => {
 
   const { t } = useTranslation();
 
-
   const handleLogOut = () => {
     dispatch(authLogout());
     navigate("/login");

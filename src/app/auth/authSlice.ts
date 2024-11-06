@@ -13,6 +13,7 @@ interface IAuthState {
   data: {
     access_token: string;
     profileImage: any;
+    image: any;
     name: string;
     id: number;
     email: string;
@@ -27,12 +28,12 @@ interface IAuthState {
   error: string | null;
   skip: boolean;
 }
-
 const initialState: IAuthState = {
   data: {
     // access_token: localStorage.getItem('access_token') ? JSON.parse(localStorage.getItem('access_token')!) : [],
     access_token: localStorage.getItem("access_token") || "",
-    profileImage: localStorage.getItem("profileImage"),
+    profileImage: "",
+    image: "",
     name: "",
     id: 0,
     email: "",
@@ -123,7 +124,7 @@ const authSlice = createSlice({
       state.data = action.payload;
     },
     setUserImage: (state, action: any) => {
-      state.data.profileImage = action.payload
+      state.data.image = action.payload
     },
     handleSkip: (state) => {
       state.skip = true;
@@ -157,9 +158,8 @@ const authSlice = createSlice({
         state.data.access_token = action.payload.data.access_token;
         localStorage.setItem("access_token", action.payload.data.access_token);
         Cookie.set("user", JSON.stringify(action.payload.data));
-        console.log('action.payload.data.access_token', action.payload.data.access_token);
-        
       }
+      state.data.image = action.payload.data.image;
       state.data.name = action.payload.data.name;
       state.status = action.payload.status;
     });
@@ -193,10 +193,8 @@ const authSlice = createSlice({
       state.loading = "succeeded";
       state.status = action.payload.status;
       state.message = "Profile image updated successfully.";
-      state.data.profileImage = action.payload.data.image;
+      state.data.image = action.payload.data.image;
       localStorage.setItem("profileImage", action.payload.data.image);
-      // state.data.profileImage = action.payload.data.image;
-      // Cookie.set("user", JSON.stringify(action.payload.data))
     });
     builder.addCase(actChangeProfileImage.rejected, (state, action) => {
       state.loading = "failed";
