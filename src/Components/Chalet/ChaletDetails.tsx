@@ -78,10 +78,14 @@ useEffect(() => {
   // const Tax = Number(data?.tax);
 
   // base price with or without shift
-  const bsaePrice = chaletDetails?.have_shifts ? totalShiftPrice : chaletDetails?.price;
+  // const bsaePrice = chaletDetails?.have_shifts ? totalShiftPrice : chaletDetails?.price;
+  const basePrice = chaletDetails?.have_shifts
+  ? totalShiftPrice
+  : (selectedDaysWithoutShifts.length > 1 ? selectedDaysWithoutShifts.length * chaletDetails?.price : chaletDetails?.price);
+
 
   // subtotal price
-  const subTotal = bsaePrice + totalPriceOfServices + extraCost;
+  const subTotal = basePrice + totalPriceOfServices + extraCost;
 
   const Tax = calculateTotalPrice(subTotal, Number(data?.tax));  
   

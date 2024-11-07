@@ -5,6 +5,7 @@ import NotificationsContent from "./_components/NotificationsContent";
 
 const Notification = () => {
   // const [noNotifications, setNoNotifications ] = useState<boolean>(false);
+
   return (
     <>
       <motion.div

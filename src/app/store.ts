@@ -7,6 +7,7 @@ import chaletReducer from './chalet/chaletSlice';
 import orderReducer from './order/orderSlice';
 import archiveReducer from './archive/archiveSlice';
 import appRateReducer from './rate/rateSlice';
+import notificationReducer from './notification/notificationSlice';
 
 export const store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ export const store = configureStore({
     order: orderReducer,
     archive: archiveReducer,
     appRate: appRateReducer,
+    notifications: notificationReducer,
   },
   devTools: true,
 });

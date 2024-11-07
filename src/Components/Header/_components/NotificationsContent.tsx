@@ -1,13 +1,30 @@
-import { Link } from "react-router-dom";
-import no from "../../../assets/no.jfif";
+import { Link, useNavigate } from "react-router-dom";
+// import no from "../../../assets/no.jfif";
 import Group from "../../../assets/icons/Group.svg";
 import location from "../../../assets/icons/carbon_location.svg";
+import { useEffect } from 'react';
+import { fetchNotifications } from '../../../app/notification/notificationSlice';
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 
 export default function NotificationsContent() {
+  const dispatch = useAppDispatch();
+  const { notifications } = useAppSelector((state: any) => state.notifications);
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    dispatch(fetchNotifications());
+  }, [dispatch]);
+  
+  // const handleMarkAsSeen = () => {
+  //   dispatch(markNotificationsAsSeen());
+  // };
+
   return (
     <div className="flex flex-col gap-3 w-full h-full p-3">
+      {notifications?.map((notification: any) => 
+      notification.type === "public_notifications" && (
       <div className="flex flex-col gap-[10px] bg-[#F7F7F7] p-2">
-        <span className="text-[#7D7D7D] text-xs">1hrs ago</span>
+        <span className="text-[#7D7D7D] text-xs">{notification?.date}</span>
         <div className="flex items-center gap-2">
           <div className="bg-white rounded-lg w-[42px] h-[42px] flex justify-center items-center">
             <svg
@@ -25,7 +42,7 @@ export default function NotificationsContent() {
           </div>
           <div>
             <p className="text-xs font-normal">
-              New chalet is added, near to your Location...
+              {notification?.message}
             </p>
             <Link
               to={"/"}
@@ -35,41 +52,45 @@ export default function NotificationsContent() {
             </Link>
           </div>
         </div>
-      </div>
+      </div>))}
+      {notifications?.map((notification: any) => 
+       notification.type === "rejected" && (
       <div className="bg-[#F7F7F7] p-2">
         <div className="flex gap-[10px]">
           <div className="w-[86px] h-[145px]">
             <div className="w-full bg-[#FF3B30] text-center rounded-tr-xl rounded-tl-xl text-white p-[2px]">
-              <span className="text-sm">Rejected</span>
+              <span className="text-sm">{notification?.not_title}</span>
             </div>
             <img
-              src={no}
+              src={notification?.ad?.image}
               alt="no"
               className="w-full h-[80%] object-cover rounded-bl-xl rounded-br-xl"
             />
           </div>
           <div className="flex flex-col gap-[10px]">
-            <h3 className="text-primary text-base font-bold">Chalet name</h3>
+            <h3 className="text-primary text-base font-bold">{notification?.ad?.name}</h3>
             <div className="flex flex-col gap-1">
               <div className="flex items-center gap-1 text-ry3Text">
                 <img src={Group} alt="Group" className="w-4 h-4" />
-                <span className="text-[14px]">20 Adults </span>
+                <span className="text-[14px]">{notification?.ad?.no_adults} Adults </span>
               </div>
               <div className="flex items-center gap-1">
                 <img src={location} alt="location" className="w-4 h-4" />
                 <span className="text-[15px] font-semibold text-mainBlack">
-                  Bagdad, Iraq
+                {notification?.ad?.city}
                 </span>
               </div>
             </div>
             <button
               // type="submit"
+              onClick={() => navigate(`/chalet/${notification?.ad?.id}`)}
               className="rounded-3xl w-[200px] text-center py-2 focus:outline-none text-sm font-bold bg-mainBlack text-white"
             >
               Change date
             </button>
             <button
               // type="submit"
+              onClick={() => navigate("/")}
               className="rounded-3xl border border-mainBlack w-[200px] text-center py-2 focus:outline-none text-xs font-bold text-mainBlack"
             >
               Recommend another chalet
@@ -79,43 +100,45 @@ export default function NotificationsContent() {
         <p className="text-[#FF3B30] text-[12px] font-normal py-2">
           . Reason: your selected date is fully booked
         </p>
-      </div>
-
+      </div>))}
+      {notifications?.map((notification: any) => 
+      notification.type === "accepted" && (
       <div className="bg-[#F7F7F7] p-2">
         <div className="flex gap-[10px]">
           <div className="w-[86px] h-[145px]">
             <div className="w-full bg-primary text-center rounded-tr-xl rounded-tl-xl text-white p-[2px]">
-              <span className="text-sm">Rejected</span>
+              <span className="text-sm">{notification?.not_title}</span>
             </div>
             <img
-              src={no}
+              src={notification?.ad?.image}
               alt="no"
               className="w-full h-[80%] object-cover rounded-bl-xl rounded-br-xl"
             />
           </div>
           <div className="flex flex-col gap-[15px]">
-            <h3 className="text-primary text-base font-bold">Chalet name</h3>
+            <h3 className="text-primary text-base font-bold">{notification?.ad?.name}</h3>
             <div className="flex flex-col gap-1">
               <div className="flex items-center gap-1 text-ry3Text">
                 <img src={Group} alt="Group" className="w-4 h-4" />
-                <span className="text-[14px]">20 Adults </span>
+                <span className="text-[14px]">{notification?.ad?.no_adults} Adults </span>
               </div>
               <div className="flex items-center gap-1">
                 <img src={location} alt="location" className="w-4 h-4" />
                 <span className="text-[15px] font-semibold text-mainBlack">
-                  Bagdad, Iraq
+                {notification?.ad?.city}
                 </span>
               </div>
             </div>
             <button
               // type="submit"
+              onClick={() => navigate("/bookings")}
               className="rounded-3xl w-[200px] text-center py-2 focus:outline-none text-sm font-bold bg-mainBlack text-white"
             >
               Go & complete check out
             </button>
           </div>
         </div>
-      </div>
+      </div>))}
     </div>
   );
 }

@@ -3,9 +3,12 @@ import notification from "../../assets/arcticons_notificationcron.svg";
 import Notification from "../../Components/Header/Notification";
 import { AnimatePresence } from "framer-motion";
 import useClickOutside from "../../hooks/useClickOutside";
+import { useAppSelector } from "../../app/hooks";
 
 function NotificationMain() {
   const [openNotification, setOpenNotification] = useState<boolean>(false);
+  const { notificationCount } = useAppSelector((state: any) => state.notifications);
+
   const handleOpenNotification = () => {
     setOpenNotification(!openNotification);
   };
@@ -19,6 +22,10 @@ function NotificationMain() {
     <div ref={dropdownRef} className="relative">
       <button onClick={handleOpenNotification}>
         <img src={notification} alt="notification" className="w-4 lg:w-8" />
+        {notificationCount > 0 &&
+        <span className="absolute top-[-12px] bg-red text-[10px] lg:text-[15px] text-white font-bold w-[18px] h-[18px] lg:w-6 lg:h-6 text-center rounded-[50px]">
+          {notificationCount}
+        </span>}
       </button>
       <AnimatePresence>
         {openNotification && (
