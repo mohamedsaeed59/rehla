@@ -17,11 +17,11 @@ const EditProfile = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const { data } = useAppSelector((state) => state.auth);
   // const user = Cookie.get('user') ? JSON.parse(Cookie.get('user')) : null;
-  const profileImg = localStorage.getItem('profileImage');
+  // const profileImg = localStorage.getItem('profileImage');
 
-  useEffect(() => {
-    dispatch(setUserImage(profileImg as any));
-  }, [])
+  // useEffect(() => {
+  //     dispatch(setUserImage(profileImg as any));
+  // }, [])
 
   const handleClick = () => {
     if (inputRef.current) {

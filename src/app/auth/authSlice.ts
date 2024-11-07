@@ -124,7 +124,7 @@ const authSlice = createSlice({
       state.data = action.payload;
     },
     setUserImage: (state, action: any) => {
-      state.data.image = action.payload
+      state.data.image = action?.payload;
     },
     handleSkip: (state) => {
       state.skip = true;
@@ -159,8 +159,8 @@ const authSlice = createSlice({
         localStorage.setItem("access_token", action.payload.data.access_token);
         Cookie.set("user", JSON.stringify(action.payload.data));
       }
-      state.data.image = action.payload.data.image;
-      state.data.name = action.payload.data.name;
+      state.data.image = action.payload.data?.image;
+      state.data.name = action.payload.data?.name;
       state.status = action.payload.status;
     });
     builder.addCase(actAuthLogin.rejected, (state) => {
@@ -193,8 +193,8 @@ const authSlice = createSlice({
       state.loading = "succeeded";
       state.status = action.payload.status;
       state.message = "Profile image updated successfully.";
-      state.data.image = action.payload.data.image;
-      localStorage.setItem("profileImage", action.payload.data.image);
+      state.data.image = action.payload.data?.image;
+      localStorage.setItem("profileImage", action.payload.data?.image);
     });
     builder.addCase(actChangeProfileImage.rejected, (state, action) => {
       state.loading = "failed";

@@ -6,6 +6,7 @@ import MostPopular from "../Components/home/MostPopular";
 import RecentlyAdd from "../Components/home/RecentlyAdd";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { actFetchHomeScreen } from "../app/home/homeSlice";
+import { actSettings } from "../app/SettingsSlice";
 
 function Home() {
   const [showTermsConditions, setShowTermsConditions] = useState<boolean>(false);
@@ -34,7 +35,11 @@ function Home() {
         lang: lang,
       })
     );
-  },[])
+  },[dispatch])
+
+  useEffect(() => {
+    dispatch(actSettings(lang));
+  }, [dispatch]);
 
   return (
     <>

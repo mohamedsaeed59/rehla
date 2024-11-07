@@ -46,7 +46,7 @@ export const unarchiveAd = createAsyncThunk(
     async (_, { rejectWithValue }) => {
     const accessToken = localStorage.getItem("access_token");
         try {
-            const response = await axios.get(`${URL__API}/user-archive-list?popular=2`, {
+            const response = await axios.get(`${URL__API}/user-archive-list`, {
                 headers: {
                   Authorization: `Bearer ${accessToken}`,
                 },

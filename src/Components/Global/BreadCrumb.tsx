@@ -11,7 +11,7 @@ const BreadCrumb = ({ title, subTitle }: DataBreadCrumb) => {
         <div className="flex justify-center items-center flex-col gap-2 py-10">
           <h2 className="font-bold text-2xl text-mainBlack">{title}</h2>
           <p className="font-normal text-base text-mainBlack">
-            <Link to={"/home"}>{t("Home")} </Link> / {subTitle}
+            <Link to={"/"}>{t("Home")} </Link> / {subTitle}
           </p>
         </div>
       </div>

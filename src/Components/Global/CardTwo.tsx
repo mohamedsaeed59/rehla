@@ -1,4 +1,4 @@
-import { memo, useState } from "react";
+import { memo, useEffect, useState } from "react";
 // import card from "../../assets/card.jfif";
 // import save from "../../assets/icons/save.svg";
 import Star from "../../assets/icons/Star.svg";
@@ -22,16 +22,25 @@ interface CardTwoProps {
 }
 
 const CardTwo = ({id, name, image, rate, favorites, city, adults}: CardTwoProps) => {
-  const [save, setSave] = useState<boolean>(true);
   const dispatch: AppDispatch = useDispatch();
+  const accessToken = localStorage.getItem("access_token");
+  const [save, setSave] = useState<boolean>(() => {
+    return localStorage.getItem(`save_${id}`) === "true";
+  });
+
+  useEffect(() => {
+    localStorage.setItem(`save_${id}`, save.toString());
+  }, [id, save]);
 
   const handleSave = () => {
-    setSave((prevSave) => !prevSave);
-    if (save) {
-      dispatch(archiveAd({ ad_id: id }));
-    } else {
-      dispatch(unarchiveAd({ ad_id: id }));
-    }
+    if(accessToken){
+      setSave((prevSave) => !prevSave);
+      if (save) {
+        dispatch(unarchiveAd({ ad_id: id }));
+      } else {
+        dispatch(archiveAd({ ad_id: id }));
+      }
+    }  
   };
   
   return (
@@ -97,7 +106,7 @@ const CardTwo = ({id, name, image, rate, favorites, city, adults}: CardTwoProps)
             >
               <path
                 d="M12.6078 25.9215L12 25.5829L11.3922 25.9215L1 31.701V3.96647C1 3.16117 1.31451 2.40017 1.85555 1.84801C2.39658 1.29743 3.11526 1 3.85185 1H20.1481C20.8847 1 21.6034 1.29743 22.1445 1.84801C22.6855 2.40017 23 3.16117 23 3.96647V31.701L12.6078 25.9215Z"
-                fill={`${!save ? "#F3C800" : "#00000"}`}
+                fill={`${!save ? "#00000" : "#F3C800"}`}
                 stroke="#1E1E1E"
                 stroke-width="1.5"
               />

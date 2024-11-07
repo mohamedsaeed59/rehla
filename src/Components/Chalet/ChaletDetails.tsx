@@ -22,7 +22,6 @@ import { archiveAd, unarchiveAd } from "../../app/archive/archiveSlice";
 
 const ChaletDetails = () => {
   const [showComments, setShowComments] = useState<boolean>(true);
-  const [save, setSave] = useState<boolean>(true);
   const dispatch = useAppDispatch();
   const { chaletDetails, comment } = useAppSelector((state: any) => state.chalet);
   const { data } = useAppSelector((state: any) => state.settings);
@@ -38,6 +37,37 @@ const ChaletDetails = () => {
   const [errorMessage, setErrorMessage] = useState<any>("");
   const [countAdults, setCountAdults] = useState(0);
   const [countChildren, setCountChildren] = useState(0);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [save, setSave] = useState<boolean>(() => {
+    return localStorage.getItem(`save_${id}`) === "true";
+  });
+  const accessToken = localStorage.getItem("access_token");
+
+  useEffect(() => {
+    localStorage.setItem(`save_${id}`, save.toString());
+  }, [id, save]);
+
+  const handleSave = () => {
+    if(accessToken){
+      setSave((prevSave) => !prevSave);
+      if (save) {
+        dispatch(unarchiveAd({ ad_id: id }));
+      } else {
+        dispatch(archiveAd({ ad_id: id }));
+      }
+    }  
+  };
+
+  // Set a limit for the short description length
+  const maxDescriptionLength = 60;
+
+  // Check if the description is large
+  const isLargeDescription = chaletDetails?.description?.length > maxDescriptionLength;
+
+  // Toggle function to switch between expanded and collapsed states
+  const toggleDescription = () => {
+    setIsExpanded(!isExpanded);
+  };
 
   useEffect(() => {
     dispatch(fetchChaletDetails({id, lang}));
@@ -57,15 +87,6 @@ useEffect(() => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  const handleSave = () => {
-    setSave((prevSave) => !prevSave);
-    if (save) {
-      dispatch(archiveAd({ ad_id: id }));
-    } else {
-      dispatch(unarchiveAd({ ad_id: id }));
-    }
-  };
 
   // Check if the number of adults exceeds the limit
   const calc = countAdults > chaletDetails?.no_adults;
@@ -158,7 +179,7 @@ useEffect(() => {
         </div>
         <div className="flex flex-col gap-2 flex-1">
           <Link
-            to={"/savedchalets"}
+            to={"/"}
             className="font-medium text-sm flex gap-1 items-center "
           >
             <div className="hover:bg-ryBackground duration-300 rounded-full p-3">
@@ -187,7 +208,7 @@ useEffect(() => {
             >
               <path
                 d="M12.6078 25.9215L12 25.5829L11.3922 25.9215L1 31.701V3.96647C1 3.16117 1.31451 2.40017 1.85555 1.84801C2.39658 1.29743 3.11526 1 3.85185 1H20.1481C20.8847 1 21.6034 1.29743 22.1445 1.84801C22.6855 2.40017 23 3.16117 23 3.96647V31.701L12.6078 25.9215Z"
-                fill={`${!save ? "#F3C800" : "#00000"}`}
+                fill={`${!save ? "#00000" : "#F3C800"}`}
                 stroke="#1E1E1E"
                 stroke-width="1.5"
               />
@@ -236,20 +257,26 @@ useEffect(() => {
                   ))}
               </div>
             </div>
-            <p className="font-normal text-base text-ry3Text leading-5">
-              {chaletDetails?.description}
-            </p>
-            <Link
-              to={"/"}
-              className="font-medium text-lg text-primary flex gap-1 items-center "
-            >
-              {t("Show more")}
-              <img
-                src={rightArrow}
-                alt="rightArrow"
-                className="w-3 h-3 rotate-[90deg]"
-              />
-            </Link>
+            <div>
+              <p className="font-normal text-base text-ry3Text leading-5">
+                {isExpanded || !isLargeDescription
+                  ? chaletDetails?.description
+                  : chaletDetails?.description.slice(0, maxDescriptionLength) + "..."}
+              </p>
+              {isLargeDescription && (
+                <button
+                  onClick={toggleDescription}
+                  className="font-medium text-lg text-primary flex gap-1 items-center"
+                >
+                  {isExpanded ? "Show less" : "Show more"}
+                  <img
+                    src={rightArrow}
+                    alt="rightArrow"
+                    className={`w-3 h-3 ${isExpanded ? "rotate-[270deg]" : "rotate-[90deg]"}`}
+                  />
+                </button>
+              )}
+            </div>
             <div className="flex flex-col gap-2 bg-white rounded-md my-2 p-3 duration-700">
               <div className="flex justify-between p-2">
                 <div className="flex items-center gap-2">

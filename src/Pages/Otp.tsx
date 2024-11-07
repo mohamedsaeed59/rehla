@@ -216,7 +216,6 @@ const Otp = () => {
       otp: Otp2,
       fcm_token: "123456",
     };
-    console.log(userData);
     dispatch(actAuthLogin(userData));
   };
 
