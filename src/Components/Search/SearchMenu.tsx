@@ -9,20 +9,18 @@ const SearchMenu = ({searchResults}: any) => {
       <div className="w-[300px] md:w-[340px]">
         <div className="flex flex-col gap-2 p-2">
           <h4 className="font-normal text-lg sm:text-xl">Location</h4>
-          {searchResults.map((loc: any, index: number) => {
-            return(
-              <div key={index} className="flex justify-between items-center p-1 my-1 cursor-pointer">
-              <Link to={"/search"} className="flex items-center gap-1">
+          {[...new Map(searchResults.map((loc: any) => [loc.city, loc])).values()].map((loc: any, index: number) => (
+            <div key={index} className="flex justify-between items-center p-1 my-1 cursor-pointer">
+              <Link to="/search" className="flex items-center gap-1">
                 <img src={location} alt="location" className="w-3 h-3" />
                 <p className="font-normal text-sm">{loc?.city}</p>
               </Link>
               <img src={arrow} alt="arrow" className="w-3 h-3" />
             </div>
-            )
-          })}
+          ))}
           <h4 className="font-normal text-sm sm:text-base">Chalet name</h4>
-          {searchResults.map((chalet: any, index: number) => {
-            return(
+          {/* {searchResults.map((chalet: any, index: number) => { */}
+          {[...new Map(searchResults.map((chalet: any) => [chalet.name, chalet])).values()].map((chalet: any, index: number) => (
             <div key={index} className="flex justify-between items-center p-1 my-1">
             <Link to={"/search"}>
               <div className="flex items-center gap-1 text-primary">
@@ -55,17 +53,16 @@ const SearchMenu = ({searchResults}: any) => {
                   </g>
                 </svg>
 
-                <p className="text-sm font-medium">{chalet.name}</p>
+                <p className="text-sm font-medium">{chalet?.name}</p>
               </div>
               <div className="flex items-center gap-1 pl-3">
                 <img src={location} alt="location" className="w-3 h-3" />
-                <p className="text-ry3Text text-xs font-light">{chalet.city}</p>
+                <p className="text-ry3Text text-xs font-light">{chalet?.city}</p>
               </div>
             </Link>
             <img src={arrow} alt="arrow" className="w-3 h-3" />
           </div>
-            )
-          })}         
+          ))}         
 
           <div className="m-1">
             <button

@@ -39,18 +39,8 @@ export const getComments = createAsyncThunk(
 // Async action to fetch Search Results
   export const fetchSearchResults = createAsyncThunk(
     'search/fetchSearchResults',
-    async ({ searchQuery, cityId, minAdults, maxAdults, popular, lastAdd }: any) => {
-      const response = await axios.get(`${URL__API}/ads`, {
-        params: {
-          page: 1,
-          serach: searchQuery,
-          city_id: cityId,
-          min_no_adults: minAdults,
-          max_no_adults: maxAdults,
-          popular,
-          last_add: lastAdd,
-        },
-      });
+    async (_) => {
+      const response = await axios.get(`${URL__API}/ads`);
       return response.data;
     }
   );
