@@ -10,18 +10,20 @@ import ProfileForm from "./_components/ProfileForm";
 import { useTranslation } from "react-i18next";
 import { actChangeProfileImage, setUserImage } from "../../app/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
+// @ts-ignore
+import Cookie from 'js-cookie';
 
 const EditProfile = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const inputRef = useRef<HTMLInputElement>(null);
   const { data } = useAppSelector((state) => state.auth);
-  // const user = Cookie.get('user') ? JSON.parse(Cookie.get('user')) : null;
+  const profileImage = Cookie.get('profileImage') ? JSON.parse(Cookie.get('profileImage')) : null;
   // const profileImg = localStorage.getItem('profileImage');
 
-  // useEffect(() => {
-  //     dispatch(setUserImage(profileImg as any));
-  // }, [])
+  useEffect(() => {
+      dispatch(setUserImage(profileImage));
+  }, [])
 
   const handleClick = () => {
     if (inputRef.current) {

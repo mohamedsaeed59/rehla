@@ -20,6 +20,8 @@ interface IAuthState {
     phone: string;
     address: any;
     city: any;
+    city_id: any;
+    gender: any;
     age: any;
   };
   status: number;
@@ -40,7 +42,9 @@ const initialState: IAuthState = {
     phone: "",
     address: "",
     city: "",
+    city_id: "",
     age: "",
+    gender: "",
   },
   status: 0,
   message: "",
@@ -117,14 +121,16 @@ const authSlice = createSlice({
   reducers: {
     authLogout: (state) => {
       state.data.access_token = "";
-      // state.data.profileImage = "";
       localStorage.removeItem("access_token");
+      Cookie.remove("user");
+      Cookie.remove("profileImage");
     },
     setUser: (state, action: any) => {
       state.data = action.payload;
+      
     },
     setUserImage: (state, action: any) => {
-      state.data.image = action?.payload;
+      state.data.image = action.payload;
     },
     handleSkip: (state) => {
       state.skip = true;
@@ -138,7 +144,6 @@ const authSlice = createSlice({
     });
     builder.addCase(actAuthRegister.fulfilled, (state, action) => {
       state.loading = "succeeded";
-      console.log(action.payload);
       state.message = action.payload.message;
       state.status = action.payload.status;
     });
@@ -158,9 +163,8 @@ const authSlice = createSlice({
         state.data.access_token = action.payload.data.access_token;
         localStorage.setItem("access_token", action.payload.data.access_token);
         Cookie.set("user", JSON.stringify(action.payload.data));
+        Cookie.set("profileImage", JSON.stringify(action.payload.data.image));
       }
-      state.data.image = action.payload.data?.image;
-      state.data.name = action.payload.data?.name;
       state.status = action.payload.status;
     });
     builder.addCase(actAuthLogin.rejected, (state) => {
@@ -177,11 +181,15 @@ const authSlice = createSlice({
       state.loading = "succeeded";
       state.status = action.payload.status;
       state.message = "Profile updated successfully.";
-      state.data.name = action.payload.data.data.name;
+      if (action.payload.data && action.payload.data.access_token) {
+        // state.data.access_token = action.payload.data.access_token;
+        // localStorage.setItem("access_token", action.payload.data.access_token);
+        Cookie.set("user", JSON.stringify(action.payload.data));
+      }
     });
-    builder.addCase(actUpdateProfile.rejected, (state, action) => {
-      state.loading = "failed";
-      state.error = action.payload as string;
+    builder.addCase(actUpdateProfile.rejected, (state, action: any) => {
+      state.loading = "failed";      
+      state.error = action.payload.response.data.message as string;
     });
 
     // Change Profile Image
@@ -193,8 +201,8 @@ const authSlice = createSlice({
       state.loading = "succeeded";
       state.status = action.payload.status;
       state.message = "Profile image updated successfully.";
-      state.data.image = action.payload.data?.image;
-      localStorage.setItem("profileImage", action.payload.data?.image);
+      state.data.image = action.payload.data.image;
+      Cookie.set("profileImage", JSON.stringify(action.payload.data.image));
     });
     builder.addCase(actChangeProfileImage.rejected, (state, action) => {
       state.loading = "failed";

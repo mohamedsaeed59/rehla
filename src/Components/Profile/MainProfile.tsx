@@ -17,9 +17,12 @@ const MainProfile = () => {
   const { t } = useTranslation();
 
   const handleLogOut = () => {
+    localStorage.removeItem("access_token");
     dispatch(authLogout());
     navigate("/login");
-  };
+};
+
+
   return (
     <div className="border border-borderColor w-full rounded-2xl overflow-hidden md:w-[450px] mx-auto my-8">
       <div className="flex flex-col my-4 py-2">

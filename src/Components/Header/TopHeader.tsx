@@ -33,6 +33,8 @@ function TopHeader() {
     const result = await getLocationFromIP();
     setAddress(result.address);
     Cookies.set("user_location", result.address, { expires: 7 });
+    Cookies.set('coordinates', JSON.stringify(result.coordinates), { expires: 7, path: '' });
+    
     setOpenLocation(false);
 
     dispatch(

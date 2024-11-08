@@ -16,10 +16,11 @@ type mobileMenu = {
 
 function MobileMenu({ setOpen }: mobileMenu) {
   const dispatch = useAppDispatch();
-
   const { t } = useTranslation();
   const navigate = useNavigate();
+
   const handleLogOut = () => {
+    localStorage.removeItem("access_token");
     dispatch(authLogout());
     navigate("/login");
   };

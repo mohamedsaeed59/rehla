@@ -7,6 +7,8 @@ import RecentlyAdd from "../Components/home/RecentlyAdd";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { actFetchHomeScreen } from "../app/home/homeSlice";
 import { actSettings } from "../app/SettingsSlice";
+// @ts-ignore
+import Cookies from "js-cookie";
 
 function Home() {
   const [showTermsConditions, setShowTermsConditions] = useState<boolean>(false);
@@ -27,15 +29,20 @@ function Home() {
     document.cookie = "termsAccepted=true; path=/; max-age=" + 60 * 60 * 24 * 365; 
     setShowTermsConditions(false); 
   };
-  useEffect(() => {
-    dispatch(
-      actFetchHomeScreen({
-        lat: '',
-        lon: '',
-        lang: lang,
-      })
-    );
-  },[dispatch])
+
+useEffect(() => {
+  const cookie = Cookies.get('coordinates');
+    if (cookie) {
+      const parsedCoordinates = JSON.parse(cookie);
+      dispatch(
+        actFetchHomeScreen({
+          lat: parsedCoordinates.lat,
+          lon: parsedCoordinates.lon,
+          lang: lang,
+        })
+      );
+    }
+},[dispatch])
 
   useEffect(() => {
     dispatch(actSettings(lang));

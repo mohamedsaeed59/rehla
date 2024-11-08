@@ -27,7 +27,7 @@ const ProfileForm = () => {
   const [openDeleteAccount, setOpenDeleteAccount] = useState<boolean>(false);
   // const [valCity, setValCity] = useState(userProfile.city_id);
   const [valCity, setValCity] = useState<City | undefined>(userProfile.city_id as City | undefined);
-  const { data } = useAppSelector((state) => state.auth);  
+  const { data, error } = useAppSelector((state) => state.auth);  
   
   const dispatch = useAppDispatch();  
 
@@ -60,7 +60,7 @@ const ProfileForm = () => {
         setUserProfile(action.payload.data);
       }
     } catch (error) {
-      console.error("Failed to update profile:", error);
+      // console.log("Failed to update profile:", error.response.data.message);
     }
   };
 
@@ -154,6 +154,9 @@ const ProfileForm = () => {
       >
         Update
       </button>
+      {error && 
+        <p className="text-red text-center">{error}</p>
+      }
       <div
         onClick={() => handleOpenDeleteAccount()}
         className="p-2 text-lg font-bold text-red text-center cursor-pointer"

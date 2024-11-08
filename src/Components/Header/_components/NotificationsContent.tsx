@@ -2,18 +2,13 @@ import { Link, useNavigate } from "react-router-dom";
 // import no from "../../../assets/no.jfif";
 import Group from "../../../assets/icons/Group.svg";
 import location from "../../../assets/icons/carbon_location.svg";
-import { useEffect } from 'react';
-import { fetchNotifications } from '../../../app/notification/notificationSlice';
-import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+// import { useEffect } from 'react';
+// import { fetchNotifications } from '../../../app/notification/notificationSlice';
+import { useAppSelector } from "../../../app/hooks";
 
 export default function NotificationsContent() {
-  const dispatch = useAppDispatch();
   const { notifications } = useAppSelector((state: any) => state.notifications);
   const navigate = useNavigate();
-  
-  useEffect(() => {
-    dispatch(fetchNotifications());
-  }, [dispatch]);
   
   // const handleMarkAsSeen = () => {
   //   dispatch(markNotificationsAsSeen());
