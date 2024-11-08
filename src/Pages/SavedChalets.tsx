@@ -1,4 +1,4 @@
-import { memo, useEffect } from "react";
+import { memo, useEffect, useState } from "react";
 import Card from "../Components/Global/Card";
 import StorBy from "../Components/Global/StorBy/StorBy";
 import { useTranslation } from "react-i18next";
@@ -9,11 +9,26 @@ const SavedChalets = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { archive } = useAppSelector((state: any) => state.archive);
+  const [sortOption, setSortOption] = useState<string>("");
+
+  const sortedArchive = [...archive].sort((a, b) => {
+    switch (sortOption) {
+      case "AlphabetAZ":
+        return a.name.localeCompare(b.name);
+      case "AlphabetZA":
+        return b.name.localeCompare(a.name);
+      case "RateHighToLow":
+        return b.rate - a.rate;
+      case "RateLowToHigh":
+        return a.rate - b.rate;
+      default:
+        return 0;
+    }
+  });
 
   useEffect(() => {
       dispatch(userArchive());
   },[])
-console.log('archive', archive);
 
   return (
     <>
@@ -21,13 +36,11 @@ console.log('archive', archive);
         <div className="flex flex-col gap-8 my-8">
           <div className="flex justify-between items-center">
             <h3 className="text-[18px] font-bold">
-              {archive?.length} <span className="text-ry3Text font-medium">{t("SavedChalets")}</span>
+              {sortedArchive?.length} <span className="text-ry3Text font-medium">{t("SavedChalets")}</span>
             </h3>
-
-            <StorBy />
+            <StorBy setSortOption={setSortOption} />
           </div>
-          {/* <Card /> */}
-          {archive?.map((ad: any, index: number) => (
+          {sortedArchive?.map((ad: any, index: number) => (
               <div key={index}>
                 <Card
                   id={ad.id}

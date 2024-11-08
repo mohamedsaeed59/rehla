@@ -4,7 +4,7 @@ import downDrop from "../../../assets/icons/arrow-down-drop.svg";
 import useClickOutside from "../../../hooks/useClickOutside";
 import { useTranslation } from "react-i18next";
 
-export default function StorBy() {
+export default function StorBy({setSortOption}: any) {
   const [downDropStore, setDownDropStore] = useState<boolean>(true);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -23,7 +23,7 @@ export default function StorBy() {
         <p className="text-sm font-normal">{t("SortBy")}</p>
         <img src={downDrop} alt="downDrop" className="w-6 h-6 object-cover" />
       </div>
-      {!downDropStore && <DownDropStorBy />}
+      {!downDropStore && <DownDropStorBy setSortOption={setSortOption} />}
     </div>
   );
 }
