@@ -33,7 +33,7 @@ interface IAuthState {
 const initialState: IAuthState = {
   data: {
     // access_token: localStorage.getItem('access_token') ? JSON.parse(localStorage.getItem('access_token')!) : [],
-    access_token: localStorage.getItem("access_token") || "",
+    access_token: "",
     profileImage: "",
     image: "",
     name: "",
@@ -160,6 +160,8 @@ const authSlice = createSlice({
     builder.addCase(actAuthLogin.fulfilled, (state, action) => {
       state.loading = "succeeded";
       if (action.payload.data && action.payload.data.access_token) {
+        // @ts-ignore
+        if (!state.data) state.data = {}; // Ensure data object exists
         state.data.access_token = action.payload.data.access_token;
         localStorage.setItem("access_token", action.payload.data.access_token);
         Cookie.set("user", JSON.stringify(action.payload.data));

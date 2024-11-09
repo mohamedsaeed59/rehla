@@ -11,7 +11,6 @@ import { useAppDispatch, useAppSelector } from "../app/hooks";
 // @ts-ignore
 import Cookie from 'js-cookie';
 import { setUser } from "../app/auth/authSlice";
-import { fetchNotificationCount } from "../app/notification/notificationSlice";
 
 function Header() {
   const [isOpen, setOpen] = useState<boolean>(false);
@@ -29,10 +28,6 @@ function Header() {
   const handleOpen = () => {
     setOpen(!isOpen);
   };
-
-  useEffect(() => {
-    dispatch(fetchNotificationCount());
-  }, [dispatch]);
 
   return (
     <header className="py-0">

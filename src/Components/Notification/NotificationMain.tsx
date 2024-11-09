@@ -1,17 +1,29 @@
-import { memo, useRef, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 import notification from "../../assets/arcticons_notificationcron.svg";
 import Notification from "../../Components/Header/Notification";
 import { AnimatePresence } from "framer-motion";
 import useClickOutside from "../../hooks/useClickOutside";
-import { useAppSelector } from "../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { fetchNotificationCount, markNotificationsAsSeen } from "../../app/notification/notificationSlice";
 
 function NotificationMain() {
+  const dispatch = useAppDispatch();
   const [openNotification, setOpenNotification] = useState<boolean>(false);
   const { notificationCount } = useAppSelector((state: any) => state.notifications);
 
   const handleOpenNotification = () => {
     setOpenNotification(!openNotification);
+
+    if (!openNotification) {
+      // Mark notifications as seen when opening
+      dispatch(markNotificationsAsSeen());
+    }
   };
+
+  
+  useEffect(() => {
+    dispatch(fetchNotificationCount());
+  }, [dispatch]);
 
 
   const dropdownRef = useRef<HTMLDivElement>(null);

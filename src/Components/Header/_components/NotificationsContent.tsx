@@ -9,10 +9,6 @@ import { useAppSelector } from "../../../app/hooks";
 export default function NotificationsContent() {
   const { notifications } = useAppSelector((state: any) => state.notifications);
   const navigate = useNavigate();
-  
-  // const handleMarkAsSeen = () => {
-  //   dispatch(markNotificationsAsSeen());
-  // };
 
   return (
     <div className="flex flex-col gap-3 w-full h-full p-3">

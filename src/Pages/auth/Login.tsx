@@ -32,7 +32,7 @@ const Login = () => {
   const user_location = Cookies.get("user_location");
 
   const onSubmit: SubmitHandler<PropsInputsLogin> = (data) => {
-    console.log(data.phoneOremail);
+    // console.log(data.phoneOremail);
     dispatch(setPhoneOrEmail(data.phoneOremail));
     reset();
     navigate("/otp");

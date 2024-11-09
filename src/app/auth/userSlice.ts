@@ -18,7 +18,7 @@ export const userSlice = createSlice({
       state.phoneOrEmail = action.payload;
     },
     setOtp: (state, action) => {
-        console.log(action.payload);
+        // console.log(action.payload);
       state.Otp2 = action.payload;
       
     },
