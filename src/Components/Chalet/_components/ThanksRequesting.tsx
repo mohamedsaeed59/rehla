@@ -14,13 +14,13 @@ export default function ThanksRequesting() {
         />
         <div className="flex items-center flex-col justify-center text-center gap-1">
           <h3 className="text-xl md:text-2xl font-bold text-mainBlack">
-            Thanks for Requesting
+            {t("Thanks for Requesting")}
           </h3>
           <p className="text-[16px] md:text-lg leading-[21px] font-normal text-mainBlack">
-            This chalet needs a confirmation from the owner
+            {t("This chalet needs a confirmation from the owner")}
           </p>
           <p className="text-[16px] md:text-lg leading-[21px] font-normal text-[#4A4A4A]">
-            (This usually takes 24 hrs for responding)
+            ({t("This usually takes 24 hrs for responding")})
           </p>
         </div>
         <Link to={"/"} className="text-[14px] w-full text-center md:w-[40%] duration-500 border border-mainBlack hover:bg-mainBlack hover:text-white font-bold leading-[17px] rounded-3xl py-3">

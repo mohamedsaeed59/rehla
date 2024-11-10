@@ -64,10 +64,10 @@ export const updateOrder = createAsyncThunk(
 // Create an async thunk for fetching orders
 export const fetchOrders = createAsyncThunk(
     'order/fetchOrders',
-    async (_, { rejectWithValue }) => {
+    async (lang: any, { rejectWithValue }) => {
     const accessToken = localStorage.getItem("access_token");
         try {
-            const response = await axios.get(`${URL__API}/my-orders`,
+            const response = await axios.get(`${URL__API}/my-orders?lang=${lang}`,
                 {
                     headers: {
                       Authorization: `Bearer ${accessToken}`,

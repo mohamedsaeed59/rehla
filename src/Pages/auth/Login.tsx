@@ -128,13 +128,13 @@ const Login = () => {
                 </p>
               </div>
             </div>
-            <div className="flex justify-center flex-col items-center gap-2">
+            {/* <div className="flex justify-center flex-col items-center gap-2">
               <div className="text-center">
                 <p className="text-ry3Text font-normal"> {t("Or")}</p>
                 <p className="text-ry3Text font-normal">{t("LoginWith")}</p>
               </div>
               <SocialIcons />
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="order-1 md:order-2 h-full md:h-screen overflow-hidden">

@@ -36,7 +36,7 @@ const MoreDetails = ({ shifts, orderDate, booking }: any) => {
     <div className="transition duration-700 p-1">
       <div className="flex flex-col gap-6">
         <h3 className="text-[19px] font-normal text-mainBlack">
-          Register Shifts
+          {t("Register Shifts")}
         </h3>
         {booking.status == "approved" &&
          <button
@@ -68,7 +68,7 @@ const MoreDetails = ({ shifts, orderDate, booking }: any) => {
             </span>
           </p>
           <p className="text-mainBlack text-[18px] font-normal">
-            {shift?.price} |QD
+            {shift?.price} |{t("QD")}
           </p>
         </div>
         <div>

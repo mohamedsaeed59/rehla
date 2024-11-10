@@ -5,10 +5,12 @@ import favorite from "../../assets/icons/carbon_favorite.svg";
 import location from "../../assets/icons/carbon_location.svg";
 import Group from "../../assets/icons/Group.svg";
 import MoreDetails from "./_components/MoreDetails";
+import { useTranslation } from "react-i18next";
 
 const CardMyBookings = ({ booking }: any) => {
   const [openMoreDetails, setOpenMoreDetails] = useState(false);
   const handleOpenMoreDetails = () => setOpenMoreDetails(!openMoreDetails);
+  const { t } = useTranslation();
 
   return (
     <div className="rounded-[20px] bg-ryBackground p-3 md:py-[27px] md:px-5 h-full">
@@ -33,20 +35,20 @@ const CardMyBookings = ({ booking }: any) => {
                   alt="ad"
                   className="w-full h-full rounded-md object-cover"
                 />
-                <div className="absolute top-2 left-1/2 w-[64px] h-[24px] rounded-xl transform -translate-x-[50%] mainBlack text-sm backdrop-blur-[16px] bg-white/70">
+                {/* <div className="absolute top-2 left-1/2 w-[64px] h-[24px] rounded-xl transform -translate-x-[50%] mainBlack text-sm backdrop-blur-[16px] bg-white/70">
                   <div className="flex items-center justify-center p-1 h-full">
                     <img src={Star} alt="Star" className="w-[14px]" />
                     <span className="text-[14px]">(4.5)</span>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
             <div className="flex flex-col gap-2 md:gap-6">
               <h2 className="font-normal text-base md:text-xl text-mainBlack">{booking.ad}</h2>
-              <div className="flex items-center gap-1">
+              {/* <div className="flex items-center gap-1">
                 <img src={favorite} alt="favorite" className="w-4 h-4" />
                 <span className="text-sm text-ry4Text">17,200</span>
-              </div>
+              </div> */}
               <div className="flex flex-col gap-1">
                 <div className="flex items-center gap-1 text-ry3Text">
                   <img src={location} alt="location" className="w-4 h-4" />
@@ -54,7 +56,7 @@ const CardMyBookings = ({ booking }: any) => {
                 </div>
                 <div className="flex items-center gap-1 text-ry3Text">
                   <img src={Group} alt="Group" className="w-4 h-4" />
-                  <span className="text-xs md:text-[16px]">{booking.no_adults} Adults</span>
+                  <span className="text-xs md:text-[16px]">{booking.no_adults} {t("Adults")}</span>
                 </div>
               </div>
             </div>

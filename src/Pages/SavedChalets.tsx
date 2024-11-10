@@ -10,6 +10,7 @@ const SavedChalets = () => {
   const dispatch = useAppDispatch();
   const { archive } = useAppSelector((state: any) => state.archive);
   const [sortOption, setSortOption] = useState<string>("");
+  const lang = localStorage.getItem("i18nextLng") || "en";
 
   const sortedArchive = [...archive].sort((a, b) => {
     switch (sortOption) {
@@ -27,7 +28,7 @@ const SavedChalets = () => {
   });
 
   useEffect(() => {
-      dispatch(userArchive());
+      dispatch(userArchive(lang));
   },[])
 
   return (

@@ -159,13 +159,13 @@ export default function NumberOfAdults({services, selectedIds, setSelectedIds, s
           </div>
         </div>
         <p className="text-base font-normal text-ry3Text">
-          (Max {chaletDetails?.no_adults} adults = 1 Adult = {chaletDetails?.price_extra_adults}$/shift)
+          ({t("Max")} {chaletDetails?.no_adults} {t("Adults")} = 1 {t("Adult")} = {chaletDetails?.price_extra_adults}{t("QD")}/{t("shift")})
         </p>
         <div className="flex justify-between items-center flex-wrap md:flex-nowrap">
         <div className="flex items-center gap-2">
         <div className="inline" onClick={handleCheckboxClick}><input type="checkbox" checked={showCounterChildren} readOnly /> </div>     
         <p className="text-base font-normal text-mainBlack inline">
-          Have Children <span className="text-ry3Text">(&lt;5 years)</span>
+          {t("Have Children")} <span className="text-ry3Text">(&lt;5 {t("years")})</span>
         </p>
         </div>
         {showCounterChildren && (
@@ -411,7 +411,7 @@ export default function NumberOfAdults({services, selectedIds, setSelectedIds, s
                 />
                 <p className="text-lg font-normal">{service.name}</p>
               </div>
-              <p className="font-bold text-[15px]">{service.price} |Qd</p>
+              <p className="font-bold text-[15px]">{service.price} |{t("QD")}</p>
             </div>
           </div>
         ))}

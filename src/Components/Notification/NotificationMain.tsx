@@ -5,14 +5,22 @@ import { AnimatePresence } from "framer-motion";
 import useClickOutside from "../../hooks/useClickOutside";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { fetchNotificationCount, markNotificationsAsSeen } from "../../app/notification/notificationSlice";
+import { useNavigate } from "react-router-dom";
 
 function NotificationMain() {
   const dispatch = useAppDispatch();
   const [openNotification, setOpenNotification] = useState<boolean>(false);
   const { notificationCount } = useAppSelector((state: any) => state.notifications);
+  const accessToken = localStorage.getItem("access_token");
+  const navigate = useNavigate();
 
   const handleOpenNotification = () => {
     setOpenNotification(!openNotification);
+
+    if (!accessToken) {
+      navigate("/login");
+      return;
+    }
 
     if (!openNotification) {
       // Mark notifications as seen when opening

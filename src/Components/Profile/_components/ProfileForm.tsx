@@ -69,7 +69,7 @@ const ProfileForm = () => {
     <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
       <div className="flex flex-col gap-1">
         <label className="text-lg font-normal">
-          Full Name <span className="text-red">*</span>
+          {t("Full Name")} <span className="text-red">*</span>
         </label>
         <input
           type="text"
@@ -82,7 +82,7 @@ const ProfileForm = () => {
       </div>
       <div className="flex flex-col gap-1">
         <label className="text-lg font-normal">
-          Phone number <span className="text-red">*</span>
+          {t("Phone number")} <span className="text-red">*</span>
         </label>
         <input
           type="phone"
@@ -94,7 +94,7 @@ const ProfileForm = () => {
       </div>
       <div className="flex flex-col gap-1">
         <label className="text-lg font-normal">
-          E-mail <span className="text-ry3Text">({t("Optional")})</span>
+          {t("E-mail")} <span className="text-ry3Text">({t("Optional")})</span>
         </label>
         <input
           type="email"
@@ -107,7 +107,7 @@ const ProfileForm = () => {
 
       <div className="flex flex-col gap-1">
         <label className="text-lg font-normal">
-          Age <span className="text-red">*</span>
+          {t("Age")} <span className="text-red">*</span>
         </label>
         <input
           type="number"
@@ -120,7 +120,7 @@ const ProfileForm = () => {
 
       <div className="flex flex-col gap-1">
         <label className="text-lg font-normal">
-          City <span className="text-red">*</span>
+          {t("City")} <span className="text-red">*</span>
         </label>
         <div ref={dropdownRef} onClick={handleOpenMenuCity} className="relative">
         <input
@@ -137,7 +137,7 @@ const ProfileForm = () => {
 
       <div className="flex flex-col gap-1">
         <label className="text-lg font-normal">
-          Address <span className="text-ry3Text">({t("Optional")})</span>
+          {t("Address")} <span className="text-ry3Text">({t("Optional")})</span>
         </label>
         <input
           type="text"
@@ -152,7 +152,7 @@ const ProfileForm = () => {
         type="submit"
         className="rounded-3xl p-2 focus:outline-none text-lg font-bold bg-mainBlack uppercase text-white"
       >
-        Update
+        {t("Update")}
       </button>
       {error && 
         <p className="text-red text-center">{error}</p>
@@ -161,7 +161,7 @@ const ProfileForm = () => {
         onClick={() => handleOpenDeleteAccount()}
         className="p-2 text-lg font-bold text-red text-center cursor-pointer"
       >
-        Delete Account
+        {t("Delete Account")}
       </div>
     </form>
       {openDeleteAccount && <DeleteAccount setOpenDeleteAccount={setOpenDeleteAccount} />}

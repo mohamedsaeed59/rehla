@@ -19,6 +19,7 @@ import { useParams } from 'react-router-dom';
 import { addOrder, setDirectOrder } from "../../app/order/orderSlice";
 import { actSettings } from "../../app/SettingsSlice";
 import { archiveAd, unarchiveAd } from "../../app/archive/archiveSlice";
+import { toast } from "react-toastify";
 
 const ChaletDetails = () => {
   const [showComments, setShowComments] = useState<boolean>(true);
@@ -55,7 +56,9 @@ const ChaletDetails = () => {
       } else {
         dispatch(archiveAd({ ad_id: id }));
       }
-    }  
+    }else{
+      toast.error(t("You need to log in to save this ad"));
+    }
   };
 
   // Set a limit for the short description length
@@ -219,13 +222,13 @@ useEffect(() => {
                 <div className="flex items-center gap-1">
                   <img src={favorite} alt="favorite" className="w-5 h-5" />
                   <span className="text-base font-light text-ry4Text">
-                    {chaletDetails?.no_favorites} Like
+                    {chaletDetails?.no_favorites}
                   </span>
                 </div>
                 <div className="flex items-center gap-1">
                   <img src={Group} alt="Group" className="w-5 h-5" />
                   <span className="text-[12px] font-semibold text-ry3Text">
-                    {chaletDetails?.no_adults} Adults{" "}
+                    {chaletDetails?.no_adults} {t("Adults")}{" "}
                   </span>
                 </div>
                 <div className="flex items-center gap-1 text-ry3Text">
@@ -268,7 +271,7 @@ useEffect(() => {
                   onClick={toggleDescription}
                   className="font-medium text-lg text-primary flex gap-1 items-center"
                 >
-                  {isExpanded ? "Show less" : "Show more"}
+                  {isExpanded ? t("Show less") : t("Show more")}
                   <img
                     src={rightArrow}
                     alt="rightArrow"
@@ -294,14 +297,14 @@ useEffect(() => {
                   </svg>
 
                   <span className="font-normal text-base text-ry5Text">
-                    {comment?.length ?? 0} Comment
+                    {comment?.length ?? 0} {t("Comment")}
                   </span>
                 </div>
                 <p
                   onClick={() => handelShowComments()}
                   className="font-medium text-base border-b border-primary text-primary cursor-pointer"
                 >
-                  Show
+                  {t("Show")}
                 </p>
               </div>
               {!showComments && (
@@ -412,34 +415,31 @@ useEffect(() => {
             </div>
 
             <div className="flex items-center gap-2">
-              <svg
-                width="23"
-                height="23"
-                viewBox="0 0 23 23"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <mask
-                  id="mask0_39_3733"
-                  maskUnits="userSpaceOnUse"
-                  x="0"
-                  y="0"
-                  width="23"
-                  height="23"
-                >
-                  <path
-                    d="M0 5.85964C0 2.70747 2.55571 0.152039 5.70833 0.152039H17.125C20.2776 0.152039 22.8333 2.70747 22.8333 5.85964V17.2748C22.8333 20.427 20.2776 22.9824 17.125 22.9824H5.70833C2.55571 22.9824 0 20.427 0 17.2748V5.85964Z"
-                    fill="white"
-                  />
-                </mask>
-                <g mask="url(#mask0_39_3733)">
-                  <path
-                    d="M5.70835 1.57896H17.125V-1.27484H5.70835V1.57896ZM21.4063 5.85966V17.2749H24.2604V5.85966H21.4063ZM17.125 21.5556H5.70835V24.4094H17.125V21.5556ZM1.4271 17.2749V5.85966H-1.42706V17.2749H1.4271ZM5.70835 21.5556C3.34389 21.5556 1.4271 19.6391 1.4271 17.2749H-1.42706C-1.42706 21.2151 1.76758 24.4094 5.70835 24.4094V21.5556ZM21.4063 17.2749C21.4063 19.6391 19.4896 21.5556 17.125 21.5556V24.4094C21.0658 24.4094 24.2604 21.2151 24.2604 17.2749H21.4063ZM17.125 1.57896C19.4896 1.57896 21.4063 3.49543 21.4063 5.85966H24.2604C24.2604 1.91942 21.0658 -1.27484 17.125 -1.27484V1.57896ZM5.70835 -1.27484C1.76758 -1.27484 -1.42706 1.91942 -1.42706 5.85966H1.4271C1.4271 3.49543 3.34389 1.57896 5.70835 1.57896V-1.27484Z"
-                    fill="#DBDBDB"
-                  />
-                </g>
-              </svg>
-
+            <svg
+              width="23"
+              height="24"
+              viewBox="0 0 40 40"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect
+                x="1"
+                y="1"
+                width="38"
+                height="38"
+                rx="8"
+                fill="#F8F8F8"
+                stroke="#DBDBDB"
+                strokeWidth="2"
+              />
+              
+              <path
+                d="M12 12 L28 28 M28 12 L12 28"
+                stroke="#9E9E9E"
+                strokeWidth="3"
+                strokeLinecap="round"
+              />
+            </svg>
               <p className="text-lg font-normal text-mainBlack">
                {t("NotAvailable")}
               </p>

@@ -5,6 +5,7 @@ import rightArrow from "../../assets/icons/right-arrow.svg";
 import DaysGrid from "./_components/DaysGrid";
 import ShiftsSidePanel from "./_components/ShiftsSidePanel";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 type DayState = "available" | "not_available" | "crowded";
 
@@ -22,10 +23,12 @@ export default function Calendar({ calendar = [], setIsSelectedDate, setSelected
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const { shifts, chaletDetails } = useAppSelector((state: any) => state.chalet);
   const { id } = useParams();
+  const lang = localStorage.getItem("i18nextLng") || "en";
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (chaletDetails?.have_shifts) {
-      dispatch(addShifts({ id, selectedDate }));
+      dispatch(addShifts({ id, selectedDate, lang }));
     }
   }, [dispatch, selectedDate, id]);
 
@@ -137,18 +140,51 @@ export default function Calendar({ calendar = [], setIsSelectedDate, setSelected
       generateCalendarDays(newIndex, monthNames);
     }
   };
+  const selectedMonthAfterIterable = monthNames[selectedMonthIndex] || "";
+  const [currentMonth, currentYear] = selectedMonthAfterIterable.split(" ");
 
+  function getMonthName(month :any) {
+    switch (month) {
+      case "January":
+        return t("January");
+      case "February":
+        return t("February");
+      case "March":
+        return t("March");
+      case "April":
+        return t("April");
+      case "May":
+        return t("May");
+      case "June":
+        return t("June");
+      case "July":
+        return t("July");
+      case "August":
+        return t("August");
+      case "September":
+        return t("September");
+      case "October":
+        return t("October");
+      case "November":
+        return t("November");
+      case "December":
+        return t("December");
+      default:
+        return "Unknown month";
+    }
+  }
+  
   return (
     <div>
       <div className="flex flex-wrap md:flex-nowrap gap-8">
         <div className="flex flex-col gap-5 w-full md:w-[70%]">
           <div className="bg-bgNew flex flex-col justify-center gap-1 rounded-tl-[40px] rounded-tr-[40px] items-center py-3">
             <div className="border shadow-sm rounded-xl py-2 px-5">
-              <span className="font-normal text-[17px]">2024</span>
+              <span className="font-normal text-[17px]">{currentYear}</span>
             </div>
             <div className="relative">
               <div className="font-medium text-lg cursor-pointer text-mainBlack flex justify-center gap-1 items-center">
-                {monthNames[selectedMonthIndex]}
+                {getMonthName(currentMonth)} {currentYear}
                 <img
                   onClick={() => handleMonthChange("next")}
                   src={rightArrow}

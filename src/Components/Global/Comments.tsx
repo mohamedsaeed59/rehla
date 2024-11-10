@@ -1,12 +1,16 @@
+import avter from "../../assets/avter.webp";
 
 export default function Comments({com}: any) {
   return (
     <div className="flex flex-col gap-1">
       <div className="flex items-center gap-3">
         <img
-          src={com?.user_image}
+          src={com?.user_image || avter}
           alt="avter"
           className="w-[24px] h-[24px] rounded-full"
+          onError={(e) => {
+            (e.target as HTMLImageElement).src = avter;
+          }}
         />
         <div className="flex flex-col gap-0">
           <p className="text-sm font-medium">{com?.user_name}</p>

@@ -7,6 +7,8 @@ import Group from "../../assets/icons/Group.svg";
 import { Link } from "react-router-dom";
 import { archiveAd, unarchiveAd } from "../../app/archive/archiveSlice";
 import { AppDispatch } from "../../app/store";
+import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 interface CardProps {
   id: number;
@@ -22,6 +24,7 @@ const Card = ({ id, name, image, rate, favorites, city, adults }: CardProps) => 
   // const [save, setSave] = useState<boolean>(true);
   const dispatch: AppDispatch = useDispatch();
   const accessToken = localStorage.getItem("access_token");
+  const { t } = useTranslation();
 
   const [save, setSave] = useState<boolean>(() => {
     return localStorage.getItem(`save_${id}`) === "true";
@@ -39,7 +42,9 @@ const Card = ({ id, name, image, rate, favorites, city, adults }: CardProps) => 
       } else {
         dispatch(archiveAd({ ad_id: id }));
       }
-    }  
+    }else{
+      toast.error(t("You need to log in to save this ad")); 
+    }
   };
 
   return (
@@ -49,7 +54,7 @@ const Card = ({ id, name, image, rate, favorites, city, adults }: CardProps) => 
           <Link to={`/chalet/${id}`} className="">
             <img
               src={image}
-              alt="card"
+              alt={name}
               className="w-full h-full max-h-[250px] object-cover group-hover:scale-[1.02] duration-300"
             />
             <div className="absolute top-2 left-1/2 w-[64px] h-[24px] rounded-xl transform -translate-x-[50%] mainBlack text-sm backdrop-blur-[16px] bg-white/70">
@@ -78,7 +83,7 @@ const Card = ({ id, name, image, rate, favorites, city, adults }: CardProps) => 
               </div>
               <div className="flex items-center gap-1 text-ry3Text">
                 <img src={Group} alt="Group" className="w-4 h-4" />
-                <span className="text-[16px]">{adults} Adults</span>
+                <span className="text-[16px]">{adults} {t("Adults")}</span>
               </div>
             </div>
           </div>

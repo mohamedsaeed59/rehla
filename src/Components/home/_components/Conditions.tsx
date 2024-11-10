@@ -1,5 +1,6 @@
 import { memo } from "react";
 import { useAppSelector } from "../../../app/hooks";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   setShowTerms: (open: boolean) => void;
@@ -7,6 +8,8 @@ type Props = {
   handleAgree: () => void;
 };
 const Conditions = ({ setShowTerms, setOpenMenuTerms, handleAgree }: Props) => {
+  const { t } = useTranslation();
+
   const { data } = useAppSelector((state) => state.settings);
 
   const handleCancel = () => {
@@ -22,7 +25,7 @@ const Conditions = ({ setShowTerms, setOpenMenuTerms, handleAgree }: Props) => {
             {data?.terms_title}
           </h3>
           <p className="text-[18px] font-normal text-mainBlack">
-            Your Agreement
+             {t("You agree to our")}
           </p>
           <div className="">
             <p className="h-[400px] overflow-y-scroll text-ry3Text text-lg font-normal">
@@ -34,13 +37,13 @@ const Conditions = ({ setShowTerms, setOpenMenuTerms, handleAgree }: Props) => {
               onClick={handleCancel}
               className="w-[175px] py-2 px-4 text-ry3Text font-bold text-sm rounded-3xl"
             >
-              Cancel
+              {t("Cancel")}
             </button>
             <button
               onClick={handleAgree}
               className="w-[175px] py-2 px-4 bg-mainBlack text-white font-bold text-sm rounded-3xl"
             >
-              Agree
+              {t("Agree")}        
             </button>
           </div>
         </div>

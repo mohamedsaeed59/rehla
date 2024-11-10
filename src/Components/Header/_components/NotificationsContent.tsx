@@ -5,10 +5,12 @@ import location from "../../../assets/icons/carbon_location.svg";
 // import { useEffect } from 'react';
 // import { fetchNotifications } from '../../../app/notification/notificationSlice';
 import { useAppSelector } from "../../../app/hooks";
+import { useTranslation } from "react-i18next";
 
 export default function NotificationsContent() {
   const { notifications } = useAppSelector((state: any) => state.notifications);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <div className="flex flex-col gap-3 w-full h-full p-3">
@@ -39,7 +41,7 @@ export default function NotificationsContent() {
               to={"/"}
               className="text-xs font-bold text-mainBlack border-b border-black"
             >
-              Discovor now
+              {t("Discovor now")}
             </Link>
           </div>
         </div>
@@ -54,7 +56,7 @@ export default function NotificationsContent() {
             </div>
             <img
               src={notification?.ad?.image}
-              alt="no"
+              alt={notification?.ad?.name}
               className="w-full h-[80%] object-cover rounded-bl-xl rounded-br-xl"
             />
           </div>
@@ -63,7 +65,7 @@ export default function NotificationsContent() {
             <div className="flex flex-col gap-1">
               <div className="flex items-center gap-1 text-ry3Text">
                 <img src={Group} alt="Group" className="w-4 h-4" />
-                <span className="text-[14px]">{notification?.ad?.no_adults} Adults </span>
+                <span className="text-[14px]">{notification?.ad?.no_adults} {t("Adults")} </span>
               </div>
               <div className="flex items-center gap-1">
                 <img src={location} alt="location" className="w-4 h-4" />
@@ -77,19 +79,19 @@ export default function NotificationsContent() {
               onClick={() => navigate(`/chalet/${notification?.ad?.id}`)}
               className="rounded-3xl w-[200px] text-center py-2 focus:outline-none text-sm font-bold bg-mainBlack text-white"
             >
-              Change date
+              {t("Change date")}
             </button>
             <button
               // type="submit"
               onClick={() => navigate("/")}
               className="rounded-3xl border border-mainBlack w-[200px] text-center py-2 focus:outline-none text-xs font-bold text-mainBlack"
             >
-              Recommend another chalet
+              {t("Recommend another chalet")}
             </button>
           </div>
         </div>
         <p className="text-[#FF3B30] text-[12px] font-normal py-2">
-          . Reason: your selected date is fully booked
+          
         </p>
       </div>))}
       {notifications?.map((notification: any) => 
@@ -102,7 +104,7 @@ export default function NotificationsContent() {
             </div>
             <img
               src={notification?.ad?.image}
-              alt="no"
+              alt={notification?.ad?.name}
               className="w-full h-[80%] object-cover rounded-bl-xl rounded-br-xl"
             />
           </div>
@@ -111,7 +113,7 @@ export default function NotificationsContent() {
             <div className="flex flex-col gap-1">
               <div className="flex items-center gap-1 text-ry3Text">
                 <img src={Group} alt="Group" className="w-4 h-4" />
-                <span className="text-[14px]">{notification?.ad?.no_adults} Adults </span>
+                <span className="text-[14px]">{notification?.ad?.no_adults} {t("Adults")} </span>
               </div>
               <div className="flex items-center gap-1">
                 <img src={location} alt="location" className="w-4 h-4" />
@@ -125,7 +127,7 @@ export default function NotificationsContent() {
               onClick={() => navigate("/bookings")}
               className="rounded-3xl w-[200px] text-center py-2 focus:outline-none text-sm font-bold bg-mainBlack text-white"
             >
-              Go & complete check out
+              {t("Gocompletecheckout")}
             </button>
           </div>
         </div>

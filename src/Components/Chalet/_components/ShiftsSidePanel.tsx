@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 interface Shift {
   id: number;
@@ -26,6 +27,7 @@ export default function ShiftsSidePanel({
 }: ShiftsSidePanelProps) {
   const [selectedShiftIds, setSelectedShiftIds] = useState<number[]>([]);
   const [errShiftMessage, setErrShiftMessage] = useState<boolean>(false);
+  const { t } = useTranslation();
 
   const handleShiftClick = (id: number) => {
     const shift = shifts.find((s) => s.id === id);
@@ -77,7 +79,7 @@ export default function ShiftsSidePanel({
       {selectedDate !== null && (
         <div>
           <h3 className="font-medium text-[17px] text-mainBlack">
-            {have_shifts && "Available Shifts"}
+            {have_shifts && t("Available Shifts")}
           </h3>
           <p className="text-mainBlack font-normal text-xs py-3">
             {have_shifts && (selectedDate || "You should choose a day to display the shifts")}
@@ -95,14 +97,14 @@ export default function ShiftsSidePanel({
                   <h4 className="font-medium mb-2">{shift?.name}</h4>
                   <p className="text-sm text-gray-600 mb-2">{shift?.time_from}</p>
                   <p className="text-sm text-gray-600 mb-2">{shift?.time_to}</p>
-                  <p className="font-bold">{shift.price} IQD</p>
+                  <p className="font-bold">{shift.price} {t("QD")}</p>
                 </div>
               </div>
             ))}
           </div>
           {!!errShiftMessage && (
             <p className="text-red font-normal text-xs mt-4">
-              You can't select non-adjacent shifts
+              {t("You can't select non-adjacent shifts")}
             </p>
           )}
         </div>

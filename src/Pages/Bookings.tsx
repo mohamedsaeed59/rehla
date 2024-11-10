@@ -6,9 +6,10 @@ import { fetchOrders } from "../app/order/orderSlice";
 const Bookings = () => {
   const dispatch = useAppDispatch();
   const { orders } = useAppSelector((state: any) => state.order);
+  const lang = localStorage.getItem("i18nextLng") || "en";
 
   useEffect(() => {
-    dispatch(fetchOrders());
+    dispatch(fetchOrders(lang));
 }, [dispatch])
 
   return (

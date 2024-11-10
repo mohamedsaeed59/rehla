@@ -10,6 +10,8 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { archiveAd, unarchiveAd } from "../../app/archive/archiveSlice";
 import { AppDispatch } from "../../app/store";
+import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 interface CardTwoProps {
   id: number;
@@ -24,6 +26,8 @@ interface CardTwoProps {
 const CardTwo = ({id, name, image, rate, favorites, city, adults}: CardTwoProps) => {
   const dispatch: AppDispatch = useDispatch();
   const accessToken = localStorage.getItem("access_token");
+  const { t } = useTranslation();
+
   const [save, setSave] = useState<boolean>(() => {
     return localStorage.getItem(`save_${id}`) === "true";
   });
@@ -40,7 +44,9 @@ const CardTwo = ({id, name, image, rate, favorites, city, adults}: CardTwoProps)
       } else {
         dispatch(archiveAd({ ad_id: id }));
       }
-    }  
+    } else{
+      toast.error(t("You need to log in to save this ad"));
+    }
   };
   
   return (
@@ -50,7 +56,7 @@ const CardTwo = ({id, name, image, rate, favorites, city, adults}: CardTwoProps)
         <Link to={`/chalet/${id}`} className="w-full max-w-[500px] h-full  max-h-[230px]">
             <img
               src={image}
-              alt="card"
+              alt={name}
               className="w-full h-full object-cover group-hover:scale-[1.02] duration-300"
             />
             <div className="absolute top-2 left-1/2 w-[64px] h-[24px] rounded-xl transform -translate-x-[50%] mainBlack text-sm backdrop-blur-[16px] bg-white/70">
@@ -90,7 +96,7 @@ const CardTwo = ({id, name, image, rate, favorites, city, adults}: CardTwoProps)
                   alt="Group"
                   className="w-3 sm:w-4 h-3 sm:h-4"
                 />
-                <span className="text-sm sm:text-[16px]">{adults} Adults </span>
+                <span className="text-sm sm:text-[16px]">{adults} {t("Adults")} </span>
               </div>
             </div>
           </div>

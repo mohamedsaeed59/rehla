@@ -1,8 +1,10 @@
+import { useTranslation } from "react-i18next";
 import { useAppSelector } from "../../app/hooks";
 import Group from "../../assets/icons/Group.svg";
 
 export default function DetailsCheckOut({directOrders}: any) {
   const { chaletDetails } = useAppSelector((state: any) => state.chalet);
+  const { t } = useTranslation();
 
   const selectedSercices = directOrders?.services;
   const allSercices = chaletDetails?.services;
@@ -14,7 +16,7 @@ export default function DetailsCheckOut({directOrders}: any) {
         <div className="flex justify-between">
           <div className="flex items-center justify-center gap-2">
             <img src={Group} alt="Group" className="w-5 h-5" />
-            <span className="text-[16px] font-normal">Adults ({directOrders?.no_adults})</span>
+            <span className="text-[16px] font-normal">{t("Adults")} ({directOrders?.no_adults})</span>
           </div>
           <span className="text-base font-light text-mainBlack">-</span>
         </div>
@@ -33,7 +35,7 @@ export default function DetailsCheckOut({directOrders}: any) {
               />
             </svg>
 
-            <span className="text-[16px] font-normal">Extra Adults ({directOrders?.extra_no_adults})</span>
+            <span className="text-[16px] font-normal">{t("Extra Adults")} ({directOrders?.extra_no_adults})</span>
           </div>
           <span className="text-base font-light text-mainBlack">-</span>
         </div>
@@ -54,7 +56,7 @@ export default function DetailsCheckOut({directOrders}: any) {
               />
             </svg>
 
-            <span className="text-[16px] font-normal">Children ({directOrders?.no_children})</span>
+            <span className="text-[16px] font-normal">{t("Children")} ({directOrders?.no_children})</span>
           </div>
           {/* <span className="text-[16px] font-normal">Children (2)</span> */}
           <span className="text-base font-light text-mainBlack">-</span>
@@ -241,7 +243,7 @@ export default function DetailsCheckOut({directOrders}: any) {
               </defs>
             </svg>
 
-            <span className="text-[16px] font-normal">Extra amenity</span>
+            <span className="text-[16px] font-normal">{t("Extra amenity")}</span>
           </div>
           {/* <span className="text-[16px] font-normal">Extra amenity</span>
           <span className="text-base font-light text-mainBlack">150 |QD</span> */}
@@ -250,7 +252,7 @@ export default function DetailsCheckOut({directOrders}: any) {
          {filteredSercices?.map((service: any) => (
            <div key={service?.id} className="flex justify-between">
             <p className="text-[14px] font-normal text-mainBlack">{service.name}</p>
-            <span className="text-sm font-light text-ry5Text">{service.price} |QD</span>
+            <span className="text-sm font-light text-ry5Text">{service.price} |{t("QD")}</span>
            </div>
          ))}
         </div>

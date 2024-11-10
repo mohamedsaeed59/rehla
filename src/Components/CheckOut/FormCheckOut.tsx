@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { addOrder, updateOrder, useCoupon } from "../../app/order/orderSlice";
 import { actSettings } from "../../app/SettingsSlice";
+import { toast } from "react-toastify";
 
 const FormCheckOut = ({directOrders} : any) => {
   const { t } = useTranslation();
@@ -13,7 +14,6 @@ const FormCheckOut = ({directOrders} : any) => {
   const { chaletDetails } = useAppSelector((state: any) => state.chalet);  
   const { data } = useAppSelector((state: any) => state.settings);
   const [coupon, setCoupon] = useState("");
-  const [errorMessage, setErrorMessage] = useState<any>("");
   const lang = localStorage.getItem("i18nextLng") || "en";
 
   useEffect(() => {
@@ -60,10 +60,11 @@ const FormCheckOut = ({directOrders} : any) => {
           localStorage.removeItem('directOrders');
         }
       } catch (error: any) {
-        setErrorMessage(error.response.data.message)
-        setTimeout(() => {
-          setErrorMessage(null);
-        }, 20000);
+        toast.error(t("You need to log in to complete the payment process"));
+        // setErrorMessage(error.response.data.message)
+        // setTimeout(() => {
+        //   setErrorMessage(null);
+        // }, 20000);
       }
     }else{
       try {
@@ -78,10 +79,11 @@ const FormCheckOut = ({directOrders} : any) => {
           localStorage.removeItem('directOrders');
         }
       } catch (error: any) {
-        setErrorMessage(error.response.data.message)
-        setTimeout(() => {
-          setErrorMessage(null);
-        }, 20000);
+        toast.error(t("You need to log in to complete the payment process"));
+        // setErrorMessage(error.response.data.message)
+        // setTimeout(() => {
+        //   setErrorMessage(null);
+        // }, 20000);
       }
     }
   };
@@ -95,7 +97,7 @@ const FormCheckOut = ({directOrders} : any) => {
         </label>
         <input
           type="text"
-          placeholder="Write your name"
+          placeholder={t("Write your name")}
           className="rounded-lg p-2 focus:outline-none border focus:border-primary border-borderColor"
         />
       </div>
@@ -175,19 +177,19 @@ const FormCheckOut = ({directOrders} : any) => {
       <div className="flex flex-col">
         <div className="flex flex-col gap-4">
           <div className="flex justify-between">
-            <p className="text-base font-normal text-mainBlack">Subtotal</p>
+            <p className="text-base font-normal text-mainBlack">{t("SubTotal")}</p>
             <span className="text-base font-light text-mainBlack">
-              {SubTotal} |QD
+              {SubTotal} |{t("QD")}
             </span>
           </div>
           <div className="flex justify-between pb-2">
-            <p className="text-base font-normal text-mainBlack">Taxes ({data?.tax}%) </p>
-            <span className="text-base font-light text-mainBlack">{Tax} |QD</span>
+            <p className="text-base font-normal text-mainBlack">{t("Taxes")} ({data?.tax}%) </p>
+            <span className="text-base font-light text-mainBlack">{Tax} |{t("QD")}</span>
           </div>
         </div>
         <div className="flex justify-between border-t pt-2">
-          <p>Total</p>
-          <span className="text-primary font-bold">{Total} |QD</span>
+          <p>{t("Total")}</p>
+          <span className="text-primary font-bold">{Total} |{t("QD")}</span>
         </div>
       </div>
       <button
@@ -196,9 +198,8 @@ const FormCheckOut = ({directOrders} : any) => {
         onClick={handleCreateOrder}
         className="rounded-3xl text-center py-4 text-sm font-bold bg-mainBlack text-white"
       >
-        CONFIRM PAYMENT ...{Total} IQD
+        {t("Confirm Payment")} ...{Total} {t("QD")}
       </button>
-      <p className="w-[300px] py-3 font-bold text-red">{errorMessage}</p>
     </form>
   );
 };

@@ -2,13 +2,16 @@ import { memo } from "react";
 import location from "../../assets/icons/Location2.svg";
 import arrow from "../../assets/icons/right-arrow.svg";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const SearchMenu = ({searchResults}: any) => {
+  const { t } = useTranslation();
+
   return (
     <div className="absolute top-12 z-20 rtl:left-0 ltr:right-0 rounded-lg bg-white border border-borderColor2 duration-300">
       <div className="w-[300px] md:w-[340px]">
         <div className="flex flex-col gap-2 p-2">
-          <h4 className="font-normal text-lg sm:text-xl">Location</h4>
+          <h4 className="font-normal text-lg sm:text-xl">{t("Location")}</h4>
           {[...new Map(searchResults.map((loc: any) => [loc.city, loc])).values()].map((loc: any, index: number) => (
             <div key={index} className="flex justify-between items-center p-1 my-1 cursor-pointer">
               <Link to="/search" className="flex items-center gap-1">
@@ -18,7 +21,7 @@ const SearchMenu = ({searchResults}: any) => {
               <img src={arrow} alt="arrow" className="w-3 h-3" />
             </div>
           ))}
-          <h4 className="font-normal text-sm sm:text-base">Chalet name</h4>
+          <h4 className="font-normal text-sm sm:text-base">{t("Chalet name")}</h4>
           {/* {searchResults.map((chalet: any, index: number) => { */}
           {[...new Map(searchResults.map((chalet: any) => [chalet.name, chalet])).values()].map((chalet: any, index: number) => (
             <div key={index} className="flex justify-between items-center p-1 my-1">
@@ -69,7 +72,7 @@ const SearchMenu = ({searchResults}: any) => {
               type="submit"
               className="w-full rounded-[35px] p-2 focus:outline-none text-lg font-bold hover:bg-mainBlack border border-mainBlack hover:text-white text-mainBlack duration-300"
             >
-            <Link to={"/search"}>Show all search results</Link>
+            <Link to={"/search"}>{t("Show all search results")}</Link>
             </button>
           </div>
         </div>

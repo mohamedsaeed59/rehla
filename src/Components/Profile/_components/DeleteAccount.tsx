@@ -3,11 +3,13 @@ import { useNavigate } from "react-router-dom";
 import Delete from "../../../assets/icons/Delete.svg";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { actDeleteAccount } from "../../../app/auth/authSlice";
+import { useTranslation } from "react-i18next";
 
 const DeleteAccount = ({setOpenDeleteAccount}: any) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { loading } = useAppSelector((state) => state.auth);
+  const { t } = useTranslation();
 
   // Handler to cancel the deletion process
   const handleCancel = () => {
@@ -33,10 +35,10 @@ const DeleteAccount = ({setOpenDeleteAccount}: any) => {
           <div className="flex flex-col items-center gap-4 py-12 px-6">
             <img src={Delete} alt="Delete" className="w-[18px] h-5" />
             <h3 className="font-bold text-lg sm:text-2xl">
-              Delete your account?
+              {t("Delete your account")}?
             </h3>
             <p className="font-normal text-sm sm:text-base text-ry5Text text-center">
-              By deleting your account, you will lose all your data.
+              {t("By deleting your account, you will lose all your data")}.
             </p>
           </div>
           <div className="flex flex-wrap gap-4 md:flex-nowrap justify-center items-center mb-6 w-[80%] mx-auto">
@@ -44,14 +46,14 @@ const DeleteAccount = ({setOpenDeleteAccount}: any) => {
               onClick={handleCancel}
               className="rounded-3xl border border-ry4Text py-1 px-3 w-full md:w-1/2 text-mainBlack"
             >
-              CANCEL
+              {t("Cancel")}
             </button>
             <button
               onClick={handleDelete}
               className="py-1 px-3 text-red text-center w-full md:w-1/2"
               disabled={loading === "pending"}
             >
-              {loading === "pending" ? "Deleting..." : "Delete"}
+              {loading === "pending" ? t("Deleting") : t("Delete")}
             </button>
           </div>
           {/* {error && (

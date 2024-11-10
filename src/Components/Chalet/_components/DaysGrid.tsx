@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import DayCell from "./DayCell";
 
 interface DayData {
@@ -13,7 +14,9 @@ interface DaysGridProps {
 }
 
 export default function DaysGrid({ calendarData, onDayClick}: DaysGridProps) {
-  const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const { t } = useTranslation();
+
+  const daysOfWeek = [t("Sun"), t("Mon"), t("Tue"), t("Wed"), t("Thu"), t("Fri"), t("Sat")];
 
   return (
     <div className="flex justify-center flex-wrap gap-2">

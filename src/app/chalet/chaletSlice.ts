@@ -50,7 +50,7 @@ export const getComments = createAsyncThunk(
     'chalet/addShifts',
     async (shiftParam: any, { rejectWithValue }) => {
       try {
-        const response = await axios.get(`${URL__API}/ad-shifts?id=${shiftParam.id}&date=${shiftParam.formattedDate}`);
+        const response = await axios.get(`${URL__API}/ad-shifts?id=${shiftParam.id}&date=${shiftParam.formattedDate}&lang=${shiftParam.lang}`);
         return response.data.data;
       } catch (error) {
         return rejectWithValue(error);

@@ -43,10 +43,10 @@ export const unarchiveAd = createAsyncThunk(
 // Async thunk for user archive
   export const userArchive = createAsyncThunk(
     'archive/userArchive',
-    async (_, { rejectWithValue }) => {
+    async (lang: any, { rejectWithValue }) => {
     const accessToken = localStorage.getItem("access_token");
         try {
-            const response = await axios.get(`${URL__API}/user-archive-list`, {
+            const response = await axios.get(`${URL__API}/user-archive-list?lang=${lang}`, {
                 headers: {
                   Authorization: `Bearer ${accessToken}`,
                 },
