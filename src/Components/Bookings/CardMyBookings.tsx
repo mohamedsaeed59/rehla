@@ -1,7 +1,7 @@
 import { memo, useState } from "react";
 import dropDown from "../../assets/icons/ic_baseline-arrow-drop-down.svg";
-import Star from "../../assets/icons/Star.svg";
-import favorite from "../../assets/icons/carbon_favorite.svg";
+// import Star from "../../assets/icons/Star.svg";
+// import favorite from "../../assets/icons/carbon_favorite.svg";
 import location from "../../assets/icons/carbon_location.svg";
 import Group from "../../assets/icons/Group.svg";
 import MoreDetails from "./_components/MoreDetails";

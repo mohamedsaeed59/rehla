@@ -9,6 +9,14 @@ import Cookies from "js-cookie";
 import { useAppDispatch } from "../../app/hooks";
 import { actFetchHomeScreen } from "../../app/home/homeSlice";
 
+interface LocationData {
+  address: string;
+  coordinates: {
+    lat: number;
+    lon: number;
+  };
+}
+
 function TopHeader() {
   const { t, i18n } = useTranslation();
   const dispatch = useAppDispatch();
@@ -20,7 +28,7 @@ function TopHeader() {
     setOpenLocation(!openLocation);
   };
 
-  const getLocationFromBrowser = () => {
+  const getLocationFromBrowser = (): Promise<LocationData> => {
     return new Promise((resolve, reject) => {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
@@ -58,8 +66,8 @@ function TopHeader() {
 
     dispatch(
       actFetchHomeScreen({
-        lat: result?.coordinates.lat,
-        lon: result?.coordinates.lon,
+        lat: result?.coordinates?.lat,
+        lon: result?.coordinates?.lon,
         lang: lang,
       })
     );
@@ -79,8 +87,8 @@ function TopHeader() {
 
       dispatch(
         actFetchHomeScreen({
-          lat: locationData.coordinates.lat,
-          lon: locationData.coordinates.lon,
+          lon: locationData?.coordinates?.lon,
+          lat: locationData?.coordinates?.lat,
           lang: newLang,
         })
       );

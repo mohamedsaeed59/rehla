@@ -29,7 +29,7 @@ export default function SliderChaletDetails({ gallery, rate }: any) {
             prevEl: prevRef.current,
             nextEl: nextRef.current,
           }}
-          onInit={(swiper) => {
+          onInit={(swiper: any) => {
             swiper.params.navigation.prevEl = prevRef.current;
             swiper.params.navigation.nextEl = nextRef.current;
             swiper.navigation.init();
