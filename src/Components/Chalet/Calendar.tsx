@@ -132,7 +132,6 @@ export default function Calendar({ calendar = [], setIsSelectedDate, setSelected
     }
 };
 
-  
   const handleMonthChange = (direction: "next" | "prev") => {
     const newIndex = direction === "next" ? selectedMonthIndex + 1 : selectedMonthIndex - 1;
     if (newIndex >= 0 && newIndex < monthNames.length) {

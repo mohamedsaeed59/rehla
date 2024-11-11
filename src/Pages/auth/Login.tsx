@@ -2,11 +2,9 @@ import { memo } from "react";
 import SliderAuth from "../../Components/auth/SliderAuth";
 import logo from "../../assets/logolight.webp";
 import { Link, useNavigate } from "react-router-dom";
-import SocialIcons from "../../Components/Global/SocialIcons";
-
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useAppDispatch } from "../../app/hooks";
-import { setPhoneOrEmail } from "../../app/auth/userSlice";
+import { setOtp, setPhoneOrEmail } from "../../app/auth/userSlice";
 import { handleSkip } from "../../app/auth/authSlice";
 import { useTranslation } from "react-i18next";
 import { actFetchHomeScreen } from "../../app/home/homeSlice";
@@ -32,17 +30,11 @@ const Login = () => {
   const user_location = Cookies.get("user_location");
 
   const onSubmit: SubmitHandler<PropsInputsLogin> = (data) => {
-    // console.log(data.phoneOremail);
     dispatch(setPhoneOrEmail(data.phoneOremail));
+    dispatch(setOtp(undefined)); // Reset Otp2 to prevent unwanted login
     reset();
     navigate("/otp");
   };
-
-  // const accessToken = localStorage.getItem("access_token");
-
-  //   if(accessToken) {
-  //     return <Navigate to="/login"/>
-  // }
   
   const fetchHomeScreen = async () => {
     const response = await fetch(`https://ipapi.co/json/`);
@@ -101,10 +93,6 @@ const Login = () => {
                       className="rounded-lg p-2 focus:outline-none border border-borderColor"
                       {...register("phoneOremail", {
                         required: "Email or phone number is required",
-                        // pattern: {
-                        //   value: /^(\S+@\S+\.\S+|^[0-9]{10})$/,
-                        //   message: "Invalid email or phone number format",
-                        // },
                       })}
                     />
                     {errors.phoneOremail && (
@@ -128,13 +116,6 @@ const Login = () => {
                 </p>
               </div>
             </div>
-            {/* <div className="flex justify-center flex-col items-center gap-2">
-              <div className="text-center">
-                <p className="text-ry3Text font-normal"> {t("Or")}</p>
-                <p className="text-ry3Text font-normal">{t("LoginWith")}</p>
-              </div>
-              <SocialIcons />
-            </div> */}
           </div>
         </div>
         <div className="order-1 md:order-2 h-full md:h-screen overflow-hidden">

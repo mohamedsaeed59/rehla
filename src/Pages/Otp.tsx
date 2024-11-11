@@ -16,15 +16,12 @@ type PropsInputsOtp = {
 };
 
 const Otp = () => {
+  const { t } = useTranslation();
   const { handleSubmit, setValue } = useForm<PropsInputsOtp>();
-
   const { phoneOrEmail, Otp2 } = useAppSelector((state) => state.userSliceToLogin);
-
-  // const { status } = useAppSelector((state) => state.auth);
-
+  const { data } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const accessToken = localStorage.getItem("access_token");
 
   const inputRefs = [
     useRef<HTMLInputElement>(null),
@@ -33,27 +30,23 @@ const Otp = () => {
     useRef<HTMLInputElement>(null),
   ];
 
-  // useEffect(() => {
-  //   if (status === 200 && Otp2) {
-  //     sendUserDataToDatabase();
-  //   }
-  // }, [Otp2, status]);
   useEffect(() => {
     if (Otp2) {
       sendUserDataToDatabase();
     }
-  }, [Otp2]);
+  }, [Otp2]);  
 
   useEffect(() => {
-    if (accessToken) {
+    if (data?.access_token) {
       navigate("/");
     }
-  }, [accessToken, navigate]);
+  }, [data?.access_token, navigate]);
+  
 
   const onSubmit: SubmitHandler<PropsInputsOtp> = (data) => {
     dispatch(setOtp(Object.values(data).join("")));
   };
-
+  
   const sendUserDataToDatabase = () => {
     const userData = {
       phone: phoneOrEmail,
@@ -63,16 +56,6 @@ const Otp = () => {
     dispatch(actAuthLogin(userData));
   };
 
-  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
-  //   const { value } = e.target;
-  //   if (/^\d$/.test(value)) {
-  //     // setValue(`num${index + 1}`, value);
-  //     setValue(`num${index + 1}` as keyof PropsInputsOtp, value);
-  //     if (index < inputRefs.length - 1 && inputRefs[index + 1].current) {
-  //       inputRefs[index + 1].current!.focus();
-  //     }
-  //   }
-  // };
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     index: number
@@ -85,7 +68,7 @@ const Otp = () => {
       }
     }
   };
-  const { t } = useTranslation();
+  
   return (
     <div className="overflow-hidden">
       <div className="p-6 md:p-12">
