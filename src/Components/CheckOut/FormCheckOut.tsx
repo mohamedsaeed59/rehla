@@ -60,11 +60,12 @@ const FormCheckOut = ({directOrders} : any) => {
           localStorage.removeItem('directOrders');
         }
       } catch (error: any) {
-        toast.error(t("You need to log in to complete the payment process"));
-        // setErrorMessage(error.response.data.message)
-        // setTimeout(() => {
-        //   setErrorMessage(null);
-        // }, 20000);
+        if(error.status === 422){
+          toast.error(error.response.data.message);
+        }
+        if(error.status === 401){
+          toast.error(t("You need to log in to complete the payment process"));
+        }       
       }
     }else{
       try {
@@ -79,16 +80,16 @@ const FormCheckOut = ({directOrders} : any) => {
           localStorage.removeItem('directOrders');
         }
       } catch (error: any) {
-        toast.error(t("You need to log in to complete the payment process"));
-        // setErrorMessage(error.response.data.message)
-        // setTimeout(() => {
-        //   setErrorMessage(null);
-        // }, 20000);
+        if(error.status === 422){
+          toast.error(error.response.data.message);
+        }
+        if(error.status === 401){
+          toast.error(t("You need to log in to complete the payment process"));
+        }  
       }
     }
   };
   
-
   return (
     <form className="flex flex-col gap-4">
       <div className="flex flex-col gap-1">

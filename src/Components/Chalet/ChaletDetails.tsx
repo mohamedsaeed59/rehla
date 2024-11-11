@@ -165,10 +165,13 @@ useEffect(() => {
           navigate('/thanks-requeste');
         }
       } catch (error: any) {
-        setErrorMessage(error.response.data.message);
-        setTimeout(() => {
-          setErrorMessage(null);
-        }, 20000);
+        // setErrorMessage(error.response.data.message);
+        // setTimeout(() => {
+        //   setErrorMessage(null);
+        // }, 20000);
+        if(error.status === 401){
+          toast.error(t("You need to log in to complete the payment process"));
+        }  
       }
     }
   }
