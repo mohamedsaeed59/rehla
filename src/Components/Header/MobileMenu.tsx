@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useEffect } from "react";
 import close from "../../assets/icons/close.svg";
 import UpdateProfile from "../Profile/UpdateProfile";
 import { Link, useNavigate } from "react-router-dom";
@@ -12,12 +12,25 @@ import { useTranslation } from "react-i18next";
 
 type mobileMenu = {
   setOpen: (open: boolean) => void;
+  isOpen: boolean;
 };
 
-function MobileMenu({ setOpen }: mobileMenu) {
+function MobileMenu({ setOpen, isOpen }: mobileMenu) {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add("no-scroll");
+    } else {
+      document.body.classList.remove("no-scroll");
+    }
+    // Cleanup on component unmount
+    return () => {
+      document.body.classList.remove("no-scroll");
+    };
+  }, [isOpen]);
 
   const handleLogOut = () => {
     localStorage.removeItem("access_token");
@@ -34,7 +47,7 @@ function MobileMenu({ setOpen }: mobileMenu) {
       initial={{ y: "-100vh" }}
       animate={{ y: 0 }}
       exit={{ y: "-100vh" }}
-      className="w-screen h-full absolute top-0 rtl:left-0 ltr:right-0 backdrop-blur-[8px] bg-black/5 z-50 duration-700"
+      className="w-screen h-screen absolute top-0 rtl:left-0 ltr:right-0 overflow-y-auto backdrop-blur-[8px] bg-black/5 z-50 duration-700"
       transition={{ type: "tween", ease: "easeInOut", duration: 0.3 }}
       variants={{
         visible: {
@@ -52,7 +65,7 @@ function MobileMenu({ setOpen }: mobileMenu) {
             </button>
           </div>
           <div>
-            <UpdateProfile />
+            <UpdateProfile setOpen={setOpen} />
 
             <div className="flex flex-col gap-4 py-4">
               <div className="flex justify-center items-center cursor-pointer rounded-xl bg-ryBackground shadow-lg py-2 hover:bg-ry4Text duration-700">

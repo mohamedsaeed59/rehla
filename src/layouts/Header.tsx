@@ -104,7 +104,7 @@ function Header() {
         </div>
         {isOpen && (
           <div className="block lg:hidden">
-            <MobileMenu setOpen={setOpen} />
+            <MobileMenu setOpen={setOpen} isOpen={isOpen} />
           </div>
         )}
       </div>

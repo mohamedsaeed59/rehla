@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useAppSelector } from "../../app/hooks";
 import { useTranslation } from "react-i18next";
 
-const UpdateProfile = () => {
+const UpdateProfile = ({setOpen}: any) => {
   const accessToken = localStorage.getItem("access_token");
   const { data } = useAppSelector((state) => state.auth);
   const { t } = useTranslation();  
@@ -12,7 +12,7 @@ const UpdateProfile = () => {
   return (
     <div className="flex flex-col justify-center items-center">
       {accessToken ? (
-        <Link to={"/profile"}>
+        <Link to={"/profile"} onClick={()=>setOpen(false)}>
           <img
             src={data?.image || avter}
             alt="avter"
@@ -20,7 +20,7 @@ const UpdateProfile = () => {
           />
         </Link>
       ) : (
-        <Link to={"/login"}>
+        <Link to={"/login"} onClick={()=>setOpen(false)}>
           <img
             src={avter}
             alt="avter"
@@ -29,7 +29,7 @@ const UpdateProfile = () => {
         </Link>
       )}
       <h2 className="font-medium text-xl text-mainBlack">{data?.name}</h2>
-      <Link to={"/editprofile"} className="text-primary flex items-center">
+      <Link to={"/editprofile"} className="text-primary flex items-center" onClick={()=>setOpen(false)}>
       {t("Update profile")}
         <svg
           width="17"

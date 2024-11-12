@@ -41,7 +41,7 @@ const EditProfile = () => {
   return (
     <>
       <div className="block lg:hidden">
-        <BreadCrumb title={"Edit Profile"} subTitle={"Edit Profile"} />
+        <BreadCrumb title={t("EditProfile")} subTitle={t("EditProfile")} />
       </div>
       <div className="container">
         <div className="grid grid-cols-1 md:grid-cols-2 my-10">

@@ -44,26 +44,50 @@ const ProfileForm = () => {
 
   const { t } = useTranslation();
 
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+
+  //   const updatedProfile = {
+  //     ...userProfile,
+  //     city_id: valCity?.id,
+  //     gender: "male",
+  //   };
+
+  //   try {
+  //     const action = await dispatch(actUpdateProfile(updatedProfile));
+
+  //     if (actUpdateProfile.fulfilled.match(action)) {
+  //       setUserProfile(action.payload.data);
+  //     }
+  //   } catch (error) {
+  //     // console.log("Failed to update profile:", error.response.data.message);
+  //   }
+  // };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+  
     const updatedProfile = {
-      ...userProfile,
-      city_id: valCity?.id,
-      gender: "male",
+      name: userProfile.name || data?.name,
+      email: userProfile.email || data?.email,
+      phone: userProfile.phone || data?.phone,
+      age: userProfile.age || data?.age,
+      city_id: valCity?.id || data?.city_id,
+      address: userProfile.address || data?.address,
+      gender: userProfile.gender || data?.gender,
     };
-
+  
     try {
       const action = await dispatch(actUpdateProfile(updatedProfile));
-
+  
       if (actUpdateProfile.fulfilled.match(action)) {
         setUserProfile(action.payload.data);
       }
     } catch (error) {
-      // console.log("Failed to update profile:", error.response.data.message);
+      console.log("Failed to update profile:", error);
     }
   };
-
+  
   return (
     <>
     <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
@@ -73,9 +97,8 @@ const ProfileForm = () => {
         </label>
         <input
           type="text"
-          // placeholder={userProfile.name}
-          defaultValue={userProfile?.name}
-          placeholder={data?.name}
+          defaultValue={data?.name}
+          // placeholder={data?.name}
           onChange={(e) => setUserProfile({ ...userProfile, name: e.target.value })}
           className="rounded-lg p-2 focus:outline-none border border-borderColor"
         />
@@ -86,8 +109,8 @@ const ProfileForm = () => {
         </label>
         <input
           type="phone"
-          defaultValue={userProfile?.phone}
-          placeholder={data?.phone}
+          defaultValue={data?.phone}
+          // placeholder={data?.phone}
           onChange={(e) => setUserProfile({ ...userProfile, phone: e.target.value })}
           className="rounded-lg p-2 focus:outline-none border border-borderColor"
         />
@@ -98,8 +121,8 @@ const ProfileForm = () => {
         </label>
         <input
           type="email"
-          defaultValue={userProfile?.email}
-          placeholder={data?.email}
+          defaultValue={data?.email}
+          // placeholder={data?.email}
           onChange={(e) => setUserProfile({ ...userProfile, email: e.target.value })}
           className="rounded-lg p-2 focus:outline-none border border-borderColor"
         />
@@ -111,8 +134,8 @@ const ProfileForm = () => {
         </label>
         <input
           type="number"
-          defaultValue={userProfile?.age}
-          placeholder={data?.age}
+          defaultValue={data?.age}
+          // placeholder={data?.age}
           onChange={(e) => setUserProfile({ ...userProfile, age: e.target.value })}
           className="rounded-lg p-2 focus:outline-none border border-borderColor"
         />
@@ -126,7 +149,7 @@ const ProfileForm = () => {
         <input
           type="text"
           value={valCity?.title}
-          placeholder={data?.city}
+          // placeholder={data?.city}
           className="rounded-lg p-2 w-full focus:outline-none border border-borderColor"
         />
         {openMenuCity && (
@@ -141,8 +164,8 @@ const ProfileForm = () => {
         </label>
         <input
           type="text"
-          defaultValue={userProfile?.address}
-          placeholder={data?.address}
+          defaultValue={data?.address}
+          // placeholder={data?.address}
           onChange={(e) => setUserProfile({ ...userProfile, address: e.target.value })}
           className="rounded-lg p-2 focus:outline-none border border-borderColor"
         />

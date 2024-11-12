@@ -8,8 +8,6 @@ function App() {
  
   const localLang = localStorage.getItem("i18nextLng") || "en";
 
-  console.log(localLang);
-
   useEffect(() => {
     const handleLanguageChange = (newLang: string) => {
       window.document.dir = i18next.dir(newLang);
@@ -27,10 +25,10 @@ function App() {
   }, [localLang]);
 
   return (
-    <>
+    <div className="overflow-x-hidden">
       <ToastContainer />
       <AppRouter />
-    </>
+    </div>
   );
 }
 

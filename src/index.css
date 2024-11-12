@@ -14,6 +14,10 @@ body {
   @apply relative overflow-x-clip;
 }
 
+.no-scroll {
+  overflow: hidden;
+}
+
 .nav-link {
   @apply text-sm xl:text-lg text-center font-normal text-[#7D7D7D] duration-300 p-1;
 }
