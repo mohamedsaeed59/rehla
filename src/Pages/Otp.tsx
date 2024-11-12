@@ -102,7 +102,7 @@ const Otp = () => {
             onSubmit={handleSubmit(onSubmit)}
             className="flex flex-col gap-3"
           >
-            <div className="flex justify-center gap-2 py-4">
+            <div className="flex justify-center gap-2 py-4" style={{ direction: "ltr" }}>
               {[1, 2, 3, 4].map((_, index) => (
                 <div
                   key={index}
