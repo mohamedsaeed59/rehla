@@ -884,5 +884,10 @@
  "September": "September",
  "October": "October",
  "November": "November",
- "December": "December"
+ "December": "December",
+
+ "name is required": "name is required",
+ "phone is required": "phone is required",
+ "age is required": "age is required",
+ "Failed to update profile": "Failed to update profile"
 }

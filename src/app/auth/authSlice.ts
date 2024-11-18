@@ -56,7 +56,16 @@ const initialState: IAuthState = {
 // Async thunk for updating profile
 export const actUpdateProfile = createAsyncThunk(
   "auth/actUpdateProfile",
-  async (profileData: { name: string; email: string; phone: string; age: string; city_id: any; address: string; gender: string }, { rejectWithValue }) => {
+  async (
+    profileData: {
+      name: string;
+      email: string;
+      phone: string;
+      age: number;
+      city_id: number;
+      address: string;
+      gender: string;
+    }, { rejectWithValue }) => {
     try {
       const accessToken = localStorage.getItem("access_token");
 
@@ -96,12 +105,14 @@ export const actChangeProfileImage = createAsyncThunk(
 
 
 // Async thunk for deleting account
-export const actDeleteAccount = createAsyncThunk(
+export const actDeleteAccount = createAsyncThunk( 
   "auth/actDeleteAccount",
   async (_, { rejectWithValue }) => {
     const accessToken = localStorage.getItem("access_token");
     try {
-      const response = await axios.post(`${API_URL}/delete-account`,
+      const response = await axios.post(
+        `${API_URL}/delete-account`,
+        {},
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -114,6 +125,7 @@ export const actDeleteAccount = createAsyncThunk(
     }
   }
 );
+
 
 const authSlice = createSlice({
   name: "auth",
@@ -191,7 +203,8 @@ const authSlice = createSlice({
     });
     builder.addCase(actUpdateProfile.rejected, (state, action: any) => {
       state.loading = "failed";      
-      state.error = action.payload.response.data.message as string;
+      // state.error = action.payload.response.data.message as string;
+      state.error = action.payload?.response?.data?.message || "Something went wrong";
     });
 
     // Change Profile Image
@@ -218,6 +231,9 @@ const authSlice = createSlice({
     });
     builder.addCase(actDeleteAccount.fulfilled, (state, action) => {
       state.loading = "succeeded";
+      localStorage.removeItem("access_token");
+      Cookie.remove("user");
+      Cookie.remove("profileImage");
       state.status = action.payload.status;
       state.message = "Account deleted successfully.";
       state.data = initialState.data; // Reset user data on account deletion

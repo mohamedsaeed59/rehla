@@ -28,7 +28,7 @@ const MenuCity = ({ setOpenMenuCity, setValCity }: Props) => {
     <div className="absolute left-0 bg-body border border-borderColor border-t-0 rounded-md rounded-tl-none rounded-tr-none w-full shadow-sm">
       <div className="p-2">
         <h3 className="font-medium text-lg text-mainBlack"> {t("Select your city")}</h3>
-        {loading === "pending" && <p>loading</p>}
+        {loading === "pending" && <p>{t("loading")}</p>}
         <form className="flex flex-col gap-3 p-2">
           {data?.cities?.map((item: any) => (
             <div

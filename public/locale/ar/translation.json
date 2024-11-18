@@ -881,5 +881,10 @@
  "September": "سبتمبر",
  "October": "أكتوبر",
  "November": "نوفمبر",
- "December": "ديسمبر"
+ "December": "ديسمبر",
+
+ "name is required": "الأسم مطلوب",
+ "phone is required": "رقم الهاتف مطلوب",
+ "age is required": "السن مطلوب",
+ "Failed to update profile": "فشل في تحديث الملف الشخصي"
 }
