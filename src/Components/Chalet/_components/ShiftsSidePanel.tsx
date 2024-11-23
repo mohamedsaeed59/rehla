@@ -44,10 +44,10 @@ export default function ShiftsSidePanel({
       .sort((a, b) => a - b);
 
     // Validation for shift selection pattern
-    if (sortedIndexes.length > 1) {
+    if (sortedIndexes?.length > 1) {
       const isValidSelection =
-        sortedIndexes.length === 3 || // All three shifts are selected
-        (sortedIndexes.length === 2 && sortedIndexes[1] - sortedIndexes[0] === 1); // Adjacent shifts only
+        sortedIndexes?.length === 3 || // All three shifts are selected
+        (sortedIndexes?.length === 2 && sortedIndexes[1] - sortedIndexes[0] === 1); // Adjacent shifts only
 
       if (isValidSelection) {
         setSelectedShiftIds(newSelectedShiftIds);

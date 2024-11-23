@@ -33,7 +33,7 @@ export default function Calendar({ calendar = [], setIsSelectedDate, setSelected
   }, [dispatch, selectedDate, id]);
 
   useEffect(() => {
-    if (calendar.length > 0) {
+    if (calendar?.length > 0) {
       const uniqueMonths = Array.from(
         new Set(
           calendar.map((day: any) =>
@@ -48,7 +48,7 @@ export default function Calendar({ calendar = [], setIsSelectedDate, setSelected
   }, [calendar]);
 
   const generateCalendarDays = (monthIndex: number, months: any[]) => {
-    if (months.length === 0) return;
+    if (months?.length === 0) return;
 
     const [monthName, year] = months[monthIndex].split(" ");
     const monthNumber = new Date(`${monthName} 1, ${year}`).getMonth();
@@ -134,7 +134,7 @@ export default function Calendar({ calendar = [], setIsSelectedDate, setSelected
 
   const handleMonthChange = (direction: "next" | "prev") => {
     const newIndex = direction === "next" ? selectedMonthIndex + 1 : selectedMonthIndex - 1;
-    if (newIndex >= 0 && newIndex < monthNames.length) {
+    if (newIndex >= 0 && newIndex < monthNames?.length) {
       setSelectedMonthIndex(newIndex);
       generateCalendarDays(newIndex, monthNames);
     }

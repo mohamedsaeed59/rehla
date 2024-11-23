@@ -105,7 +105,7 @@ useEffect(() => {
   // const bsaePrice = chaletDetails?.have_shifts ? totalShiftPrice : chaletDetails?.price;
   const basePrice = chaletDetails?.have_shifts
   ? totalShiftPrice
-  : (selectedDaysWithoutShifts.length > 1 ? selectedDaysWithoutShifts.length * chaletDetails?.price : chaletDetails?.price);
+  : (selectedDaysWithoutShifts?.length > 1 ? selectedDaysWithoutShifts?.length * chaletDetails?.price : chaletDetails?.price);
 
 
   // subtotal price
@@ -137,7 +137,7 @@ useEffect(() => {
         })
       )
       const days = isSelectedDate || selectedDaysWithoutShifts;
-      if(days && days.length > 0 && selectedShifts && selectedShifts.length > 0 && countAdults > 0){
+      if(days && days?.length > 0 && selectedShifts && selectedShifts?.length > 0 && countAdults > 0){
        navigate('/check-out');
       }else{
         setErrorMessage(t("PleaseEnterAllDataCorrectly"));
