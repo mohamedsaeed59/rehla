@@ -1,10 +1,73 @@
-import { memo } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 import avter from "../../assets/avter.webp";
 import logolight from "../../assets/logolight.jpg";
 import { useTranslation } from "react-i18next";
+// import webSocketService from "../../utils/socketService";
+import { useAppSelector } from "../../app/hooks";
 
 const ChatComponent = () => {
   const { t } = useTranslation();
+  const { data } = useAppSelector((state) => state.auth);
+  const [messages, setMessages] = useState([]);
+  const [message, setMessage] = useState("");
+  const socketRef = useRef<WebSocket | null>(null);
+  const user_id = data.id;
+  const channel = `chat-app${user_id}`;
+
+  // WebSocket setup
+  useEffect(() => {
+    const socket = new WebSocket("ws://rehla-iq.com:8580");
+
+    socket.onopen = () => {
+      console.log("WebSocket connected");
+      socket.send(JSON.stringify({ action: "join", channel }));
+    };
+
+    socket.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      setMessages((prevMessages) => [...prevMessages, data]);
+    };
+
+    socket.onclose = () => {
+      console.log("WebSocket disconnected");
+    };
+
+    socket.onerror = (error) => {
+      console.error("WebSocket error:", error);
+    };
+
+    socketRef.current = socket;
+
+    return () => {
+      socket.close();
+    };
+  }, [channel]);
+
+  // Send a message
+  const handleSendMessage = () => {
+    if (message.trim() && socketRef.current) {
+      socketRef.current.send(
+        JSON.stringify({
+          action: "message",
+          channel,
+          message,
+        })
+      );
+      setMessages((prev) => [
+        ...prev,
+        { user: "me", text: message, time: new Date().toLocaleTimeString() },
+      ]);
+      setMessage("");
+    }
+  };
+
+
+  // Scrolling to bottom of the chatbox
+  useEffect(() => {
+    const chatContainer = document.querySelector(".overflow-y-scroll");
+    //@ts-ignore
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+  }, [messages]);
 
   return (
     <div className="bg-white">
@@ -24,214 +87,43 @@ const ChatComponent = () => {
             )}
           </p>
           <div className="flex flex-col gap-3 py-5 h-[250px] px-[10px]">
-            <div className="flex items-center justify-end gap-2">
-              <div className="flex flex-col justify-end items-end gap-1">
-                <div className="relative w-fit">
-                  <div className="w-fit py-2 px-4 shadow-xl bg-[#F3C800] rounded-lg  flex justify-center items-center">
-                    <p className="text-[15px] text-mainBlack">Hi!</p>
-                  </div>
-                  <div className="absolute right-[-8px] bottom-0">
-                    <svg
-                      width="23"
-                      height="9"
-                      viewBox="0 0 23 9"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M10.4337 0L22.4337 9H1.43367C0.472665 9 0.0646592 7.7766 0.833659 7.2L10.4337 0Z"
-                        fill="#F3C800"
-                      />
-                    </svg>
-                  </div>
-                </div>
-                <p className="flex items-center gap-1 text-[#7D7D7D] text-sm">
-                  04:15 pm
-                  <svg
-                    width="21"
-                    height="11"
-                    viewBox="0 0 21 11"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M6.43359 5.48418L10.6766 9.72719L19.1606 1.24219M1.43359 5.48418L5.67659 9.72719M14.1616 1.24219L10.9336 4.49918"
-                      stroke="#97DFFF"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </p>
+            {/* User Messages */}
+            {messages.map((msg, index) => (
+            <div
+              key={index}
+              className={`flex ${
+                msg.user === "me" ? "justify-end" : "justify-start"
+              } items-center gap-2 py-2`}
+            >
+              {msg.user !== "me" && (
+                <img
+                  src={logolight}
+                  alt="avatar"
+                  className="w-[24px] h-[24px] rounded-full border border-mainBlack"
+                />
+              )}
+              <div
+                className={`relative w-fit py-2 px-4 shadow-lg rounded-lg ${
+                  msg.user === "me"
+                    ? "bg-[#F3C800] text-right"
+                    : "bg-white text-left"
+                }`}
+              >
+                <p className="text-[15px] text-mainBlack">{msg.text}</p>
+                <p className="text-xs text-gray-500">{msg.time}</p>
               </div>
-              <img
-                src={avter}
-                alt="avter"
-                className="w-[24px] h-[24px] rounded-full"
-              />
+              {msg.user === "me" && (
+                <img
+                  src={avter}
+                  alt="avatar"
+                  className="w-[24px] h-[24px] rounded-full"
+                />
+              )}
             </div>
-            <div className="flex items-center gap-2">
-              <img
-                src={logolight}
-                alt="avter"
-                className="w-[24px] h-[24px] rounded-full border border-mainBlack"
-              />
-              <div className="flex flex-col gap-1">
-                <div className="relative w-fit">
-                  <div className="w-fit py-3 px-4 shadow-lg bg-white rounded-lg  flex justify-center items-center">
-                    <p className="text-[15px] text-mainBlack">
-                      Hi! , Yomna how can i help you?
-                    </p>
-                  </div>
-                  <div className="absolute left-[-8px] bottom-0">
-                    <svg
-                      width="22"
-                      height="9"
-                      viewBox="0 0 22 9"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M9.99998 0L22 9H0.999978C0.0389778 9 -0.368821 7.777 0.399979 7.2L9.99998 0Z"
-                        fill="white"
-                      />
-                    </svg>
-                  </div>
-                </div>
-                <p className="flex items-center gap-1 text-[#7D7D7D] text-sm">
-                  04:15 pm
-                </p>
-              </div>
-            </div>
-            <div className="flex items-center justify-end gap-2">
-              <div className="flex flex-col justify-end items-end gap-1">
-                <div className="relative w-fit">
-                  <div className="w-fit py-2 px-4 shadow-xl bg-[#F3C800] rounded-lg  flex justify-center items-center">
-                    <p className="text-[15px] text-mainBlack">Hi!</p>
-                  </div>
-                  <div className="absolute right-[-8px] bottom-0">
-                    <svg
-                      width="23"
-                      height="9"
-                      viewBox="0 0 23 9"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M10.4337 0L22.4337 9H1.43367C0.472665 9 0.0646592 7.7766 0.833659 7.2L10.4337 0Z"
-                        fill="#F3C800"
-                      />
-                    </svg>
-                  </div>
-                </div>
-                <p className="flex items-center gap-1 text-[#7D7D7D] text-sm">
-                  04:15 pm
-                  <svg
-                    width="21"
-                    height="11"
-                    viewBox="0 0 21 11"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M6.43359 5.48418L10.6766 9.72719L19.1606 1.24219M1.43359 5.48418L5.67659 9.72719M14.1616 1.24219L10.9336 4.49918"
-                      stroke="#97DFFF"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </p>
-              </div>
-              <img
-                src={avter}
-                alt="avter"
-                className="w-[24px] h-[24px] rounded-full"
-              />
-            </div>
-            <div className="flex items-center gap-2">
-              <img
-                src={logolight}
-                alt="avter"
-                className="w-[24px] h-[24px] rounded-full border border-mainBlack"
-              />
-              <div className="flex flex-col gap-1">
-                <div className="relative w-fit">
-                  <div className="w-fit py-3 px-4 shadow-lg bg-white rounded-lg  flex justify-center items-center">
-                    <p className="text-[15px] text-mainBlack">
-                      Hi! , Yomna how can i help you?
-                    </p>
-                  </div>
-                  <div className="absolute left-[-8px] bottom-0">
-                    <svg
-                      width="22"
-                      height="9"
-                      viewBox="0 0 22 9"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M9.99998 0L22 9H0.999978C0.0389778 9 -0.368821 7.777 0.399979 7.2L9.99998 0Z"
-                        fill="white"
-                      />
-                    </svg>
-                  </div>
-                </div>
-                <p className="flex items-center gap-1 text-[#7D7D7D] text-sm">
-                  04:15 pm
-                </p>
-              </div>
-            </div>
-            <div className="flex items-center justify-end gap-2">
-              <div className="flex flex-col justify-end items-end gap-1">
-                <div className="relative w-fit">
-                  <div className="w-fit py-2 px-4 shadow-xl bg-[#F3C800] rounded-lg  flex justify-center items-center">
-                    <p className="text-[15px] text-mainBlack">Hi!</p>
-                  </div>
-                  <div className="absolute right-[-8px] bottom-0">
-                    <svg
-                      width="23"
-                      height="9"
-                      viewBox="0 0 23 9"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M10.4337 0L22.4337 9H1.43367C0.472665 9 0.0646592 7.7766 0.833659 7.2L10.4337 0Z"
-                        fill="#F3C800"
-                      />
-                    </svg>
-                  </div>
-                </div>
-                <p className="flex items-center gap-1 text-[#7D7D7D] text-sm">
-                  04:15 pm
-                  <svg
-                    width="21"
-                    height="11"
-                    viewBox="0 0 21 11"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M6.43359 5.48418L10.6766 9.72719L19.1606 1.24219M1.43359 5.48418L5.67659 9.72719M14.1616 1.24219L10.9336 4.49918"
-                      stroke="#97DFFF"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </p>
-              </div>
-              <img
-                src={avter}
-                alt="avter"
-                className="w-[24px] h-[24px] rounded-full"
-              />
-            </div>
+          ))}
           </div>
         </div>
-
-        <div className="my-6 flex px-3">
+         <div className="my-6 flex px-3">
           <input
             className="border border-borderColor rtl:border-l-0 ltr:border-r-0 
 
@@ -240,9 +132,12 @@ const ChatComponent = () => {
 
            focus:outline-none py-3 px-2 flex-1"
             type="text"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
             placeholder={t("WriteYourComment")}
           />
           <button
+            onClick={handleSendMessage}
             className="cursor-pointer bg-[#D9D9D9]
         rtl:rounded-bl-3xl  rtl:rounded-tl-3xl 
         ltr:rounded-br-3xl  ltr:rounded-tr-3xl 
@@ -264,6 +159,7 @@ const ChatComponent = () => {
             </svg>
           </button>
         </div>
+        
       </div>
     </div>
   );
